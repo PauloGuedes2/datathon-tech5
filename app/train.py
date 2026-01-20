@@ -1,30 +1,18 @@
-import logging
-
-from src.data.data_loader import DataLoader
-from src.model.classification import StudentRiskModel
-from src.model.feature_engineer import FeatureEngineer
+from src.infrastructure.data.data_loader import DataLoader
+from src.infrastructure.model.ml_pipeline import MLPipeline
+from src.util.logger import logger
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logger.info("Iniciando Pipeline de Treinamento...")
 
-    # 1. Carregar Dados
     loader = DataLoader()
-    df_raw = loader.load_data()
+    raw_df = loader.load_data()
 
-    # --- LINHAS DE DEBUG ---
-    print("\n--- COLUNAS ENCONTRADAS NO EXCEL ---")
-    print(df_raw.columns.tolist())
-    print("------------------------------------\n")
-    # -----------------------
+    trainer = MLPipeline()
+    df_target = trainer.create_target(raw_df)
+    trainer.train(df_target)
 
-    df_clean = loader.clean_data(df_raw)
+    logger.info("Processo concluído.")
 
-    # 2. Criar Target (Engenharia específica para treino)
-    fe = FeatureEngineer()
-    df_train = fe.create_target(df_clean)
-
-    # 3. Treinar Modelo
-    trainer = StudentRiskModel()
-    trainer.train(df_train)
-
-    print("Pipeline de treinamento finalizado com sucesso!")
+    importance_df = trainer.get_feature_importance()
+    logger.info(f"\nFeature Importance:\n{importance_df}")

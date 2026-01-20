@@ -1,8 +1,11 @@
+fastapi
+uvicorn
 pandas
 numpy
 scikit-learn
-fastapi
-uvicorn
 joblib
 openpyxl
 pydantic
+pytest
+pytest-cov
+httpx

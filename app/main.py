@@ -1,54 +1,50 @@
-import pandas as pd
+import os
+
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 
-from src.api.schemas import StudentData, PredictionResponse
-from src.model.classification import StudentRiskModel, logger
-
-app = FastAPI(
-    title="API Passos Mágicos - Previsão de Risco",
-    description="Predição de risco de defasagem escolar baseada em indicadores do PEDE.",
-    version="1.0.0"
-)
-
-# Instância global do modelo
-model_service = StudentRiskModel()
+from src.api.controller import PredictionController
 
 
-@app.on_event("startup")
-def load_model():
-    try:
-        model_service.load()
-        logger.info("Modelo carregado com sucesso na inicialização.")
-    except Exception as e:
-        logger.warning(f"Modelo não encontrado ({e}). Certifique-se de treinar o modelo primeiro.")
+class App:
+    def __init__(self):
+        # 1. Inicializa o FastAPI
+        self.app = FastAPI(
+            title="Passos Mágicos - API de Previsão de Risco",
+            description="API para predição de risco de defasagem escolar utilizando Machine Learning.",
+            version="1.0.0"
+        )
 
+        # 2. Configura as Rotas
+        self._configure_routes()
 
-@app.post("/predict", response_model=PredictionResponse)
-def predict_student_risk(student: StudentData):
-    """
-    Recebe os indicadores de um estudante e retorna o risco de defasagem.
-    """
-    try:
-        # Converter Pydantic para DataFrame
-        input_df = pd.DataFrame([student.dict()])
+    def _configure_routes(self):
+        """
+        Instancia a Controller e registra suas rotas na aplicação.
+        """
+        prediction_controller = PredictionController()
 
-        # Realizar previsão
-        risk_prob = model_service.predict(input_df)[0]
+        self.app.include_router(
+            prediction_controller.router,
+            prefix="/api/v1",
+            tags=["Previsão"]
+        )
 
-        # Lógica de Threshold (Pode vir do Params)
-        threshold = 0.5
-        risk_label = "ALTO RISCO" if risk_prob > threshold else "BAIXO RISCO"
+        self.app.add_api_route("/health", self.health_check, methods=["GET"], tags=["Health"])
 
-        return {
-            "risk_probability": round(risk_prob, 4),
-            "risk_label": risk_label,
-            "message": f"O estudante possui {risk_prob:.1%} de probabilidade de defasagem."
-        }
-    except Exception as e:
-        logger.error(f"Erro na predição: {e}")
-        raise HTTPException(status_code=500, detail="Erro interno ao processar previsão.")
+    @staticmethod
+    def health_check():
+        """Endpoint para verificar se a API está online."""
+        return {"status": "ok", "service": "passos-magicos-api"}
+
+    def run(self, host: str = "0.0.0.0", port: int = 8000):
+        """Inicia o servidor Uvicorn."""
+        port = int(os.getenv("PORT", port))
+
+        # Roda o servidor
+        uvicorn.run(self.app, host=host, port=port)
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    application = App()
+    application.run()
