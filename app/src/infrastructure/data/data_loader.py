@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 import unicodedata
 
@@ -14,7 +16,7 @@ class DataLoader:
         - Normalização de colunas
         - Tratamento de valores nulos
     """
-    
+
     def load_data(self) -> pd.DataFrame:
         """
         Carrega e processa o dataset principal.
@@ -48,8 +50,11 @@ class DataLoader:
             - Substitui espaços por underscore
             - Preenche NaN com 0
         """
+
         def normalize(col):
-            col = str(col).strip().upper().replace(" ", "_")
+            col = str(col).strip().upper()
+            # Substitui múltiplos espaços/tabs/quebras por um único underscore
+            col = re.sub(r'\s+', '_', col)
             col = unicodedata.normalize("NFKD", col).encode("ASCII", "ignore").decode("utf-8")
             return col
 
