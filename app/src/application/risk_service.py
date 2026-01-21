@@ -7,10 +7,34 @@ from src.infrastructure.model.ml_pipeline import MLPipeline
 
 class RiskService:
     def __init__(self):
+        """
+        Inicializa o serviço de predição de risco.
+        
+        Carrega automaticamente o modelo ML treinado para uso.
+        
+        Attributes:
+            ml_pipeline: Instância do pipeline de ML carregado
+        """
         self.ml_pipeline = MLPipeline()
-        self.ml_pipeline.load()  # Tenta carregar ao iniciar
+        self.ml_pipeline.load()
 
     def predict_risk(self, student: Student) -> dict:
+        """
+        Prediz o risco de defasagem escolar para um estudante.
+        
+        Args:
+            student: Objeto Student com dados do estudante
+            
+        Returns:
+            Dict com probabilidade, label e mensagem explicativa
+            
+        Formato de retorno:
+            {
+                "risk_probability": float,
+                "risk_label": str,
+                "message": str
+            }
+        """
         df = pd.DataFrame([student.data])
 
         prob = self.ml_pipeline.predict_proba(df)

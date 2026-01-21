@@ -12,19 +12,44 @@ from src.util.logger import logger
 
 class MLPipeline:
     def __init__(self):
+        """
+        Inicializa o pipeline de Machine Learning.
+        
+        Attributes:
+            model: Pipeline sklearn que será carregado/treinado
+        """
         self.model = None
 
     @staticmethod
     def create_target(df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Cria a variável target para o modelo de classificação.
+        
+        Args:
+            df: DataFrame com os dados originais contendo coluna DEFAS
+            
+        Returns:
+            DataFrame com nova coluna RISCO_DEFASAGEM (1=risco, 0=ok)
+            
+        Raises:
+            ValueError: Se coluna DEFAS não existir no dataset
+        """
         if "DEFAS" not in df.columns:
             raise ValueError("Coluna DEFAS não encontrada no dataset.")
-
-        # 1 = RISCO (defasagem), 0 = OK
         df[Settings.TARGET_COL] = (df["DEFAS"] < 0).astype(int)
 
         return df
 
     def get_feature_importance(self) -> pd.DataFrame:
+        """
+        Extrai a importância das features do modelo treinado.
+        
+        Returns:
+            DataFrame com features ordenadas por importância decrescente
+            
+        Raises:
+            RuntimeError: Se modelo não estiver carregado
+        """
         if not self.model:
             self.load()
         if not self.model:
@@ -48,10 +73,22 @@ class MLPipeline:
 
     @staticmethod
     def train(df: pd.DataFrame):
+        """
+        Treina o modelo de classificação Random Forest com pipeline completo.
+        
+        Args:
+            df: DataFrame com features e target já preparados
+            
+        Features:
+            - Divisão estratificada dos dados
+            - Pipeline com feature engineering e classificador
+            - Balanceamento de classes automático
+            - Avaliação com métricas de classificação
+            - Salvamento do modelo treinado
+        """
         X = df[Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS]
         y = df[Settings.TARGET_COL]
 
-        # Log do desbalanceamento (IMPORTANTE PARA BANCA)
         class_dist = y.value_counts()
         logger.info(f"Distribuição do target:\n{class_dist}")
 
@@ -80,7 +117,7 @@ class MLPipeline:
                 RandomForestClassifier(
                     n_estimators=200,
                     random_state=Settings.RANDOM_STATE,
-                    class_weight="balanced"  # 🔥 FUNDAMENTAL
+                    class_weight="balanced"
                 )
             )
         ])
@@ -98,6 +135,12 @@ class MLPipeline:
         logger.info(f"Modelo salvo em {Settings.MODEL_PATH}")
 
     def load(self):
+        """
+        Carrega o modelo treinado do disco.
+        
+        Tenta carregar o modelo salvo em joblib. Se não encontrar,
+        registra erro e define modelo como None.
+        """
         try:
             self.model = load(Settings.MODEL_PATH)
         except FileNotFoundError:
@@ -105,6 +148,18 @@ class MLPipeline:
             self.model = None
 
     def predict_proba(self, df: pd.DataFrame) -> float:
+        """
+        Prediz a probabilidade de risco de defasagem escolar.
+        
+        Args:
+            df: DataFrame com dados do estudante
+            
+        Returns:
+            Probabilidade de risco (0-1) para classe positiva
+            
+        Raises:
+            RuntimeError: Se modelo não estiver disponível
+        """
         if not self.model:
             self.load()
         if not self.model:

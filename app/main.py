@@ -8,19 +8,28 @@ from src.api.controller import PredictionController
 
 class App:
     def __init__(self):
-        # 1. Inicializa o FastAPI
+        """
+        Inicializa a aplicação FastAPI com configurações e rotas.
+        
+        Configura:
+            - Instância FastAPI com metadados
+            - Registro de todas as rotas da aplicação
+        """
         self.app = FastAPI(
             title="Passos Mágicos - API de Previsão de Risco",
             description="API para predição de risco de defasagem escolar utilizando Machine Learning.",
             version="1.0.0"
         )
 
-        # 2. Configura as Rotas
         self._configure_routes()
 
     def _configure_routes(self):
         """
-        Instancia a Controller e registra suas rotas na aplicação.
+        Configura e registra todas as rotas da aplicação.
+        
+        Registra:
+            - Rotas do PredictionController com prefixo /api/v1
+            - Endpoint de health check na raiz
         """
         prediction_controller = PredictionController()
 
@@ -34,14 +43,26 @@ class App:
 
     @staticmethod
     def health_check():
-        """Endpoint para verificar se a API está online."""
+        """
+        Endpoint de health check para monitoramento da API.
+        
+        Returns:
+            Dict com status da aplicação
+        """
         return {"status": "ok", "service": "passos-magicos-api"}
 
     def run(self, host: str = "0.0.0.0", port: int = 8000):
-        """Inicia o servidor Uvicorn."""
+        """
+        Inicia o servidor Uvicorn para servir a API.
+        
+        Args:
+            host: Endereço IP para bind (padrão: 0.0.0.0)
+            port: Porta para servir a API (padrão: 8000)
+            
+        Note:
+            A porta pode ser sobrescrita pela variável de ambiente PORT
+        """
         port = int(os.getenv("PORT", port))
-
-        # Roda o servidor
         uvicorn.run(self.app, host=host, port=port)
 
 

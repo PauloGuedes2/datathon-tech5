@@ -3,6 +3,16 @@ from src.infrastructure.model.ml_pipeline import MLPipeline
 from src.util.logger import logger
 
 if __name__ == "__main__":
+    """
+    Executa o pipeline completo de treinamento do modelo.
+    
+    Processo:
+        1. Carrega dados do Excel
+        2. Cria variável target baseada em DEFAS
+        3. Treina modelo Random Forest
+        4. Salva modelo treinado
+        5. Exibe importância das features
+    """
     logger.info("Iniciando Pipeline de Treinamento...")
 
     loader = DataLoader()
