@@ -37,11 +37,11 @@ def test_predict_missing_field(client):
 
     response = client.post("/api/v1/predict", json=payload)
 
-    assert response.status_code == 422  # Validation error
+    assert response.status_code == 422
 
 def test_predict_invalid_type(client):
     payload = {
-        "IDADE_22": "quatorze",  # inválido
+        "IDADE_22": "quatorze",
         "CG": 7.5,
         "CF": 7.0,
         "CT": 7.2,

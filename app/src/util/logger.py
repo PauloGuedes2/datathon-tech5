@@ -8,6 +8,12 @@ class LoggerFactory:
     """
     Responsável por configurar e fornecer instâncias de Logger
     padronizadas para toda a aplicação.
+    
+    Funcionalidades:
+        - Configuração única de logger
+        - Formatação padronizada
+        - Handler para console/Docker
+        - Prevenção de logs duplicados
     """
 
     _configured = False
@@ -16,16 +22,24 @@ class LoggerFactory:
     def setup(cls, name: str = "PASSOS_MAGICOS_APP"):
         """
         Configura o logger se ainda não estiver configurado.
-        Garante que não haja duplicação de handlers.
+        
+        Args:
+            name: Nome do logger (padrão: PASSOS_MAGICOS_APP)
+            
+        Returns:
+            Logger configurado e pronto para uso
+            
+        Features:
+            - Garante que não haja duplicação de handlers
+            - Formatação com timestamp e nível
+            - Output para stdout (compatível com Docker)
         """
         logger = logging.getLogger(name)
 
         if not logger.handlers:
-            # Define o nível de log (padrão INFO se não estiver nas settings)
             log_level = getattr(Settings, "LOG_LEVEL", "INFO")
             logger.setLevel(log_level)
 
-            # Formatação Padronizada
             formatter = logging.Formatter(
                 fmt='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                 datefmt='%Y-%m-%d %H:%M:%S'
