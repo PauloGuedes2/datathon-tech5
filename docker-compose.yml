@@ -1,0 +1,23 @@
+services:
+  passos-magicos-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: passos-magicos-container
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - PYTHONPATH=/app
+    volumes:
+      # Volume para persistir o modelo treinado
+      - ./app/models:/app/app/models
+      # Volume para logs
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
