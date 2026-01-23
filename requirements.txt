@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+joblib
+openpyxl
+pydantic
+pytest
+pytest-cov
+pytest-mock
+httpx
+coverage
