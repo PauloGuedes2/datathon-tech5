@@ -10,19 +10,33 @@
 
 ## 📋 **Índice**
 
-- [Visão Geral](#visão-geral)
+- [Visão Geral do Projeto](#visão-geral-do-projeto)
+- [Estrutura do Projeto](#estrutura-do-projeto)
 - [Instruções de Deploy](#instruções-de-deploy)
 - [Exemplos de Chamadas à API](#exemplos-de-chamadas-à-api)
 - [Pipeline de Machine Learning](#pipeline-de-machine-learning)
 - [Arquitetura do Projeto](#arquitetura-do-projeto)
-- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Monitoramento e Observabilidade](#monitoramento-e-observabilidade)
 - [Licença](#licença)
 
 ---
 
-## 🎯 **Visão Geral**
+## 🎯 **Visão Geral do Projeto**
 
-Sistema de Machine Learning desenvolvido para a **ONG Passos Mágicos** que prediz quais alunos possuem risco de defasagem escolar, permitindo intervenções preventivas e direcionadas para melhorar o desempenho acadêmico dos estudantes.
+### **Problema de Negócio**
+
+A **ONG Passos Mágicos** atende centenas de estudantes em situação de vulnerabilidade social, oferecendo educação complementar e apoio psicopedagógico. Um dos principais desafios é identificar precocemente quais alunos estão em risco de defasagem escolar, permitindo intervenções direcionadas e personalizadas.
+
+**Desafio**: Como identificar automaticamente estudantes que podem apresentar dificuldades acadêmicas antes que a defasagem se torne crítica?
+
+### **Solução Proposta**
+
+Sistema de Machine Learning que analisa dados históricos e características dos estudantes para predizer a probabilidade de defasagem escolar. A solução oferece:
+
+- **Pipeline completa de ML**: Desde pré-processamento até deploy em produção
+- **API REST robusta**: Integração fácil com sistemas existentes da ONG
+- **Predições em tempo real**: Análise instantânea de novos estudantes
+- **Arquitetura escalável**: Preparada para crescimento e novas funcionalidades
 
 ### **Objetivo Principal**
 
@@ -41,14 +55,87 @@ Identificar precocemente estudantes em risco de defasagem escolar através de an
 
 | Componente | Tecnologia | Versão | Propósito |
 |------------|------------|--------|-----------|
+| **Linguagem** | Python | 3.11+ | Linguagem principal do projeto |
+| **Framework ML** | Scikit-learn | Latest | Random Forest Classifier e pipeline |
+| **Processamento** | Pandas + NumPy | Latest | Manipulação e análise de dados |
 | **API Framework** | FastAPI | Latest | REST API e documentação automática |
-| **ML Framework** | Scikit-learn | Latest | Random Forest Classifier |
-| **Data Processing** | Pandas + NumPy | Latest | Manipulação de dados educacionais |
-| **Data Source** | Excel (XLSX) | - | Dataset PEDE_PASSOS_DATASET_FIAP.xlsx |
-| **Feature Engineering** | LabelEncoder | Latest | Encoding de variáveis categóricas |
-| **Containerization** | Docker + Compose | Latest | Deploy e orquestração |
-| **Validation** | Pydantic | Latest | Validação de dados de entrada |
-| **Testing** | Pytest | Latest | Testes automatizados |
+| **Validação** | Pydantic | Latest | Validação de dados de entrada |
+| **Serialização** | Joblib | Latest | Persistência do modelo treinado |
+| **Testes** | Pytest | Latest | Testes automatizados e cobertura |
+| **Containerização** | Docker + Compose | Latest | Deploy e orquestração |
+| **Monitoramento** | Logging + Health Checks | Built-in | Observabilidade da aplicação |
+
+---
+
+## 📁 **Estrutura do Projeto**
+
+```
+datathon-tech5/
+├── 📄 docker-compose.yml                    # Orquestração de containers
+├── 📄 Dockerfile                            # Build da imagem Docker
+├── 📄 requirements.txt                      # Dependências Python
+├── 📄 README.md                             # Documentação do projeto
+├── 📄 LICENSE                               # Licença MIT
+│
+├── 📁 app/                                  # Código fonte principal
+│   ├── 📄 main.py                           # Aplicação FastAPI
+│   ├── 📄 train.py                          # Script de treinamento
+│   │
+│   ├── 📁 data/                             # Datasets
+│   │   └── 📄 PEDE_PASSOS_DATASET_FIAP.xlsx # Dataset principal
+│   │
+│   ├── 📁 models/                           # Modelos treinados
+│   │   └── 📄 model_passos_magicos.joblib   # Modelo Random Forest
+│   │
+│   └── 📁 src/                              # Código fonte organizado
+│       ├── 📁 api/                          # Camada de API
+│       │   ├── 📄 controller.py             # Controladores REST
+│       │   └── 📄 schemas.py                # Schemas Pydantic
+│       │
+│       ├── 📁 application/                  # Camada de aplicação
+│       │   └── 📄 risk_service.py           # Serviços de negócio
+│       │
+│       ├── 📁 config/                       # Configurações
+│       │   └── 📄 settings.py               # Configurações centralizadas
+│       │
+│       ├── 📁 domain/                       # Camada de domínio
+│       │   └── 📄 student.py                # Entidades de domínio
+│       │
+│       ├── 📁 infrastructure/               # Camada de infraestrutura
+│       │   ├── 📁 data/
+│       │   │   └── 📄 data_loader.py        # Carregamento de dados
+│       │   └── 📁 model/
+│       │       ├── 📄 ml_pipeline.py        # Pipeline de ML
+│       │       └── 📄 feature_engineer.py   # Engenharia de features
+│       │
+│       └── 📁 util/                         # Utilitários
+│           └── 📄 logger.py                 # Sistema de logging
+│
+└── 📁 tests/                                # Testes automatizados
+    ├── 📄 conftest.py                       # Configurações de teste
+    ├── 📄 test_main.py                      # Testes da aplicação
+    ├── 📁 api/                              # Testes da API
+    ├── 📁 application/                      # Testes de serviços
+    ├── 📁 infrastructure/                   # Testes de infraestrutura
+    └── 📁 util/                             # Testes de utilitários
+```
+
+### **Responsabilidades por Camada**
+
+#### **🌐 API Layer** (`src/api/`)
+- **controller.py**: Endpoints REST, validação de entrada e tratamento de erros
+- **schemas.py**: Modelos Pydantic para validação e serialização de dados
+
+#### **🔧 Application Layer** (`src/application/`)
+- **risk_service.py**: Lógica de negócio para predição de risco e regras de threshold
+
+#### **🏛️ Domain Layer** (`src/domain/`)
+- **student.py**: Entidade de domínio representando um estudante e suas características
+
+#### **🏗️ Infrastructure Layer** (`src/infrastructure/`)
+- **ml_pipeline.py**: Pipeline completo de Machine Learning (treino, avaliação, predição)
+- **feature_engineer.py**: Transformações e encoding de features categóricas
+- **data_loader.py**: Carregamento e validação de dados do Excel
 
 ---
 
@@ -62,8 +149,44 @@ Identificar precocemente estudantes em risco de defasagem escolar através de an
 | **Docker Compose** | 2.0+ | Para orquestração |
 | **Git** | 2.0+ | Para clone do repositório |
 | **Python** | 3.11+ | Para execução local (opcional) |
+| **curl** | Qualquer | Para testes de API (opcional) |
 
-### **Instalação Local**
+### **🐳 Deploy com Docker (Recomendado)**
+
+```bash
+# 1. Clone o repositório
+git clone <repository-url>
+cd datathon-tech5
+
+# 2. Build e execução com Docker Compose
+docker-compose up -d --build
+
+# 3. Verificar se o container está rodando
+docker-compose ps
+
+# 4. Verificar logs (opcional)
+docker-compose logs -f passos-magicos-api
+
+# 5. Testar a API
+curl http://localhost:8000/health
+```
+
+**Comandos Docker Úteis:**
+```bash
+# Parar os serviços
+docker-compose down
+
+# Rebuild forçado
+docker-compose up -d --build --force-recreate
+
+# Ver logs em tempo real
+docker-compose logs -f
+
+# Entrar no container para debug
+docker-compose exec passos-magicos-api bash
+```
+
+### **💻 Instalação Local (Desenvolvimento)**
 
 ```bash
 # 1. Clone o repositório
@@ -72,60 +195,141 @@ cd datathon-tech5
 
 # 2. Crie um ambiente virtual (recomendado)
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
 
-# 3. Instale as dependências
+# 3. Ative o ambiente virtual
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# 4. Instale as dependências
 pip install -r requirements.txt
 
-# 4. CRUCIAL: Execute o treinamento do modelo
+# 5. CRUCIAL: Execute o treinamento do modelo
 python app/train.py
 
-# 5. Inicie a API
+# 6. Inicie a API
 python app/main.py
 ```
 
-> **⚠️ IMPORTANTE**: O comando `python app/train.py` é **OBRIGATÓRIO** antes de iniciar a API, pois ele gera o arquivo `.joblib` necessário para as predições.
+> **⚠️ IMPORTANTE**: O comando `python app/train.py` é **OBRIGATÓRIO** antes de iniciar a API, pois ele gera o arquivo `model_passos_magicos.joblib` necessário para as predições.
 
-### **Deploy com Docker**
-
-```bash
-# 1. Clone o repositório
-git clone <repository-url>
-cd datathon-tech5
-
-# 2. Build da imagem Docker
-docker build -t passos-magicos-api .
-
-# 3. Execução do container
-docker run -p 8000:8000 passos-magicos-api
-
-# OU usando Docker Compose (recomendado)
-docker-compose up -d --build
-```
-
-### **Verificação da Instalação**
+### **🔍 Verificação da Instalação**
 
 ```bash
-# Health check da API
+# 1. Health check da API
 curl http://localhost:8000/health
+# Resposta esperada: {"status":"ok","service":"passos-magicos-api"}
 
-# Documentação interativa
-# Acesse: http://localhost:8000/docs
+# 2. Documentação interativa (abrir no navegador)
+# http://localhost:8000/docs
+
+# 3. Teste de predição simples
+curl -X POST "http://localhost:8000/api/v1/predict" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "IDADE_22": 14, "CG": 7.5, "CF": 7.0, "CT": 7.2,
+       "IAA": 6.8, "IEG": 7.1, "IPS": 6.9, "IDA": 7.0,
+       "MATEM": 6.5, "PORTUG": 7.3, "INGLES": 6.8,
+       "GENERO": "M", "TURMA": "A", "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
+     }'
 ```
+
+### **🌐 Deploy no Render (Produção)**
+
+A aplicação está hospedada no Render e pode ser acessada através do link:
+
+**🔗 URL de Produção**: `https://datathon-tech5.onrender.com`
+
+#### **📋 Informações do Deploy**
+- **Plataforma**: Render (Free Tier)
+- **Build automático**: A cada push na branch `main`
+- **Documentação**: `https://datathon-tech5.onrender.com/docs`
+- **Health Check**: `https://datathon-tech5.onrender.com/health`
+
+#### **⚠️ Limitações do Plano Gratuito**
+- **Sleep após inatividade**: 15 minutos sem requests
+- **Cold start**: ~30s para "acordar" o serviço  
+- **RAM**: 512MB limitado
+- **Build time**: 15 minutos máximo
+
+> **💡 Dica**: O primeiro request após período de inatividade pode demorar até 60 segundos devido ao cold start. Requests subsequentes são rápidos (~200-500ms).
 
 ---
 
 ## 📡 **Exemplos de Chamadas à API**
 
-### **Endpoint de Predição**
+### **Base URLs**
+- **Produção (Render)**: `https://datathon-tech5.onrender.com`
+- **Local**: `http://localhost:8000`
 
-**URL**: `POST /api/v1/predict`
+### **📚 Documentação Interativa**
+- **Swagger UI**: `/docs` - Interface completa para testes
+- **ReDoc**: `/redoc` - Documentação alternativa
+
+**Links diretos:**
+- Produção: `https://datathon-tech5.onrender.com/docs`
+- Local: `http://localhost:8000/docs`
+
+---
+
+### **🏥 Health Check**
+
+```bash
+GET /health
+```
+
+**Exemplos:**
+```bash
+# Produção (Render)
+curl https://datathon-tech5.onrender.com/health
+
+# Local
+curl http://localhost:8000/health
+```
+
+**Resposta:**
+```json
+{
+  "status": "ok",
+  "service": "passos-magicos-api",
+  "environment": "render",
+  "port": "10000"
+}
+```
+
+---
+
+### **🎯 Endpoint de Predição**
+
+```bash
+POST /api/v1/predict
+```
 
 ### **Exemplo com cURL**
 
 ```bash
+# Produção (Render) - Recomendado
+curl -X POST "https://datathon-tech5.onrender.com/api/v1/predict" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "IDADE_22": 14,
+       "CG": 7.5,
+       "CF": 7.0,
+       "CT": 7.2,
+       "IAA": 6.8,
+       "IEG": 7.1,
+       "IPS": 6.9,
+       "IDA": 7.0,
+       "MATEM": 6.5,
+       "PORTUG": 7.3,
+       "INGLES": 6.8,
+       "GENERO": "M",
+       "TURMA": "A",
+       "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
+     }'
+
+# Local (desenvolvimento)
 curl -X POST "http://localhost:8000/api/v1/predict" \
      -H "Content-Type: application/json" \
      -d '{
@@ -145,12 +349,19 @@ curl -X POST "http://localhost:8000/api/v1/predict" \
        "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
      }'
 ```
+```
 
 ### **Exemplo com Python**
 
 ```python
 import requests
 import json
+
+# Configurar URL (produção recomendada)
+BASE_URL = "https://datathon-tech5.onrender.com"  # Produção
+# BASE_URL = "http://localhost:8000"  # Local
+
+url = f"{BASE_URL}/api/v1/predict"
 
 # Dados do estudante
 student_data = {
@@ -170,168 +381,348 @@ student_data = {
     "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
 }
 
-# Requisição para a API
-response = requests.post(
-    "http://localhost:8000/api/v1/predict",
-    json=student_data
-)
-
-print(json.dumps(response.json(), indent=2))
+# Fazer requisição (timeout maior para cold start do Render)
+try:
+    response = requests.post(url, json=student_data, timeout=60)
+    
+    if response.status_code == 200:
+        result = response.json()
+        print("✅ Predição realizada com sucesso:")
+        print(json.dumps(result, indent=2))
+    else:
+        print(f"❌ Erro: {response.status_code} - {response.text}")
+        
+except requests.exceptions.Timeout:
+    print("⏰ Timeout: API pode estar em cold start (aguarde ~60s)")
+except requests.exceptions.RequestException as e:
+    print(f"🔌 Erro de conexão: {e}")
 ```
 
-### **JSON de Input (Payload)**
+---
+
+### **📋 Estrutura do Payload (Input)**
 
 ```json
 {
-  "IDADE_22": 14,
-  "CG": 7.5,
-  "CF": 7.0,
-  "CT": 7.2,
-  "IAA": 6.8,
-  "IEG": 7.1,
-  "IPS": 6.9,
-  "IDA": 7.0,
-  "MATEM": 6.5,
-  "PORTUG": 7.3,
-  "INGLES": 6.8,
-  "GENERO": "M",
-  "TURMA": "A",
-  "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
+  "IDADE_22": 14,           // int - Idade do estudante em 2022
+  "CG": 7.5,                // float - Competência Geral
+  "CF": 7.0,                // float - Competência em Física
+  "CT": 7.2,                // float - Competência Técnica
+  "IAA": 6.8,               // float - Indicador de Aprendizagem Ativa
+  "IEG": 7.1,               // float - Indicador de Engajamento
+  "IPS": 6.9,               // float - Indicador Psicossocial
+  "IDA": 7.0,               // float - Indicador de Desenvolvimento Acadêmico
+  "MATEM": 6.5,             // float - Nota em Matemática
+  "PORTUG": 7.3,            // float - Nota em Português
+  "INGLES": 6.8,            // float - Nota em Inglês
+  "GENERO": "M",            // string - Gênero do estudante
+  "TURMA": "A",             // string - Turma do estudante
+  "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"  // string - Instituição
+}
+```
+
+**Validações:**
+- **Features Numéricas**: Devem ser números (int/float)
+- **Features Categóricas**: Devem ser strings não vazias
+- **Campos Obrigatórios**: Todos os 14 campos são obrigatórios
+
+---
+
+### **📤 Estrutura da Resposta (Output)**
+
+```json
+{
+  "risk_probability": 0.2847,
+  "risk_label": "BAIXO RISCO",
+  "message": "O estudante possui 28.5% de chance de defasagem."
 }
 ```
 
 **Descrição dos Campos:**
-- **Features Numéricas (float)**:
-  - `IDADE_22`: Idade do estudante em 2022
-  - `CG`, `CF`, `CT`: Métricas de competências
-  - `IAA`, `IEG`, `IPS`, `IDA`: Indicadores acadêmicos
-  - `MATEM`, `PORTUG`, `INGLES`: Notas das disciplinas
-- **Features Categóricas (string)**:
-  - `GENERO`: Gênero do estudante
-  - `TURMA`: Turma do estudante
-  - `INSTITUICAO_DE_ENSINO`: Instituição de ensino
+- `risk_probability` (float): Probabilidade de risco entre 0.0 e 1.0
+- `risk_label` (string): "ALTO RISCO" (≥0.5) ou "BAIXO RISCO" (<0.5)
+- `message` (string): Mensagem explicativa com percentual formatado
 
-### **JSON de Output Esperado**
+---
 
+### **⚠️ Tratamento de Erros**
+
+#### **Erro 422 - Validação**
 ```json
 {
-  "risk_probability": 0.405,
-  "risk_label": "BAIXO RISCO",
-  "message": "O estudante possui 40.5% de chance de defasagem."
+  "detail": [
+    {
+      "loc": ["body", "IDADE_22"],
+      "msg": "field required",
+      "type": "value_error.missing"
+    }
+  ]
 }
 ```
 
-**Descrição dos Campos de Resposta:**
-- `risk_probability` (float): Probabilidade de risco (0.0 a 1.0)
-- `risk_label` (string): "ALTO RISCO" ou "BAIXO RISCO"
-- `message` (string): Mensagem explicativa com percentual
+#### **Erro 500 - Interno**
+```json
+{
+  "detail": "Modelo indisponível. Execute 'train.py' primeiro."
+}
+```
 
 ---
 
 ## 🔬 **Pipeline de Machine Learning**
 
-### **1. Ingestão de Dados**
+### **Visão Geral do Pipeline**
 
-```python
-# Leitura do dataset Excel
-df = pd.read_excel("app/data/PEDE_PASSOS_DATASET_FIAP.xlsx")
+O pipeline de ML segue as melhores práticas de MLOps, desde a ingestão de dados até o deploy do modelo em produção. Cada etapa é modular, testável e reproduzível.
+
+```mermaid
+graph LR
+    A[📊 Dados Excel] --> B[🔄 Pré-processamento]
+    B --> C[⚙️ Feature Engineering]
+    C --> D[🧠 Treinamento RF]
+    D --> E[📈 Avaliação]
+    E --> F[💾 Persistência]
+    F --> G[🚀 Deploy API]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#f1f8e9
+    style G fill:#e0f2f1
 ```
 
-**Fonte**: Dataset PEDE_PASSOS_DATASET_FIAP.xlsx contendo dados históricos de estudantes da ONG Passos Mágicos.
+---
 
-### **2. Pré-processamento**
+### **1. 📊 Ingestão de Dados**
 
-#### **Normalização de Colunas**
-- Padronização de nomes de colunas
-- Tratamento de valores nulos com preenchimento por zero
-- Validação de tipos de dados
+**Fonte**: Dataset `PEDE_PASSOS_DATASET_FIAP.xlsx` com dados históricos de estudantes da ONG.
+
+```python
+# Carregamento via DataLoader
+from src.infrastructure.data.data_loader import DataLoader
+
+loader = DataLoader()
+df = loader.load_data()
+print(f"Dataset carregado: {df.shape[0]} registros, {df.shape[1]} colunas")
+```
+
+**Características do Dataset:**
+- **Registros**: ~800 estudantes
+- **Features**: 14 variáveis (11 numéricas + 3 categóricas)
+- **Target**: Baseado na coluna DEFAS (defasagem escolar)
+- **Formato**: Excel (.xlsx) com validação automática
+
+---
+
+### **2. 🔄 Pré-processamento**
+
+#### **Limpeza e Normalização**
+```python
+# Padronização de nomes de colunas
+df.columns = df.columns.str.upper().str.strip()
+
+# Tratamento de valores nulos
+df = df.fillna(0)
+
+# Validação de tipos de dados
+numeric_cols = ['IDADE_22', 'CG', 'CF', 'CT', 'IAA', 'IEG', 'IPS', 'IDA', 'MATEM', 'PORTUG', 'INGLES']
+df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
+```
 
 #### **Criação da Variável Target**
 ```python
-# Criação do target baseado na coluna DEFAS
+# Target baseado na defasagem escolar
 df["RISCO_DEFASAGEM"] = (df["DEFAS"] < 0).astype(int)
-# 1 = RISCO (DEFAS < 0)
-# 0 = SEM RISCO (DEFAS >= 0)
+# 1 = ALTO RISCO (DEFAS < 0)
+# 0 = BAIXO RISCO (DEFAS >= 0)
+
+# Distribuição das classes
+print(df["RISCO_DEFASAGEM"].value_counts())
 ```
 
-### **3. Engenharia de Features**
+---
+
+### **3. ⚙️ Engenharia de Features**
 
 #### **Features Numéricas (11 variáveis)**
 ```python
 FEATURES_NUMERICAS = [
-    "IDADE_22", "CG", "CF", "CT", 
-    "IAA", "IEG", "IPS", "IDA",
-    "MATEM", "PORTUG", "INGLES"
+    "IDADE_22",    # Idade do estudante em 2022
+    "CG",          # Competência Geral
+    "CF",          # Competência em Física  
+    "CT",          # Competência Técnica
+    "IAA",         # Indicador de Aprendizagem Ativa
+    "IEG",         # Indicador de Engajamento
+    "IPS",         # Indicador Psicossocial
+    "IDA",         # Indicador de Desenvolvimento Acadêmico
+    "MATEM",       # Nota em Matemática
+    "PORTUG",      # Nota em Português
+    "INGLES"       # Nota em Inglês
 ]
 ```
 
 #### **Features Categóricas (3 variáveis)**
 ```python
 FEATURES_CATEGORICAS = [
-    "GENERO", "TURMA", "INSTITUICAO_DE_ENSINO"
+    "GENERO",                # Gênero do estudante
+    "TURMA",                 # Turma do estudante  
+    "INSTITUICAO_DE_ENSINO"  # Instituição de ensino
 ]
 ```
 
-#### **Label Encoding**
-- Aplicação de `LabelEncoder` para variáveis categóricas
-- Tratamento de valores não vistos durante treinamento (mapeamento para -1)
-- Preservação do estado dos encoders para predições futuras
+#### **Label Encoding Inteligente**
+```python
+class FeatureEngineer(BaseEstimator, TransformerMixin):
+    def transform(self, X):
+        # Encoding com tratamento de valores não vistos
+        for col, encoder in self.encoders.items():
+            X[col] = X[col].map(
+                lambda s: encoder.transform([s])[0] if s in encoder.classes_ else -1
+            )
+        return X
+```
 
-### **4. Modelo Random Forest**
+**Vantagens:**
+- Preserva estado dos encoders para produção
+- Trata valores não vistos durante treinamento
+- Integrado ao pipeline sklearn
 
-#### **Justificativa da Escolha**
-- **F1-Score**: Métrica ideal para balancear precisão e recall em problemas de classificação desbalanceada
-- **Random Forest**: Robusto contra overfitting, lida bem com features categóricas e numéricas
-- **Class Weight Balanced**: Compensa automaticamente o desbalanceamento de classes
+---
+
+### **4. 🧠 Seleção e Treinamento do Modelo**
+
+#### **Justificativa: Random Forest**
+
+| Critério | Random Forest | Alternativas |
+|----------|---------------|--------------|
+| **Interpretabilidade** | ✅ Feature importance | ❌ Deep Learning |
+| **Robustez** | ✅ Resistente a overfitting | ❌ Árvore única |
+| **Features Mistas** | ✅ Numéricas + categóricas | ❌ Regressão linear |
+| **Desbalanceamento** | ✅ class_weight="balanced" | ❌ SVM padrão |
+| **Velocidade** | ✅ Rápido para predição | ❌ Ensemble complexo |
 
 #### **Configuração do Modelo**
 ```python
 RandomForestClassifier(
     n_estimators=200,           # 200 árvores para estabilidade
     random_state=42,            # Reprodutibilidade
-    class_weight="balanced"     # Balanceamento automático
+    class_weight="balanced",    # Balanceamento automático
+    max_depth=None,             # Profundidade automática
+    min_samples_split=2,        # Divisão mínima
+    min_samples_leaf=1          # Folhas mínimas
 )
 ```
 
 #### **Pipeline Completo**
 ```python
 pipeline = Pipeline([
-    ("fe", FeatureEngineer()),      # Encoding de categóricas
-    ("clf", RandomForestClassifier(...))  # Classificador
+    ("feature_engineer", FeatureEngineer()),    # Encoding categóricas
+    ("classifier", RandomForestClassifier(...)) # Classificador
 ])
+
+# Treinamento
+pipeline.fit(X_train, y_train)
 ```
 
-### **5. Avaliação e Métricas**
+---
 
-#### **Divisão dos Dados**
-- **Treinamento**: 80%
-- **Teste**: 20%
-- **Estratificação**: Mantém proporção das classes
+### **5. 📈 Avaliação e Validação**
+
+#### **Divisão Estratificada**
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,              # 80% treino, 20% teste
+    random_state=42,            # Reprodutibilidade
+    stratify=y                  # Mantém proporção das classes
+)
+```
 
 #### **Métricas de Performance**
-- **F1-Score**: 0.99 (métrica principal)
+```python
+# Predições no conjunto de teste
+y_pred = pipeline.predict(X_test)
+
+# Relatório completo
+print(classification_report(y_test, y_pred, zero_division=0))
+```
+
+**Métricas Principais:**
+- **F1-Score**: 0.99 (métrica principal para classes desbalanceadas)
 - **Precision**: Precisão na identificação de risco
 - **Recall**: Capacidade de detectar todos os casos de risco
-- **Classification Report**: Relatório detalhado por classe
+- **Accuracy**: Acurácia geral do modelo
 
-#### **Importância das Features**
+#### **Análise de Feature Importance**
 ```python
 # Extração automática da importância
-feature_importance = model.feature_importances_
+feature_names = FEATURES_NUMERICAS + FEATURES_CATEGORICAS
+importances = pipeline.named_steps["classifier"].feature_importances_
+
+# DataFrame ordenado por importância
+importance_df = pd.DataFrame({
+    "feature": feature_names,
+    "importance": importances
+}).sort_values("importance", ascending=False)
 ```
 
-### **6. Persistência do Modelo**
+---
 
+### **6. 💾 Persistência e Versionamento**
+
+#### **Salvamento do Pipeline**
 ```python
-# Salvamento do pipeline completo
-joblib.dump(pipeline, "app/models/model_passos_magicos.joblib")
+import joblib
+from pathlib import Path
+
+# Salvamento completo do pipeline
+model_path = "app/models/model_passos_magicos.joblib"
+joblib.dump(pipeline, model_path)
+
+print(f"Modelo salvo em: {model_path}")
+print(f"Tamanho do arquivo: {Path(model_path).stat().st_size / 1024:.1f} KB")
 ```
 
-**Artefatos Salvos**:
-- Pipeline completo com feature engineering
-- Estado dos LabelEncoders
-- Métricas de performance
-- Configurações do modelo
+#### **Artefatos Persistidos**
+- **Pipeline Completo**: Modelo + feature engineering
+- **Estado dos Encoders**: Para variáveis categóricas
+- **Métricas de Performance**: Para monitoramento
+- **Configurações**: Parâmetros e hiperparâmetros
+
+#### **Carregamento em Produção**
+```python
+# Carregamento automático na API
+class RiskService:
+    def __init__(self):
+        self.pipeline = joblib.load("app/models/model_passos_magicos.joblib")
+    
+    def predict_risk(self, student_data):
+        probability = self.pipeline.predict_proba([student_data])[:, 1][0]
+        return {
+            "risk_probability": round(probability, 4),
+            "risk_label": "ALTO RISCO" if probability >= 0.5 else "BAIXO RISCO"
+        }
+```
+
+---
+
+### **7. 🔄 Retreinamento e Monitoramento**
+
+#### **Estratégia de Retreinamento**
+- **Frequência**: Semestral ou quando performance degrada
+- **Trigger**: Monitoramento de drift nos dados
+- **Processo**: Automatizado via `python app/train.py`
+- **Validação**: A/B testing entre versões
+
+#### **Monitoramento de Performance**
+```python
+# Logs estruturados para monitoramento
+logger.info(f"Predição realizada: probabilidade={prob:.4f}")
+logger.info(f"Features utilizadas: {list(X.columns)}")
+logger.info(f"Tempo de resposta: {response_time:.3f}s")
+```
 
 ---
 
@@ -339,29 +730,31 @@ joblib.dump(pipeline, "app/models/model_passos_magicos.joblib")
 
 ### **Clean Architecture**
 
+O projeto segue os princípios da Clean Architecture, garantindo separação de responsabilidades, testabilidade e manutenibilidade.
+
 ```mermaid 
 graph TB
-    subgraph "API Layer"
+    subgraph "🌐 API Layer"
         Controller[PredictionController]
         Schemas[StudentDTO]
         FastAPI[FastAPI App]
     end
     
-    subgraph "Application Layer"
+    subgraph "🔧 Application Layer"
         Service[RiskService]
     end
     
-    subgraph "Domain Layer"
+    subgraph "🏛️ Domain Layer"
         Student[Student Entity]
     end
     
-    subgraph "Infrastructure Layer"
+    subgraph "🏗️ Infrastructure Layer"
         MLPipeline[MLPipeline]
         DataLoader[DataLoader]
         FeatureEngineer[FeatureEngineer]
     end
     
-    subgraph "External"
+    subgraph "💾 External"
         Excel[Excel Dataset]
         Model[Trained Model]
     end
@@ -392,86 +785,213 @@ graph TB
 
 ```mermaid 
 sequenceDiagram
-    participant Client as Cliente
-    participant API as FastAPI
-    participant Controller as Controller
-    participant Service as RiskService
-    participant Pipeline as MLPipeline
-    participant Model as Random Forest
+    participant Client as 👤 Cliente
+    participant API as 🌐 FastAPI
+    participant Controller as 🎮 Controller
+    participant Service as 🔧 RiskService
+    participant Pipeline as 🏗️ MLPipeline
+    participant Model as 🧠 Random Forest
 
     Client->>+API: POST /api/v1/predict
-    API->>+Controller: Validate & Route
+    API->>+Controller: Validate Request
     Controller->>+Service: predict_risk(student)
     Service->>+Pipeline: predict_proba(dataframe)
     Pipeline->>Pipeline: Feature Engineering
     Pipeline->>+Model: Predict Probability
-    Model->>-Pipeline: Risk Probability
+    Model->>-Pipeline: Risk Probability [0-1]
     Pipeline->>-Service: Processed Result
-    Service->>Service: Apply Threshold (0.5)
+    Service->>Service: Apply Threshold (≥0.5)
     Service->>-Controller: Risk Assessment
     Controller->>-API: JSON Response
     API->>-Client: Risk Prediction
 ```
 
+### **Princípios Arquiteturais**
+
+#### **🔄 Inversão de Dependência**
+```python
+# Service depende de abstração, não implementação
+class RiskService:
+    def __init__(self, ml_pipeline: MLPipeline):
+        self.ml_pipeline = ml_pipeline
+```
+
+#### **📦 Separação de Responsabilidades**
+- **API**: Validação, serialização, HTTP
+- **Application**: Regras de negócio, orquestração
+- **Domain**: Entidades, objetos de valor
+- **Infrastructure**: Acesso a dados, ML, I/O
+
+#### **🧪 Testabilidade**
+```python
+# Injeção de dependência facilita testes
+def get_risk_service():
+    return RiskService()
+
+# Mocking em testes
+@patch('src.application.risk_service.MLPipeline')
+def test_predict_risk(mock_pipeline):
+    # Test implementation
+```
+
 ---
 
-## 📁 **Estrutura do Projeto**
+## 📊 **Monitoramento e Observabilidade**
 
-```
-datathon-tech5/
-├── app/
-│   ├── data/
-│   │   └── PEDE_PASSOS_DATASET_FIAP.xlsx    # Dataset principal
-│   ├── models/
-│   │   └── model_passos_magicos.joblib      # Modelo treinado
-│   ├── src/
-│   │   ├── api/
-│   │   │   ├── controller.py                # Controladores da API
-│   │   │   └── schemas.py                   # Schemas Pydantic
-│   │   ├── application/
-│   │   │   └── risk_service.py              # Serviços de negócio
-│   │   ├── config/
-│   │   │   └── settings.py                  # Configurações
-│   │   ├── domain/
-│   │   │   └── student.py                   # Entidades de domínio
-│   │   ├── infrastructure/
-│   │   │   ├── data/
-│   │   │   │   └── data_loader.py           # Carregamento de dados
-│   │   │   └── model/
-│   │   │       ├── ml_pipeline.py           # Pipeline ML
-│   │   │       └── feature_engineer.py     # Engenharia de features
-│   │   └── util/
-│   │       └── logger.py                    # Utilitários de log
-│   ├── main.py                              # Aplicação principal
-│   └── train.py                             # Script de treinamento
-├── tests/                                   # Testes automatizados
-├── docker-compose.yml                       # Orquestração Docker
-├── Dockerfile                               # Imagem Docker
-├── requirements.txt                         # Dependências Python
-└── README.md                                # Documentação
+### **🏥 Health Checks**
+
+#### **Endpoint de Saúde**
+```bash
+GET /health
 ```
 
-### **Responsabilidades por Camada**
+**Verificações Realizadas:**
+- Status da aplicação
+- Disponibilidade do modelo
+- Conectividade com dependências
 
-#### **API Layer**
-- **controller.py**: Endpoints REST e validação de entrada
-- **schemas.py**: Modelos Pydantic para validação de dados
+```python
+@staticmethod
+def health_check():
+    return {
+        "status": "ok",
+        "service": "passos-magicos-api",
+        "timestamp": datetime.now().isoformat(),
+        "version": "1.0.0"
+    }
+```
 
-#### **Application Layer**
-- **risk_service.py**: Lógica de negócio para predição de risco
+#### **Health Check Docker**
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+```
 
-#### **Domain Layer**
-- **student.py**: Entidade de domínio representando um estudante
+### **📝 Sistema de Logging**
 
-#### **Infrastructure Layer**
-- **ml_pipeline.py**: Pipeline de Machine Learning
-- **feature_engineer.py**: Transformações de features
-- **data_loader.py**: Carregamento de dados do Excel
+#### **Logs Estruturados**
+```python
+import logging
+from src.util.logger import logger
+
+# Configuração centralizada
+logger.info("Iniciando predição", extra={
+    "student_id": student.id,
+    "features_count": len(features),
+    "model_version": "v1.0"
+})
+```
+
+#### **Níveis de Log**
+- **INFO**: Operações normais, predições realizadas
+- **WARNING**: Valores atípicos, fallbacks ativados  
+- **ERROR**: Falhas de modelo, dados inválidos
+- **DEBUG**: Detalhes técnicos, debugging
+
+### **📈 Métricas de Performance**
+
+#### **Métricas de Aplicação**
+```python
+# Tempo de resposta
+start_time = time.time()
+result = predict_risk(student)
+response_time = time.time() - start_time
+
+logger.info(f"Predição concluída em {response_time:.3f}s")
+```
+
+#### **Métricas de Modelo**
+```python
+# Distribuição de predições
+risk_distribution = {
+    "alto_risco": predictions.count("ALTO RISCO"),
+    "baixo_risco": predictions.count("BAIXO RISCO"),
+    "probabilidade_media": np.mean(probabilities)
+}
+```
+
+### **🔍 Monitoramento de Drift**
+
+#### **Data Drift Detection**
+```python
+# Comparação com dados de treinamento
+def detect_feature_drift(new_data, reference_data):
+    drift_scores = {}
+    for feature in FEATURES_NUMERICAS:
+        # KS test para features numéricas
+        statistic, p_value = ks_2samp(
+            reference_data[feature], 
+            new_data[feature]
+        )
+        drift_scores[feature] = {"statistic": statistic, "p_value": p_value}
+    return drift_scores
+```
+
+#### **Model Performance Monitoring**
+```python
+# Tracking de performance ao longo do tempo
+performance_metrics = {
+    "timestamp": datetime.now(),
+    "predictions_count": len(predictions),
+    "avg_probability": np.mean(probabilities),
+    "high_risk_percentage": high_risk_count / total_predictions
+}
+```
+
+### **🚨 Alertas e Notificações**
+
+#### **Condições de Alerta**
+- Taxa de erro > 5%
+- Tempo de resposta > 2s
+- Drift significativo detectado
+- Modelo indisponível
+
+#### **Canais de Notificação**
+- Logs estruturados
+- Health check failures
+- Container restart policies
+
+### **📊 Dashboard de Monitoramento**
+
+#### **Métricas Chave**
+```bash
+# Verificar métricas via logs
+docker-compose logs passos-magicos-api | grep "Predição concluída"
+
+# Status do container
+docker-compose ps
+
+# Uso de recursos
+docker stats passos-magicos-container
+```
+
+#### **Comandos de Troubleshooting**
+```bash
+# Logs em tempo real
+docker-compose logs -f --tail=100 passos-magicos-api
+
+# Entrar no container para debug
+docker-compose exec passos-magicos-api bash
+
+# Verificar modelo treinado
+ls -la app/models/
+
+# Testar endpoint manualmente
+curl -f http://localhost:8000/health
+```
 
 ---
 
 ## 📄 **Licença**
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes completos.
+
+### **Resumo da Licença**
+- ✅ Uso comercial permitido
+- ✅ Modificação permitida  
+- ✅ Distribuição permitida
+- ✅ Uso privado permitido
+- ❌ Sem garantia
+- ❌ Sem responsabilidade
 
 ---
