@@ -215,9 +215,9 @@ print(json.dumps(response.json(), indent=2))
 
 ```json
 {
-  "risk_probability": 0.2340,
+  "risk_probability": 0.405,
   "risk_label": "BAIXO RISCO",
-  "message": "O estudante possui 23.4% de chance de defasagem."
+  "message": "O estudante possui 40.5% de chance de defasagem."
 }
 ```
 
