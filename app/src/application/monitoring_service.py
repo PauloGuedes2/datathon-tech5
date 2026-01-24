@@ -1,8 +1,9 @@
-import pandas as pd
 import os
-from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
+
+import pandas as pd
 from evidently import ColumnMapping
+from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
+from evidently.report import Report
 
 from src.config.settings import Settings
 from src.util.logger import logger
@@ -26,6 +27,10 @@ class MonitoringService:
             reference_data = pd.read_csv(Settings.REFERENCE_PATH)
             current_data = pd.read_csv(Settings.LOG_PATH)
 
+            # Remove registros inválidos
+            reference_data = reference_data.dropna(subset=["prediction"])
+            current_data = current_data.dropna(subset=["prediction"])
+
             # Garante que temos colunas compatíveis (Interseção)
             common_cols = list(set(reference_data.columns) & set(current_data.columns))
 
@@ -45,7 +50,8 @@ class MonitoringService:
 
             # 4. Gera o Relatório
             drift_report = Report(metrics=[
-                DataDriftPreset(),  # Detecta mudança na distribuição dos dados (Drift)
+                DataDriftPreset(),  # Drift nas features
+                TargetDriftPreset()  # Drift nas previsões
             ])
 
             drift_report.run(

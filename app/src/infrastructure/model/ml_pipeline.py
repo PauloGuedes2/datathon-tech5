@@ -1,14 +1,16 @@
-import pandas as pd
-import numpy as np
+import json
+from datetime import datetime
 import os
+
+import pandas as pd
 from joblib import dump
+from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.impute import SimpleImputer
+from sklearn.metrics import recall_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.compose import ColumnTransformer
-from sklearn.metrics import classification_report, recall_score, f1_score
 
 from src.config.settings import Settings
 from src.util.logger import logger
@@ -115,6 +117,25 @@ class MLPipeline:
         logger.info("=== RESULTADOS ===")
         logger.info(f"Recall: {recall:.2%}")
         logger.info(f"F1-Score: {f1:.2%}")
+
+        # Salvar métricas em arquivo
+        metrics = {
+            "timestamp": datetime.now().isoformat(),
+            "recall": round(float(recall), 4),
+            "f1_score": round(float(f1), 4),
+            "train_size": int(len(X_train)),
+            "test_size": int(len(X_test)),
+            "target_distribution": y.value_counts().to_dict()
+        }
+
+        metrics_path = os.path.join(Settings.MONITORING_PATH, "train_metrics.json")
+
+        os.makedirs(os.path.dirname(metrics_path), exist_ok=True)
+
+        with open(metrics_path, "w", encoding="utf-8") as f:
+            json.dump(metrics, f, indent=4, ensure_ascii=False)
+
+        logger.info(f"Métricas salvas em: {metrics_path}")
         # ------------------------------------------------------------
 
         # 5. Salvar Modelo

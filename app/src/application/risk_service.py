@@ -47,21 +47,27 @@ class RiskService:
             raise e
 
     def _prepare_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        # (Mantenha a lógica idêntica à anterior: Ano Ingresso, NAs, Tipos...)
+        df = df.copy()
+
         ano_atual = datetime.now().year
 
         if "ANO_INGRESSO" in df.columns:
-            df["ANO_INGRESSO"] = pd.to_numeric(df["ANO_INGRESSO"], errors='coerce').fillna(ano_atual)
+            ano_ingresso = pd.to_numeric(df["ANO_INGRESSO"], errors="coerce")
+            df["ANO_INGRESSO"] = ano_ingresso.fillna(ano_ingresso.median())
             df["TEMPO_NA_ONG"] = ano_atual - df["ANO_INGRESSO"]
-            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].apply(lambda x: x if x >= 0 else 0)
+            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].clip(lower=0)
         else:
             df["TEMPO_NA_ONG"] = 0
 
         for col in Settings.FEATURES_NUMERICAS:
             if col in df.columns:
-                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+                df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
-        required_features = Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
+        required_features = (
+                Settings.FEATURES_NUMERICAS +
+                Settings.FEATURES_CATEGORICAS
+        )
+
         for col in required_features:
             if col not in df.columns:
                 df[col] = 0 if col in Settings.FEATURES_NUMERICAS else "N/A"
@@ -73,7 +79,7 @@ class RiskService:
         try:
             # Adiciona a predição e timestamp ao log
             log_df = df.copy()
-            log_df["prediction"] = prob
+            log_df["prediction"] = float(prob)
             log_df["timestamp"] = datetime.now()
 
             # Cria diretório se não existir
