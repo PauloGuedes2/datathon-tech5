@@ -349,7 +349,6 @@ curl -X POST "http://localhost:8000/api/v1/predict" \
        "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
      }'
 ```
-```
 
 ### **Exemplo com Python**
 
@@ -995,3 +994,28 @@ Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](
 - ❌ Sem responsabilidade
 
 ---
+
+### **Monitoramento e Observabilidade**
+
+This project includes an automated monitoring subsystem using Evidently to generate reports for Data Drift, Prediction Drift, Data Quality and Stability Index.
+
+- Logs of inferences are written to: `app/logs/predictions.csv` (configurable via `LOG_PATH`).
+- Reference dataset is saved after training to: `app/monitoring/reference_data.csv` (configurable via `REFERENCE_PATH`).
+- Reports are generated and saved to: `app/monitoring/reports/` (configurable via `MONITORING_PATH`).
+
+Available monitoring endpoints:
+
+- POST `/api/v1/monitoring/run` — trigger generation of Evidently reports
+- GET `/api/v1/monitoring/reports` — list generated report files.
+- GET `/api/v1/monitoring/reports/{name}` — download an HTML report.
+
+Environment variables:
+
+- `LOG_PATH` — path to predictions log file (default `app/logs/predictions.csv`).
+- `MONITORING_PATH` — base monitoring path (default `app/monitoring`).
+- `REFERENCE_PATH` — path to reference dataset (default `app/monitoring/reference_data.csv`).
+
+Usage notes:
+
+1. Run `python app/train.py` to train the model and automatically save the reference dataset used for monitoring.
+2. Start the API `python app/main.py` — reports will be attempted on startup and can also be triggered via the monitoring endpoint.

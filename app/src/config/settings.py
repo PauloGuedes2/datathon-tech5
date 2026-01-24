@@ -3,47 +3,32 @@ from pathlib import Path
 
 
 class Settings:
-    """
-    Configurações centralizadas da aplicação.
-    
-    Contém todos os parâmetros de configuração para:
-        - Caminhos de arquivos e diretórios
-        - Regras de negócio
-        - Configurações de Machine Learning
-        - Features do modelo
-    """
-
     # --- Caminhos ---
     BASE_DIR = Path(__file__).resolve().parents[2]
-    DATA_PATH = os.path.join(BASE_DIR, "data", "PEDE_PASSOS_DATASET_FIAP.xlsx")
+    DATA_DIR = os.path.join(BASE_DIR, "data")
     MODEL_DIR = os.path.join(BASE_DIR, "models")
     MODEL_PATH = os.path.join(MODEL_DIR, "model_passos_magicos.joblib")
-    os.makedirs(MODEL_DIR, exist_ok=True)
+    LOG_PATH = os.path.join(BASE_DIR, "logs", "predictions.csv")
 
-    # --- Regras de Negócio ---
-    RISK_THRESHOLD = 0.5  # Acima disso é ALTO RISCO
+    # Monitoramento
+    MONITORING_PATH = os.path.join(BASE_DIR, "monitoring")
+    REFERENCE_PATH = os.path.join(MONITORING_PATH, "reference_data.csv")
 
-    # --- ML Configs ---
+    # --- Configuração do Modelo ---
+    RISK_THRESHOLD = 0.5
     TARGET_COL = "RISCO_DEFASAGEM"
     RANDOM_STATE = 42
     TEST_SIZE = 0.2
 
+    # --- FEATURES EXPLICITAS (WHITELIST) ---
     FEATURES_NUMERICAS = [
-        "IDADE_22",
-        "CG",
-        "CF",
-        "CT",
-        "IAA",
-        "IEG",
-        "IPS",
-        "IDA",
-        "MATEM",
-        "PORTUG",
-        "INGLES"
+        "IDADE",
+        "TEMPO_NA_ONG"
     ]
 
     FEATURES_CATEGORICAS = [
         "GENERO",
         "TURMA",
-        "INSTITUICAO_DE_ENSINO",
+        "INSTITUICAO_ENSINO",
+        "FASE"
     ]

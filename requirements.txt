@@ -11,3 +11,4 @@ pytest-cov
 pytest-mock
 httpx
 coverage
+evidently==0.6.0

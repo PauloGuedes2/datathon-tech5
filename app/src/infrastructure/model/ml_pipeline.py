@@ -1,168 +1,140 @@
 import pandas as pd
-from joblib import dump, load
+import numpy as np
+import os
+from joblib import dump
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.metrics import classification_report, recall_score, f1_score
 
 from src.config.settings import Settings
-from src.infrastructure.model.feature_engineer import FeatureEngineer
 from src.util.logger import logger
 
 
 class MLPipeline:
-    def __init__(self):
-        """
-        Inicializa o pipeline de Machine Learning.
-        
-        Attributes:
-            model: Pipeline sklearn que será carregado/treinado
-        """
-        self.model = None
-
-    @staticmethod
-    def create_target(df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Cria a variável target para o modelo de classificação.
-        
-        Args:
-            df: DataFrame com os dados originais contendo coluna DEFAS
-            
-        Returns:
-            DataFrame com nova coluna RISCO_DEFASAGEM (1=risco, 0=ok)
-            
-        Raises:
-            ValueError: Se coluna DEFAS não existir no dataset
-        """
-        if "DEFAS" not in df.columns:
-            raise ValueError("Coluna DEFAS não encontrada no dataset.")
-        df[Settings.TARGET_COL] = (df["DEFAS"] < 0).astype(int)
-
+    def create_target(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Cria a variável alvo RISCO_DEFASAGEM."""
+        if "DEFASAGEM" in df.columns:
+            df[Settings.TARGET_COL] = df["DEFASAGEM"].apply(
+                lambda x: 1 if (isinstance(x, (int, float)) and x < 0) else 0
+            )
+        elif "INDE" in df.columns:
+            df["INDE"] = pd.to_numeric(df["INDE"], errors='coerce')
+            df[Settings.TARGET_COL] = (df["INDE"] < 6.0).astype(int)
+        elif "PEDRA" in df.columns:
+            df[Settings.TARGET_COL] = df["PEDRA"].astype(str).str.upper().apply(
+                lambda x: 1 if "QUARTZO" in x else 0
+            )
+        else:
+            raise ValueError("Colunas DEFASAGEM, INDE ou PEDRA não encontradas.")
         return df
 
-    def get_feature_importance(self) -> pd.DataFrame:
-        """
-        Extrai a importância das features do modelo treinado.
-        
-        Returns:
-            DataFrame com features ordenadas por importância decrescente
-            
-        Raises:
-            RuntimeError: Se modelo não estiver carregado
-        """
-        if not self.model:
-            self.load()
-        if not self.model:
-            raise RuntimeError("Modelo indisponível.")
+    def _sanitize_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        cols_existentes = [c for c in Settings.FEATURES_NUMERICAS if c in df.columns]
+        for col in cols_existentes:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+        for col in Settings.FEATURES_CATEGORICAS:
+            if col in df.columns:
+                df[col] = df[col].astype(str).replace('nan', 'N/A')
+        if cols_existentes:
+            df[cols_existentes] = df[cols_existentes].fillna(0)
+        return df
 
-        clf = self.model.named_steps["clf"]
-        features = Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
+    def _feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
+        if "ANO_INGRESSO" in df.columns and "ANO_REFERENCIA" in df.columns:
+            df["ANO_INGRESSO"] = pd.to_numeric(df["ANO_INGRESSO"], errors='coerce')
+            mediana_ingresso = df["ANO_INGRESSO"].median()
+            df["ANO_INGRESSO"] = df["ANO_INGRESSO"].fillna(mediana_ingresso)
+            df["TEMPO_NA_ONG"] = df["ANO_REFERENCIA"] - df["ANO_INGRESSO"]
+            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].apply(lambda x: x if x >= 0 else 0)
+        else:
+            df["TEMPO_NA_ONG"] = 0
+        return df
 
-        importances = clf.feature_importances_
+    def train(self, df: pd.DataFrame):
+        logger.info("Iniciando preparação e sanitização dos dados...")
 
-        df_importance = (
-            pd.DataFrame({
-                "feature": features,
-                "importance": importances
-            })
-            .sort_values(by="importance", ascending=False)
-            .reset_index(drop=True)
-        )
+        # 1. Pipeline de Dados
+        df = self._sanitize_data(df)
+        df = self._feature_engineering(df)
 
-        return df_importance
+        features_to_use = Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
+        missing_cols = [col for col in features_to_use if col not in df.columns]
+        for col in missing_cols: df[col] = 0
 
-    @staticmethod
-    def train(df: pd.DataFrame):
-        """
-        Treina o modelo de classificação Random Forest com pipeline completo.
-        
-        Args:
-            df: DataFrame com features e target já preparados
-            
-        Features:
-            - Divisão estratificada dos dados
-            - Pipeline com feature engineering e classificador
-            - Balanceamento de classes automático
-            - Avaliação com métricas de classificação
-            - Salvamento do modelo treinado
-        """
-        X = df[Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS]
+        X = df[features_to_use]
         y = df[Settings.TARGET_COL]
 
-        class_dist = y.value_counts()
-        logger.info(f"Distribuição do target:\n{class_dist}")
+        logger.info(f"Distribuição do target:\n{y.value_counts()}")
 
-        # Fallback inteligente para stratify
-        stratify = y if class_dist.min() >= 2 else None
-        if stratify is None:
-            logger.warning(
-                "Classe minoritária com menos de 2 amostras. "
-                "Treinando sem stratify."
-            )
-
-        logger.info(f"FEATURES USADAS NO TREINO: {list(X.columns)}")
-
+        # 2. Split
         X_train, X_test, y_train, y_test = train_test_split(
-            X,
-            y,
-            test_size=Settings.TEST_SIZE,
-            random_state=Settings.RANDOM_STATE,
-            stratify=stratify
+            X, y, test_size=Settings.TEST_SIZE, random_state=Settings.RANDOM_STATE, stratify=y
         )
 
-        pipeline = Pipeline([
-            ("fe", FeatureEngineer()),
-            (
-                "clf",
-                RandomForestClassifier(
-                    n_estimators=200,
-                    random_state=Settings.RANDOM_STATE,
-                    class_weight="balanced"
-                )
-            )
+        # 3. Pipeline de Modelo
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+            ('scaler', StandardScaler())
         ])
 
+        categorical_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+        ])
+
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, Settings.FEATURES_NUMERICAS),
+                ('cat', categorical_transformer, Settings.FEATURES_CATEGORICAS)
+            ])
+
+        pipeline = Pipeline(steps=[
+            ('preprocessor', preprocessor),
+            ('classifier', RandomForestClassifier(
+                n_estimators=200,
+                random_state=Settings.RANDOM_STATE,
+                class_weight='balanced',
+                n_jobs=-1
+            ))
+        ])
+
+        logger.info("Treinando modelo...")
         pipeline.fit(X_train, y_train)
 
-        # Avaliação focada em risco
+        # 4. Avaliação
         y_pred = pipeline.predict(X_test)
-        logger.info(
-            "Relatório de Classificação:\n"
-            f"{classification_report(y_test, y_pred, zero_division=0)}"
-        )
 
+        # --- CORREÇÃO AQUI: Calculando as métricas antes de logar ---
+        recall = recall_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred)
+
+        logger.info("=== RESULTADOS ===")
+        logger.info(f"Recall: {recall:.2%}")
+        logger.info(f"F1-Score: {f1:.2%}")
+        # ------------------------------------------------------------
+
+        # 5. Salvar Modelo
+        os.makedirs(os.path.dirname(Settings.MODEL_PATH), exist_ok=True)
         dump(pipeline, Settings.MODEL_PATH)
-        logger.info(f"Modelo salvo em {Settings.MODEL_PATH}")
+        logger.info(f"Modelo salvo em: {Settings.MODEL_PATH}")
 
-    def load(self):
-        """
-        Carrega o modelo treinado do disco.
-        
-        Tenta carregar o modelo salvo em joblib. Se não encontrar,
-        registra erro e define modelo como None.
-        """
-        try:
-            self.model = load(Settings.MODEL_PATH)
-        except FileNotFoundError:
-            logger.error("Modelo não encontrado. Execute 'train.py' primeiro.")
-            self.model = None
+        # 6. Salvar Reference Data (COM PREDICTION COLUMN)
+        logger.info("Gerando dataset de referência para monitoramento...")
 
-    def predict_proba(self, df: pd.DataFrame) -> float:
-        """
-        Prediz a probabilidade de risco de defasagem escolar.
-        
-        Args:
-            df: DataFrame com dados do estudante
-            
-        Returns:
-            Probabilidade de risco (0-1) para classe positiva
-            
-        Raises:
-            RuntimeError: Se modelo não estiver disponível
-        """
-        if not self.model:
-            self.load()
-        if not self.model:
-            raise RuntimeError("Modelo indisponível.")
+        # Predição de probabilidade no dataset de treino (X)
+        ref_predictions = pipeline.predict_proba(X)[:, 1]
 
-        return self.model.predict_proba(df)[:, 1][0]
+        reference_df = X.copy()
+        reference_df[Settings.TARGET_COL] = y
+        reference_df["prediction"] = ref_predictions  # Coluna essencial para o Evidently
+
+        os.makedirs(os.path.dirname(Settings.REFERENCE_PATH), exist_ok=True)
+        reference_df.to_csv(Settings.REFERENCE_PATH, index=False)
+        logger.info(f"Dataset de referência salvo com sucesso em: {Settings.REFERENCE_PATH}")
+
+
+trainer = MLPipeline()
