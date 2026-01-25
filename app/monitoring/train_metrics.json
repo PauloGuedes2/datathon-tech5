@@ -1,1 +1,1 @@
-{"timestamp": "2026-01-25T13:28:33.375010", "recall": 0.8483, "f1_score": 0.7067, "precision": 0.6056, "train_size": 1874, "test_size": 1156}
+{"timestamp": "2026-01-25T13:40:00.940788", "recall": 0.8483, "f1_score": 0.7067, "precision": 0.6056, "train_size": 1874, "test_size": 1156}
