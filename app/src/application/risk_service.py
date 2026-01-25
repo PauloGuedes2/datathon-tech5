@@ -16,30 +16,32 @@ class RiskService:
         try:
             return load(Settings.MODEL_PATH)
         except Exception as e:
-            logger.critical(f"Erro ao carregar modelo: {e}")
+            logger.critical(f"Erro fatal: Modelo não encontrado em {Settings.MODEL_PATH}. Treine-o primeiro.")
             return None
 
     def predict_risk(self, student_data: dict) -> dict:
         if not self.model:
-            raise RuntimeError("Modelo indisponível.")
+            raise RuntimeError("Serviço indisponível: Modelo não carregado.")
 
-        # 1. Cria DataFrame e Prepara Features
+        # 1. Preparação
         df = pd.DataFrame([student_data])
         df = self._prepare_features(df)
 
         try:
-            # 2. Predição
-            prob = self.model.predict_proba(df)[:, 1][0]
-            risk_label = "ALTO RISCO" if prob > Settings.RISK_THRESHOLD else "BAIXO RISCO"
+            # 2. Inferência
+            # Probabilidade da classe positiva (1 = Alto Risco)
+            prob_risk = self.model.predict_proba(df)[:, 1][0]
+            prediction_class = int(prob_risk > Settings.RISK_THRESHOLD)  # 0 ou 1
 
-            # 3. LOG DE MONITORAMENTO (A novidade está aqui)
-            # Salva os dados de entrada + a predição feita
-            self._save_prediction_log(df, prob)
+            risk_label = "ALTO RISCO" if prediction_class == 1 else "BAIXO RISCO"
+
+            # 3. Observabilidade (Logging)
+            self._save_prediction_log(df, prediction_class, prob_risk)
 
             return {
-                "risk_probability": round(float(prob), 4),
+                "risk_probability": round(float(prob_risk), 4),
                 "risk_label": risk_label,
-                "message": f"Probabilidade de risco: {prob:.1%}"
+                "prediction": prediction_class
             }
 
         except Exception as e:
@@ -49,46 +51,36 @@ class RiskService:
     def _prepare_features(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
 
+        # Feature Engineering em tempo real (igual ao treino)
         ano_atual = datetime.now().year
-
         if "ANO_INGRESSO" in df.columns:
             ano_ingresso = pd.to_numeric(df["ANO_INGRESSO"], errors="coerce")
-            df["ANO_INGRESSO"] = ano_ingresso.fillna(ano_ingresso.median())
-            df["TEMPO_NA_ONG"] = ano_atual - df["ANO_INGRESSO"]
+            # Aqui usamos um valor default seguro se vier vazio
+            df["TEMPO_NA_ONG"] = ano_atual - ano_ingresso.fillna(ano_atual)
             df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].clip(lower=0)
         else:
             df["TEMPO_NA_ONG"] = 0
 
-        for col in Settings.FEATURES_NUMERICAS:
-            if col in df.columns:
-                df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-
-        required_features = (
-                Settings.FEATURES_NUMERICAS +
-                Settings.FEATURES_CATEGORICAS
-        )
-
-        for col in required_features:
+        # Garante estrutura exata do modelo
+        required = Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
+        for col in required:
             if col not in df.columns:
                 df[col] = 0 if col in Settings.FEATURES_NUMERICAS else "N/A"
 
-        return df[required_features]
+        return df[required]
 
-    def _save_prediction_log(self, df: pd.DataFrame, prob: float):
-        """Salva a predição em um CSV acumulativo para o Evidently ler depois."""
+    def _save_prediction_log(self, df: pd.DataFrame, pred_class: int, prob: float):
+        """Salva log para o Evidently ler depois como 'Current Data'."""
         try:
-            # Adiciona a predição e timestamp ao log
             log_df = df.copy()
-            log_df["prediction"] = float(prob)
-            log_df["timestamp"] = datetime.now()
+            # Precisamos salvar a 'prediction' (classe) para o TargetDrift funcionar
+            log_df["prediction"] = pred_class
+            log_df["probability"] = prob
+            log_df["timestamp"] = datetime.now().isoformat()
 
-            # Cria diretório se não existir
-            os.makedirs(os.path.dirname(Settings.LOG_PATH), exist_ok=True)
-
-            # Salva (append mode 'a'). Se arquivo não existe, escreve header.
             header = not os.path.exists(Settings.LOG_PATH)
+            os.makedirs(os.path.dirname(Settings.LOG_PATH), exist_ok=True)
             log_df.to_csv(Settings.LOG_PATH, mode='a', header=header, index=False)
 
         except Exception as e:
-            # Erro de log não deve parar a API, apenas avisar
-            logger.warning(f"Falha ao salvar log de monitoramento: {e}")
+            logger.warning(f"Falha no logging (não afeta resposta da API): {e}")

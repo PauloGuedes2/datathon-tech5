@@ -1,35 +1,23 @@
-# Use Python 3.11
-FROM python:3.11
+FROM python:3.11-slim
 
-# Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# Instala dependências do SO necessárias
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
+# Copia e instala requirements
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY app/ ./app/
+# Copia todo o código fonte
+COPY . .
 
-# Create models directory
-RUN mkdir -p app/models
+# Cria as pastas necessárias para evitar erro de permissão/existência
+RUN mkdir -p app/models logs app/monitoring
 
-# Set Python path to include app directory
+# Define o PYTHONPATH para incluir a raiz
 ENV PYTHONPATH=/app
 
-# Expose port
-EXPOSE 8000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
-
-# Run the application
-CMD ["python", "app/main.py"]
+# Comando de execução
+# Ajustado para: uvicorn app.main:app (já que o main.py está dentro da pasta app)
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
