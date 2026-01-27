@@ -1,28 +1,23 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 
 
 class Student(BaseModel):
-    """
-    Define a estrutura de dados esperada pela API.
-    Deve corresponder às features preventivas definidas no settings.py.
-    """
+    """Define a estrutura de dados com validações rigorosas (Data Quality)."""
 
-    # Features Numéricas
-    IDADE: int = Field(..., description="Idade do aluno", example=12)
-    ANO_INGRESSO: int = Field(..., description="Ano que o aluno entrou na Passos Mágicos", example=2022)
+    IDADE: int = Field(..., ge=4, le=25, description="Idade entre 4 e 25 anos")
+    ANO_INGRESSO: int = Field(..., ge=2010, le=2026, description="Ano de entrada válido")
 
-    # Features Categóricas
-    GENERO: str = Field(..., description="Gênero do aluno", example="Feminino")
-    TURMA: str = Field(..., description="Turma atual", example="Turma A")
-    INSTITUICAO_ENSINO: str = Field(..., description="Tipo de escola (Pública/Privada)", example="Escola Pública")
-    FASE: str = Field(..., description="Fase do aluno na ONG", example="2")
+    GENERO: str = Field(..., pattern="^(Masculino|Feminino|Outro)$")
+    TURMA: str = Field(..., min_length=1)
+    INSTITUICAO_ENSINO: str = Field(..., min_length=3)
+    FASE: str = Field(..., pattern="^[0-9A-Z]+$")
 
-    # Campos opcionais (apenas para garantir compatibilidade se enviaram extra, mas não usados no modelo)
-    NOME: Optional[str] = Field(None, description="Nome do aluno (opcional)")
+    NOME: Optional[str] = None
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "IDADE": 14,
                 "GENERO": "Masculino",
@@ -32,3 +27,4 @@ class Student(BaseModel):
                 "ANO_INGRESSO": 2023
             }
         }
+    )

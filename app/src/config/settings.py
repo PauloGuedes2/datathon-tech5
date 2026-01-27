@@ -12,7 +12,7 @@ class Settings:
 
     # --- Arquivos Finais ---
     MODEL_PATH = os.path.join(MODEL_DIR, "model_passos_magicos.joblib")
-    LOG_PATH = os.path.join(LOG_DIR, "predictions.csv")
+    LOG_PATH = os.path.join(LOG_DIR, "predictions.jsonl")
     REFERENCE_PATH = os.path.join(MONITORING_DIR, "reference_data.csv")
     METRICS_FILE = os.path.join(MONITORING_DIR, "train_metrics.json")
 

@@ -1,12 +1,23 @@
 from fastapi import APIRouter, HTTPException, Depends
 from src.application.risk_service import RiskService
 from src.domain.student import Student
+from src.infrastructure.model.model_manager import ModelManager
 
+# Instância global do gerenciador
+model_manager = ModelManager()
 
 def get_risk_service():
-    """Factory para injeção de dependência."""
-    return RiskService()
-
+    """
+    Factory atualizada:
+    1. Obtém o modelo já carregado da memória (rápido).
+    2. Injeta no Service.
+    """
+    try:
+        model = model_manager.get_model()
+        return RiskService(model=model)
+    except RuntimeError as e:
+        # Se o modelo não estiver disponível, a API deve retornar 503 (Service Unavailable)
+        raise HTTPException(status_code=503, detail="Modelo de ML não inicializado.")
 
 class PredictionController:
     def __init__(self):
@@ -23,12 +34,7 @@ class PredictionController:
 
     @staticmethod
     async def predict(student: Student, service: RiskService = Depends(get_risk_service)):
-        """
-        Endpoint para predição de risco.
-        O FastAPI usa a classe Student para validar o JSON de entrada automaticamente.
-        """
         try:
             return service.predict_risk(student.model_dump())
-
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
