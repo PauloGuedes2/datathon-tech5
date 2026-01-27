@@ -1,1157 +1,1157 @@
-IDADE,TEMPO_NA_ONG,GENERO,TURMA,INSTITUICAO_ENSINO,FASE,RISCO_DEFASAGEM,prediction
-8.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA A - G0/G1,Pública,ALFA,0,0
-8.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,0,0
-8.0,1,Masculino,ALFA A - G0/G1,Pública,ALFA,1,0
-9.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,1,1
-9.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-8.0,1,Feminino,ALFA B - G2/G3,Pública,ALFA,1,0
-9.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
-10.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
-10.0,1,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
-9.0,1,Feminino,ALFA C - G0/G1,Pública,ALFA,1,1
-7.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
-7.0,0,Masculino,ALFA C - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,1,0
-7.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
-10.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
-8.0,1,Masculino,ALFA D - G2/G3,Pública,ALFA,1,0
-10.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA E - G2/G3,Pública,ALFA,1,1
-8.0,1,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,0,0
-9.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,1,1
-8.0,1,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,1,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,1,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,1,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,0,0
-10.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,1
-8.0,1,Feminino,ALFA F - G0/G1,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA F - G0/G1,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA F - G0/G1,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA F - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA F - G0/G1,Pública,ALFA,0,0
-10.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
-10.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,0
-10.0,2,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
-10.0,2,Masculino,ALFA G - G2/G3,Pública,ALFA,1,1
-10.0,1,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
-8.0,1,Feminino,ALFA G - G2/G3,Pública,ALFA,1,0
-9.0,1,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
-9.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,1,1
-7.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
-8.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
-9.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
-7.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
-8.0,1,Feminino,ALFA I - G2/G3,Pública,ALFA,1,0
-9.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
-9.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
-10.0,1,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
-8.0,1,Masculino,ALFA I - G2/G3,Pública,ALFA,1,0
-9.0,1,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,0
-9.0,1,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
-9.0,2,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA J - G2/G3,Privada,ALFA,1,1
-10.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
-11.0,1,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
-10.0,2,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
-7.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
-9.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
-10.0,1,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
-10.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-11.0,2,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
-11.0,2,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-10.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-10.0,2,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,1,0
-10.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,0,0
-9.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,0
-7.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,0,0
-9.0,1,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
-8.0,1,Masculino,ALFA N - G2/G3,Pública,ALFA,1,0
-9.0,1,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
-9.0,2,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,0,0
-9.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
-8.0,1,Feminino,ALFA N - G2/G3,Privada,ALFA,1,0
-10.0,1,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
-10.0,2,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
-10.0,2,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-10.0,2,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,0
-10.0,1,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-10.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
-10.0,0,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
-10.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
-10.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-10.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-10.0,1,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
-10.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,0,0
-10.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-9.0,1,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
-7.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
-8.0,0,Masculino,ALFA R - G0/G1,Pública,ALFA,0,0
-8.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
-8.0,1,Feminino,ALFA R - G0/G1,Pública,ALFA,1,0
-7.0,0,Masculino,ALFA R - G0/G1,Pública,ALFA,0,0
-8.0,1,Feminino,ALFA R - G0/G1,Pública,ALFA,1,0
-7.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
-8.0,1,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
-9.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
-8.0,1,Masculino,ALFA S - G2/G3,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
-8.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
-8.0,1,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
-9.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
-11.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA T - G2/G3,Pública,ALFA,0,0
-9.0,0,Feminino,ALFA T - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
-9.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
-9.0,1,Feminino,ALFA T - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,0,0
-10.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,0
-8.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,0,0
-9.0,2,Masculino,ALFA U - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,0,0
-9.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,1
-8.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,0,0
-10.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,1
-8.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,0
-8.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,1,0
-7.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
-7.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
-7.0,0,Masculino,ALFA Y - G0/G1,Pública,ALFA,0,0
-9.0,0,Masculino,ALFA Y - G0/G1,Pública,ALFA,1,1
-7.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
-10.0,1,Masculino,1A,Pública,1A,1,1
-10.0,0,Feminino,1A,Pública,1A,1,0
-10.0,1,Feminino,1A,Pública,1A,1,1
-10.0,1,Masculino,1A,Pública,1A,1,1
-9.0,0,Feminino,1A,Pública,1A,0,0
-11.0,0,Feminino,1A,Pública,1A,1,0
-10.0,1,Masculino,1A,Pública,1A,1,1
-9.0,1,Feminino,1A,Pública,1A,0,1
-10.0,1,Feminino,1A,Pública,1A,1,1
-10.0,1,Feminino,1A,Pública,1A,0,1
-10.0,1,Masculino,1A,Pública,1A,1,1
-10.0,1,Masculino,1A,Pública,1A,1,1
-10.0,0,Feminino,1A,Pública,1A,1,0
-11.0,2,Masculino,1A,Pública,1A,1,1
-11.0,0,Feminino,1B,Pública,1B,1,0
-10.0,1,Masculino,1B,Pública,1B,0,1
-11.0,0,Feminino,1B,Pública,1B,1,0
-12.0,1,Feminino,1B,Pública,1B,1,1
-10.0,1,Masculino,1B,Pública,1B,1,1
-12.0,3,Masculino,1B,Pública,1B,1,1
-9.0,1,Masculino,1B,Pública,1B,0,1
-11.0,1,Masculino,1B,Pública,1B,1,1
-10.0,1,Masculino,1B,Pública,1B,0,1
-11.0,1,Feminino,1B,Pública,1B,1,1
-9.0,1,Feminino,1B,Pública,1B,0,0
-9.0,1,Feminino,1B,Pública,1B,0,0
-9.0,0,Masculino,1B,Pública,1B,0,1
-10.0,2,Masculino,1B,Pública,1B,1,1
-12.0,1,Masculino,1B,Pública,1B,1,1
-9.0,1,Feminino,1C,Pública,1C,0,1
-9.0,2,Masculino,1C,Privada,1C,0,1
-11.0,1,Masculino,1C,Pública,1C,1,1
-9.0,1,Masculino,1C,Pública,1C,0,1
-10.0,1,Feminino,1C,Pública,1C,1,1
-11.0,1,Masculino,1C,Pública,1C,1,1
-10.0,1,Feminino,1C,Pública,1C,1,1
-13.0,0,Masculino,1C,Pública,1C,1,1
-8.0,1,Masculino,1C,Pública,1C,0,0
-9.0,2,Feminino,1C,Pública,1C,0,0
-11.0,2,Feminino,1C,Pública,1C,1,1
-11.0,2,Masculino,1C,Privada,1C,1,1
-10.0,1,Masculino,1C,Pública,1C,1,1
-10.0,2,Masculino,1C,Pública,1C,1,1
-10.0,0,Feminino,1D,Pública,1D,0,0
-11.0,0,Feminino,1D,Pública,1D,1,0
-9.0,0,Feminino,1D,Pública,1D,0,0
-9.0,1,Feminino,1D,Pública,1D,0,1
-11.0,2,Masculino,1D,Pública,1D,1,1
-10.0,0,Feminino,1D,Pública,1D,0,0
-10.0,0,Feminino,1D,Pública,1D,1,0
-10.0,0,Masculino,1D,Pública,1D,1,1
-11.0,0,Masculino,1D,Pública,1D,1,1
-10.0,0,Masculino,1D,Pública,1D,1,1
-11.0,0,Masculino,1E,Pública,1E,1,1
-10.0,1,Masculino,1E,Pública,1E,1,1
-11.0,0,Masculino,1E,Pública,1E,1,1
-10.0,0,Masculino,1E,Pública,1E,0,1
-11.0,2,Feminino,1E,Pública,1E,1,1
-12.0,0,Masculino,1E,Pública,1E,1,1
-10.0,0,Feminino,1E,Pública,1E,0,0
-12.0,1,Feminino,1E,Pública,1E,1,1
-10.0,2,Feminino,1G,Pública,1G,0,1
-9.0,2,Feminino,1G,Pública,1G,0,0
-10.0,0,Feminino,1G,Pública,1G,1,0
-10.0,2,Feminino,1G,Pública,1G,1,1
-11.0,2,Feminino,1G,Pública,1G,1,1
-12.0,0,Feminino,1G,Pública,1G,1,0
-12.0,1,Masculino,1G,Pública,1G,1,1
-9.0,2,Feminino,1G,Pública,1G,0,0
-9.0,2,Masculino,1G,Pública,1G,0,1
-10.0,2,Masculino,1G,Pública,1G,0,1
-10.0,0,Masculino,1G,Pública,1G,1,1
-9.0,1,Masculino,1G,Pública,1G,0,1
-10.0,2,Masculino,1G,Pública,1G,0,1
-10.0,1,Feminino,1G,Pública,1G,1,1
-11.0,0,Masculino,1G,Pública,1G,1,1
-10.0,1,Feminino,1G,Pública,1G,0,1
-11.0,3,Feminino,1H,Pública,1H,1,1
-11.0,1,Masculino,1H,Pública,1H,1,1
-10.0,2,Feminino,1H,Pública,1H,1,1
-10.0,0,Feminino,1H,Pública,1H,0,1
-12.0,2,Masculino,1H,Pública,1H,1,1
-12.0,2,Masculino,1H,Pública,1H,1,1
-12.0,2,Masculino,1H,Pública,1H,1,1
-11.0,2,Feminino,1H,Privada,1H,1,0
-12.0,2,Feminino,1H,Pública,1H,1,1
-12.0,0,Masculino,1H,Pública,1H,1,1
-12.0,2,Feminino,1H,Pública,1H,1,1
-11.0,0,Masculino,1H,Pública,1H,1,1
-11.0,0,Feminino,1J,Pública,1J,1,1
-11.0,0,Masculino,1J,Pública,1J,1,1
-10.0,2,Feminino,1J,Pública,1J,1,1
-11.0,2,Masculino,1J,Pública,1J,1,1
-12.0,0,Feminino,1J,Pública,1J,1,1
-12.0,0,Masculino,1J,Pública,1J,1,1
-11.0,1,Feminino,1J,Pública,1J,1,1
-11.0,2,Masculino,1J,Pública,1J,1,1
-11.0,1,Masculino,1J,Pública,1J,1,1
-11.0,0,Feminino,1J,Pública,1J,1,1
-10.0,1,Masculino,1J,Pública,1J,1,1
-12.0,3,Masculino,1J,Pública,1J,1,1
-12.0,1,Masculino,1J,Pública,1J,1,1
-12.0,2,Feminino,1K,Pública,1K,1,1
-9.0,1,Feminino,1K,Pública,1K,0,1
-11.0,3,Masculino,1K,Pública,1K,1,1
-11.0,2,Feminino,1K,Pública,1K,1,1
-9.0,1,Masculino,1K,Pública,1K,0,1
-11.0,2,Feminino,1K,Pública,1K,1,1
-10.0,2,Feminino,1K,Pública,1K,1,1
-10.0,3,Masculino,1K,Pública,1K,1,1
-11.0,1,Feminino,1K,Pública,1K,1,1
-10.0,2,Masculino,1K,Pública,1K,1,1
-11.0,1,Masculino,1K,Pública,1K,1,1
-10.0,1,Feminino,1K,Pública,1K,1,1
-11.0,2,Feminino,1K,Pública,1K,1,1
-10.0,2,Feminino,1K,Pública,1K,0,1
-11.0,1,Masculino,1K,Pública,1K,1,1
-12.0,2,Masculino,1L,Pública,1L,1,1
-10.0,2,Masculino,1L,Pública,1L,1,1
-9.0,2,Feminino,1L,Pública,1L,0,1
-10.0,1,Masculino,1L,Pública,1L,1,1
-10.0,0,Masculino,1L,Pública,1L,1,1
-11.0,2,Feminino,1L,Pública,1L,1,1
-11.0,2,Feminino,1L,Pública,1L,1,1
-10.0,1,Feminino,1L,Pública,1L,1,1
-10.0,1,Masculino,1L,Pública,1L,1,1
-11.0,0,Masculino,1L,Pública,1L,1,1
-11.0,0,Masculino,1L,Pública,1L,1,1
-12.0,3,Masculino,1L,Pública,1L,1,1
-9.0,1,Feminino,1L,Pública,1L,0,1
-10.0,2,Masculino,1L,Pública,1L,0,1
-10.0,2,Feminino,1L,Pública,1L,1,1
-11.0,0,Feminino,1M,Pública,1M,1,0
-10.0,0,Feminino,1M,Pública,1M,1,1
-10.0,0,Feminino,1M,Pública,1M,1,1
-10.0,0,Masculino,1M,Pública,1M,1,1
-9.0,1,Feminino,1M,Pública,1M,0,1
-10.0,1,Masculino,1M,Pública,1M,1,1
-10.0,0,Masculino,1M,Pública,1M,0,1
-10.0,2,Masculino,1M,Pública,1M,1,1
-11.0,0,Feminino,1M,Pública,1M,1,0
-11.0,0,Feminino,1M,Pública,1M,1,0
-10.0,0,Feminino,1M,Pública,1M,1,1
-11.0,0,Feminino,1M,Pública,1M,1,0
-10.0,0,Feminino,1M,Pública,1M,1,1
-9.0,0,Masculino,1M,Pública,1M,0,1
-13.0,0,Masculino,1M,Pública,1M,1,1
-13.0,0,Feminino,1N,Pública,1N,1,1
-11.0,0,Masculino,1N,Pública,1N,1,1
-12.0,1,Masculino,1N,Pública,1N,1,1
-9.0,1,Masculino,1N,Pública,1N,0,1
-12.0,1,Feminino,1N,Pública,1N,1,1
-9.0,1,Feminino,1N,Pública,1N,0,1
-9.0,1,Feminino,1N,Pública,1N,0,1
-11.0,2,Feminino,1N,Pública,1N,1,1
-9.0,1,Feminino,1N,Pública,1N,0,1
-11.0,3,Feminino,1N,Pública,1N,1,1
-10.0,1,Feminino,1N,Pública,1N,1,1
-10.0,0,Feminino,1N,Pública,1N,1,1
-9.0,0,Masculino,1N,Pública,1N,0,1
-12.0,3,Feminino,1N,Pública,1N,1,1
-11.0,0,Feminino,1N,Pública,1N,1,1
-9.0,1,Feminino,1P,Pública,1P,0,1
-8.0,1,Masculino,1P,Pública,1P,0,0
-13.0,0,Feminino,1P,Pública,1P,1,1
-12.0,1,Masculino,1P,Pública,1P,1,1
-9.0,1,Masculino,1P,Pública,1P,0,1
-9.0,1,Feminino,1P,Pública,1P,0,1
-10.0,3,Masculino,1P,Pública,1P,1,1
-9.0,1,Masculino,1P,Pública,1P,0,1
-10.0,1,Feminino,1P,Pública,1P,1,1
-10.0,3,Masculino,1R,Pública,1R,1,1
-10.0,2,Masculino,1R,Pública,1R,1,1
-10.0,2,Masculino,1R,Pública,1R,0,1
-10.0,2,Masculino,1R,Pública,1R,0,1
-10.0,1,Feminino,1R,Pública,1R,0,1
-10.0,1,Masculino,1R,Pública,1R,0,1
-10.0,1,Masculino,1R,Pública,1R,1,1
-10.0,0,Feminino,1R,Pública,1R,1,1
-10.0,2,Masculino,1R,Pública,1R,1,1
-9.0,0,Masculino,1R,Pública,1R,0,1
-9.0,1,Feminino,1R,Pública,1R,0,1
-11.0,0,Feminino,1R,Pública,1R,1,1
-11.0,1,Masculino,1R,Pública,1R,1,1
-10.0,1,Feminino,1R,Pública,1R,1,1
-11.0,2,Masculino,2A,Privada,2A,0,0
-11.0,2,Masculino,2A,Pública,2A,0,1
-13.0,1,Feminino,2A,Pública,2A,1,1
-11.0,1,Feminino,2A,Privada,2A,0,0
-13.0,1,Feminino,2A,Pública,2A,1,1
-12.0,3,Feminino,2A,Pública,2A,1,0
-10.0,3,Masculino,2A,Pública,2A,0,1
-12.0,0,Masculino,2A,Pública,2A,0,1
-12.0,3,Feminino,2A,Pública,2A,1,0
-10.0,1,Feminino,2A,Pública,2A,0,0
-12.0,0,Feminino,2A,Pública,2A,1,1
-14.0,3,Masculino,2A,Pública,2A,1,1
-11.0,0,Masculino,2A,Pública,2A,0,1
-11.0,1,Feminino,2B,Pública,2B,0,1
-13.0,3,Feminino,2B,Pública,2B,1,0
-15.0,3,Feminino,2B,Privada - Programa de apadrinhamento,2B,1,0
-12.0,0,Feminino,2B,Pública,2B,1,0
-11.0,2,Masculino,2B,Pública,2B,0,1
-10.0,3,Feminino,2B,Pública,2B,0,0
-12.0,0,Feminino,2B,Pública,2B,1,0
-11.0,1,Masculino,2B,Pública,2B,0,1
-12.0,2,Masculino,2B,Pública,2B,1,1
-11.0,1,Feminino,2B,Pública,2B,0,1
-10.0,1,Feminino,2B,Pública,2B,0,1
-11.0,2,Feminino,2C,Pública,2C,0,1
-12.0,3,Feminino,2C,Pública,2C,0,1
-12.0,0,Masculino,2C,Pública,2C,1,1
-12.0,0,Masculino,2C,Pública,2C,0,1
-12.0,1,Masculino,2C,Pública,2C,0,1
-12.0,3,Masculino,2C,Pública,2C,0,1
-11.0,2,Feminino,2C,Pública,2C,0,1
-12.0,0,Feminino,2C,Pública,2C,1,1
-13.0,0,Feminino,2D,Pública,2D,1,0
-12.0,0,Masculino,2D,Pública,2D,0,1
-13.0,0,Feminino,2D,Pública,2D,1,0
-11.0,2,Masculino,2D,Pública,2D,0,1
-12.0,1,Masculino,2D,Pública,2D,0,1
-12.0,0,Masculino,2D,Pública,2D,1,1
-11.0,3,Masculino,2D,Pública,2D,0,1
-11.0,3,Masculino,2D,Privada,2D,0,0
-12.0,0,Masculino,2D,Pública,2D,0,1
-10.0,3,Feminino,2D,Privada - Programa de Apadrinhamento,2D,0,0
-12.0,0,Masculino,2D,Pública,2D,0,1
-12.0,0,Feminino,2D,Pública,2D,0,0
-11.0,2,Feminino,2D,Pública,2D,0,1
-13.0,0,Masculino,2D,Pública,2D,1,1
-12.0,0,Feminino,2G,Pública,2G,1,1
-13.0,0,Masculino,2G,Pública,2G,1,1
-12.0,3,Masculino,2G,Pública,2G,1,1
-11.0,2,Masculino,2G,Pública,2G,0,1
-10.0,2,Masculino,2G,Pública,2G,0,1
-12.0,3,Masculino,2G,Pública,2G,1,1
-13.0,3,Feminino,2G,Pública,2G,1,1
-12.0,3,Feminino,2G,Pública,2G,1,1
-11.0,3,Feminino,2G,Pública,2G,0,1
-12.0,3,Feminino,2G,Pública,2G,1,1
-11.0,1,Feminino,2G,Pública,2G,0,1
-13.0,1,Masculino,2G,Pública,2G,1,1
-10.0,3,Feminino,2G,Pública,2G,0,1
-13.0,0,Masculino,2G,Pública,2G,1,1
-12.0,3,Feminino,2H,Pública,2H,1,1
-13.0,3,Masculino,2H,Pública,2H,1,1
-11.0,1,Masculino,2H,Pública,2H,0,1
-12.0,3,Feminino,2H,Pública,2H,1,1
-11.0,3,Masculino,2H,Pública,2H,0,1
-13.0,3,Masculino,2H,Pública,2H,1,1
-11.0,2,Feminino,2H,Pública,2H,0,1
-11.0,0,Feminino,2H,Pública,2H,0,1
-12.0,1,Feminino,2H,Pública,2H,0,1
-12.0,2,Feminino,2H,Pública,2H,0,1
-12.0,2,Feminino,2H,Pública,2H,1,1
-12.0,3,Feminino,2H,Pública,2H,1,1
-12.0,3,Masculino,2H,Pública,2H,1,1
-12.0,2,Masculino,2H,Pública,2H,1,1
-11.0,3,Feminino,2I,Pública,2I,0,0
-10.0,2,Feminino,2I,Pública,2I,0,1
-11.0,2,Masculino,2I,Pública,2I,0,1
-11.0,2,Feminino,2I,Pública,2I,0,1
-11.0,1,Feminino,2I,Pública,2I,0,1
-10.0,0,Feminino,2I,Pública,2I,0,0
-13.0,1,Masculino,2I,Pública,2I,1,1
-11.0,3,Masculino,2I,Privada - Programa de Apadrinhamento,2I,0,0
-10.0,2,Feminino,2I,Pública,2I,0,1
-12.0,1,Masculino,2I,Pública,2I,1,1
-10.0,2,Masculino,2I,Pública,2I,0,1
-12.0,1,Masculino,2K,Pública,2K,0,1
-11.0,0,Feminino,2K,Pública,2K,0,0
-12.0,2,Feminino,2K,Pública,2K,0,1
-11.0,0,Masculino,2K,Pública,2K,0,1
-14.0,2,Masculino,2K,Pública,2K,1,1
-11.0,3,Feminino,2K,Pública,2K,0,0
-13.0,3,Masculino,2K,Pública,2K,1,1
-11.0,0,Masculino,2K,Pública,2K,0,1
-10.0,2,Feminino,2K,Privada - Programa de Apadrinhamento,2K,0,0
-12.0,0,Masculino,2K,Pública,2K,0,1
-12.0,0,Masculino,2K,Pública,2K,1,1
-12.0,2,Masculino,2K,Pública,2K,1,1
-12.0,2,Masculino,2K,Pública,2K,0,1
-12.0,0,Feminino,2K,Pública,2K,1,0
-14.0,0,Masculino,2K,Pública,2K,1,1
-11.0,0,Masculino,2K,Pública,2K,0,1
-14.0,0,Feminino,2L,Pública,2L,1,1
-13.0,0,Masculino,2L,Pública,2L,1,1
-11.0,0,Masculino,2L,Pública,2L,0,1
-11.0,2,Masculino,2L,Pública,2L,0,1
-12.0,2,Masculino,2L,Pública,2L,0,1
-13.0,0,Feminino,2L,Pública,2L,1,1
-11.0,0,Feminino,2L,Pública,2L,0,0
-12.0,0,Masculino,2L,Pública,2L,1,1
-11.0,3,Feminino,2L,Pública,2L,0,0
-12.0,2,Masculino,2L,Pública,2L,1,1
-12.0,0,Feminino,2L,Privada,2L,1,0
-12.0,0,Masculino,2L,Pública,2L,0,1
-11.0,1,Feminino,2L,Pública,2L,0,1
-11.0,2,Masculino,2L,Pública,2L,0,1
-9.0,0,Masculino,2L,Pública,2L,0,1
-11.0,2,Masculino,2L,Pública,2L,0,1
-11.0,2,Feminino,2M,Privada - Programa de Apadrinhamento,2M,0,0
-11.0,1,Masculino,2M,Pública,2M,0,1
-12.0,3,Feminino,2M,Privada - Programa de Apadrinhamento,2M,0,0
-12.0,1,Masculino,2M,Pública,2M,0,1
-11.0,2,Masculino,2M,Pública,2M,0,1
-12.0,0,Masculino,2M,Pública,2M,1,1
-12.0,2,Feminino,2M,Pública,2M,1,1
-12.0,1,Feminino,2M,Pública,2M,0,1
-11.0,1,Masculino,2M,Pública,2M,0,1
-11.0,0,Feminino,2M,Pública,2M,0,0
-11.0,3,Feminino,2M,Pública,2M,0,1
-11.0,2,Masculino,2M,Pública,2M,0,1
-12.0,2,Masculino,2M,Pública,2M,0,1
-12.0,0,Feminino,2M,Pública,2M,0,1
-12.0,0,Feminino,2M,Pública,2M,0,1
-13.0,0,Feminino,2M,Pública,2M,1,1
-12.0,0,Feminino,2N,Pública,2N,0,0
-10.0,3,Masculino,2N,Privada - Programa de Apadrinhamento,2N,0,0
-11.0,0,Masculino,2N,Pública,2N,0,1
-10.0,2,Feminino,2N,Pública,2N,0,0
-12.0,1,Masculino,2N,Pública,2N,1,1
-12.0,2,Feminino,2N,Pública,2N,0,1
-11.0,0,Feminino,2N,Pública,2N,0,0
-10.0,2,Masculino,2N,Privada,2N,0,1
-11.0,1,Masculino,2N,Pública,2N,0,1
-11.0,1,Feminino,2N,Pública,2N,0,0
-12.0,0,Feminino,2N,Pública,2N,1,0
-11.0,3,Feminino,2N,Pública,2N,0,0
-11.0,2,Masculino,2N,Pública,2N,0,1
-12.0,2,Feminino,2P,Pública,2P,1,1
-12.0,3,Masculino,2P,Pública,2P,1,1
-12.0,2,Masculino,2P,Pública,2P,0,1
-12.0,1,Feminino,2P,Pública,2P,0,1
-13.0,0,Feminino,2P,Pública,2P,1,1
-11.0,2,Masculino,2P,Pública,2P,0,1
-12.0,3,Feminino,2P,Pública,2P,0,1
-11.0,2,Feminino,2P,Pública,2P,0,1
-11.0,2,Feminino,2P,Privada - Programa de Apadrinhamento,2P,0,0
-12.0,0,Feminino,2P,Pública,2P,1,1
-11.0,3,Feminino,2P,Pública,2P,0,1
-13.0,0,Masculino,2P,Pública,2P,1,1
-12.0,2,Masculino,2P,Pública,2P,1,1
-12.0,2,Feminino,2P,Pública,2P,0,1
-11.0,1,Masculino,2R,Pública,2R,0,1
-12.0,2,Masculino,2R,Pública,2R,1,1
-11.0,2,Feminino,2R,Pública,2R,0,0
-11.0,0,Feminino,2R,Pública,2R,0,0
-11.0,3,Masculino,2R,Pública,2R,0,1
-12.0,0,Masculino,2R,Pública,2R,1,1
-12.0,1,Masculino,2R,Pública,2R,1,1
-10.0,0,Feminino,2R,Pública,2R,0,0
-11.0,0,Masculino,2R,Pública,2R,0,1
-11.0,0,Feminino,2R,Pública,2R,0,0
-11.0,2,Feminino,2U,Pública,2U,0,0
-11.0,0,Feminino,2U,Pública,2U,0,0
-12.0,2,Feminino,2U,Pública,2U,1,0
-13.0,2,Masculino,2U,Pública,2U,1,1
-12.0,3,Feminino,2U,Privada,2U,1,0
-10.0,0,Feminino,2U,Pública,2U,0,0
-14.0,2,Feminino,2U,Pública,2U,1,1
-13.0,2,Masculino,2U,Pública,2U,1,1
-12.0,0,Feminino,2U,Pública,2U,1,0
-12.0,0,Feminino,2U,Pública,2U,0,0
-11.0,2,Feminino,2U,Pública,2U,0,0
-11.0,2,Masculino,2U,Pública,2U,0,1
-12.0,0,Feminino,2U,Pública,2U,1,0
-11.0,2,Masculino,2U,Pública,2U,0,1
-10.0,2,Masculino,2U,Pública,2U,0,1
-13.0,2,Feminino,3A,Pública,3A,0,1
-13.0,2,Feminino,3A,Privada,3A,0,0
-13.0,2,Masculino,3A,Pública,3A,0,1
-13.0,3,Masculino,3A,Privada,3A,0,1
-13.0,0,Feminino,3A,Privada,3A,0,0
-16.0,3,Feminino,3A,Pública,3A,1,1
-15.0,0,Masculino,3A,Pública,3A,1,1
-15.0,2,Feminino,3A,Pública,3A,1,1
-13.0,2,Masculino,3A,Pública,3A,0,1
-12.0,3,Feminino,3A,Privada - Programa de Apadrinhamento,3A,0,0
-13.0,3,Feminino,3A,Pública,3A,0,0
-12.0,1,Feminino,3A,Pública,3A,0,1
-15.0,0,Masculino,3A,0,3A,0,1
-12.0,2,Feminino,3A,Privada,3A,0,0
-12.0,2,Masculino,3A,Pública,3A,0,1
-13.0,3,Feminino,3B,Pública,3B,0,0
-13.0,1,Feminino,3B,Pública,3B,0,0
-11.0,3,Feminino,3B,Pública,3B,0,0
-14.0,0,Feminino,3B,Pública,3B,1,1
-12.0,1,Masculino,3B,Pública,3B,0,1
-14.0,0,Feminino,3B,Pública,3B,1,1
-11.0,3,Feminino,3B,Pública,3B,0,0
-13.0,1,Masculino,3B,Pública,3B,0,1
-14.0,3,Feminino,3B,Pública,3B,1,1
-13.0,0,Masculino,3B,Pública,3B,0,1
-11.0,1,Feminino,3B,Pública,3B,0,0
-11.0,3,Masculino,3B,Privada,3B,0,0
-12.0,2,Masculino,3B,Pública,3B,0,1
-11.0,0,Masculino,3B,Pública,3B,0,1
-14.0,0,Feminino,3B,Pública,3B,1,1
-15.0,1,Feminino,3B,Pública,3B,1,1
-12.0,3,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
-14.0,3,Feminino,3C,Pública,3C,0,0
-12.0,2,Masculino,3C,Pública,3C,0,1
-13.0,0,Masculino,3C,Pública,3C,0,1
-12.0,2,Masculino,3C,Pública,3C,0,1
-15.0,1,Feminino,3C,Pública,3C,1,1
-12.0,3,Masculino,3C,Pública,3C,0,1
-13.0,3,Masculino,3C,Pública,3C,0,1
-12.0,3,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
-14.0,2,Masculino,3C,Pública,3C,1,1
-13.0,3,Masculino,3C,Pública,3C,0,1
-11.0,3,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
-14.0,3,Masculino,3C,Pública,3C,0,1
-15.0,1,Masculino,3C,Pública,3C,1,1
-14.0,3,Feminino,3C,Pública,3C,1,0
-13.0,0,Feminino,3D,Pública,3D,0,1
-12.0,1,Masculino,3D,Pública,3D,0,1
-12.0,2,Masculino,3D,Pública,3D,0,1
-14.0,2,Masculino,3D,Privada,3D,0,0
-13.0,3,Masculino,3D,Pública,3D,0,1
-13.0,0,Masculino,3D,Pública,3D,0,1
-13.0,3,Feminino,3D,Pública,3D,0,0
-12.0,3,Feminino,3D,Privada - Programa de Apadrinhamento,3D,0,0
-13.0,0,Masculino,3D,Pública,3D,0,1
-12.0,1,Feminino,3D,Pública,3D,0,1
-14.0,1,Masculino,3D,Pública,3D,0,1
-12.0,3,Masculino,3D,Pública,3D,0,1
-12.0,1,Masculino,3D,Pública,3D,0,1
-12.0,1,Feminino,3D,Pública,3D,0,1
-14.0,1,Masculino,3D,Pública,3D,0,1
-14.0,1,Feminino,3D,Pública,3D,0,1
-13.0,1,Masculino,3F,Pública,3F,0,1
-16.0,3,Masculino,3F,Pública,3F,1,1
-16.0,2,Masculino,3F,Pública,3F,1,1
-13.0,3,Masculino,3F,Pública,3F,0,1
-14.0,0,Feminino,3F,Pública,3F,1,1
-12.0,1,Feminino,3F,Pública,3F,0,1
-13.0,1,Masculino,3F,Pública,3F,0,1
-13.0,3,Feminino,3F,Pública,3F,0,0
-12.0,2,Feminino,3F,Pública,3F,0,0
-13.0,0,Masculino,3F,Pública,3F,0,1
-14.0,3,Masculino,3F,Pública,3F,1,1
-14.0,0,Masculino,3F,Pública,3F,1,1
-14.0,1,Feminino,3G,Pública,3G,0,1
-14.0,1,Masculino,3G,Pública,3G,1,1
-12.0,1,Masculino,3G,Pública,3G,0,1
-15.0,3,Masculino,3G,Pública,3G,1,1
-13.0,3,Masculino,3G,Pública,3G,0,1
-13.0,2,Feminino,3G,Privada - Programa de Apadrinhamento,3G,0,0
-13.0,3,Masculino,3G,Pública,3G,0,1
-13.0,1,Feminino,3G,Pública,3G,0,0
-15.0,3,Masculino,3G,Pública,3G,1,1
-15.0,3,Masculino,3G,Pública,3G,1,1
-13.0,3,Feminino,3G,Pública,3G,0,0
-13.0,3,Masculino,3G,Pública,3G,0,1
-13.0,2,Feminino,3G,Pública,3G,0,0
-14.0,3,Feminino,3G,Pública,3G,1,0
-12.0,3,Feminino,3G,Pública,3G,0,0
-12.0,3,Feminino,3H,Pública,3H,0,0
-13.0,3,Feminino,3H,Pública,3H,0,0
-12.0,3,Masculino,3H,Privada - Programa de Apadrinhamento,3H,0,0
-13.0,3,Masculino,3H,Pública,3H,0,1
-12.0,1,Masculino,3H,Pública,3H,0,1
-15.0,0,Masculino,3H,Pública,3H,1,1
-14.0,2,Masculino,3H,Pública,3H,1,1
-11.0,2,Feminino,3H,Pública,3H,0,1
-12.0,3,Feminino,3H,Pública,3H,0,0
-15.0,1,Masculino,3H,Pública,3H,1,1
-13.0,3,Feminino,3H,Pública,3H,0,0
-13.0,2,Masculino,3H,Pública,3H,0,1
-13.0,3,Masculino,3H,Pública,3H,0,1
-14.0,0,Feminino,3I,Pública,3I,0,0
-13.0,0,Feminino,3I,Pública,3I,0,0
-14.0,1,Masculino,3I,Pública,3I,1,1
-13.0,3,Feminino,3I,Pública,3I,0,0
-13.0,1,Masculino,3I,Pública,3I,0,1
-13.0,0,Feminino,3I,Pública,3I,0,0
-15.0,0,Feminino,3I,Pública,3I,1,1
-14.0,2,Masculino,3I,Pública,3I,1,1
-14.0,3,Feminino,3I,Pública,3I,0,0
-14.0,0,Feminino,3I,Pública,3I,1,0
-12.0,2,Masculino,3K,Pública,3K,0,1
-12.0,2,Feminino,3K,Pública,3K,0,0
-13.0,1,Feminino,3K,Privada - Programa de Apadrinhamento,3K,0,0
-14.0,3,Masculino,3K,Pública,3K,0,1
-13.0,3,Masculino,3K,Pública,3K,0,1
-13.0,2,Feminino,3K,Pública,3K,0,0
-12.0,1,Masculino,3K,Pública,3K,0,1
-12.0,1,Masculino,3K,Pública,3K,0,1
-14.0,2,Masculino,3K,Pública,3K,1,1
-12.0,1,Feminino,3K,Pública,3K,0,1
-13.0,0,Feminino,3K,Pública,3K,0,0
-15.0,3,Masculino,3K,Pública,3K,1,1
-12.0,2,Masculino,3K,Pública,3K,0,1
-14.0,2,Feminino,3K,Pública,3K,0,1
-11.0,2,Feminino,3K,Pública,3K,0,0
-13.0,2,Feminino,3K,Pública,3K,0,0
-15.0,2,Feminino,3L,Pública,3L,1,1
-13.0,1,Feminino,3L,Pública,3L,0,0
-15.0,2,Masculino,3L,Pública,3L,1,1
-14.0,3,Feminino,3L,Pública,3L,0,1
-14.0,3,Feminino,3L,Pública,3L,0,1
-13.0,1,Feminino,3L,Pública,3L,0,0
-12.0,3,Feminino,3L,Privada,3L,0,0
-15.0,3,Masculino,3L,Pública,3L,1,1
-13.0,3,Masculino,3L,Pública,3L,0,1
-12.0,2,Masculino,3L,Pública,3L,0,1
-12.0,3,Feminino,3L,Pública,3L,0,0
-14.0,3,Feminino,3L,Pública,3L,0,1
-14.0,2,Feminino,3L,Pública,3L,0,1
-14.0,2,Masculino,3L,Pública,3L,0,1
-12.0,2,Feminino,3M,Pública,3M,0,1
-14.0,0,Feminino,3M,Pública,3M,1,1
-13.0,0,Masculino,3M,Pública,3M,0,1
-12.0,1,Feminino,3M,Pública,3M,0,1
-13.0,2,Feminino,3M,Pública,3M,0,0
-13.0,3,Masculino,3M,Pública,3M,0,1
-16.0,0,Feminino,3M,Pública,3M,1,1
-14.0,3,Feminino,3M,Pública,3M,0,1
-14.0,1,Feminino,3M,Pública,3M,1,1
-15.0,1,Masculino,3M,Pública,3M,1,1
-13.0,3,Masculino,3M,Pública,3M,0,1
-13.0,3,Feminino,3M,Pública,3M,0,0
-14.0,0,Masculino,3M,Pública,3M,1,1
-14.0,1,Feminino,3M,Pública,3M,0,1
-14.0,0,Feminino,3M,Pública,3M,1,1
-12.0,0,Feminino,3N,Pública,3N,0,0
-12.0,1,Feminino,3N,Pública,3N,0,0
-12.0,1,Masculino,3N,Pública,3N,0,1
-14.0,0,Masculino,3N,Pública,3N,0,1
-12.0,1,Masculino,3N,Pública,3N,0,1
-14.0,1,Feminino,3N,Pública,3N,1,0
-15.0,3,Masculino,3N,Pública,3N,1,1
-14.0,2,Masculino,3N,Pública,3N,0,1
-14.0,0,Feminino,3N,Pública,3N,1,0
-13.0,0,Feminino,3N,Pública,3N,0,0
-16.0,3,Masculino,3N,Pública,3N,1,1
-15.0,0,Masculino,3N,Pública,3N,1,1
-12.0,2,Feminino,3P,Pública,3P,0,1
-13.0,3,Feminino,3P,Pública,3P,0,1
-11.0,1,Feminino,3P,Pública,3P,0,1
-14.0,3,Masculino,3P,Pública,3P,1,1
-15.0,0,Masculino,3P,Pública,3P,1,1
-12.0,1,Masculino,3P,Pública,3P,0,1
-14.0,3,Masculino,3P,Pública,3P,1,1
-14.0,2,Masculino,3P,Pública,3P,0,1
-12.0,3,Feminino,3P,Pública,3P,0,1
-12.0,1,Feminino,3P,Pública,3P,0,1
-15.0,0,Masculino,3P,Pública,3P,1,1
-15.0,3,Masculino,3P,Pública,3P,1,1
-13.0,0,Masculino,3P,Pública,3P,0,1
-15.0,1,Masculino,3P,Pública,3P,1,1
-12.0,3,Feminino,3P,Pública,3P,0,1
-13.0,0,Masculino,3R,Pública,3R,0,1
-15.0,0,Masculino,3R,Pública,3R,1,1
-14.0,3,Feminino,3R,Pública,3R,0,1
-14.0,1,Feminino,3R,Pública,3R,1,1
-13.0,2,Feminino,3R,Pública,3R,0,0
-13.0,2,Feminino,3R,Pública,3R,0,0
-14.0,3,Feminino,3R,Pública,3R,0,1
-13.0,3,Feminino,3R,Pública,3R,0,0
-13.0,3,Feminino,3R,Pública,3R,0,0
-13.0,0,Masculino,3R,Pública,3R,0,1
-13.0,3,Feminino,3R,Pública,3R,0,0
-12.0,2,Feminino,3U,Pública,3U,0,1
-11.0,3,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
-15.0,2,Masculino,3U,Pública,3U,1,1
-11.0,3,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
-13.0,3,Masculino,3U,Pública,3U,0,1
-14.0,0,Masculino,3U,Pública,3U,0,1
-14.0,2,Feminino,3U,Pública,3U,0,1
-14.0,3,Masculino,3U,Pública,3U,1,1
-13.0,2,Masculino,3U,Pública,3U,0,1
-12.0,2,Masculino,3U,Pública,3U,0,1
-11.0,1,Feminino,3U,Pública,3U,0,1
-14.0,3,Masculino,3U,Pública,3U,0,1
-12.0,1,Masculino,3U,Pública,3U,0,1
-14.0,0,Feminino,3U,Pública,3U,0,1
-12.0,2,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
-14.0,3,Masculino,3U,Pública,3U,0,1
-15.0,1,Feminino,4A,Pública,4A,1,1
-16.0,0,Masculino,4A,Pública,4A,1,1
-14.0,2,Feminino,4A,Privada,4A,0,0
-13.0,3,Feminino,4A,Pública,4A,0,0
-13.0,2,Masculino,4A,Privada,4A,0,0
-15.0,0,Feminino,4A,Pública,4A,1,1
-15.0,3,Masculino,4A,Privada - Programa de Apadrinhamento,4A,0,0
-14.0,0,Feminino,4A,Privada,4A,0,0
-15.0,3,Feminino,4A,Privada - Programa de Apadrinhamento,4A,1,0
-15.0,2,Feminino,4A,Pública,4A,0,1
-15.0,2,Masculino,4A,Privada,4A,1,0
-16.0,0,Masculino,4A,Pública,4A,1,1
-15.0,3,Masculino,4A,Pública,4A,0,0
-14.0,3,Feminino,4A,Pública,4A,0,0
-16.0,3,Feminino,4A,Pública,4A,1,1
-14.0,3,Masculino,4B,Pública,4B,0,1
-16.0,2,Masculino,4B,Pública,4B,1,1
-13.0,3,Masculino,4B,Pública,4B,0,1
-16.0,0,Feminino,4B,Pública,4B,1,1
-13.0,3,Feminino,4B,Pública,4B,0,0
-15.0,0,Feminino,4B,Pública,4B,1,1
-15.0,0,Masculino,4B,Pública,4B,1,1
-16.0,0,Masculino,4B,Pública,4B,1,1
-17.0,0,Feminino,4B,Pública,4B,1,1
-16.0,0,Feminino,4B,Pública,4B,1,1
-14.0,3,Masculino,4B,Pública,4B,0,1
-15.0,0,Feminino,4B,Pública,4B,1,1
-14.0,3,Feminino,4B,Pública,4B,0,1
-15.0,3,Feminino,4B,Pública,4B,0,1
-17.0,0,Feminino,4B,Pública,4B,1,1
-16.0,0,Feminino,4B,Pública,4B,1,1
-16.0,0,Masculino,4B,Pública,4B,1,1
-15.0,0,Feminino,4C,Pública,4C,1,1
-17.0,1,Masculino,4C,Pública,4C,1,1
-16.0,0,Masculino,4C,Pública,4C,1,1
-16.0,0,Feminino,4C,Pública,4C,1,1
-13.0,1,Feminino,4C,Pública,4C,0,1
-16.0,0,Feminino,4C,Pública,4C,1,1
-15.0,1,Feminino,4C,Privada - Programa de Apadrinhamento,4C,0,0
-16.0,3,Feminino,4C,Pública,4C,1,1
-16.0,0,Feminino,4C,Pública,4C,1,1
-14.0,3,Feminino,4C,Privada - Programa de Apadrinhamento,4C,0,0
-14.0,3,Feminino,4C,Pública,4C,0,0
-16.0,0,Masculino,4C,Pública,4C,1,1
-14.0,2,Feminino,4F,Pública,4F,0,1
-16.0,3,Masculino,4F,Pública,4F,1,1
-17.0,3,Feminino,4F,Pública,4F,1,1
-16.0,3,Masculino,4F,Pública,4F,1,1
-13.0,3,Masculino,4F,Pública,4F,0,1
-15.0,1,Feminino,4F,Pública,4F,1,1
-14.0,3,Feminino,4F,Pública,4F,0,1
-13.0,1,Feminino,4F,Pública,4F,0,1
-13.0,0,Feminino,4F,Pública,4F,0,1
-16.0,3,Feminino,4F,Pública,4F,1,1
-15.0,3,Feminino,4F,Pública,4F,0,1
-13.0,3,Feminino,4F,Pública,4F,0,0
-17.0,3,Masculino,4F,Privada,4F,1,1
-16.0,2,Feminino,4F,Pública,4F,1,1
-16.0,0,Masculino,4F,Pública,4F,1,1
-14.0,3,Feminino,4F,Pública,4F,0,1
-14.0,2,Feminino,4H,Privada - Programa de Apadrinhamento,4H,0,0
-16.0,0,Masculino,4H,Pública,4H,1,1
-15.0,0,Masculino,4H,Pública,4H,1,1
-15.0,0,Feminino,4H,Pública,4H,1,1
-15.0,3,Masculino,4L,Pública,4L,1,1
-15.0,2,Feminino,4L,Pública,4L,1,1
-15.0,0,Feminino,4L,Pública,4L,1,1
-15.0,2,Feminino,4L,Pública,4L,1,1
-15.0,2,Feminino,4L,Pública,4L,0,1
-15.0,0,Feminino,4L,Pública,4L,1,1
-16.0,3,Feminino,4L,Pública,4L,1,1
-15.0,0,Feminino,4L,Pública,4L,1,1
-15.0,3,Feminino,4L,Pública,4L,0,1
-14.0,2,Feminino,4L,Pública,4L,0,0
-15.0,2,Masculino,4L,Pública,4L,0,1
-16.0,0,Feminino,4L,Pública,4L,1,1
-14.0,0,Feminino,4L,Pública,4L,0,0
-14.0,2,Feminino,4L,Pública,4L,0,0
-15.0,1,Feminino,4L,Pública,4L,1,1
-14.0,3,Feminino,4M,Privada,4M,0,0
-14.0,3,Feminino,4M,Pública,4M,0,0
-14.0,2,Masculino,4M,Pública,4M,0,1
-15.0,2,Feminino,4M,Pública,4M,1,1
-13.0,2,Feminino,4M,Pública,4M,0,0
-15.0,3,Feminino,4M,Pública,4M,0,1
-15.0,1,Masculino,4M,Pública,4M,0,1
-14.0,3,Feminino,4M,Pública,4M,0,0
-15.0,0,Feminino,4M,Pública,4M,1,1
-14.0,1,Feminino,4M,Pública,4M,0,0
-14.0,3,Feminino,4M,Pública,4M,0,0
-14.0,3,Masculino,4M,Privada - Programa de Apadrinhamento,4M,0,0
-16.0,3,Masculino,4M,Pública,4M,1,1
-12.0,3,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
-14.0,3,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
-13.0,3,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
-16.0,1,Feminino,4M,Pública,4M,1,1
-14.0,2,Masculino,4M,Pública,4M,0,1
-15.0,0,Feminino,4N,Pública,4N,1,1
-16.0,0,Feminino,4N,Pública,4N,1,1
-16.0,3,Feminino,4N,Pública,4N,1,1
-15.0,0,Feminino,4N,Pública,4N,1,1
-14.0,2,Feminino,4N,Pública,4N,0,0
-16.0,3,Masculino,4N,Pública,4N,1,1
-13.0,3,Masculino,4N,Pública,4N,0,1
-15.0,1,Feminino,4N,Pública,4N,1,1
-15.0,0,Masculino,4N,Pública,4N,1,1
-16.0,0,Masculino,4N,Pública,4N,1,1
-16.0,3,Masculino,4N,Pública,4N,1,1
-14.0,3,Masculino,4N,Pública,4N,0,1
-17.0,3,Masculino,4R,Pública,4R,1,1
-14.0,0,Masculino,4R,Pública,4R,0,1
-17.0,0,Feminino,4R,Pública,4R,1,1
-16.0,3,Feminino,4R,Privada - Programa de Apadrinhamento,4R,1,0
-16.0,0,Feminino,4R,Pública,4R,1,1
-15.0,1,Masculino,4R,Pública,4R,1,1
-18.0,3,Feminino,5A,Pública,5A,1,1
-17.0,3,Feminino,5A,Privada - Programa de Apadrinhamento,5A,1,0
-15.0,3,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-16.0,3,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-17.0,1,Feminino,5A,Pública,5A,1,1
-14.0,3,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-15.0,3,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-17.0,3,Feminino,5A,Pública,5A,1,1
-15.0,3,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-17.0,1,Feminino,5A,Pública,5A,1,1
-16.0,3,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-15.0,3,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-16.0,2,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
-17.0,3,Feminino,5A,Pública,5A,1,1
-15.0,3,Feminino,5B,Pública,5B,0,1
-15.0,0,Feminino,5B,Pública,5B,0,1
-16.0,1,Feminino,5B,Pública,5B,0,1
-17.0,3,Masculino,5B,Privada,5B,1,1
-15.0,2,Feminino,5B,Pública,5B,0,1
-15.0,3,Feminino,5B,Privada,5B,0,0
-15.0,1,Feminino,5B,Pública,5B,0,1
-17.0,0,Feminino,5B,Pública,5B,1,1
-15.0,3,Feminino,5B,Privada - Programa de Apadrinhamento,5B,0,0
-17.0,0,Feminino,5B,Pública,5B,1,1
-17.0,0,Feminino,5C,Pública,5C,1,1
-15.0,3,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-15.0,0,Feminino,5C,Pública,5C,0,0
-16.0,0,Feminino,5C,Pública,5C,1,1
-16.0,0,Masculino,5C,Pública,5C,1,1
-14.0,3,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-15.0,3,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-14.0,3,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-14.0,3,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-14.0,2,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-16.0,3,Feminino,5C,Pública,5C,1,1
-14.0,1,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
-15.0,1,Feminino,5C,Pública,5C,0,1
-17.0,2,Feminino,5D,Pública,5D,1,1
-18.0,1,Masculino,5D,Concluiu o 3º EM,5D,1,1
-17.0,1,Masculino,5D,Pública,5D,1,1
-17.0,2,Feminino,5D,Pública,5D,1,1
-16.0,0,Masculino,5D,Pública,5D,1,1
-16.0,3,Feminino,5D,Pública,5D,1,1
-14.0,3,Masculino,5D,Privada - Programa de Apadrinhamento,5D,0,0
-17.0,0,Feminino,5D,Pública,5D,1,1
-16.0,0,Masculino,5D,Pública,5D,1,1
-15.0,0,Masculino,5D,Pública,5D,0,1
-15.0,1,Masculino,5D,Pública,5D,0,1
-16.0,2,Feminino,5F,Privada - Programa de Apadrinhamento,5F,1,0
-16.0,2,Feminino,5F,Pública,5F,1,1
-17.0,3,Feminino,5F,Pública,5F,1,1
-17.0,0,Feminino,5F,Pública,5F,1,1
-18.0,3,Feminino,5F,Concluiu o 3º EM,5F,1,1
-17.0,1,Masculino,5F,Pública,5F,1,1
-17.0,3,Masculino,5F,Pública,5F,1,1
-17.0,0,Masculino,5F,Pública,5F,1,1
-17.0,0,Masculino,5F,Pública,5F,1,1
-18.0,0,Masculino,5F,Pública,5F,1,1
-16.0,1,Feminino,5G,Pública,5G,1,1
-17.0,0,Feminino,5G,Pública,5G,1,1
-14.0,3,Feminino,5G,Privada - Programa de Apadrinhamento,5G,0,0
-17.0,3,Feminino,5G,Pública,5G,1,1
-16.0,1,Feminino,5G,Pública,5G,1,1
-16.0,3,Feminino,5G,Pública,5G,1,1
-17.0,2,Feminino,5L,Pública,5L,1,1
-16.0,3,Feminino,5L,Pública,5L,1,1
-13.0,3,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,0
-15.0,2,Masculino,5L,Pública,5L,0,1
-17.0,3,Feminino,5L,Privada - Programa de Apadrinhamento,5L,1,0
-15.0,3,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,0
-16.0,0,Masculino,5L,Pública,5L,1,1
-17.0,3,Masculino,5L,Privada,5L,1,1
-16.0,3,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,0
-15.0,0,Feminino,5M,Pública,5M,0,1
-17.0,0,Feminino,5M,Pública,5M,1,1
-17.0,2,Feminino,5M,Pública,5M,1,1
-15.0,2,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
-16.0,2,Feminino,5M,Pública,5M,1,1
-15.0,2,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
-16.0,1,Feminino,5M,Pública,5M,1,1
-16.0,0,Feminino,5M,Pública,5M,1,1
-15.0,3,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
-16.0,3,Feminino,5M,Pública,5M,1,1
-17.0,0,Masculino,5M,Pública,5M,1,1
-15.0,3,Masculino,5M,Pública,5M,0,1
-15.0,0,Masculino,5M,Pública,5M,0,1
-15.0,3,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
-16.0,3,Masculino,5N,Pública,5N,1,1
-14.0,3,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
-16.0,0,Masculino,5N,Pública,5N,1,1
-14.0,2,Feminino,5N,Pública,5N,0,1
-18.0,2,Feminino,5N,Pública,5N,1,1
-16.0,1,Feminino,5N,Pública,5N,1,1
-14.0,3,Masculino,5N,Privada - Programa de Apadrinhamento,5N,0,0
-17.0,2,Masculino,5N,Pública,5N,1,1
-15.0,3,Masculino,5N,Privada - Programa de Apadrinhamento,5N,0,0
-17.0,0,Feminino,5N,Pública,5N,1,1
-15.0,3,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
-16.0,1,Masculino,5N,Pública,5N,1,1
-16.0,0,Feminino,5N,Pública,5N,1,1
-16.0,3,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
-17.0,3,Masculino,6A,Pública,6A,1,1
-17.0,0,Masculino,6A,Pública,6A,0,1
-16.0,3,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
-18.0,3,Masculino,6A,Privada - Programa de Apadrinhamento,6A,1,1
-17.0,2,Feminino,6A,Privada,6A,1,0
-18.0,0,Feminino,6A,Concluiu o 3º EM,6A,1,1
-17.0,0,Masculino,6A,Pública,6A,0,1
-16.0,0,Feminino,6A,Pública,6A,0,1
-17.0,0,Feminino,6A,Pública,6A,1,1
-16.0,0,Feminino,6A,Pública,6A,0,1
-17.0,3,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
-17.0,0,Feminino,6A,Pública,6A,1,1
-18.0,3,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
-18.0,3,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
-17.0,1,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
-17.0,3,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
-16.0,3,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
-16.0,0,Masculino,6L,Privada - Programa de Apadrinhamento,6L,0,0
-18.0,2,Masculino,6L,Pública,6L,1,1
-18.0,1,Feminino,6L,Concluiu o 3º EM,6L,1,1
-17.0,0,Masculino,6L,Privada,6L,1,1
-16.0,0,Masculino,6L,Pública,6L,0,1
-17.0,1,Feminino,6L,Pública,6L,0,1
-17.0,3,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
-18.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-18.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,1,Masculino,7A,Pública,7A,0,1
-18.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-18.0,3,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-19.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-18.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
-17.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-15.0,3,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,2,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-16.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-17.0,3,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-17.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-17.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-15.0,2,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-18.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-17.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-16.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-16.0,3,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-15.0,2,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-18.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,3,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
-16.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-15.0,3,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
-22.0,3,Feminino,8A,Privada,8A,0,0
-21.0,3,Feminino,8A,Privada,8A,0,0
-21.0,3,Masculino,8B,Privada,8B,0,0
-21.0,3,Masculino,8B,Privada,8B,0,0
-21.0,3,Feminino,8B,Privada,8B,0,0
-21.0,3,Masculino,8B,Privada,8B,0,0
-21.0,3,Feminino,8B,Privada,8B,0,0
-21.0,3,Feminino,8B,Privada,8B,0,0
-20.0,3,Feminino,8B,Privada,8B,0,0
-21.0,3,Masculino,8B,Privada - Pagamento por *Empresa Parceira,8B,0,0
-21.0,3,Feminino,8B,Privada,8B,0,0
-21.0,3,Masculino,8B,Privada,8B,0,0
-27.0,3,Masculino,8B,Privada,8B,0,0
-21.0,3,Feminino,8B,Privada - Pagamento por *Empresa Parceira,8B,0,0
-21.0,3,Feminino,8B,Privada,8B,0,0
-21.0,3,Feminino,8D,Privada,8D,0,0
-21.0,3,Feminino,8D,Privada *Parcerias com Bolsa 100%,8D,0,0
-20.0,3,Feminino,8D,Privada,8D,0,0
-20.0,3,Feminino,8D,Privada,8D,0,0
-20.0,3,Feminino,8D,Privada,8D,0,0
-19.0,3,Masculino,8D,Privada,8D,0,0
-19.0,3,Feminino,8D,Privada,8D,0,0
-21.0,2,Masculino,8D,Pública,8D,0,1
-20.0,3,Masculino,8D,Privada,8D,0,0
-19.0,3,Masculino,8D,Privada *Parcerias com Bolsa 100%,8D,0,0
-24.0,3,Feminino,8D,Privada,8D,0,0
-20.0,3,Feminino,8D,Privada,8D,0,0
-18.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-22.0,2,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-21.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-20.0,3,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-19.0,3,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-19.0,3,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-20.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-20.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,2,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-22.0,2,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-20.0,3,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-20.0,3,Feminino,8E,Privada,8E,0,0
-19.0,3,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-19.0,3,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
-20.0,2,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-19.0,2,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
-19.0,3,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-23.0,1,Feminino,8F,Concluiu o 3º EM,8F,0,1
-19.0,2,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,3,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,2,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,3,Masculino,8F,Concluiu o 3º EM,8F,0,1
-19.0,2,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-20.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-20.0,2,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,2,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,3,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-18.0,3,Feminino,8F,Privada - Programa de Apadrinhamento,8F,0,0
-21.0,1,Masculino,8F,Concluiu o 3º EM,8F,0,1
-18.0,3,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
-23.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Feminino,9,Bolsista Universitário *Formado (a),9,0,0
-20.0,3,Masculino,9,Privada,9,0,1
-20.0,3,Masculino,9,Privada,9,0,1
-21.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-23.0,3,Feminino,9,Privada,9,0,0
-21.0,3,Masculino,9,Privada,9,0,1
-20.0,3,Feminino,9,Privada,9,0,0
-23.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-25.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Masculino,9,Privada,9,0,1
-21.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-23.0,3,Masculino,9,Privada,9,0,1
-21.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-22.0,3,Feminino,9,Privada,9,0,0
-22.0,3,Feminino,9,Privada *Parcerias com Bolsa 100%,9,0,0
-22.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-23.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-22.0,3,Feminino,9,Privada,9,0,0
-20.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-22.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-21.0,2,Feminino,9,Privada,9,0,0
-22.0,3,Masculino,9,Privada,9,0,1
-20.0,3,Masculino,9,Privada,9,0,1
-23.0,3,Feminino,9,Privada,9,0,0
-22.0,3,Masculino,9,Privada,9,0,1
-23.0,3,Masculino,9,Privada,9,0,1
-22.0,3,Feminino,9,Privada,9,0,0
-23.0,3,Feminino,9,Privada,9,0,0
-20.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-21.0,3,Masculino,9,Privada,9,0,1
-21.0,3,Masculino,9,Bolsista Universitário *Formado (a),9,0,1
-22.0,3,Feminino,9,Privada,9,0,0
-24.0,3,Feminino,9,Bolsista Universitário *Formado (a),9,0,0
-21.0,3,Feminino,9,Bolsista Universitário *Formado (a),9,0,0
+IDADE,TEMPO_NA_ONG,INDE_ANTERIOR,IAA_ANTERIOR,IEG_ANTERIOR,IPS_ANTERIOR,IDA_ANTERIOR,IPP_ANTERIOR,IPV_ANTERIOR,IAN_ANTERIOR,ALUNO_NOVO,GENERO,TURMA,INSTITUICAO_ENSINO,FASE,RISCO_DEFASAGEM,prediction
+8.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,ALFA A - G0/G1,Pública,ALFA,0,0
+8.0,0,7.611366666700001,10.002,8.6666666665,6.26,8.0,5.625,5.446666667,10.0,0,Feminino,ALFA A - G0/G1,Pública,ALFA,0,0
+8.0,0,8.002866666700001,10.002,9.3333333335,3.76,8.0,7.5,7.05,10.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,0,0
+8.0,1,7.952200000100001,10.002,9.0833333335,3.76,8.0,7.5,7.046666667,10.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,1,0
+9.0,0,7.156366666600001,8.002,9.75,3.76,7.0,6.875,7.213333333,5.0,0,Masculino,ALFA A - G0/G1,Pública,ALFA,1,1
+9.0,0,5.444199999900001,9.002,4.1666666665,3.76,7.5,5.0,4.173333333,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,1,8.0822,10.002,10.0,6.26,8.25,7.5,7.78,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+10.0,1,8.959700000000002,9.502,10.0,7.51,10.0,8.125,9.73,5.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,0,7.346677272700001,9.002,8.6136363635,7.51,7.5,7.1875,6.27,5.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,0,8.152624242500002,10.002,9.5454545455,6.26,8.5,7.5,8.336666667,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,1,7.982890909100001,7.918,9.5454545455,6.26,9.25,7.5,7.78,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+8.0,1,8.2579575757,9.502,9.5454545455,6.26,9.5,7.5,8.113333333,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,0
+9.0,0,8.0345030302,10.002,8.818181818,6.26,8.75,7.5,8.223333333,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,1,7.8769272727000015,9.502,8.1136363635,6.26,9.25,7.5,7.89,5.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
+9.0,1,8.191290909100001,8.502,9.2954545455,6.26,9.75,7.5,8.28,5.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
+10.0,0,7.583018181800001,9.002,7.409090909,7.51,8.5,7.5,7.5,5.0,0,Masculino,ALFA B - G2/G3,Pública,ALFA,1,1
+10.0,1,8.3033538462,10.002,9.230769231,7.51,9.0,7.5,8.28,5.0,0,Feminino,ALFA B - G2/G3,Pública,ALFA,1,1
+8.0,0,8.035957575700001,10.002,9.0454545455,6.26,8.75,7.5,8.003333333,5.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
+9.0,1,8.3800152174,9.002,9.347826087,2.51,10.0,7.8125,7.89,10.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,1,1
+7.0,0,8.057128571400002,9.502,9.523809524,2.51,9.75,8.125,8.443333333,5.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
+7.0,0,8.156578882000002,10.002,8.830227742999998,2.51,8.0,7.5,8.946666667,10.0,0,Masculino,ALFA C - G0/G1,Pública,ALFA,0,0
+8.0,0,5.914801966800001,8.002,5.051759834,2.51,7.0,5.3125,4.61,10.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,1,0
+7.0,0,7.619650310500001,10.002,9.3064182195,2.51,7.75,8.125,8.223333333,5.0,0,Feminino,ALFA C - G0/G1,Pública,ALFA,0,0
+10.0,0,7.9208899585,9.002,7.9813664595,2.51,10.0,7.1875,7.273333333,10.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,0,7.2171722223,7.002,9.4444444445,7.51,7.75,5.9375,6.166666667,5.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,0,8.407200000000001,10.002,10.0,7.51,8.75,7.5,8.28,5.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,1,8.079200000000002,9.502,9.5,7.51,8.25,7.5,7.89,5.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,0,8.2072,8.502,10.0,7.51,8.5,7.5,8.28,5.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,0,6.9031621211,7.502,4.7727272725,7.51,8.25,7.1875,7.893333333,5.0,0,Feminino,ALFA D - G2/G3,Pública,ALFA,1,1
+8.0,1,8.005023232300001,8.002,9.4949494945,7.51,8.5,6.875,8.336666667,5.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,0
+10.0,0,8.1942,9.002,10.0,6.88,8.5,7.5,8.28,5.0,0,Masculino,ALFA D - G2/G3,Pública,ALFA,1,1
+9.0,1,7.9493666666,9.502,10.0,7.51,7.75,6.875,7.553333333,5.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,1
+8.0,1,6.395389393900001,8.002,6.8863636365000005,2.51,7.5,6.5625,6.553333333,5.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,0,5.7839559808,9.002,5.6937799039999994,2.51,7.75,5.0,4.72,5.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,0,0
+9.0,0,8.0617454545,10.002,9.5227272725,2.51,7.5,7.5,8.28,10.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,1,1
+8.0,1,7.0574222223000005,9.002,8.4444444445,2.51,6.5,7.5,8.336666667,5.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,0,4.6684348484000004,8.502,3.159090909,2.51,5.5,4.6875,4.333333333,5.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,1,7.620247619000001,9.502,9.761904762,2.51,9.25,7.5,6.833333333,5.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,1,6.315972727300001,8.502,7.8863636365000005,2.51,5.25,6.875,7.0,5.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,1,6.853080434800001,9.502,8.445652174,2.51,6.5,7.1875,7.22,5.0,0,Feminino,ALFA E - G2/G3,Pública,ALFA,1,0
+8.0,0,8.419200000000002,9.502,10.0,8.13,8.75,7.5,8.28,5.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,0,0
+10.0,0,7.577287995300001,9.502,6.643356643500001,7.51,6.75,7.1875,7.393333333,10.0,0,Masculino,ALFA E - G2/G3,Pública,ALFA,1,1
+8.0,1,7.069727777800001,8.502,7.638888889,7.51,6.5,7.1875,7.11,5.0,0,Feminino,ALFA F - G0/G1,Pública,ALFA,1,0
+8.0,0,7.6352,9.502,8.75,7.51,6.0,7.5,8.67,5.0,0,Feminino,ALFA F - G0/G1,Pública,ALFA,1,0
+8.0,0,7.623866666600001,8.502,8.75,2.51,9.0,7.5,8.613333333,5.0,0,Masculino,ALFA F - G0/G1,Pública,ALFA,1,0
+8.0,0,5.6345333333,9.502,2.9166666665000003,2.51,7.0,7.5,6.0,5.0,0,Masculino,ALFA F - G0/G1,Pública,ALFA,0,0
+8.0,0,5.758866666800001,10.002,5.416666667,2.51,4.0,6.25,4.996666667,10.0,0,Feminino,ALFA F - G0/G1,Pública,ALFA,0,0
+10.0,0,8.8352,10.002,10.0,2.51,10.0,7.5,9.17,10.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
+10.0,0,7.085119934500001,9.002,7.9575163395,8.135,6.0,7.8125,6.493333333,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
+8.0,0,6.685221929800001,8.502,8.710526316,2.51,4.75,7.8125,8.053333333,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,0
+10.0,2,8.503033333400001,9.002,10.0,8.135,9.75,7.5,7.946666667,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
+10.0,2,7.665116666600001,9.002,9.75,2.51,9.25,7.8125,7.163333333,5.0,0,Masculino,ALFA G - G2/G3,Pública,ALFA,1,1
+10.0,1,7.0900771929,7.502,7.6710526315,7.51,7.25,7.5,6.773333333,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
+8.0,1,7.697103508700001,9.002,9.4736842105,7.51,7.25,8.125,6.943333333,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,0
+9.0,1,5.657357017600001,7.918,8.697368421,2.51,2.75,5.9375,6.156666667,5.0,0,Feminino,ALFA G - G2/G3,Pública,ALFA,1,1
+8.0,0,7.7494938597,9.502,7.6710526315,7.51,8.25,7.1875,8.226666667,5.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
+9.0,0,6.5940333333000005,10.002,5.833333333500001,6.255,5.5,6.25,5.383333333,10.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,1,0
+7.0,0,6.876997101400001,10.002,7.445652174,7.51,6.0,7.5,5.933333333,5.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
+7.0,0,8.379199999899999,9.002,9.1666666665,7.51,7.5,7.5,8.223333333,10.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
+8.0,0,8.3907833334,8.502,9.375,2.51,10.0,7.8125,8.166666667,10.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
+9.0,0,6.4118666668,9.002,9.166666667,2.51,0.0,7.5,8.386666667,10.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,1,1
+8.0,0,7.510200000000001,10.002,8.333333333,7.51,6.5,6.25,8.336666667,5.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
+7.0,0,8.0155333334,9.502,8.125,7.51,6.25,7.5,8.446666667,10.0,0,Feminino,ALFA H - G0/G1,Pública,ALFA,0,0
+7.0,0,8.239799999999999,7.418,8.541666667,7.51,9.0,7.5,7.443333333,10.0,0,Masculino,ALFA H - G0/G1,Pública,ALFA,0,0
+8.0,1,8.3510666667,6.834,8.3333333335,7.51,9.0,7.5,8.5,10.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,0
+9.0,0,7.2838203209,8.502,8.6631016045,7.51,6.0,7.5,7.5,5.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
+9.0,0,7.59291123,9.002,8.20855615,7.51,7.75,7.5,7.5,5.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
+10.0,1,7.665638502700001,7.502,7.0721925135,7.51,10.0,7.5,7.5,5.0,0,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
+9.0,1,5.2212050505,7.002,2.7525252525,2.51,6.0,6.875,6.66,5.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
+10.0,1,6.764292246,8.502,8.14171123,7.51,4.75,7.1875,6.83,5.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,1
+9.0,1,5.5058531621,8.502,7.3320158105,2.51,2.75,6.5625,6.16,5.0,0,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
+8.0,1,6.4727360962,7.002,4.598930481,7.51,7.0,7.1875,7.415,5.0,0,Masculino,ALFA I - G2/G3,Pública,ALFA,1,0
+9.0,1,6.587019518800001,8.002,7.005347594,7.51,4.75,7.1875,7.33,5.0,0,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
+10.0,1,6.8667414438000005,7.002,6.483957219,7.51,7.0,7.1875,7.5,5.0,0,Masculino,ALFA I - G2/G3,Pública,ALFA,1,1
+8.0,0,5.799702673800001,7.002,4.692513369,6.255,5.25,6.875,6.49,5.0,0,Feminino,ALFA I - G2/G3,Pública,ALFA,1,0
+9.0,1,6.823383155100001,8.502,7.6871657755000005,7.51,5.0,7.1875,7.33,5.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
+9.0,1,7.627588888900001,8.002,8.6944444445,7.51,8.25,6.875,7.5,5.0,0,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
+9.0,1,7.801200000000001,9.502,9.25,7.51,7.5,7.5,7.5,5.0,0,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
+9.0,0,7.040088888900001,8.502,8.4444444445,7.51,5.0,7.5,7.5,5.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
+9.0,2,7.201526797300001,8.502,5.7516339865,7.51,8.5,7.5,7.5,5.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
+10.0,1,6.917866666700001,9.002,6.833333333500001,2.51,8.25,7.5,7.5,5.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
+9.0,1,6.3925823529,9.002,7.7794117645,7.51,3.0,6.875,6.99,5.0,0,Feminino,ALFA J - G2/G3,Privada,ALFA,1,1
+10.0,0,7.9400888889,9.002,8.9444444445,7.51,8.75,7.5,7.5,5.0,0,Masculino,ALFA J - G2/G3,Pública,ALFA,1,1
+11.0,1,7.8845333333,9.002,9.1666666665,7.51,8.25,7.5,7.5,5.0,0,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
+10.0,2,7.722033333300001,10.002,8.1666666665,7.51,8.25,6.875,7.5,5.0,0,Feminino,ALFA J - G2/G3,Pública,ALFA,1,1
+7.0,0,6.684533333300001,8.002,8.4166666665,2.51,6.0,7.5,7.5,5.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
+8.0,0,7.95295,9.002,8.875,6.885,8.75,6.5625,5.915,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
+9.0,0,8.47795,9.502,9.0,7.51,7.5,8.4375,8.165,10.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
+9.0,0,7.487366666700001,10.002,9.0833333335,7.51,7.0,6.875,6.66,5.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
+9.0,1,8.332450000000001,10.002,10.0,7.51,8.5,7.8125,8.0,5.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,1,1
+8.0,0,7.075466666700001,7.918,8.5833333335,2.51,8.5,7.5,6.83,5.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
+8.0,0,8.9824954545,9.002,9.5227272725,7.51,10.0,8.4375,7.915,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
+7.0,0,7.6397833333000005,9.002,9.2916666665,7.51,4.5,7.8125,7.245,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
+8.0,0,8.264116666700001,9.002,9.3333333335,7.51,7.5,7.8125,7.325,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,1,0
+8.0,0,8.0588666667,8.502,8.2083333335,7.51,10.0,7.5,7.83,5.0,0,Masculino,ALFA K - G0/G1,Pública,ALFA,0,0
+8.0,0,7.98945,9.502,10.0,7.51,6.5,6.5625,6.66,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
+7.0,0,8.944616666700002,10.002,9.3333333335,7.51,9.5,8.4375,7.915,10.0,0,Feminino,ALFA K - G0/G1,Pública,ALFA,0,0
+10.0,1,7.8522833333,9.002,7.291666666499999,7.51,7.25,8.4375,7.245,10.0,0,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
+10.0,0,7.8262,9.002,7.25,7.51,9.0,8.75,7.75,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+11.0,2,8.1040529412,8.502,9.411764706,7.51,8.25,9.375,7.665,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+9.0,0,5.6127,8.502,6.25,5.625,6.25,2.5,4.75,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+9.0,1,8.213199999999999,7.502,10.0,6.255,9.25,9.375,7.75,5.0,0,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
+9.0,0,8.338700000000001,9.502,9.75,7.51,8.5,9.375,7.75,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+9.0,1,8.350200000000001,10.002,10.0,5.625,9.0,9.375,7.75,5.0,0,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
+11.0,2,7.746700000000001,8.002,9.25,5.01,8.75,8.125,7.665,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+10.0,0,7.361700000000001,10.002,8.75,7.51,5.5,8.125,7.24,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+10.0,2,8.3217,9.002,9.75,7.51,8.75,9.375,7.665,5.0,0,Feminino,ALFA L - G2/G3,Pública,ALFA,1,1
+10.0,1,6.566200000000001,10.002,8.75,2.51,5.0,7.5,6.575,5.0,0,Masculino,ALFA L - G2/G3,Pública,ALFA,1,1
+8.0,0,8.0056026915,9.502,9.544513457499999,7.51,7.75,8.125,7.665,5.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,1,0
+10.0,0,7.141365631500001,9.502,6.2008281575,2.51,9.5,7.5,7.75,5.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
+8.0,0,6.015144444400001,8.002,4.722222222,7.51,6.0,6.875,5.66,5.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,0
+8.0,0,6.1368428571,8.002,8.6607142855,7.51,3.0,6.875,5.33,5.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,1,0
+8.0,0,7.3547,8.502,10.0,6.885,8.75,5.0,5.33,5.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,0,0
+9.0,0,8.3422714286,9.502,8.392857143,7.51,10.0,5.625,7.0,10.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
+9.0,1,7.862906349200001,10.002,9.246031746,7.51,10.0,5.625,6.0,5.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,1
+8.0,0,6.053509523800001,9.002,7.619047619,7.51,4.5,5.625,4.58,5.0,0,Masculino,ALFA M - G0/G1,Pública,ALFA,1,0
+7.0,0,7.8185809524000005,9.502,9.761904762,7.51,9.0,7.5,5.575,5.0,0,Feminino,ALFA M - G0/G1,Pública,ALFA,0,0
+8.0,0,8.8262,8.002,10.0,7.51,9.75,6.25,8.5,10.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,0,0
+9.0,1,9.3612,8.502,10.0,7.51,10.0,8.75,9.425,10.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
+8.0,1,7.4195809524000005,9.002,9.511904762,2.51,8.75,7.5,6.83,5.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,1,0
+9.0,1,6.677723809500001,9.502,8.7976190475,2.51,4.5,7.5,7.835,5.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
+9.0,2,7.2340128655000004,8.502,9.4590643275,7.51,6.25,6.25,6.83,5.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
+8.0,0,6.066009523800001,8.502,6.619047619,3.135,6.5,5.625,6.08,5.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,0,0
+9.0,0,7.3701047619,9.502,8.0595238095,7.51,5.5,6.25,6.66,10.0,0,Masculino,ALFA N - G2/G3,Pública,ALFA,1,1
+9.0,1,6.153842857100001,8.502,8.7857142855,2.51,5.0,5.625,6.165,5.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
+9.0,1,7.1323428571,9.002,8.7857142855,7.51,6.5,6.25,6.495,5.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
+8.0,1,7.693461904800001,9.502,9.023809524,7.51,7.0,6.875,8.0,5.0,0,Feminino,ALFA N - G2/G3,Privada,ALFA,1,0
+10.0,1,6.4483428571,10.002,9.0357142855,2.51,4.0,6.25,7.325,5.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
+10.0,2,7.967866666700001,9.002,7.833333333500001,7.51,9.25,7.5,8.25,5.0,0,Feminino,ALFA N - G2/G3,Pública,ALFA,1,1
+10.0,2,5.685771428600001,10.002,6.3928571430000005,2.51,3.75,6.25,6.405,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,1,8.3373184211,9.502,9.7368421055,8.13,8.75,8.4375,7.665,5.0,0,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,1,7.7244368421,9.002,9.4736842105,7.51,6.75,8.125,7.58,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+10.0,2,7.9298184211,8.502,9.7368421055,7.51,8.0,7.8125,7.5,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+8.0,0,7.73495,9.002,9.75,7.51,7.25,7.1875,7.325,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,0
+10.0,1,7.9604662539,7.502,8.5913312695,7.51,9.0,8.75,7.83,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+10.0,0,8.3422,9.502,10.0,7.51,8.5,8.75,7.83,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,1,7.855727777800001,8.002,8.388888889,7.51,8.5,8.4375,7.915,5.0,0,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
+10.0,0,8.3792,10.002,10.0,9.38,7.5,8.75,7.83,5.0,0,Feminino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,0,8.335450000000002,8.502,10.0,8.755,8.5,8.4375,7.83,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,1,8.1861038462,9.002,9.230769231,8.13,8.75,8.4375,7.665,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+9.0,0,8.379818421100001,10.002,9.7368421055,7.51,9.5,7.8125,7.5,5.0,0,Masculino,ALFA O - G2/G3,Pública,ALFA,1,1
+10.0,0,8.289950000000001,10.002,9.5,8.13,8.5,8.4375,7.665,5.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
+10.0,0,6.454700000000001,8.002,9.5,7.51,3.0,6.875,6.08,5.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
+9.0,1,7.353427272700001,9.502,8.3636363635,7.51,6.0,8.125,7.335,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+10.0,0,8.0352454545,9.502,9.5227272725,7.51,8.25,8.125,7.335,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+9.0,1,7.202245454500001,10.002,6.5227272725,7.51,7.0,8.125,7.17,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+9.0,1,6.8916181818,7.418,7.909090909,7.51,6.75,7.5,6.085,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+10.0,1,7.537472727300001,9.502,8.3863636365,7.51,6.75,8.75,7.17,5.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,1,1
+10.0,1,6.1376545455,9.002,6.4772727275,7.51,2.25,8.75,6.83,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+8.0,0,6.9318363636,10.002,9.318181818,7.51,3.75,7.5,6.585,5.0,0,Feminino,ALFA Q - G2/G3,Pública,ALFA,0,0
+10.0,1,7.8695888889,9.002,9.4444444445,7.51,5.5,8.125,7.085,10.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+9.0,0,7.9943363636,9.502,8.568181818,7.51,9.0,8.125,7.335,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+9.0,1,7.1807,8.002,7.5,7.51,6.75,8.125,7.335,5.0,0,Masculino,ALFA Q - G2/G3,Pública,ALFA,1,1
+7.0,0,7.453427272700001,9.002,7.8636363634999995,7.51,7.25,8.125,7.335,5.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
+7.0,0,6.552990476200001,9.168,7.380952381,5.01,4.0,6.25,6.17,10.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
+8.0,0,7.2102,8.502,9.0,5.635,6.0,5.625,6.17,10.0,0,Masculino,ALFA R - G0/G1,Pública,ALFA,0,0
+8.0,0,6.8480623189,8.502,7.0018115945,7.51,5.0,5.625,6.42,10.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,0,0
+8.0,1,8.738700000000001,9.502,9.375,5.635,10.0,7.5,8.0,10.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,1,0
+7.0,0,7.1463666667000005,8.502,7.708333333500001,5.01,8.0,6.875,7.33,5.0,0,Masculino,ALFA R - G0/G1,Pública,ALFA,0,0
+8.0,1,7.709200000000001,10.002,6.875,5.635,8.5,6.875,6.915,10.0,0,Feminino,ALFA R - G0/G1,Pública,ALFA,1,0
+7.0,0,7.188033333300001,10.002,7.291666666499999,6.26,7.0,6.875,7.58,5.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
+8.0,1,7.690800000000001,7.418,10.0,5.635,6.5,6.875,6.99,10.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
+9.0,0,6.6513739130000005,9.002,7.010869565,6.26,6.0,6.25,6.99,5.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
+9.0,0,7.570033333300001,8.002,8.4166666665,7.51,8.75,6.875,6.99,5.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
+8.0,0,7.3700333333,9.002,9.7916666665,6.26,6.5,6.875,6.99,5.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
+8.0,1,6.919852173900001,9.002,6.6032608695,7.51,6.5,7.5,6.99,5.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,0
+8.0,0,7.6077217391,9.502,9.282608695499999,7.51,6.5,7.5,7.5,5.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
+8.0,0,8.427286956500001,10.002,8.3804347825,7.51,8.75,7.5,7.5,10.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,0,0
+7.0,0,8.6012,7.002,10.0,7.51,9.5,7.5,7.5,10.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,0,0
+8.0,1,8.052286956500001,8.502,8.6304347825,6.26,8.0,7.5,7.5,10.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,0
+9.0,0,7.4637,9.502,9.5,6.26,6.5,6.875,7.5,5.0,0,Masculino,ALFA S - G2/G3,Pública,ALFA,1,1
+11.0,0,8.0456444444,10.002,8.722222222,7.51,9.0,7.5,7.5,5.0,0,Feminino,ALFA S - G2/G3,Pública,ALFA,1,1
+8.0,0,6.4843521739,7.502,6.9782608695,7.51,4.5,6.875,7.5,5.0,0,Feminino,ALFA T - G2/G3,Pública,ALFA,0,0
+9.0,0,7.9632000000000005,9.502,10.0,8.13,4.75,7.5,7.5,10.0,0,Feminino,ALFA T - G2/G3,Pública,ALFA,1,1
+9.0,0,7.577286956500001,9.502,8.8804347825,7.51,6.75,7.5,7.5,5.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
+9.0,0,7.3707652174,9.502,9.347826087,7.51,5.25,7.5,7.5,5.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
+9.0,0,8.101200000000002,9.502,10.0,7.51,8.25,7.5,7.5,5.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,1,1
+9.0,1,8.2742769231,9.002,9.6153846155,7.51,9.75,7.5,7.5,5.0,0,Feminino,ALFA T - G2/G3,Pública,ALFA,1,1
+8.0,0,7.7982217391,9.002,9.532608695499999,6.88,8.25,6.875,7.33,5.0,0,Masculino,ALFA T - G2/G3,Pública,ALFA,0,0
+10.0,0,7.8987,9.002,10.0,8.13,5.5,6.875,6.99,10.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,1
+8.0,0,7.6703428571,9.002,9.2857142855,8.13,6.75,7.5,7.5,5.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,0
+8.0,0,6.638292105300001,9.502,8.6842105265,3.755,7.25,5.9375,5.16,5.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,0,0
+9.0,2,7.964342230600001,9.502,8.784461152999999,4.385,8.0,7.1875,7.5,10.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,1
+8.0,0,7.3057112782,10.002,9.022556391,7.51,5.0,7.5,7.5,5.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,0,0
+9.0,0,9.038200000000002,9.502,10.0,8.13,9.5,8.75,7.5,10.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,1
+8.0,0,7.834830952400001,8.502,9.761904762,7.51,7.5,7.8125,7.5,5.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,0,0
+10.0,0,8.3720803259,8.502,9.2606516295,7.51,8.5,7.1875,7.5,10.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,1
+8.0,0,6.221984461100001,8.002,7.5689223055,7.51,5.0,6.25,5.16,5.0,0,Masculino,ALFA U - G2/G3,Pública,ALFA,1,0
+8.0,0,7.7262,10.002,10.0,4.385,8.0,6.875,7.5,5.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,0
+8.0,0,7.803580952400001,9.002,9.761904762,7.51,7.25,7.5,7.5,5.0,0,Feminino,ALFA U - G2/G3,Pública,ALFA,1,0
+8.0,0,7.8030796992,9.502,8.759398496,7.51,8.0,7.5,7.5,5.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,1,0
+7.0,0,7.015057142799999,9.002,8.214285713999999,6.88,5.0,7.5,7.67,5.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
+7.0,0,8.980533333299999,9.002,9.7916666665,6.88,10.0,7.5,8.42,10.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
+7.0,0,8.4930333333,9.502,9.7916666665,5.005,8.25,7.5,8.42,10.0,0,Masculino,ALFA Y - G0/G1,Pública,ALFA,0,0
+9.0,0,8.8435333333,8.502,9.2916666665,7.51,10.0,7.5,8.17,10.0,0,Masculino,ALFA Y - G0/G1,Pública,ALFA,1,1
+7.0,0,5.4262,9.002,5.625,7.51,0.0,7.5,7.0,5.0,0,Feminino,ALFA Y - G0/G1,Pública,ALFA,0,0
+10.0,1,7.2597000000000005,9.502,7.5,3.755,5.0,7.5,8.42,10.0,0,Masculino,1A,Pública,1A,1,1
+10.0,0,7.812283333400001,9.502,7.5,7.51,8.0,8.4375,8.336666667,5.0,0,Feminino,1A,Pública,1A,1,1
+10.0,1,7.503255555500002,9.502,8.6944444445,7.51,5.75,8.125,8.003333333,5.0,0,Feminino,1A,Pública,1A,1,1
+10.0,1,7.057230303000001,9.002,8.181818182,6.26,6.5,7.5,6.723333333,5.0,0,Masculino,1A,Pública,1A,1,1
+9.0,0,7.7054045454,8.502,7.727272727,6.26,8.25,8.4375,8.45,5.0,0,Feminino,1A,Pública,1A,0,1
+11.0,0,8.5997833334,9.502,10.0,7.51,7.75,7.8125,7.836666667,10.0,0,Feminino,1A,Pública,1A,1,1
+10.0,1,7.8477,9.502,10.0,7.51,6.5,8.125,7.67,5.0,0,Masculino,1A,Pública,1A,1,1
+9.0,1,7.897071212,9.002,7.727272727,7.51,9.0,8.4375,7.783333333,5.0,0,Feminino,1A,Pública,1A,0,1
+10.0,1,8.692255194900001,9.502,9.3073593075,6.26,8.75,7.8125,8.616666667,10.0,0,Feminino,1A,Pública,1A,1,1
+10.0,1,8.1096318182,9.502,9.090909091,6.26,8.5,7.8125,8.67,5.0,0,Feminino,1A,Pública,1A,0,1
+10.0,1,8.9544954545,9.002,9.7727272725,6.88,9.0,8.4375,8.84,10.0,0,Masculino,1A,Pública,1A,1,1
+10.0,1,8.0985863636,9.502,9.318181818,7.51,8.0,8.4375,7.95,5.0,0,Masculino,1A,Pública,1A,1,1
+10.0,0,7.613169697000002,9.502,9.318181818,6.26,6.5,7.5,8.116666667,5.0,0,Feminino,1A,Pública,1A,1,1
+11.0,2,7.8280333334000005,9.002,10.0,6.26,7.0,8.125,7.946666667,5.0,0,Masculino,1A,Pública,1A,1,1
+11.0,0,6.427771212000001,6.334,7.727272727000001,6.26,6.5,6.5625,5.833333333,5.0,0,Feminino,1B,Pública,1B,1,1
+10.0,1,7.989700527000001,6.918,9.555335968,7.51,8.0,8.125,8.616666667,5.0,0,Masculino,1B,Pública,1B,0,1
+11.0,0,7.2917293147999995,8.502,9.328063240999999,4.38,7.25,5.3125,5.783333333,10.0,0,Feminino,1B,Pública,1B,1,1
+12.0,1,7.438578787899999,9.002,9.7727272725,5.005,6.0,7.5,8.166666667,5.0,0,Feminino,1B,Pública,1B,1,1
+10.0,1,7.61095,8.002,10.0,6.88,6.75,7.1875,7.77,5.0,0,Masculino,1B,Pública,1B,1,1
+12.0,3,7.8661333334000005,6.418,10.0,7.51,7.5,7.5,8.616666667,5.0,0,Masculino,1B,Pública,1B,1,1
+9.0,1,4.542230369,6.249,5.938735178,4.38,3.75,4.0625,3.176666667,5.0,0,Masculino,1B,Pública,1B,0,0
+11.0,1,8.425024769300002,10.002,9.1007905135,5.635,8.25,8.125,7.893333333,10.0,0,Masculino,1B,Pública,1B,1,1
+10.0,1,6.5335560606000005,9.002,6.1363636360000005,4.38,6.75,7.1875,6.996666667,5.0,0,Masculino,1B,Pública,1B,0,1
+11.0,1,8.8910333334,9.002,10.0,7.51,9.25,8.125,7.886666667,10.0,0,Feminino,1B,Pública,1B,1,1
+9.0,1,8.6516166666,8.002,10.0,7.51,10.0,8.4375,8.783333333,5.0,0,Feminino,1B,Pública,1B,0,1
+9.0,1,8.802003030200002,9.002,9.318181818,8.13,8.5,8.125,8.563333333,10.0,0,Feminino,1B,Pública,1B,0,1
+9.0,0,8.0758287879,10.002,9.7727272725,7.505,5.0,7.8125,7.946666667,10.0,0,Masculino,1B,Pública,1B,0,1
+10.0,2,7.622839525700001,8.418,6.6501976285,7.51,7.25,7.5,7.5,10.0,0,Masculino,1B,Pública,1B,1,1
+12.0,1,6.2114602109,9.002,7.3221343875,5.63,6.0,5.625,5.106666667,5.0,0,Masculino,1B,Pública,1B,1,1
+9.0,1,7.1404338602,8.002,7.055335968,5.63,7.5,6.875,8.393333333,5.0,0,Feminino,1C,Pública,1C,0,1
+9.0,2,8.5209954545,9.002,9.5227272725,7.51,7.75,7.8125,8.17,10.0,0,Masculino,1C,Privada,1C,0,1
+11.0,1,7.769381818200001,10.002,9.090909091,7.51,4.25,7.5,8.0,10.0,0,Masculino,1C,Pública,1C,1,1
+9.0,1,6.8757227273,9.502,8.6363636365,7.51,6.25,5.3125,5.83,5.0,0,Masculino,1C,Pública,1C,0,1
+10.0,1,8.697700000000001,8.002,10.0,7.51,8.75,8.125,7.92,10.0,0,Feminino,1C,Pública,1C,1,1
+11.0,1,7.797790909100001,9.002,8.7954545455,6.885,8.75,7.5,7.25,5.0,0,Masculino,1C,Pública,1C,1,1
+10.0,1,8.01645,8.502,9.75,7.51,8.0,7.8125,7.92,5.0,0,Feminino,1C,Pública,1C,1,1
+13.0,0,8.67895,10.002,10.0,7.51,9.5,8.4375,8.42,5.0,0,Masculino,1C,Pública,1C,1,1
+8.0,1,8.1188277778,6.918,8.888888889,7.51,10.0,7.8125,8.085,5.0,0,Masculino,1C,Pública,1C,0,0
+9.0,2,8.2852454545,8.502,9.7727272725,7.51,6.5,8.125,8.085,10.0,0,Feminino,1C,Pública,1C,0,0
+11.0,2,8.9079954545,10.002,9.5227272725,9.38,8.0,7.8125,8.42,10.0,0,Feminino,1C,Pública,1C,1,1
+11.0,2,7.655745454500001,9.002,9.2727272725,7.51,7.0,7.5,7.5,5.0,0,Masculino,1C,Privada,1C,1,1
+10.0,1,6.0398818182000005,9.502,7.840909091,6.26,2.5,5.625,6.665,5.0,0,Masculino,1C,Pública,1C,1,1
+10.0,2,7.833495454500001,9.502,9.0227272725,7.51,7.0,8.4375,7.92,5.0,0,Masculino,1C,Pública,1C,1,1
+10.0,0,7.864245454500001,10.002,9.2727272725,6.255,7.75,7.5,7.92,5.0,0,Feminino,1D,Pública,1D,0,1
+11.0,0,8.588040909100002,10.002,9.5454545455,7.51,7.25,8.4375,8.17,10.0,0,Feminino,1D,Pública,1D,1,1
+9.0,0,8.257421861500001,9.002,9.3073593075,7.51,8.75,8.4375,8.255,5.0,0,Feminino,1D,Pública,1D,0,1
+9.0,1,8.3971318182,8.502,9.090909091,7.51,7.5,8.4375,8.17,10.0,0,Feminino,1D,Pública,1D,0,1
+11.0,2,7.688609090900001,8.002,7.9545454545,7.51,5.5,8.125,8.17,10.0,0,Masculino,1D,Pública,1D,1,1
+10.0,0,5.009290909100001,9.002,4.5454545455,5.01,1.0,7.5,6.245,5.0,0,Feminino,1D,Pública,1D,0,0
+10.0,0,8.4749727273,8.002,8.6363636365,7.51,8.75,8.125,8.17,10.0,0,Feminino,1D,Pública,1D,1,1
+10.0,0,7.8186772727000005,8.002,8.8636363635,7.51,7.5,8.4375,8.255,5.0,0,Masculino,1D,Pública,1D,1,1
+11.0,0,7.546086363600001,10.002,9.318181818,7.51,5.75,7.8125,7.5,5.0,0,Masculino,1D,Pública,1D,1,1
+10.0,0,7.626768181800001,10.002,8.409090909,7.51,6.75,8.4375,7.5,5.0,0,Masculino,1D,Pública,1D,1,1
+11.0,0,7.863131818100001,10.002,9.0909090905,7.51,7.25,8.4375,7.5,5.0,0,Masculino,1E,Pública,1E,1,1
+10.0,1,7.5319272727,9.002,8.1136363635,7.51,6.25,8.75,8.165,5.0,0,Masculino,1E,Pública,1E,1,1
+11.0,0,7.0235939394,9.502,4.696969697,6.26,7.75,8.75,7.915,5.0,0,Masculino,1E,Pública,1E,1,1
+10.0,0,6.886950000000001,9.002,9.5,6.26,2.75,8.4375,7.835,5.0,0,Masculino,1E,Pública,1E,0,1
+11.0,2,9.204671861500001,10.002,9.3073593075,7.51,9.75,8.75,8.835,10.0,0,Feminino,1E,Pública,1E,1,1
+12.0,0,7.3853681818000005,7.918,8.409090909,7.51,6.25,8.4375,7.835,5.0,0,Masculino,1E,Pública,1E,1,1
+10.0,0,7.747564718600001,9.002,8.593073593,7.51,7.25,8.4375,7.92,5.0,0,Feminino,1E,Pública,1E,0,1
+12.0,1,8.840007359300001,9.502,9.2965367965,6.885,8.5,8.75,8.835,10.0,0,Feminino,1E,Pública,1E,1,1
+10.0,2,5.110372077899999,10.002,5.3896103895,5.635,2.0,7.1875,4.25,5.0,0,Feminino,1G,Pública,1G,0,0
+9.0,2,7.986866666600001,8.502,9.5833333335,6.26,6.25,8.333333333,7.553333333,10.0,0,Feminino,1G,Pública,1G,0,0
+10.0,0,7.826199999900001,9.502,10.0,6.26,7.0,5.833333333,6.333333333,10.0,0,Feminino,1G,Pública,1G,1,0
+10.0,2,7.3712454546,8.002,9.7727272725,6.26,6.75,7.291666667,7.056666667,5.0,0,Feminino,1G,Pública,1G,1,1
+11.0,2,7.072914756400001,8.502,7.549407115,6.26,7.5,6.875,6.996666667,5.0,0,Feminino,1G,Pública,1G,1,1
+12.0,0,7.005745454500001,8.502,9.564393939,5.635,5.25,7.291666667,7.0,5.0,0,Feminino,1G,Pública,1G,1,0
+12.0,1,7.375503030400001,8.502,8.2765151515,7.51,7.75,7.916666667,6.386666667,5.0,0,Masculino,1G,Pública,1G,1,1
+9.0,2,5.4552454547,8.002,4.772727273,7.51,4.5,6.041666667,4.726666667,5.0,0,Feminino,1G,Pública,1G,0,0
+9.0,2,8.5817909091,8.002,9.337121212,7.51,8.0,8.958333333,8.336666667,10.0,0,Masculino,1G,Pública,1G,0,1
+10.0,2,8.7738666667,9.002,9.7916666665,7.51,8.5,8.75,7.946666667,10.0,0,Masculino,1G,Pública,1G,0,1
+10.0,0,8.447003030300001,10.002,8.4848484845,6.26,8.5,8.125,8.056666667,10.0,0,Masculino,1G,Pública,1G,1,1
+9.0,1,7.7436242424,9.002,9.337121212,7.51,9.0,6.25,6.5,5.0,0,Masculino,1G,Pública,1G,0,1
+10.0,2,8.1163818182,8.502,8.674242424500001,7.51,7.5,7.916666667,7.443333333,10.0,0,Masculino,1G,Pública,1G,0,1
+10.0,1,8.5912909091,9.502,9.337121212,7.51,8.0,8.333333333,7.946666667,10.0,0,Feminino,1G,Pública,1G,1,1
+11.0,0,7.7830787878,9.002,9.7727272725,7.51,7.0,8.333333333,7.22,5.0,0,Masculino,1G,Pública,1G,1,1
+10.0,1,7.7352909091000015,8.502,9.128787879,7.51,8.25,7.916666667,6.833333333,5.0,0,Feminino,1G,Pública,1G,0,1
+11.0,3,7.9921696969000005,8.002,9.318181818,7.51,6.5,8.333333333,7.22,10.0,0,Feminino,1H,Pública,1H,1,1
+11.0,1,4.2118138341,7.918,3.9525691700000003,6.26,0.0,6.041666667,4.496666667,5.0,0,Masculino,1H,Pública,1H,1,0
+10.0,2,7.539847562500002,10.002,7.994071146,7.51,8.25,7.291666667,6.553333333,5.0,0,Feminino,1H,Pública,1H,1,1
+10.0,0,7.2626980238000005,10.002,7.292490119,6.885,7.25,6.875,7.39,5.0,0,Feminino,1H,Pública,1H,0,1
+12.0,2,8.7536999999,8.502,10.0,7.51,7.5,8.958333333,8.783333333,10.0,0,Masculino,1H,Pública,1H,1,1
+12.0,2,6.8121156785000005,7.502,8.646245059,5.635,6.5,6.458333333,6.616666667,5.0,0,Masculino,1H,Pública,1H,1,1
+12.0,2,5.294247619100001,9.002,6.4285714285,5.005,3.5,5.625,4.226666667,5.0,0,Masculino,1H,Pública,1H,1,1
+11.0,2,5.2645678524,0.0,4.6245059285,5.01,6.75,6.666666667,6.61,5.0,0,Feminino,1H,Privada,1H,1,1
+12.0,2,8.1611005269,9.002,9.555335968,7.51,8.0,8.541666667,8.223333333,5.0,0,Feminino,1H,Pública,1H,1,1
+12.0,0,5.0795885374,8.418,5.2964426875,5.005,3.75,5.833333333,4.223333333,5.0,0,Masculino,1H,Pública,1H,1,0
+12.0,2,5.6558,7.918,5.520833333500001,6.26,4.5,6.458333333,5.44,5.0,0,Feminino,1H,Pública,1H,1,1
+11.0,0,6.833780895800001,7.418,7.994071146,7.51,6.0,6.875,6.773333333,5.0,0,Masculino,1H,Pública,1H,1,1
+11.0,0,7.126922222200001,9.002,6.777777778,7.51,7.5,6.875,7.163333333,5.0,0,Feminino,1J,Pública,1J,1,1
+11.0,0,7.0132,9.502,7.5,7.51,4.75,8.125,7.7475,5.0,0,Masculino,1J,Pública,1J,1,1
+10.0,2,6.403450000000001,8.502,5.3125,7.51,5.75,7.8125,6.5425,5.0,0,Feminino,1J,Pública,1J,1,0
+11.0,2,8.808825,10.002,10.0,7.51,9.25,8.90625,9.085,5.0,0,Masculino,1J,Pública,1J,1,1
+12.0,0,6.0234537878,9.502,6.439393939,7.51,2.75,7.34375,6.25,5.0,0,Feminino,1J,Pública,1J,1,0
+12.0,0,7.5543388889,9.002,8.9444444445,7.51,7.25,7.8125,6.915,5.0,0,Masculino,1J,Pública,1J,1,1
+11.0,1,6.8290988095000005,9.002,6.7976190475,7.51,7.0,7.34375,5.92,5.0,0,Feminino,1J,Pública,1J,1,1
+11.0,2,5.8367476190000005,9.502,5.845238095,7.51,2.75,7.5,5.8325,5.0,0,Masculino,1J,Pública,1J,1,1
+11.0,1,6.2372943675000005,9.002,5.5335968375,7.51,5.75,6.71875,5.7875,5.0,0,Masculino,1J,Pública,1J,1,1
+11.0,0,6.821885606,9.502,8.03030303,7.51,4.5,7.65625,6.745,5.0,0,Feminino,1J,Pública,1J,1,0
+10.0,1,8.425325,9.502,10.0,7.51,8.0,8.90625,8.6675,5.0,0,Masculino,1J,Pública,1J,1,1
+12.0,3,7.744032575800001,5.834,9.128787879,6.26,8.25,8.59375,8.4975,5.0,0,Masculino,1J,Pública,1J,1,1
+12.0,1,7.1193969697,10.002,7.3484848485,7.51,6.5,7.5,6.7425,5.0,0,Masculino,1J,Pública,1J,1,1
+12.0,2,6.403040909100001,10.002,5.7954545455,7.51,5.5,7.1875,5.87,5.0,0,Feminino,1K,Pública,1K,1,1
+9.0,1,5.8450809523,10.002,8.095238095,5.005,2.25,7.083333333,5.335,5.0,0,Feminino,1K,Pública,1K,0,0
+11.0,3,8.8733666667,8.002,10.0,7.51,8.75,8.541666667,8.59,10.0,0,Masculino,1K,Pública,1K,1,1
+11.0,2,8.2272,9.502,10.0,7.51,7.75,8.75,8.005,5.0,0,Feminino,1K,Pública,1K,1,1
+9.0,1,7.099342857200002,10.002,5.9523809525,7.51,6.0,7.916666667,8.33,5.0,0,Masculino,1K,Pública,1K,0,1
+11.0,2,7.612057142800001,8.502,9.0476190475,7.51,3.75,8.333333333,8.09,10.0,0,Feminino,1K,Pública,1K,1,1
+10.0,2,5.178509523800001,7.917,5.9523809525,5.63,0.0,8.333333333,6.5,5.0,0,Feminino,1K,Pública,1K,1,1
+10.0,3,8.2450571429,10.002,9.047619048,7.51,8.5,8.333333333,8.255,5.0,0,Masculino,1K,Pública,1K,1,1
+11.0,1,8.5107,9.502,10.0,7.505,8.75,8.75,8.425,5.0,0,Feminino,1K,Pública,1K,1,1
+10.0,2,6.245452381,0.0,6.904761905,7.51,5.75,8.125,8.255,5.0,0,Masculino,1K,Pública,1K,1,1
+11.0,1,8.0066285715,10.002,9.523809524,6.26,7.75,7.916666667,8.17,5.0,0,Masculino,1K,Pública,1K,1,1
+10.0,1,7.840033333300001,10.002,8.333333332999999,7.51,6.75,8.541666667,8.59,5.0,0,Feminino,1K,Pública,1K,1,1
+11.0,2,7.703347619,9.168,8.095238095,6.88,7.75,8.125,8.085,5.0,0,Feminino,1K,Pública,1K,1,1
+10.0,2,7.938842857200001,9.502,9.285714286000001,7.51,7.0,8.125,8.34,5.0,0,Feminino,1K,Pública,1K,0,1
+11.0,1,7.145652380900001,9.502,6.9047619045,7.51,3.0,8.125,8.255,10.0,0,Masculino,1K,Pública,1K,1,1
+12.0,2,5.286047619,0.0,8.095238095,7.51,3.0,7.5,5.33,5.0,0,Masculino,1L,Pública,1L,1,1
+10.0,2,6.817057142900001,9.002,7.380952381,7.51,6.25,7.916666667,5.74,5.0,0,Masculino,1L,Pública,1L,1,1
+9.0,2,7.9442,10.002,10.0,6.26,6.75,7.5,8.59,5.0,0,Feminino,1L,Pública,1L,0,1
+10.0,1,8.0443904763,9.002,9.047619048,7.51,5.25,9.166666667,8.085,10.0,0,Masculino,1L,Pública,1L,1,1
+10.0,0,8.192009523800001,8.502,9.2857142855,7.51,8.25,9.166666667,8.335,5.0,0,Masculino,1L,Pública,1L,1,1
+11.0,2,8.006108496800001,8.502,8.8562091505,7.51,8.0,9.166666667,8.085,5.0,0,Feminino,1L,Pública,1L,1,1
+11.0,2,7.1373428571,9.002,7.619047619,5.63,6.75,8.333333333,7.335,5.0,0,Feminino,1L,Pública,1L,1,1
+10.0,1,7.7430333333,9.502,10.0,5.63,6.0,8.958333333,8.17,5.0,0,Feminino,1L,Pública,1L,1,1
+10.0,1,8.2352,10.002,10.0,6.26,8.0,8.75,8.17,5.0,0,Masculino,1L,Pública,1L,1,1
+11.0,0,7.6147238096,8.002,9.047619048,5.63,7.25,8.75,8.085,5.0,0,Masculino,1L,Pública,1L,1,1
+11.0,0,8.041811111100001,9.502,8.888888889,7.51,7.75,8.958333333,8.085,5.0,0,Masculino,1L,Pública,1L,1,1
+12.0,3,7.864033333300001,8.502,10.0,7.51,6.25,8.958333333,8.085,5.0,0,Masculino,1L,Pública,1L,1,1
+9.0,1,8.131890476200002,9.502,9.0476190475,7.51,8.25,8.541666667,8.085,5.0,0,Feminino,1L,Pública,1L,0,1
+10.0,2,8.965033333300001,10.002,10.0,7.51,8.0,8.958333333,8.59,10.0,0,Masculino,1L,Pública,1L,0,1
+10.0,2,8.1896285714,9.502,7.8571428569999995,7.51,7.75,7.5,8.085,10.0,0,Feminino,1L,Pública,1L,1,1
+11.0,0,8.441414285700002,9.502,9.761904762,6.26,9.5,8.958333333,8.085,5.0,0,Feminino,1M,Pública,1M,1,1
+10.0,0,7.9147292443,9.002,7.7432712215,7.51,8.0,7.96875,9.09,5.0,0,Feminino,1M,Pública,1M,1,1
+10.0,0,8.774075000000002,10.002,10.0,7.51,9.5,9.21875,8.505,5.0,0,Feminino,1M,Pública,1M,1,1
+10.0,0,8.1939895962,8.502,9.068322981,7.51,8.75,8.28125,8.505,5.0,0,Masculino,1M,Pública,1M,1,1
+9.0,1,8.2775982919,8.502,7.9813664595,6.26,9.0,9.53125,9.76,5.0,0,Feminino,1M,Pública,1M,0,1
+10.0,1,9.531325,10.002,10.0,6.26,10.0,9.53125,9.76,10.0,0,Masculino,1M,Pública,1M,1,1
+10.0,0,6.529417908900001,9.002,8.8923395445,6.26,5.5,5.9375,5.155,5.0,0,Masculino,1M,Pública,1M,0,1
+10.0,2,7.7196166667,9.502,7.833333333500001,7.51,7.5,7.1875,6.165,10.0,0,Masculino,1M,Pública,1M,1,1
+11.0,0,8.925450000000001,10.002,10.0,7.51,9.75,9.0625,9.09,5.0,0,Feminino,1M,Pública,1M,1,1
+11.0,0,7.589914648100001,7.418,8.674948240500001,7.51,8.0,8.28125,7.17,5.0,0,Feminino,1M,Pública,1M,1,1
+10.0,0,7.982890217400001,8.502,9.347826087,7.51,8.0,8.28125,7.92,5.0,0,Feminino,1M,Pública,1M,1,1
+11.0,0,8.176825000000001,10.002,9.0,7.51,7.0,8.90625,9.175,5.0,0,Feminino,1M,Pública,1M,1,1
+10.0,0,8.507700000000002,7.502,10.0,7.51,8.5,9.375,9.345,5.0,0,Feminino,1M,Pública,1M,1,1
+9.0,0,7.469102691500001,9.002,9.544513457499999,7.51,4.5,8.75,8.17,5.0,0,Masculino,1M,Pública,1M,0,1
+13.0,0,8.961646169800002,9.502,9.109730849,7.51,8.5,9.375,9.005,10.0,0,Masculino,1M,Pública,1M,1,1
+13.0,0,7.135189648100001,8.002,8.674948240500001,7.51,7.25,7.5,5.745,5.0,0,Feminino,1N,Pública,1N,1,1
+11.0,0,6.921633333300001,6.918,7.5,6.26,6.75,7.708333333,7.415,5.0,0,Masculino,1N,Pública,1N,1,1
+12.0,1,6.610588888900001,8.502,5.277777778,7.51,6.0,7.708333333,7.415,5.0,0,Masculino,1N,Pública,1N,1,1
+9.0,1,6.1175906455,9.502,6.017786561,6.885,3.25,7.083333333,7.085,5.0,0,Masculino,1N,Pública,1N,0,0
+12.0,1,8.853624242300002,9.502,9.545454545,6.26,8.5,8.333333333,9.175,10.0,0,Feminino,1N,Pública,1N,1,1
+9.0,1,7.051379841899999,9.002,8.8833992095,5.63,5.0,8.125,7.495,5.0,0,Feminino,1N,Pública,1N,0,0
+9.0,1,7.961241502000001,9.002,6.85770751,6.26,8.5,8.125,7.755,10.0,0,Feminino,1N,Pública,1N,0,0
+11.0,2,8.2823798419,9.502,8.8833992095,6.26,7.75,8.125,7.835,10.0,0,Feminino,1N,Pública,1N,1,1
+9.0,1,6.036012253,8.502,5.2865612650000005,7.51,3.25,8.125,7.075,5.0,0,Feminino,1N,Pública,1N,0,0
+11.0,3,8.364790909100002,9.002,9.5454545455,6.26,7.75,8.125,7.835,10.0,0,Feminino,1N,Pública,1N,1,1
+10.0,1,6.984760606,9.002,8.8636363635,6.26,5.25,7.708333333,6.825,5.0,0,Feminino,1N,Pública,1N,1,1
+10.0,0,7.7964318841,7.502,9.347826087,7.51,7.75,7.916666667,7.92,5.0,0,Feminino,1N,Pública,1N,1,1
+9.0,0,7.842866666700001,9.502,9.5,7.51,7.25,7.916666667,7.5,5.0,0,Masculino,1N,Pública,1N,0,1
+12.0,3,5.9004061924,8.002,6.6501976285,6.26,0.0,7.291666667,7.075,10.0,0,Feminino,1N,Pública,1N,1,0
+11.0,0,7.0345379447,9.002,7.9841897235,6.26,5.5,8.125,7.495,5.0,0,Feminino,1N,Pública,1N,1,0
+9.0,1,7.5402350878,9.502,9.7368421055,7.51,5.25,7.916666667,7.75,5.0,0,Feminino,1P,Pública,1P,0,1
+8.0,1,7.946388311600001,9.002,9.058441558,7.51,6.25,7.5,7.4175,10.0,0,Masculino,1P,Pública,1P,0,0
+13.0,0,8.119860173100001,10.002,8.365800865499999,7.51,8.25,6.875,6.79,10.0,0,Feminino,1P,Pública,1P,1,1
+12.0,1,7.466126406900001,9.002,9.5346320345,7.51,6.0,7.5,7.29,5.0,0,Masculino,1P,Pública,1P,1,1
+9.0,1,6.287171861500001,9.002,9.3073593075,5.635,2.25,6.875,6.6225,5.0,0,Masculino,1P,Pública,1P,0,0
+9.0,1,8.2432,8.502,10.0,6.26,7.5,7.5,7.585,10.0,0,Feminino,1P,Pública,1P,0,1
+10.0,3,8.2603406926,10.002,9.2965367965,6.26,8.5,7.083333333,6.8325,10.0,0,Masculino,1P,Pública,1P,1,1
+9.0,1,7.704770175400001,7.502,9.4736842105,5.635,9.0,6.458333333,7.7525,5.0,0,Masculino,1P,Pública,1P,0,1
+10.0,1,8.3028861472,9.002,9.0692640695,7.51,7.5,7.708333333,7.835,10.0,0,Feminino,1P,Pública,1P,1,1
+10.0,3,8.1765333333,9.502,10.0,7.51,7.75,8.333333333,7.96,5.0,0,Masculino,1R,Pública,1R,1,1
+10.0,2,6.9375869048,8.502,9.523809524,4.38,6.0,7.03125,6.7075,5.0,0,Masculino,1R,Pública,1R,1,1
+10.0,2,6.972777380900001,8.502,6.9047619045,7.51,6.75,7.65625,6.875,5.0,0,Masculino,1R,Pública,1R,0,1
+10.0,2,7.797628571400001,9.002,7.8571428569999995,7.51,7.0,7.5,7.125,10.0,0,Masculino,1R,Pública,1R,0,1
+10.0,1,8.7897,9.002,10.0,7.51,8.75,8.125,7.88,10.0,0,Feminino,1R,Pública,1R,0,1
+10.0,1,8.375080952400001,7.502,9.761904762,7.51,7.5,8.125,8.045,10.0,0,Masculino,1R,Pública,1R,0,1
+10.0,1,7.3743785714,9.502,7.8571428569999995,6.26,6.0,7.1875,6.54,10.0,0,Masculino,1R,Pública,1R,1,1
+10.0,0,7.548241666600001,9.502,8.333333332999999,7.51,7.25,7.96875,7.1675,5.0,0,Feminino,1R,Pública,1R,1,1
+10.0,2,7.214341666700001,7.418,8.3333333335,7.51,6.75,7.96875,7.04,5.0,0,Masculino,1R,Pública,1R,1,1
+9.0,0,6.6752,9.002,5.75,7.51,8.0,6.25,5.745,5.0,0,Masculino,1R,Pública,1R,0,1
+9.0,1,7.405235714200002,9.502,8.571428571,7.51,3.5,7.8125,7.5425,10.0,0,Feminino,1R,Pública,1R,0,0
+11.0,0,8.475080952400003,9.502,9.761904762,7.51,7.0,8.125,8.045,10.0,0,Feminino,1R,Pública,1R,1,1
+11.0,1,7.560479761900002,10.002,8.8095238095,7.51,6.0,7.96875,7.7525,5.0,0,Masculino,1R,Pública,1R,1,1
+10.0,1,5.442610714300001,9.502,3.5714285715,7.51,4.75,5.78125,4.995,5.0,0,Feminino,1R,Pública,1R,1,1
+11.0,2,7.8403547619000005,9.002,8.8095238095,7.51,7.75,8.4375,7.6675,5.0,0,Masculino,2A,Privada,2A,0,1
+11.0,2,7.4798428571999995,8.002,9.0357142855,5.005,6.25,6.666666667,7.276666667,10.0,0,Masculino,2A,Pública,2A,0,1
+13.0,1,6.643866666600001,8.502,5.9166666665,7.51,4.25,6.666666667,6.713333333,10.0,0,Feminino,2A,Pública,2A,1,0
+11.0,1,6.8100812324,7.5,8.5154061625,3.755,6.0,7.708333333,7.553333333,5.0,0,Feminino,2A,Privada,2A,0,0
+13.0,1,7.5198666666000005,8.502,6.833333333500001,6.255,6.25,7.708333333,8.283333333,10.0,0,Feminino,2A,Pública,2A,1,1
+12.0,3,6.6114857142,7.502,7.5714285715,10.0,3.75,7.083333333,6.943333333,5.0,0,Feminino,2A,Pública,2A,1,0
+10.0,3,4.9800714287000005,0.0,6.6428571430000005,5.635,3.0,6.666666667,6.606666667,5.0,0,Masculino,2A,Pública,2A,0,1
+12.0,0,7.3363190476,9.002,8.3214285715,6.88,4.5,7.291666667,7.273333333,10.0,0,Masculino,2A,Pública,2A,0,0
+12.0,3,8.6268666667,9.002,10.0,7.51,7.75,7.916666667,8.17,10.0,0,Feminino,2A,Pública,2A,1,1
+10.0,1,7.1234857143,8.502,7.8214285715,6.25,6.5,7.5,7.67,5.0,0,Feminino,2A,Pública,2A,0,1
+12.0,0,7.7042238095,8.002,5.880952381,7.51,7.75,7.708333333,8.28,10.0,0,Feminino,2A,Pública,2A,1,1
+14.0,3,6.6442555555,8.002,7.777777778,7.51,3.5,7.708333333,7.833333333,5.0,0,Masculino,2A,Pública,2A,1,1
+11.0,0,5.2661285715,7.002,6.6071428569999995,4.38,4.25,4.791666667,4.886666667,5.0,0,Masculino,2A,Pública,2A,0,1
+11.0,1,8.492914285800001,9.502,9.511904762,7.51,7.75,7.5,7.946666667,10.0,0,Feminino,2B,Pública,2B,0,1
+13.0,3,6.643252381000002,7.918,7.8214285715,7.51,4.0,6.041666667,5.66,10.0,0,Feminino,2B,Pública,2B,1,0
+15.0,3,6.578604762,8.502,5.6428571430000005,6.26,5.25,8.125,8.056666667,5.0,0,Feminino,2B,Privada - Programa de apadrinhamento,2B,1,1
+12.0,0,4.4960809524,7.502,6.095238095,5.63,1.0,5.625,3.506666667,5.0,0,Feminino,2B,Pública,2B,1,0
+11.0,2,6.0197761904,3.498,8.0357142855,7.51,2.75,7.291666667,7.663333333,5.0,0,Masculino,2B,Pública,2B,0,1
+10.0,3,8.986533333300002,9.502,10.0,8.13,7.5,8.333333333,9.45,10.0,0,Feminino,2B,Pública,2B,0,1
+12.0,0,7.482680952299999,7.418,7.845238095,7.51,5.25,7.708333333,8.0,10.0,0,Feminino,2B,Pública,2B,1,0
+11.0,1,5.879073684200001,8.751,7.280701754500001,7.51,3.25,6.041666667,5.213333333,5.0,0,Masculino,2B,Pública,2B,0,1
+12.0,2,8.0333666666,7.502,8.0833333335,7.51,7.5,7.708333333,8.223333333,10.0,0,Masculino,2B,Pública,2B,1,1
+11.0,1,6.995247619100001,7.502,9.011904762,7.51,5.25,7.083333333,7.166666667,5.0,0,Feminino,2B,Pública,2B,0,1
+10.0,1,8.220866666700001,9.502,10.0,7.51,5.25,7.916666667,8.39,10.0,0,Feminino,2B,Pública,2B,0,0
+11.0,2,9.498580952300001,9.502,9.511904762,9.375,9.5,8.958333333,9.563333333,10.0,0,Feminino,2C,Pública,2C,0,1
+12.0,3,8.040259523700001,8.002,8.7857142855,6.885,7.25,8.4375,7.503333333,10.0,0,Feminino,2C,Pública,2C,0,1
+12.0,0,7.260202380900001,6.25,8.0714285715,7.51,5.0,7.8125,7.443333333,10.0,0,Masculino,2C,Pública,2C,1,1
+12.0,0,6.665390476100001,8.002,8.2976190475,7.51,3.75,7.5,7.273333333,5.0,0,Masculino,2C,Pública,2C,0,1
+12.0,1,6.784805263200001,9.502,7.460526316,7.51,3.25,6.875,6.27,10.0,0,Masculino,2C,Pública,2C,0,1
+12.0,3,7.345521428500001,9.502,7.8095238095,6.26,5.0,7.1875,7.443333333,10.0,0,Masculino,2C,Pública,2C,0,1
+11.0,2,7.5794738095000005,8.502,9.0476190475,7.51,4.75,7.1875,7.5,10.0,0,Feminino,2C,Pública,2C,0,0
+12.0,0,6.219580952400001,9.002,7.595238095,4.385,3.0,5.625,5.996666667,10.0,0,Feminino,2C,Pública,2C,1,0
+13.0,0,6.871961904800001,10.002,9.273809524,7.51,2.75,7.5,7.33,5.0,0,Feminino,2D,Pública,2D,1,0
+12.0,0,7.6243666666,8.502,10.0,7.51,6.5,8.125,7.053333333,5.0,0,Masculino,2D,Pública,2D,0,1
+13.0,0,9.074561111000001,8.502,9.722222222,7.51,10.0,9.0625,8.113333333,10.0,0,Feminino,2D,Pública,2D,1,0
+11.0,2,7.288424359,8.002,7.794871795,7.51,6.25,9.0625,7.61,5.0,0,Masculino,2D,Pública,2D,0,1
+12.0,1,8.2739844611,7.502,9.2355889725,7.51,7.25,8.75,8.003333333,10.0,0,Masculino,2D,Pública,2D,0,1
+12.0,0,7.7401916040000005,7.418,8.28320802,4.385,8.0,7.8125,7.61,10.0,0,Masculino,2D,Pública,2D,1,1
+11.0,3,7.3344666666,7.418,8.75,7.51,5.75,8.75,7.833333333,5.0,0,Masculino,2D,Pública,2D,0,1
+11.0,3,8.6777119048,8.002,9.523809524,7.51,9.0,8.4375,7.89,10.0,0,Masculino,2D,Privada,2D,0,1
+12.0,0,8.2779474937,7.002,7.9949874685,7.51,8.75,8.4375,8.17,10.0,0,Masculino,2D,Pública,2D,0,1
+10.0,3,8.213723809600001,10.002,7.380952381,7.51,7.5,8.75,8.056666667,10.0,0,Feminino,2D,Privada - Programa de Apadrinhamento,2D,0,0
+12.0,0,8.5023309524,9.002,9.761904762,3.755,8.0,9.0625,8.84,10.0,0,Masculino,2D,Pública,2D,0,1
+12.0,0,8.836711278200001,9.002,9.022556391,7.51,9.25,8.75,8.28,10.0,0,Feminino,2D,Pública,2D,0,0
+11.0,2,8.1281028822,8.502,8.972431078,7.51,7.0,8.4375,7.443333333,10.0,0,Feminino,2D,Pública,2D,0,1
+13.0,0,8.1403666666,9.002,10.0,7.51,6.0,8.125,7.383333333,10.0,0,Masculino,2D,Pública,2D,1,0
+12.0,0,7.459755555500001,8.502,9.4444444445,7.51,4.75,8.75,8.223333333,5.0,0,Feminino,2G,Pública,2G,1,1
+13.0,0,5.967421532000001,8.002,6.35610766,6.26,5.0,6.875,5.4125,5.0,0,Masculino,2G,Pública,2G,1,1
+12.0,3,7.404455434800001,10.002,7.195652174,7.51,7.5,7.65625,7.2425,5.0,0,Masculino,2G,Pública,2G,1,1
+11.0,2,7.0366241342,9.168,8.170995671,5.625,6.75,7.65625,6.5375,5.0,0,Masculino,2G,Pública,2G,0,1
+10.0,2,8.773575000000001,8.502,10.0,7.51,8.75,7.96875,8.1275,10.0,0,Masculino,2G,Pública,2G,0,1
+12.0,3,7.9648467391,7.502,9.782608695499999,6.885,6.75,7.03125,7.5825,10.0,0,Masculino,2G,Pública,2G,1,1
+13.0,3,6.5398187888,10.002,7.204968943999999,6.255,5.75,6.40625,5.9125,5.0,0,Feminino,2G,Pública,2G,1,1
+12.0,3,6.2964554347999995,7.002,8.695652174,4.375,5.25,7.03125,5.8325,5.0,0,Feminino,2G,Pública,2G,1,1
+11.0,3,4.7704873377000006,9.502,4.188311688500001,4.375,2.5,5.78125,4.835,5.0,0,Feminino,2G,Pública,2G,0,1
+12.0,3,5.8701964286,0.0,7.1428571430000005,6.26,3.25,7.65625,7.0,10.0,0,Feminino,2G,Pública,2G,1,0
+11.0,1,6.4975618421000005,7.917,7.7236842105,4.375,6.5,6.40625,6.415,5.0,0,Feminino,2G,Pública,2G,0,1
+13.0,1,7.966711904800001,7.502,9.523809524,7.51,7.0,7.1875,7.21,10.0,0,Masculino,2G,Pública,2G,1,1
+10.0,3,6.985788509300001,9.502,7.3291925465,7.51,6.25,7.1875,6.75,5.0,0,Feminino,2G,Pública,2G,0,1
+13.0,0,8.8986026915,9.002,9.544513457499999,8.135,8.25,8.75,8.755,10.0,0,Masculino,2G,Pública,2G,1,1
+12.0,3,6.689320600500001,9.502,8.4368530025,5.625,5.25,6.5625,6.415,5.0,0,Feminino,2H,Pública,2H,1,1
+13.0,3,7.7888467391,8.002,9.782608695499999,6.255,8.0,7.65625,7.705,5.0,0,Masculino,2H,Pública,2H,1,1
+11.0,1,6.2236373706000006,7.502,5.983436853,5.625,6.75,6.5625,6.04,5.0,0,Masculino,2H,Pública,2H,0,1
+12.0,3,7.861995031000001,8.502,7.763975155000001,7.51,7.25,7.5,7.54,10.0,0,Feminino,2H,Pública,2H,1,1
+11.0,3,6.8133640787,8.002,8.0020703935,5.625,6.75,7.1875,6.4075,5.0,0,Masculino,2H,Pública,2H,0,1
+13.0,3,7.467500983400001,8.002,7.525879916999999,7.51,6.75,7.03125,6.79,10.0,0,Masculino,2H,Pública,2H,1,1
+11.0,2,5.4653662008,0.0,6.873706004,6.255,4.0,7.65625,6.9975,5.0,0,Feminino,2H,Pública,2H,0,1
+11.0,0,8.4695488613,8.502,8.6542443065,6.885,9.25,7.5,8.0,10.0,0,Feminino,2H,Pública,2H,0,1
+12.0,1,7.384207505200001,8.002,7.960662526,5.625,7.5,6.71875,6.2875,10.0,0,Feminino,2H,Pública,2H,0,1
+12.0,2,8.2841303831,10.002,9.0890269155,7.51,7.0,7.65625,7.7475,10.0,0,Feminino,2H,Pública,2H,0,1
+12.0,2,8.93195,8.502,10.0,7.51,9.25,7.8125,8.4975,10.0,0,Feminino,2H,Pública,2H,1,1
+12.0,3,6.629159109700001,8.502,5.7660455485,5.625,8.0,6.5625,6.535,5.0,0,Feminino,2H,Pública,2H,1,1
+12.0,3,7.9281521222,9.002,8.871635610999999,7.51,9.25,7.03125,7.2475,5.0,0,Masculino,2H,Pública,2H,1,1
+12.0,2,7.0833015528,7.418,8.198757764,5.625,8.75,6.5625,6.165,5.0,0,Masculino,2H,Pública,2H,1,1
+11.0,3,6.035771224300001,10.002,6.3272311215000006,7.51,3.25,7.03125,5.83,5.0,0,Feminino,2I,Pública,2I,0,1
+10.0,2,8.469255555700002,8.002,7.152777778,6.885,9.5,9.166666667,8.666666667,10.0,0,Feminino,2I,Pública,2I,0,1
+11.0,2,8.578533333400001,9.002,10.0,7.51,8.5,7.5,7.386666667,10.0,0,Masculino,2I,Pública,2I,0,1
+11.0,2,7.426572549100001,10.002,6.573529412,7.51,6.25,8.333333333,6.386666667,10.0,0,Feminino,2I,Pública,2I,0,0
+11.0,1,5.3098253133,9.002,5.250626566499999,3.755,2.75,5.0,4.67,10.0,0,Feminino,2I,Pública,2I,0,0
+10.0,0,7.9646385965,8.002,7.5438596495,7.51,8.5,7.5,7.273333333,10.0,0,Feminino,2I,Pública,2I,0,1
+13.0,1,7.413901754400001,9.002,8.070175439,7.51,5.0,7.5,6.993333333,10.0,0,Masculino,2I,Pública,2I,1,1
+11.0,3,7.549644444400001,8.002,9.722222222,7.51,7.25,7.5,6.77,5.0,0,Masculino,2I,Privada - Programa de Apadrinhamento,2I,0,0
+10.0,2,8.6102,9.002,10.0,6.26,8.5,7.5,8.17,10.0,0,Feminino,2I,Pública,2I,0,1
+12.0,1,8.705811111100001,10.002,9.5138888885,5.635,9.5,7.5,7.946666667,10.0,0,Masculino,2I,Pública,2I,1,1
+10.0,2,7.764199999900001,9.502,8.5416666665,7.51,8.25,7.5,7.273333333,5.0,0,Masculino,2I,Pública,2I,0,1
+12.0,1,7.903311111100001,8.502,7.4305555555,7.51,8.0,7.5,7.33,10.0,0,Masculino,2K,Pública,2K,0,1
+11.0,0,7.678917391300001,9.002,7.0760869565,7.51,6.25,8.125,7.75,10.0,0,Feminino,2K,Pública,2K,0,0
+12.0,2,8.80795,9.502,10.0,5.635,8.5,8.4375,8.7525,10.0,0,Feminino,2K,Pública,2K,0,1
+11.0,0,8.2483467391,10.002,9.782608695499999,5.01,7.25,7.65625,7.875,10.0,0,Masculino,2K,Pública,2K,0,1
+14.0,2,7.0514989130000005,8.002,8.010869565,7.51,5.0,6.40625,6.2875,10.0,0,Masculino,2K,Pública,2K,1,1
+11.0,3,5.9677326087,10.002,6.4239130435,6.26,3.75,6.5625,5.7525,5.0,0,Feminino,2K,Pública,2K,0,1
+13.0,3,8.0754139589,10.002,8.1235697945,7.51,7.0,7.5,7.7475,10.0,0,Masculino,2K,Pública,2K,1,1
+11.0,0,6.8360336957,7.418,7.913043478500001,6.255,7.5,5.78125,6.54,5.0,0,Masculino,2K,Pública,2K,0,1
+10.0,2,6.7210333334,8.002,6.666666667,6.255,4.25,6.875,7.1225,10.0,0,Feminino,2K,Privada - Programa de Apadrinhamento,2K,0,0
+12.0,0,9.171825000000002,9.502,9.75,9.38,8.0,8.90625,9.215,10.0,0,Masculino,2K,Pública,2K,0,1
+12.0,0,6.615766239300001,8.502,6.1965811965,7.51,4.25,7.1875,6.0325,10.0,0,Masculino,2K,Pública,2K,1,0
+12.0,2,7.09445,8.502,8.875,7.51,5.5,7.1875,6.9975,5.0,0,Masculino,2K,Pública,2K,1,1
+12.0,2,7.930283695700001,9.168,8.6630434785,7.51,8.25,7.96875,7.915,5.0,0,Masculino,2K,Pública,2K,0,1
+12.0,0,7.6486021739000005,8.502,7.4782608695,7.51,7.0,7.1875,7.165,10.0,0,Feminino,2K,Pública,2K,1,1
+14.0,0,6.860721739100001,8.502,8.782608695499999,7.51,4.75,6.875,6.8275,5.0,0,Masculino,2K,Pública,2K,1,1
+11.0,0,5.2257,8.502,5.0,7.51,0.0,7.5,6.8725,5.0,0,Masculino,2K,Pública,2K,0,0
+14.0,0,7.311433695700001,9.502,7.913043478500001,7.51,6.5,5.78125,5.7475,10.0,0,Feminino,2L,Pública,2L,1,1
+13.0,0,7.754200000000001,9.002,10.0,6.26,7.0,7.5,7.89,5.0,0,Masculino,2L,Pública,2L,1,1
+11.0,0,6.7386875776999995,9.002,7.7432712215,5.625,5.0,7.5,7.386666667,5.0,0,Masculino,2L,Pública,2L,0,1
+11.0,2,6.865474509900001,8.002,5.431372549,6.26,5.75,7.916666667,7.056666667,10.0,0,Masculino,2L,Pública,2L,0,1
+12.0,2,7.843291097300001,9.002,9.3271221535,7.51,6.0,7.5,6.883333333,10.0,0,Masculino,2L,Pública,2L,0,1
+13.0,0,7.229425672900001,8.002,8.219461698,7.51,4.0,7.916666667,7.213333333,10.0,0,Feminino,2L,Pública,2L,1,0
+11.0,0,8.0267434782,10.002,9.5652173915,6.26,8.25,7.708333333,7.833333333,5.0,0,Feminino,2L,Pública,2L,0,1
+12.0,0,6.7668935818000016,8.002,7.111801242,7.51,3.5,7.5,6.716666667,10.0,0,Masculino,2L,Pública,2L,1,0
+11.0,3,5.9842289855000015,9.002,5.793478261000001,6.26,5.0,6.666666667,5.663333333,5.0,0,Feminino,2L,Pública,2L,0,0
+12.0,2,7.847373913,8.002,8.010869565,7.51,7.5,7.5,7.22,10.0,0,Masculino,2L,Pública,2L,1,1
+12.0,0,6.696419461700001,8.502,7.0910973085,5.625,6.5,6.875,6.89,5.0,0,Feminino,2L,Privada,2L,1,1
+12.0,0,7.3725768116,8.502,9.5652173915,6.26,7.75,6.666666667,6.333333333,5.0,0,Masculino,2L,Pública,2L,0,1
+11.0,1,7.5072,9.002,6.25,7.51,6.5,7.5,7.78,10.0,0,Feminino,2L,Pública,2L,0,1
+11.0,2,7.9326223603,9.502,8.3954451345,6.26,7.25,7.5,7.386666667,10.0,0,Masculino,2L,Pública,2L,0,1
+9.0,0,6.879985507300001,0.0,8.4782608695,7.51,5.75,7.5,7.666666667,10.0,0,Masculino,2L,Pública,2L,0,0
+11.0,2,8.479020512900002,8.002,8.8141025645,7.51,8.0,8.75,8.45,10.0,0,Masculino,2L,Pública,2L,0,1
+11.0,2,8.513646169700001,8.002,9.109730849,6.26,8.75,7.708333333,8.723333333,10.0,0,Feminino,2M,Privada - Programa de Apadrinhamento,2M,0,0
+11.0,1,8.8857454545,8.002,9.7727272725,5.635,8.75,9.375,9.4,10.0,0,Masculino,2M,Pública,2M,0,1
+12.0,3,8.678450000000002,8.002,10.0,6.26,7.5,9.0625,9.23,10.0,0,Feminino,2M,Privada - Programa de Apadrinhamento,2M,0,0
+12.0,1,9.134040909100001,8.002,9.5454545455,6.26,9.75,9.6875,9.4,10.0,0,Masculino,2M,Pública,2M,0,1
+11.0,2,6.448416666600001,9.585,6.0,6.26,3.25,7.8125,6.163333333,10.0,0,Masculino,2M,Pública,2M,0,0
+12.0,0,8.174593939300001,8.502,8.8636363635,6.26,7.25,8.75,8.003333333,10.0,0,Masculino,2M,Pública,2M,1,1
+12.0,2,6.378661323900001,8.502,7.8468899525,7.51,4.0,7.1875,5.946666667,5.0,0,Feminino,2M,Pública,2M,1,0
+12.0,1,5.698703030200001,8.334,5.068181818,5.63,4.75,7.5,5.443333333,5.0,0,Feminino,2M,Pública,2M,0,0
+11.0,1,6.570068686900001,8.002,4.2676767675,7.51,6.25,7.5,5.826666667,10.0,0,Masculino,2M,Pública,2M,0,1
+11.0,0,8.76595,8.502,10.0,6.26,8.5,8.4375,8.73,10.0,0,Feminino,2M,Pública,2M,0,1
+11.0,3,5.8748823529,0.0,6.7794117645,7.51,4.25,7.5,5.84,10.0,0,Feminino,2M,Pública,2M,0,0
+11.0,2,8.4845030302,9.002,8.318181818,7.51,8.25,8.75,8.223333333,10.0,0,Masculino,2M,Pública,2M,0,1
+12.0,2,6.645260606100001,8.502,7.6136363634999995,6.885,3.25,8.125,5.606666667,10.0,0,Masculino,2M,Pública,2M,0,0
+12.0,0,6.890966666600001,6.918,5.75,6.26,7.0,8.125,6.053333333,10.0,0,Feminino,2M,Pública,2M,0,0
+12.0,0,6.7799738095,9.002,5.714285714500001,7.51,4.25,7.8125,6.773333333,10.0,0,Feminino,2M,Pública,2M,0,0
+13.0,0,5.2423787879,0.0,5.0227272725,7.51,2.0,6.875,6.996666667,10.0,0,Feminino,2M,Pública,2M,1,0
+12.0,0,7.147881818200001,8.502,7.840909091,7.51,7.0,8.125,6.33,5.0,0,Feminino,2N,Pública,2N,0,1
+10.0,3,7.914800000000001,8.418,9.25,6.885,6.5,8.125,7.11,10.0,0,Masculino,2N,Privada - Programa de Apadrinhamento,2N,0,0
+11.0,0,7.9221068268,8.418,9.519450801,6.26,5.75,8.4375,7.783333333,10.0,0,Masculino,2N,Pública,2N,0,0
+10.0,2,7.360450000100002,9.502,8.3333333335,6.885,3.5,8.4375,7.556666667,10.0,0,Feminino,2N,Pública,2N,0,0
+12.0,1,7.563515408100001,8.002,8.7757437075,7.51,4.5,8.125,7.723333333,10.0,0,Masculino,2N,Pública,2N,1,1
+12.0,2,7.279250000000001,5.25,9.75,7.51,7.75,7.8125,6.11,5.0,0,Feminino,2N,Pública,2N,0,1
+11.0,0,7.5017244089,9.002,6.7734553775,7.51,5.75,8.125,7.666666667,10.0,0,Feminino,2N,Pública,2N,0,0
+10.0,2,8.04495,9.502,10.0,7.51,5.0,8.4375,7.5,10.0,0,Masculino,2N,Privada,2N,0,0
+11.0,1,7.838370289900001,8.002,7.8804347825,7.51,6.0,8.4375,8.336666667,10.0,0,Masculino,2N,Pública,2N,0,1
+11.0,1,8.9802350877,9.502,9.7368421055,7.51,8.5,8.75,8.783333333,10.0,0,Feminino,2N,Pública,2N,0,1
+12.0,0,8.8634934783,9.502,8.8152173915,6.26,9.25,9.0625,8.84,10.0,0,Feminino,2N,Pública,2N,1,1
+11.0,3,6.886091025600001,8.002,7.628205128,7.51,5.25,7.8125,7.39,5.0,0,Feminino,2N,Pública,2N,0,0
+11.0,2,8.496283333400001,8.002,9.75,7.51,7.25,8.4375,8.506666667,10.0,0,Masculino,2N,Pública,2N,0,1
+12.0,2,5.778986231800001,9.002,3.054347826,6.885,4.25,7.1875,5.053333333,10.0,0,Feminino,2P,Pública,2P,1,1
+12.0,3,7.052457703200001,8.502,8.2212885155,7.51,5.25,7.916666667,7.326666667,5.0,0,Masculino,2P,Pública,2P,1,1
+12.0,2,6.597315151500001,9.168,4.840909091,7.51,7.25,6.666666667,6.723333333,5.0,0,Masculino,2P,Pública,2P,0,1
+12.0,1,6.3802279106,8.002,4.9043062200000005,7.51,5.25,6.875,5.553333333,10.0,0,Feminino,2P,Pública,2P,0,1
+13.0,0,7.3473880383,6.834,6.112440191499999,7.51,7.0,8.125,7.39,10.0,0,Feminino,2P,Pública,2P,1,1
+11.0,2,6.991699999900001,7.502,10.0,7.51,2.75,8.958333333,7.723333333,5.0,0,Masculino,2P,Pública,2P,0,1
+12.0,3,7.971648484800001,7.418,9.090909091,7.51,7.5,7.5,7.053333333,10.0,0,Feminino,2P,Pública,2P,0,1
+11.0,2,7.6853212122,7.502,6.2272727275,7.51,7.75,8.333333333,7.776666667,10.0,0,Feminino,2P,Pública,2P,0,1
+11.0,2,7.361896969700001,8.002,6.931818182000001,7.51,5.5,7.916666667,7.663333333,10.0,0,Feminino,2P,Privada - Programa de Apadrinhamento,2P,0,0
+12.0,0,8.929745454599999,7.002,9.7727272725,7.51,9.25,9.166666667,8.786666667,10.0,0,Feminino,2P,Pública,2P,1,1
+11.0,3,6.057060605999999,7.5,4.6136363634999995,5.63,6.75,5.833333333,6.94,5.0,0,Feminino,2P,Pública,2P,0,1
+13.0,0,6.7464878789,8.502,5.7272727275,7.51,5.0,8.125,5.936666667,10.0,0,Masculino,2P,Pública,2P,1,0
+12.0,2,6.7199171717,9.502,7.5252525255,7.51,3.75,8.75,6.943333333,5.0,0,Masculino,2P,Pública,2P,1,1
+12.0,2,6.402239075100001,9.002,6.8660287085,7.51,4.5,8.125,5.826666667,5.0,0,Feminino,2P,Pública,2P,0,1
+11.0,1,7.502239394,7.418,8.3863636365,7.51,5.25,7.708333333,7.556666667,10.0,0,Masculino,2R,Pública,2R,0,1
+12.0,2,9.0150030303,9.502,9.068181818,7.51,9.5,8.541666667,8.73,10.0,0,Masculino,2R,Pública,2R,1,1
+11.0,2,4.6743653679,6.834,3.5064935065,7.51,4.75,5.0,2.943333333,5.0,0,Feminino,2R,Pública,2R,0,1
+11.0,0,7.702648484900001,7.918,9.090909091,7.51,5.25,7.916666667,7.5,10.0,0,Feminino,2R,Pública,2R,0,0
+11.0,3,7.151855844200001,8.002,8.3874458875,7.51,3.5,6.458333333,7.886666667,10.0,0,Masculino,2R,Pública,2R,0,1
+12.0,0,7.8317974024999994,7.502,7.012987013,7.51,8.75,8.333333333,6.723333333,10.0,0,Masculino,2R,Pública,2R,1,0
+12.0,1,5.046077056300001,6.918,4.448051948,7.51,5.0,4.583333333,3.776666667,5.0,0,Masculino,2R,Pública,2R,1,0
+10.0,0,4.8048623378,8.002,4.188311688500001,7.51,4.5,4.166666667,2.996666667,5.0,0,Feminino,2R,Pública,2R,0,0
+11.0,0,8.1804207793,7.502,7.2294372295,7.51,9.25,7.5,8.166666667,10.0,0,Masculino,2R,Pública,2R,0,1
+11.0,0,7.560230303200001,8.502,6.5151515155,7.51,7.5,6.666666667,7.446666667,10.0,0,Feminino,2R,Pública,2R,0,0
+11.0,2,9.464745454400001,10.002,9.7727272725,7.51,10.0,9.583333333,9.003333333,10.0,0,Feminino,2U,Pública,2U,0,1
+11.0,0,9.1548666666,9.502,10.0,7.51,9.0,8.75,8.893333333,10.0,0,Feminino,2U,Pública,2U,0,0
+12.0,2,8.9217077641,10.002,9.3271221535,7.51,8.75,8.4375,8.556666667,10.0,0,Feminino,2U,Pública,2U,1,1
+13.0,2,6.57279265,9.502,7.525879916999999,7.51,5.75,5.9375,5.613333333,5.0,0,Masculino,2U,Pública,2U,1,1
+12.0,3,6.8089355072,7.502,6.811594203,7.51,6.75,7.1875,6.883333333,5.0,0,Feminino,2U,Privada,2U,1,0
+10.0,0,6.712378053800001,8.002,8.457556936,6.26,4.0,7.5,7.723333333,5.0,0,Feminino,2U,Pública,2U,0,0
+14.0,2,8.10445,9.502,10.0,7.51,5.5,7.8125,7.61,10.0,0,Feminino,2U,Pública,2U,1,1
+13.0,2,6.6397610766,7.502,7.48447205,7.51,6.25,6.25,6.333333333,5.0,0,Masculino,2U,Pública,2U,1,1
+12.0,0,8.2366166666,9.002,10.0,7.51,9.0,7.1875,7.833333333,5.0,0,Feminino,2U,Pública,2U,1,1
+12.0,0,6.5509171717,8.502,7.5252525255,7.51,3.75,7.5,7.223333333,5.0,0,Feminino,2U,Pública,2U,0,0
+11.0,2,7.520576262600001,9.002,7.979797980000001,7.51,5.5,7.1875,7.273333333,10.0,0,Feminino,2U,Pública,2U,0,0
+11.0,2,8.061295238200001,10.002,9.523809524,7.51,6.0,7.5,7.276666667,10.0,0,Masculino,2U,Pública,2U,0,1
+12.0,0,8.2403304348,9.002,8.695652174,7.51,8.0,7.5,7.5,10.0,0,Feminino,2U,Pública,2U,1,0
+11.0,2,5.832133333300001,6.418,6.6666666665,6.255,3.5,6.875,6.72,5.0,0,Masculino,2U,Pública,2U,0,1
+10.0,2,8.5184577641,9.002,9.3271221535,7.51,8.0,8.125,7.946666667,10.0,0,Masculino,2U,Pública,2U,0,1
+13.0,2,8.652552484400001,10.002,7.784679089,7.51,9.0,8.4375,8.503333333,10.0,0,Feminino,3A,Pública,3A,0,1
+13.0,2,7.0859945773333335,9.168,6.370972886666667,7.5,6.5,6.875,5.7875,10.0,0,Feminino,3A,Privada,3A,0,0
+13.0,2,7.922281328333334,7.5,7.329323308333333,8.755,6.333333333333333,7.8125,8.915,10.0,0,Masculino,3A,Pública,3A,0,1
+13.0,3,3.8354776573333336,8.334,3.9141382866666667,2.51,0.0,3.4375,3.1225,10.0,0,Masculino,3A,Privada,3A,0,0
+13.0,0,6.726607507733334,10.002,5.315995871999999,6.255,5.666666666666667,6.71875,6.1625,10.0,0,Feminino,3A,Privada,3A,0,0
+16.0,3,7.217066033133334,9.585,5.404288499000001,9.38,4.666666666666667,7.96875,7.5475,10.0,0,Feminino,3A,Pública,3A,1,1
+15.0,0,5.881225668333334,9.585,5.201336675,9.38,3.1666666666666665,7.03125,6.79,2.5,0,Masculino,3A,Pública,3A,1,1
+15.0,2,6.240744444466667,9.168,4.305555555666667,9.38,4.666666666666667,7.5,6.7075,5.0,0,Feminino,3A,Pública,3A,1,1
+13.0,2,5.721382142866666,7.084,5.714285714333333,9.38,1.75,7.65625,6.5825,5.0,0,Masculino,3A,Pública,3A,0,0
+12.0,3,8.074015455333335,9.585,8.097577276666668,9.38,6.5,7.5,7.54,10.0,0,Feminino,3A,Privada - Programa de Apadrinhamento,3A,0,0
+13.0,3,9.4171373016,9.168,9.441269841333334,9.38,9.666666666666666,9.0625,9.1725,10.0,0,Feminino,3A,Pública,3A,0,1
+12.0,1,7.479598365200001,8.334,7.777033492666668,8.125,6.333333333333333,7.03125,6.5425,10.0,0,Feminino,3A,Pública,3A,0,1
+15.0,0,6.9071109649333335,8.751,7.705263158,5.63,3.6666666666666665,7.03125,7.4575,10.0,0,Masculino,3A,0,3A,0,1
+12.0,2,7.210222117800001,9.585,5.560902255666666,8.755,4.833333333333333,7.96875,7.5025,10.0,0,Feminino,3A,Privada,3A,0,0
+12.0,2,7.368084290266667,9.168,5.5110047846666665,8.755,6.166666666666667,7.8125,7.295,10.0,0,Masculino,3A,Pública,3A,0,1
+13.0,3,7.761749603200001,10.002,9.149206349333333,2.51,6.166666666666667,7.96875,8.2525,10.0,0,Feminino,3B,Pública,3B,0,0
+13.0,1,5.702426010066667,5.832,3.7838383836666662,8.135,4.666666666666667,5.15625,5.5,10.0,0,Feminino,3B,Pública,3B,0,0
+11.0,3,6.913936532,7.917,8.393265993333333,8.755,2.6666666666666665,7.1875,6.58,10.0,0,Feminino,3B,Pública,3B,0,0
+14.0,0,7.4643250000000005,10.002,8.933333333333334,10.0,3.1666666666666665,7.03125,6.705,10.0,0,Feminino,3B,Pública,3B,1,0
+12.0,1,7.0026462121333335,8.334,9.060606060666666,8.75,3.75,7.65625,7.3325,5.0,0,Masculino,3B,Pública,3B,0,1
+14.0,0,7.8153856754,8.751,5.627886710333333,8.755,8.166666666666666,7.96875,7.545,10.0,0,Feminino,3B,Pública,3B,1,0
+11.0,3,5.065788844333333,7.5,6.157902555,2.51,3.1666666666666665,6.09375,5.4525,5.0,0,Feminino,3B,Pública,3B,0,0
+13.0,1,7.7704681818,8.334,9.109090909,8.135,5.5,7.1875,7.415,10.0,0,Masculino,3B,Pública,3B,0,1
+14.0,3,5.4253413299333335,7.5,4.516498316333333,2.51,6.333333333333333,4.21875,4.1625,10.0,0,Feminino,3B,Pública,3B,1,0
+13.0,0,6.231045707066668,8.751,7.735353535333334,8.755,3.5,6.09375,5.62,5.0,0,Masculino,3B,Pública,3B,0,0
+11.0,1,8.3261,8.751,10.0,9.38,7.0,6.875,7.1275,10.0,0,Feminino,3B,Pública,3B,0,1
+11.0,3,9.189883333333334,9.168,9.866666666666667,8.755,8.5,9.0625,9.09,10.0,0,Masculino,3B,Privada,3B,0,1
+12.0,2,8.728632539666668,10.002,8.831746031666666,8.135,7.666666666666667,9.0625,8.545,10.0,0,Masculino,3B,Pública,3B,0,1
+11.0,0,7.9127926470666665,9.168,9.803921568666667,4.38,6.666666666666667,7.96875,7.335,10.0,0,Masculino,3B,Pública,3B,0,0
+14.0,0,8.67371279,6.666,9.283272283333334,8.755,8.166666666666666,8.90625,8.755,10.0,0,Feminino,3B,Pública,3B,1,1
+15.0,1,5.5473805555333335,7.917,2.777777777666667,7.51,4.0,7.65625,6.9175,5.0,0,Feminino,3B,Pública,3B,1,1
+12.0,3,5.833118518533334,8.751,6.125925926,8.755,3.1666666666666665,6.25,5.495,5.0,0,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
+14.0,3,8.901966666666668,9.168,9.866666666666667,2.51,9.666666666666666,9.375,9.45,10.0,0,Feminino,3C,Pública,3C,0,0
+12.0,2,5.880466583166668,7.5,5.266499582333334,2.51,5.0,6.041666667,6.11,10.0,0,Masculino,3C,Pública,3C,0,0
+13.0,0,8.385133333233336,9.168,9.866666666666667,7.51,7.0,8.333333333,7.553333333,10.0,0,Masculino,3C,Pública,3C,0,1
+12.0,2,7.778263492033334,7.917,8.293650793666666,5.63,7.0,8.541666667,7.553333333,10.0,0,Masculino,3C,Pública,3C,0,1
+15.0,1,6.3467483709,8.334,6.8300751879999995,2.51,4.0,7.083333333,6.94,10.0,0,Feminino,3C,Pública,3C,1,1
+12.0,3,5.3933086048000005,10.002,5.017209691,6.88,2.0,6.25,5.883333333,5.0,0,Masculino,3C,Pública,3C,0,0
+13.0,3,7.214534419433333,8.751,6.468838763666667,9.38,4.5,7.083333333,7.496666667,10.0,0,Masculino,3C,Pública,3C,0,1
+12.0,3,7.026322556366667,7.083,5.111779448666667,2.51,8.666666666666666,8.333333333,7.39,10.0,0,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
+14.0,2,9.066199999966669,10.002,10.0,2.51,9.833333333333334,9.583333333,9.45,10.0,0,Masculino,3C,Pública,3C,1,1
+13.0,3,7.843157894833334,9.585,9.382456140333334,8.13,7.333333333333333,7.291666667,7.496666667,5.0,0,Masculino,3C,Pública,3C,0,1
+11.0,3,7.276330075300001,9.168,5.793483709333334,7.51,6.666666666666667,7.291666667,6.936666667,10.0,0,Masculino,3C,Privada - Programa de Apadrinhamento,3C,0,0
+14.0,3,8.384033333366668,10.002,10.0,2.51,8.833333333333334,8.541666667,7.56,10.0,0,Masculino,3C,Pública,3C,0,1
+15.0,1,7.088855054266667,9.585,6.043441938333333,7.51,5.0,7.5,7.103333333,10.0,0,Masculino,3C,Pública,3C,1,1
+14.0,3,5.475324895633334,10.002,4.849791144666667,6.25,3.0,6.041666667,5.88,5.0,0,Feminino,3C,Pública,3C,1,1
+13.0,0,6.293175689166667,8.334,5.618045113,5.0,5.833333333333333,7.708333333,6.993333333,5.0,0,Feminino,3D,Pública,3D,0,0
+12.0,1,7.9798,9.168,10.0,8.75,3.75,8.125,8.1275,10.0,0,Masculino,3D,Pública,3D,0,1
+12.0,2,5.543865740733334,0.0,7.703703703666666,6.885,2.0,6.40625,6.37,10.0,0,Masculino,3D,Pública,3D,0,0
+14.0,2,6.771708625733333,7.083,5.567251461999999,7.51,4.666666666666667,7.65625,7.5,10.0,0,Masculino,3D,Privada,3D,0,0
+13.0,3,7.617803571466666,9.585,9.523809524,5.625,5.333333333333333,7.34375,6.955,10.0,0,Masculino,3D,Pública,3D,0,1
+13.0,0,6.715437329466668,7.917,6.585769980666666,7.51,5.166666666666667,6.5625,5.83,10.0,0,Masculino,3D,Pública,3D,0,0
+13.0,3,8.631675000000001,9.168,10.0,7.51,8.0,7.96875,7.835,10.0,0,Feminino,3D,Pública,3D,0,1
+12.0,3,6.918152272733334,9.168,6.363636363666667,2.51,6.0,8.28125,7.2475,10.0,0,Feminino,3D,Privada - Programa de Apadrinhamento,3D,0,0
+13.0,0,8.077708333333334,9.585,10.0,2.51,6.666666666666667,8.59375,8.3775,10.0,0,Masculino,3D,Pública,3D,0,0
+12.0,1,7.622584090933335,9.168,7.787878788,7.51,5.666666666666667,7.96875,7.335,10.0,0,Feminino,3D,Pública,3D,0,0
+14.0,1,7.6221531746,9.168,7.039682539666667,8.13,6.833333333333333,7.1875,6.995,10.0,0,Masculino,3D,Pública,3D,0,1
+12.0,3,7.7652831384,9.585,7.621832358666666,7.51,6.333333333333333,7.8125,7.4175,10.0,0,Masculino,3D,Pública,3D,0,1
+12.0,1,8.547495614066667,9.585,9.824561403666666,7.51,7.666666666666667,7.8125,7.7925,10.0,0,Masculino,3D,Pública,3D,0,1
+12.0,1,8.5079027778,7.5,7.722222222333333,8.13,8.666666666666666,8.90625,8.8825,10.0,0,Feminino,3D,Pública,3D,0,1
+14.0,1,8.0164785714,9.168,9.523809523666666,2.51,7.333333333333333,8.4375,8.1675,10.0,0,Masculino,3D,Pública,3D,0,1
+14.0,1,6.108547514666667,7.5,7.84502924,7.51,2.3333333333333335,5.46875,5.125,10.0,0,Feminino,3D,Pública,3D,0,0
+13.0,1,6.5744562514,8.751,5.822406257,7.51,3.5,7.34375,6.7475,10.0,0,Masculino,3F,Pública,3F,0,0
+16.0,3,5.936272086266667,8.334,5.4312354313333335,7.51,0.0,7.65625,7.5,10.0,0,Masculino,3F,Pública,3F,1,1
+16.0,2,5.545864285733334,7.917,3.2619047620000003,8.13,5.166666666666667,6.5625,5.496,5.0,0,Masculino,3F,Pública,3F,1,1
+13.0,3,5.048054503133334,9.168,3.7763975156666674,8.13,3.0,6.09375,4.268,5.0,0,Masculino,3F,Pública,3F,0,0
+14.0,0,6.158158974333333,10.002,5.705128205,8.13,3.1666666666666665,6.25,4.728,10.0,0,Feminino,3F,Pública,3F,1,0
+12.0,1,6.710079487200001,6.666,7.435897436,7.51,5.5,8.125,6.964,5.0,0,Feminino,3F,Pública,3F,0,1
+13.0,1,6.116032815733334,6.249,4.600414078666667,7.5,5.0,6.5625,5.824,10.0,0,Masculino,3F,Pública,3F,0,0
+13.0,3,6.017215010400001,9.168,3.7546583853333337,8.13,3.6666666666666665,7.1875,5.422,10.0,0,Feminino,3F,Pública,3F,0,0
+12.0,2,6.7205649586,8.751,6.481366459666667,8.13,3.9333333333333336,7.03125,6.232,10.0,0,Feminino,3F,Pública,3F,0,0
+13.0,0,8.0467871118,8.751,9.616977225666666,2.51,6.833333333333333,8.90625,8.7,10.0,0,Masculino,3F,Pública,3F,0,1
+14.0,3,4.6391535714200005,0.0,2.5238095237666665,8.13,2.8333333333333335,7.03125,5.258,10.0,0,Masculino,3F,Pública,3F,1,0
+14.0,0,5.111470186333333,10.002,2.7505175983333334,6.885,4.333333333333333,5.0,5.03,5.0,0,Masculino,3F,Pública,3F,1,1
+14.0,1,7.0491790134,8.751,7.9726867336666665,7.505,5.833333333333333,7.34375,7.14,5.0,0,Feminino,3G,Pública,3G,0,1
+14.0,1,7.332483333333334,8.334,8.133333333333333,10.0,3.8333333333333335,7.8125,6.6225,10.0,0,Masculino,3G,Pública,3G,1,1
+12.0,1,7.5660750000000005,7.917,9.200000000000001,7.51,8.0,7.34375,6.745,5.0,0,Masculino,3G,Pública,3G,0,1
+15.0,3,6.649708333333334,7.5,7.1000000000000005,7.51,4.666666666666667,6.71875,5.6175,10.0,0,Masculino,3G,Pública,3G,1,1
+13.0,3,5.940775,8.334,6.133333333333333,7.51,3.6666666666666665,6.71875,6.1225,5.0,0,Masculino,3G,Pública,3G,0,0
+13.0,2,8.2697037582,8.751,9.526143791,7.51,7.5,7.96875,7.2075,10.0,0,Feminino,3G,Privada - Programa de Apadrinhamento,3G,0,0
+13.0,3,8.465533333333335,10.002,9.233333333333333,7.51,5.833333333333333,8.75,9.13,10.0,0,Masculino,3G,Pública,3G,0,1
+13.0,1,7.839050000000001,9.168,9.5,8.755,5.0,7.8125,6.8275,10.0,0,Feminino,3G,Pública,3G,0,0
+15.0,3,5.9731,8.751,6.2,2.51,2.5,7.5,6.785,10.0,0,Masculino,3G,Pública,3G,1,1
+15.0,3,6.782158333333333,7.917,6.166666666666667,7.51,7.0,7.65625,6.7025,5.0,0,Masculino,3G,Pública,3G,1,1
+13.0,3,6.125500000000001,7.5,7.166666666666667,7.51,4.333333333333333,6.25,5.9975,5.0,0,Feminino,3G,Pública,3G,0,0
+13.0,3,5.833377380933333,7.083,6.171428571333333,2.51,3.8333333333333335,6.40625,6.1625,10.0,0,Masculino,3G,Pública,3G,0,0
+13.0,2,7.2079551282,9.585,6.674358974333333,8.76,5.166666666666667,6.5625,6.745,10.0,0,Feminino,3G,Pública,3G,0,1
+14.0,3,6.5472236842000004,7.5,6.080701754333333,8.755,4.166666666666667,6.5625,6.08,10.0,0,Feminino,3G,Pública,3G,1,0
+12.0,3,5.896573588800001,10.002,8.287284610666667,2.51,2.8333333333333335,6.5625,6.325,5.0,0,Feminino,3G,Pública,3G,0,0
+12.0,3,6.752914393933334,8.751,5.636363636333333,8.755,4.333333333333333,7.34375,6.37,10.0,0,Feminino,3H,Pública,3H,0,0
+13.0,3,7.659555952400001,9.168,7.161904762,8.135,6.0,7.96875,7.5,10.0,0,Feminino,3H,Pública,3H,0,0
+12.0,3,7.2102906723333335,8.751,7.030620028333334,8.135,6.833333333333333,5.625,5.932,10.0,0,Masculino,3H,Privada - Programa de Apadrinhamento,3H,0,0
+13.0,3,9.350986466133334,10.002,8.756265663999999,7.51,9.666666666666666,10.0,9.576,10.0,0,Masculino,3H,Pública,3H,0,1
+12.0,1,7.240168803466668,9.168,7.600427350666667,7.51,6.666666666666667,5.9375,5.626,10.0,0,Masculino,3H,Pública,3H,0,1
+15.0,0,8.440611904733334,8.751,9.390476190333333,8.13,9.333333333333334,5.9375,7.07,10.0,0,Masculino,3H,Pública,3H,1,1
+14.0,2,4.548544781066667,0.0,3.9057239053333332,7.51,2.0,7.5,6.832,5.0,0,Masculino,3H,Pública,3H,1,1
+11.0,2,6.514094017066666,8.751,7.668803418666666,7.51,6.166666666666667,5.625,5.292,5.0,0,Feminino,3H,Pública,3H,0,1
+12.0,3,8.526983333333334,9.585,10.0,7.51,6.666666666666667,8.4375,8.202,10.0,0,Feminino,3H,Pública,3H,0,1
+15.0,1,8.595447619066668,9.168,9.461904762000001,8.135,8.333333333333334,8.125,7.468,10.0,0,Masculino,3H,Pública,3H,1,1
+13.0,3,7.916082936533334,9.585,9.082539682666665,7.51,7.0,7.96875,8.466,5.0,0,Feminino,3H,Pública,3H,0,1
+13.0,2,6.429063888866667,7.084,6.944444444333333,7.51,2.5,7.34375,6.732,10.0,0,Masculino,3H,Pública,3H,0,0
+13.0,3,5.667282265,8.751,4.908119658333334,7.51,1.6666666666666667,6.40625,5.428,10.0,0,Masculino,3H,Pública,3H,0,0
+14.0,0,7.970034615400001,9.585,9.443589743666667,7.51,6.833333333333333,7.1875,6.432,10.0,0,Feminino,3I,Pública,3I,0,0
+13.0,0,9.089828985533336,9.168,9.710144927666667,8.135,9.5,8.5,8.3375,10.0,0,Feminino,3I,Pública,3I,0,0
+14.0,1,7.188366666666667,7.917,9.666666666666666,8.135,1.1666666666666667,8.0,8.0825,10.0,0,Masculino,3I,Pública,3I,1,1
+13.0,3,6.274190982333334,8.751,8.201288245,7.51,3.1666666666666665,6.25,6.2475,5.0,0,Feminino,3I,Pública,3I,0,0
+13.0,1,8.392733333333334,8.334,9.833333333333334,8.135,7.833333333333333,7.625,7.25,10.0,0,Masculino,3I,Pública,3I,0,1
+13.0,0,6.8560823939999995,9.585,9.02791197,8.135,4.0,5.375,4.705,10.0,0,Feminino,3I,Pública,3I,0,0
+15.0,0,7.109390969933334,8.751,5.103121516333333,7.51,5.833333333333333,7.125,7.9175,10.0,0,Feminino,3I,Pública,3I,1,1
+14.0,2,7.653744444466668,9.168,8.722222222333334,8.135,7.0,7.875,7.4575,5.0,0,Masculino,3I,Pública,3I,1,1
+14.0,3,7.731569404200001,8.751,9.028180354333333,8.135,7.666666666666667,7.875,7.0825,5.0,0,Feminino,3I,Pública,3I,0,1
+14.0,0,7.447591035933334,7.917,8.904455179666668,8.135,5.0,6.875,6.87,10.0,0,Feminino,3I,Pública,3I,1,0
+12.0,2,8.176263231333333,9.168,8.33064949,8.135,8.666666666666666,8.125,8.67,5.0,0,Masculino,3K,Pública,3K,0,1
+12.0,2,8.3569352941,10.002,8.607843137333333,9.375,7.666666666666667,7.083333333,7.28,10.0,0,Feminino,3K,Pública,3K,0,1
+13.0,1,8.689300000100001,9.168,10.0,7.51,7.5,8.541666667,8.336666667,10.0,0,Feminino,3K,Privada - Programa de Apadrinhamento,3K,0,0
+14.0,3,8.2889555555,8.334,9.277777777666666,6.255,8.333333333333334,7.291666667,7.893333333,10.0,0,Masculino,3K,Pública,3K,0,1
+13.0,3,8.008488888833334,8.751,7.361111111,7.51,7.666666666666667,8.541666667,7.613333333,10.0,0,Masculino,3K,Pública,3K,0,1
+13.0,2,7.9631703704333345,9.168,7.935185184999999,8.13,7.166666666666667,7.916666667,7.106666667,10.0,0,Feminino,3K,Pública,3K,0,1
+12.0,1,7.684639869300001,9.168,9.498366013,7.51,5.0,7.291666667,6.94,10.0,0,Masculino,3K,Pública,3K,0,1
+12.0,1,8.407166666633334,9.585,10.0,7.51,6.666666666666667,7.083333333,8.28,10.0,0,Masculino,3K,Pública,3K,0,1
+14.0,2,7.817322222166666,8.751,9.861111111,7.51,5.333333333333333,7.083333333,7.22,10.0,0,Masculino,3K,Pública,3K,1,1
+12.0,1,5.544981481433334,7.5,6.157407407333333,7.51,2.8333333333333335,6.458333333,5.5,5.0,0,Feminino,3K,Pública,3K,0,1
+13.0,0,7.601562962866668,8.751,8.314814814666667,7.51,5.666666666666667,8.125,6.833333333,10.0,0,Feminino,3K,Pública,3K,0,0
+15.0,3,7.709588888900001,6.667,9.027777777666666,6.885,6.833333333333333,7.708333333,7.056666667,10.0,0,Masculino,3K,Pública,3K,1,1
+12.0,2,6.718348148233334,10.002,8.324074074,6.88,4.166666666666667,6.666666667,6.826666667,5.0,0,Masculino,3K,Pública,3K,0,1
+14.0,2,6.6438703703,7.5,4.851851851666666,7.51,5.333333333333333,7.291666667,6.883333333,10.0,0,Feminino,3K,Pública,3K,0,0
+11.0,2,6.5276296297,7.5,4.981481481666667,7.51,4.833333333333333,7.083333333,6.776666667,10.0,0,Feminino,3K,Pública,3K,0,0
+13.0,2,7.894888888933334,9.585,9.694444444333334,3.76,6.333333333333333,6.875,8.336666667,10.0,0,Feminino,3K,Pública,3K,0,1
+15.0,2,8.225462962900002,9.585,9.231481481333333,7.51,7.166666666666667,7.916666667,7.223333333,10.0,0,Feminino,3L,Pública,3L,1,1
+13.0,1,6.872009064333334,9.168,7.851461988333334,8.76,4.333333333333333,7.1875,7.1175,5.0,0,Feminino,3L,Pública,3L,0,0
+15.0,2,7.908044272466667,8.751,6.829721362333333,8.135,8.0,6.875,7.83,10.0,0,Masculino,3L,Pública,3L,1,1
+14.0,3,6.778749122800001,8.751,7.223245614,8.76,4.0,7.5,7.665,5.0,0,Feminino,3L,Pública,3L,0,0
+14.0,3,7.187625925933334,7.917,8.429629629666666,7.51,6.0,6.25,5.67,10.0,0,Feminino,3L,Pública,3L,0,1
+13.0,1,6.728911403533334,6.666,6.839473684333334,6.885,4.833333333333333,6.5625,6.915,10.0,0,Feminino,3L,Pública,3L,0,0
+12.0,3,6.793890866866667,9.585,6.191537667666666,7.51,4.166666666666667,6.5625,6.7825,10.0,0,Feminino,3L,Privada,3L,0,0
+15.0,3,7.121622213600001,7.917,6.108152734666667,2.51,7.833333333333333,7.65625,7.625,10.0,0,Masculino,3L,Pública,3L,1,1
+13.0,3,6.024753703733333,9.168,5.818518518666667,7.51,3.0,7.1875,6.8725,5.0,0,Masculino,3L,Pública,3L,0,0
+12.0,2,8.647409313733334,9.585,9.670588235333334,7.51,7.333333333333333,8.28125,8.545,10.0,0,Masculino,3L,Pública,3L,0,1
+12.0,3,8.185838802933334,10.002,7.881527348,7.51,7.166666666666667,7.5,8.375,10.0,0,Feminino,3L,Pública,3L,0,0
+14.0,3,7.429623555266667,8.334,7.5029927763333335,8.13,7.0,6.40625,6.21,10.0,0,Feminino,3L,Pública,3L,0,1
+14.0,2,6.7359982456,7.917,6.5964912280000005,7.51,4.5,6.25,6.745,10.0,0,Feminino,3L,Pública,3L,0,1
+14.0,2,6.616193704866666,5.833,6.501135191,8.13,4.333333333333333,6.875,6.8275,10.0,0,Masculino,3L,Pública,3L,0,1
+12.0,2,6.795673420466667,8.334,7.2122004356666665,8.75,4.166666666666667,5.625,6.245,10.0,0,Feminino,3M,Pública,3M,0,0
+14.0,0,7.507033333333333,8.751,10.0,8.135,3.6666666666666665,7.375,6.738,10.0,0,Feminino,3M,Pública,3M,1,0
+13.0,0,5.696233333333334,8.334,5.0,7.51,2.6666666666666665,7.125,6.83,5.0,0,Masculino,3M,Pública,3M,0,0
+12.0,1,8.337,9.168,8.633333333333333,6.88,8.166666666666666,8.25,7.736,10.0,0,Feminino,3M,Pública,3M,0,1
+13.0,2,7.437466666666667,8.751,9.533333333333333,2.51,5.0,8.375,7.836,10.0,0,Feminino,3M,Pública,3M,0,0
+13.0,3,7.1074778554666675,7.917,7.6107226106666666,7.51,4.166666666666667,7.625,7.234,10.0,0,Masculino,3M,Pública,3M,0,0
+16.0,0,6.942581818200001,9.168,7.090909091,7.51,5.0,6.25,6.158,10.0,0,Feminino,3M,Pública,3M,1,1
+14.0,3,6.0886079922,7.501,6.304873294333333,8.135,3.1666666666666665,7.375,6.966,5.0,0,Feminino,3M,Pública,3M,0,0
+14.0,1,6.624588235266668,8.334,6.286274509666666,2.51,5.666666666666667,7.5,6.998,10.0,0,Feminino,3M,Pública,3M,1,0
+15.0,1,7.388266666666667,9.585,8.716666666666667,7.51,5.666666666666667,7.625,7.698,5.0,0,Masculino,3M,Pública,3M,1,1
+13.0,3,3.7894777778,0.0,3.3555555556666667,6.26,2.3333333333333335,5.125,5.066,5.0,0,Masculino,3M,Pública,3M,0,0
+13.0,3,7.177130604266668,9.168,7.038986354666666,7.51,4.666666666666667,7.75,6.966,10.0,0,Feminino,3M,Pública,3M,0,0
+14.0,0,6.0175222222,7.5,6.194444444333333,6.885,2.6666666666666665,7.0,5.534,10.0,0,Masculino,3M,Pública,3M,1,0
+14.0,1,6.754584615400001,7.5,8.076923077,7.51,5.0,7.25,7.066,5.0,0,Feminino,3M,Pública,3M,0,1
+14.0,0,7.0305545924,7.084,7.846439628666666,9.38,3.8333333333333335,6.75,6.866,10.0,0,Feminino,3M,Pública,3M,1,0
+12.0,0,6.905568627466667,8.334,8.674509804,6.885,5.833333333333333,6.625,6.598,5.0,0,Feminino,3N,Pública,3N,0,1
+12.0,1,7.296598575533334,7.501,6.210826211,8.13,8.166666666666666,6.25,6.165,10.0,0,Feminino,3N,Pública,3N,0,1
+12.0,1,8.180966666666668,9.168,10.0,7.51,5.833333333333333,8.125,7.67,10.0,0,Masculino,3N,Pública,3N,0,1
+14.0,0,7.360417647066668,9.168,7.137254902,8.13,6.833333333333333,6.875,5.745,10.0,0,Masculino,3N,Pública,3N,0,1
+12.0,1,6.900662108266667,8.334,6.374643874666667,8.75,4.666666666666667,7.5,6.17,10.0,0,Masculino,3N,Pública,3N,0,1
+14.0,1,6.563952941199999,8.751,6.278431372666667,8.13,4.333333333333333,6.875,5.33,10.0,0,Feminino,3N,Pública,3N,1,1
+15.0,3,6.864053921600001,9.585,7.682352941333334,7.51,5.666666666666667,7.1875,6.33,5.0,0,Masculino,3N,Pública,3N,1,1
+14.0,2,7.4019,8.334,9.566666666666666,7.51,7.333333333333333,6.875,6.25,5.0,0,Masculino,3N,Pública,3N,0,1
+14.0,0,7.218157142866668,7.918,8.380952381,8.13,4.833333333333333,6.875,6.415,10.0,0,Feminino,3N,Pública,3N,1,1
+13.0,0,6.748480626800001,7.917,6.467236467333334,8.13,6.666666666666667,7.5,6.335,5.0,0,Feminino,3N,Pública,3N,0,1
+16.0,3,6.482499715066667,8.334,5.2421652420000004,7.51,4.833333333333333,7.5,5.665,10.0,0,Masculino,3N,Pública,3N,1,1
+15.0,0,6.852411484600001,10.002,7.826890756333333,7.51,7.166666666666667,6.875,5.825,2.5,0,Masculino,3N,Pública,3N,1,1
+12.0,2,6.514862200466668,9.585,7.441394335666668,7.51,4.166666666666667,7.1875,6.325,5.0,0,Feminino,3P,Pública,3P,0,0
+13.0,3,7.515491249000001,7.917,8.999164578333334,6.875,4.166666666666667,8.28125,7.875,10.0,0,Feminino,3P,Pública,3P,0,0
+11.0,1,5.228470175466667,4.584,4.707017544,2.51,3.3333333333333335,6.875,6.1175,10.0,0,Feminino,3P,Pública,3P,0,0
+14.0,3,7.1837526524666675,8.334,7.588638262333333,8.13,3.5,8.28125,7.4575,10.0,0,Masculino,3P,Pública,3P,1,1
+15.0,0,7.715491666666668,10.002,9.266666666666667,7.51,6.166666666666667,8.28125,7.7475,5.0,0,Masculino,3P,Pública,3P,1,1
+12.0,1,6.064236111066667,9.585,5.222222222,7.51,4.333333333333333,7.03125,6.2025,5.0,0,Masculino,3P,Pública,3P,0,1
+14.0,3,6.906276357600001,8.334,6.152715121333333,7.51,4.666666666666667,7.5,7.04,10.0,0,Masculino,3P,Pública,3P,1,1
+14.0,2,5.410188638266668,8.334,6.377276524666667,2.51,3.6666666666666665,6.25,5.96,5.0,0,Masculino,3P,Pública,3P,0,1
+12.0,3,7.3416246032,7.917,8.715873016,7.51,4.0,7.8125,7.3725,10.0,0,Feminino,3P,Pública,3P,0,0
+12.0,1,5.7693807644,7.917,5.278195488666667,2.51,3.8333333333333335,6.71875,6.1625,10.0,0,Feminino,3P,Pública,3P,0,0
+15.0,0,8.390566666666668,8.334,9.133333333333333,7.51,8.5,8.125,7.335,10.0,0,Masculino,3P,Pública,3P,1,1
+15.0,3,5.9717087542,9.585,4.7710437709999995,7.51,3.5,7.5,6.79,5.0,0,Masculino,3P,Pública,3P,1,1
+13.0,0,5.680161507933333,8.751,3.7396825396666666,6.88,4.0,7.03125,6.83,5.0,0,Masculino,3P,Pública,3P,0,1
+15.0,1,7.443301282066667,9.585,9.743589743666666,7.51,3.1666666666666665,7.1875,7.165,10.0,0,Masculino,3P,Pública,3P,1,1
+12.0,3,6.095440873,9.168,5.565079365,8.13,3.5,7.03125,6.7475,5.0,0,Feminino,3P,Pública,3P,0,0
+13.0,0,7.082591269866667,9.585,9.149206349333333,3.76,4.0,7.1875,6.9975,10.0,0,Masculino,3R,Pública,3R,0,0
+15.0,0,7.641184313700001,8.334,9.003921568666668,7.51,4.333333333333333,8.333333333,7.78,10.0,0,Masculino,3R,Pública,3R,1,1
+14.0,3,6.941692592633334,6.666,9.629629629666667,8.76,4.0,7.291666667,7.22,5.0,0,Feminino,3R,Pública,3R,0,0
+14.0,1,6.985329691766667,8.751,6.004481792666667,8.76,3.6666666666666665,8.333333333,7.333333333,10.0,0,Feminino,3R,Pública,3R,1,0
+13.0,2,5.458179831866667,8.751,4.547899159666667,8.135,1.6666666666666667,7.5,6.383333333,5.0,0,Feminino,3R,Pública,3R,0,0
+13.0,2,8.103217647033333,8.751,9.537254901999999,8.76,5.166666666666667,8.333333333,7.89,10.0,0,Feminino,3R,Pública,3R,0,0
+14.0,3,8.331124561366668,7.083,9.382456140333334,7.51,6.5,9.166666667,8.893333333,10.0,0,Feminino,3R,Pública,3R,0,1
+13.0,3,8.238600000066668,7.501,10.0,8.76,6.833333333333333,8.125,7.166666667,10.0,0,Feminino,3R,Pública,3R,0,0
+13.0,3,6.668152941266667,9.168,5.978431372666667,7.51,4.166666666666667,7.5,6.106666667,10.0,0,Feminino,3R,Pública,3R,0,0
+13.0,0,8.207433333400001,8.751,9.6,6.885,7.5,8.125,7.056666667,10.0,0,Masculino,3R,Pública,3R,0,1
+13.0,3,7.4827333334,8.334,10.0,6.255,3.0,8.125,8.056666667,10.0,0,Feminino,3R,Pública,3R,0,0
+12.0,2,7.5447559291,8.751,9.182446312,7.51,4.5,7.708333333,7.056666667,10.0,0,Feminino,3U,Pública,3U,0,0
+11.0,3,7.2457999999666685,7.083,5.733333333333333,7.51,8.0,7.291666667,6.553333333,10.0,0,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
+15.0,2,8.702387301666668,9.168,9.241269841333333,7.51,8.5,8.75,8.056666667,10.0,0,Masculino,3U,Pública,3U,1,1
+11.0,3,6.357733333300001,8.334,7.3999999999999995,6.885,4.0,6.458333333,7.05,5.0,0,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
+13.0,3,8.676133333333334,9.168,9.833333333333334,7.51,7.833333333333333,8.75,8.0,10.0,0,Masculino,3U,Pública,3U,0,1
+14.0,0,6.407590225500001,9.585,3.380451127666667,6.885,5.333333333333333,7.291666667,6.443333333,10.0,0,Masculino,3U,Pública,3U,0,1
+14.0,2,6.666811111166668,7.917,5.222222222333333,7.51,4.0,7.916666667,7.44,10.0,0,Feminino,3U,Pública,3U,0,0
+14.0,3,7.098988888900001,8.751,6.111111111,8.13,4.5,8.333333333,7.276666667,10.0,0,Masculino,3U,Pública,3U,1,1
+13.0,2,7.8284999999666685,9.585,9.700000000000001,7.51,6.833333333333333,7.916666667,7.603333333,5.0,0,Masculino,3U,Pública,3U,0,1
+12.0,2,6.610947619100001,7.084,5.061904762,7.51,5.5,7.291666667,6.55,10.0,0,Masculino,3U,Pública,3U,0,1
+11.0,1,6.942277777866667,9.585,7.155555555666666,6.885,4.666666666666667,6.875,6.216666667,10.0,0,Feminino,3U,Pública,3U,0,1
+14.0,3,8.238553968266668,9.168,9.841269841333334,8.75,4.5,8.125,8.83,10.0,0,Masculino,3U,Pública,3U,0,1
+12.0,1,5.457877193033333,7.5,3.087719298333333,6.885,3.8333333333333335,6.458333333,4.946666667,10.0,0,Masculino,3U,Pública,3U,0,0
+14.0,0,7.7564571427,8.751,8.914285714,7.51,6.0,7.708333333,6.883333333,10.0,0,Feminino,3U,Pública,3U,0,0
+12.0,2,8.228500000033334,9.585,8.916666666666666,7.51,7.0,7.916666667,7.72,10.0,0,Feminino,3U,Privada - Programa de Apadrinhamento,3U,0,0
+14.0,3,8.8602539683,9.585,9.441269841333334,7.51,8.666666666666666,8.958333333,8.166666667,10.0,0,Masculino,3U,Pública,3U,0,1
+15.0,1,5.766892063566667,8.334,3.9841269843333333,7.51,2.5,7.083333333,5.886666667,10.0,0,Feminino,4A,Pública,4A,1,1
+16.0,0,8.1371,8.334,10.0,10.0,6.0,8.625,8.706,5.0,0,Masculino,4A,Pública,4A,1,1
+14.0,2,7.643772047733333,9.168,8.705360238666666,8.755,5.5,8.5,8.302,5.0,0,Feminino,4A,Privada,4A,0,0
+13.0,3,8.832389092333335,9.168,8.973112128333334,6.26,9.333333333333334,8.875,8.704,10.0,0,Feminino,4A,Pública,4A,0,0
+13.0,2,7.711540746133334,7.5,7.155537064000001,5.635,8.166666666666666,8.0,7.668,10.0,0,Masculino,4A,Privada,4A,0,0
+15.0,0,8.932712280733334,9.168,9.407894737,9.38,8.166666666666666,8.75,8.44,10.0,0,Feminino,4A,Pública,4A,1,0
+15.0,3,6.330428437666668,7.917,5.2929755216666665,6.885,4.666666666666667,8.375,7.604,5.0,0,Masculino,4A,Privada - Programa de Apadrinhamento,4A,0,0
+14.0,0,8.421271701,9.585,7.605358505000001,9.38,7.0,8.625,8.706,10.0,0,Feminino,4A,Privada,4A,0,0
+15.0,3,8.4721031746,9.168,9.206349206333334,5.635,8.166666666666666,8.5,8.336,10.0,0,Feminino,4A,Privada - Programa de Apadrinhamento,4A,1,0
+15.0,2,8.268876190466667,8.751,9.702380952333334,5.635,8.5,8.75,9.074,5.0,0,Feminino,4A,Pública,4A,0,1
+15.0,2,8.266902371533334,7.917,9.249011857666666,6.26,7.5,8.25,8.372,10.0,0,Masculino,4A,Privada,4A,1,0
+16.0,0,7.419398245666667,8.334,7.554824561666667,6.88,7.166666666666667,8.125,8.206,5.0,0,Masculino,4A,Pública,4A,1,1
+15.0,3,7.9402206349333335,9.585,9.174603174666666,5.0,9.0,8.0,7.734,5.0,0,Masculino,4A,Pública,4A,0,1
+14.0,3,6.834286748466667,7.5,5.512100409000001,6.26,5.833333333333333,7.5,7.196,10.0,0,Feminino,4A,Pública,4A,0,0
+16.0,3,8.384742583733333,8.751,9.673046251999999,6.885,7.666666666666667,8.0,7.766,10.0,0,Feminino,4A,Pública,4A,1,1
+14.0,3,6.807291921866668,7.918,7.885292942666666,5.63,5.666666666666667,7.625,7.398,5.0,0,Masculino,4B,Pública,4B,0,1
+16.0,2,8.052795331466667,9.168,7.441643324,7.51,6.833333333333333,7.625,8.8375,10.0,0,Masculino,4B,Pública,4B,1,1
+13.0,3,4.3639463364,9.585,5.414731682,5.635,1.0,3.5,3.545,5.0,0,Masculino,4B,Pública,4B,0,0
+16.0,0,5.9794829346,8.334,4.453748006333333,6.26,3.1666666666666665,6.375,6.7925,10.0,0,Feminino,4B,Pública,4B,1,1
+13.0,3,5.458833333333334,6.25,8.666666666666666,5.01,0.5,6.25,6.8725,5.0,0,Feminino,4B,Pública,4B,0,1
+15.0,0,7.209434085200001,9.168,7.268170426,6.26,5.0,6.875,7.6275,10.0,0,Feminino,4B,Pública,4B,1,1
+15.0,0,7.604211111133335,8.751,8.305555555666666,7.51,7.0,7.25,8.46,5.0,0,Masculino,4B,Pública,4B,1,1
+16.0,0,5.0761468806000005,8.334,4.942067736333334,6.885,2.1666666666666665,5.75,5.2875,5.0,0,Masculino,4B,Pública,4B,1,1
+17.0,0,5.816448179266667,0.0,8.102240896333333,7.51,5.5,6.375,6.0375,5.0,0,Feminino,4B,Pública,4B,1,1
+16.0,0,7.759243871133334,9.168,9.247219355666667,7.51,6.5,7.75,8.335,5.0,0,Feminino,4B,Pública,4B,1,1
+14.0,3,7.913942087533334,8.334,8.771043771,7.51,8.166666666666666,7.75,8.335,5.0,0,Masculino,4B,Pública,4B,0,1
+15.0,0,6.627336016533334,8.334,6.656346749333334,5.635,5.333333333333333,5.25,6.5375,10.0,0,Feminino,4B,Pública,4B,1,1
+14.0,3,7.8003261438000004,9.168,7.493464052333334,7.51,8.166666666666666,8.0,8.5025,5.0,0,Feminino,4B,Pública,4B,0,1
+15.0,3,6.646485739800001,0.0,8.306595365666666,6.26,4.333333333333333,7.75,8.5875,10.0,0,Feminino,4B,Pública,4B,0,1
+17.0,0,7.838218894866668,9.168,6.827094474333333,6.26,7.5,7.125,8.5875,10.0,0,Feminino,4B,Pública,4B,1,1
+16.0,0,5.7191555556,6.666,7.111111111333334,6.26,2.1666666666666665,6.875,6.9175,5.0,0,Feminino,4B,Pública,4B,1,1
+16.0,0,7.894084175066667,9.585,7.542087542,7.51,8.333333333333334,7.75,8.6725,5.0,0,Masculino,4B,Pública,4B,1,1
+15.0,0,7.2484555556,8.334,9.111111111333335,5.005,5.666666666666667,7.5,8.545,5.0,0,Feminino,4C,Pública,4C,1,1
+17.0,1,8.080345634866667,9.168,9.841269841333334,7.51,7.5,7.65625,8.393333333,5.0,0,Masculino,4C,Pública,4C,1,1
+16.0,0,7.1023212964,8.334,6.481481481666667,7.51,6.833333333333333,7.65625,7.946666667,5.0,0,Masculino,4C,Pública,4C,1,1
+16.0,0,6.743847969266667,9.168,6.120448179333334,6.26,5.0,7.65625,8.556666667,5.0,0,Feminino,4C,Pública,4C,1,1
+13.0,1,7.777244180000001,8.751,8.399470899666667,7.51,7.333333333333333,7.8125,8.616666667,5.0,0,Feminino,4C,Pública,4C,0,1
+16.0,0,8.749111111066668,7.5,9.722222222333334,5.635,9.0,8.125,9.393333333,10.0,0,Feminino,4C,Pública,4C,1,1
+15.0,1,7.318459391466667,9.168,8.624338624,6.885,5.333333333333333,7.65625,8.28,5.0,0,Feminino,4C,Privada - Programa de Apadrinhamento,4C,0,0
+16.0,3,8.5452952381,6.667,9.523809523666666,5.005,8.833333333333334,9.166666667,8.95,10.0,0,Feminino,4C,Pública,4C,1,1
+16.0,0,6.757026587266667,8.751,7.728174603333334,6.26,4.5,7.65625,7.723333333,5.0,0,Feminino,4C,Pública,4C,1,1
+14.0,3,7.4636202380666665,8.334,9.523809523666666,5.635,6.666666666666667,6.40625,8.44,5.0,0,Feminino,4C,Privada - Programa de Apadrinhamento,4C,0,0
+14.0,3,8.568424074066666,8.751,9.537037037,5.635,7.833333333333333,8.4375,9.06,10.0,0,Feminino,4C,Pública,4C,0,1
+16.0,0,7.492006349133335,9.168,7.162698412666667,6.26,5.5,7.5,8.333333333,10.0,0,Masculino,4C,Pública,4C,1,1
+14.0,2,6.305585581933334,10.002,4.993386243333333,7.51,4.333333333333333,7.34375,7.273333333,5.0,0,Feminino,4F,Pública,4F,0,0
+16.0,3,6.980833740133334,9.168,7.890668700666666,6.26,4.5,6.875,6.362,10.0,0,Masculino,4F,Pública,4F,1,1
+17.0,3,6.125104328999999,7.083,6.645021645,5.0,5.0,6.75,7.064,5.0,0,Feminino,4F,Pública,4F,1,1
+16.0,3,6.782180868800001,8.751,6.361737677333333,5.635,6.666666666666667,7.875,8.502,2.5,0,Masculino,4F,Pública,4F,1,1
+13.0,3,5.805712280733333,9.168,6.324561403666666,5.63,3.0,6.75,6.43,5.0,0,Masculino,4F,Pública,4F,0,0
+15.0,1,8.036024386733335,9.168,8.600288600333334,7.51,5.833333333333333,7.875,8.47,10.0,0,Feminino,4F,Pública,4F,1,1
+14.0,3,7.119011111133333,8.334,8.888888889,5.005,4.666666666666667,8.0,8.87,5.0,0,Feminino,4F,Pública,4F,0,1
+13.0,1,8.072200721466668,7.5,8.607503607333333,7.51,7.5,7.625,7.936,10.0,0,Feminino,4F,Pública,4F,0,1
+13.0,0,6.6777135642,7.5,7.821067821,7.51,2.0,7.125,7.5,10.0,0,Feminino,4F,Pública,4F,0,0
+16.0,3,7.880605848,8.334,6.761695906666667,7.51,7.333333333333333,7.5,8.636,10.0,0,Feminino,4F,Pública,4F,1,1
+15.0,3,5.965307936466667,7.5,6.349206349,7.51,4.333333333333333,6.75,5.764,5.0,0,Feminino,4F,Pública,4F,0,1
+13.0,3,8.448920634933334,8.751,9.674603174666666,7.51,7.0,7.875,8.502,10.0,0,Feminino,4F,Pública,4F,0,1
+17.0,3,7.169905291000001,8.751,6.921693121666666,6.26,4.333333333333333,7.25,8.464,10.0,0,Masculino,4F,Privada,4F,1,1
+16.0,2,5.806145462066667,7.917,4.854560643666667,7.51,4.166666666666667,7.0,6.296,5.0,0,Feminino,4F,Pública,4F,1,1
+16.0,0,7.894385710733333,8.751,9.090261886999999,5.635,7.166666666666667,8.5,9.272,5.0,0,Masculino,4F,Pública,4F,1,1
+14.0,3,7.790523996266667,8.751,9.049953314666666,7.51,6.166666666666667,7.875,9.168,5.0,0,Feminino,4F,Pública,4F,0,1
+14.0,2,7.480115873000001,9.168,7.698412698333333,7.51,5.166666666666667,7.125,7.634,10.0,0,Feminino,4H,Privada - Programa de Apadrinhamento,4H,0,0
+16.0,0,9.049892592566668,9.168,9.629629629666667,6.88,9.166666666666666,8.958333333,8.95,10.0,0,Masculino,4H,Pública,4H,1,1
+15.0,0,6.9787022855,8.334,7.834844760666667,6.26,6.333333333333333,7.083333333,7.386666667,5.0,0,Masculino,4H,Pública,4H,1,1
+15.0,0,6.472788888966667,8.334,8.069444444333334,6.255,4.5,6.666666667,6.666666667,5.0,0,Feminino,4H,Pública,4H,1,1
+15.0,3,7.8197579711000005,7.917,7.753623188333333,6.26,8.166666666666666,9.166666667,9.006666667,5.0,0,Masculino,4L,Pública,4L,1,1
+15.0,2,7.526188206666666,8.751,8.954191033333332,5.63,7.5,7.8125,7.58,5.0,0,Feminino,4L,Pública,4L,1,1
+15.0,0,6.6430030186,7.917,7.9050567596666665,4.38,4.833333333333333,7.65625,8.0,5.0,0,Feminino,4L,Pública,4L,1,1
+15.0,2,7.429837830666667,8.334,9.153439153333332,7.51,5.5,7.8125,8.1675,5.0,0,Feminino,4L,Pública,4L,1,1
+15.0,2,7.2528500000000005,8.751,9.666666666666666,5.63,4.833333333333333,7.8125,8.1675,5.0,0,Feminino,4L,Pública,4L,0,1
+15.0,0,7.7298118421333335,7.917,9.140350877333333,5.01,6.833333333333333,7.34375,7.54,10.0,0,Feminino,4L,Pública,4L,1,1
+16.0,3,6.730367016866668,10.002,6.775210084333334,7.51,4.0,7.65625,7.7925,5.0,0,Feminino,4L,Pública,4L,1,1
+15.0,0,7.167975,7.501,10.0,6.26,5.5,7.34375,7.2875,5.0,0,Feminino,4L,Pública,4L,1,1
+15.0,3,6.555764327466668,10.002,6.128654970666666,5.01,5.666666666666667,6.875,7.54,5.0,0,Feminino,4L,Pública,4L,0,1
+14.0,2,6.981130848,9.585,8.011695906666667,7.51,3.3333333333333335,7.03125,6.4975,10.0,0,Feminino,4L,Pública,4L,0,0
+15.0,2,8.533628557533333,8.334,8.401559454333333,7.51,8.833333333333334,8.4375,8.2925,10.0,0,Masculino,4L,Pública,4L,0,1
+16.0,0,7.0875128168,8.334,7.614522417333333,6.26,3.6666666666666665,7.96875,7.875,10.0,0,Feminino,4L,Pública,4L,1,1
+14.0,0,7.34055,9.168,10.0,7.51,3.75,7.8125,8.2075,5.0,0,Feminino,4L,Pública,4L,0,0
+14.0,2,7.303823728133333,7.917,8.640618640666666,7.51,4.0,7.5,7.415,10.0,0,Feminino,4L,Pública,4L,0,0
+15.0,1,7.341187280733334,8.334,9.616228070333333,7.51,3.3333333333333335,7.34375,7.1625,10.0,0,Feminino,4L,Pública,4L,1,1
+14.0,3,6.6304815790000005,8.751,7.763157895,5.635,4.0,7.8125,7.79,5.0,0,Feminino,4M,Privada,4M,0,0
+14.0,3,7.279762962966667,7.083,9.148148147999999,5.635,4.833333333333333,7.291666667,7.4125,10.0,0,Feminino,4M,Pública,4M,0,0
+14.0,2,8.044378070166667,8.334,8.456140351,6.26,7.333333333333333,8.020833333,8.125,10.0,0,Masculino,4M,Pública,4M,0,1
+15.0,2,7.534949122800001,9.168,8.898245614,5.635,5.0,7.5,7.625,10.0,0,Feminino,4M,Pública,4M,1,1
+13.0,2,6.0768703704,0.0,5.918518518666667,7.51,6.833333333333333,7.5,7.6275,5.0,0,Feminino,4M,Pública,4M,0,1
+15.0,3,6.905439215666667,8.334,5.9151960783333335,5.635,5.0,7.5,7.8775,10.0,0,Feminino,4M,Pública,4M,0,1
+15.0,1,8.410830701766667,9.168,7.4947368423333325,7.51,9.0,8.020833333,8.21,10.0,0,Masculino,4M,Pública,4M,0,1
+14.0,3,8.6794789474,8.334,9.824561403666666,7.51,7.833333333333333,8.125,8.755,10.0,0,Feminino,4M,Pública,4M,0,1
+15.0,0,5.683064814833333,7.5,3.074074074,6.26,4.166666666666667,6.354166667,6.1175,10.0,0,Feminino,4M,Pública,4M,1,1
+14.0,1,5.260851851866667,0.0,6.259259259333334,7.51,2.5,7.5,7.54,5.0,0,Feminino,4M,Pública,4M,0,0
+14.0,3,7.473167836266667,7.917,9.135672514666666,6.26,5.666666666666667,6.875,7.0375,10.0,0,Feminino,4M,Pública,4M,0,0
+14.0,3,6.635847117766667,0.0,7.027568922333333,7.51,5.5,7.708333333,8.0425,10.0,0,Masculino,4M,Privada - Programa de Apadrinhamento,4M,0,0
+16.0,3,8.700808577033333,8.751,8.972709551666666,7.51,8.0,8.541666667,9.13,10.0,0,Masculino,4M,Pública,4M,1,1
+12.0,3,6.2443426900666665,8.751,3.9520467836666664,7.51,5.666666666666667,6.875,7.535,5.0,0,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
+14.0,3,9.125183333366667,8.751,10.0,7.51,9.333333333333334,8.229166667,9.0475,10.0,0,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
+13.0,3,8.355707894766669,7.083,9.382456140666667,6.26,8.166666666666666,8.020833333,8.5475,10.0,0,Feminino,4M,Privada - Programa de Apadrinhamento,4M,0,0
+16.0,1,7.544228947400001,8.334,9.557894737,6.26,4.0,7.8125,7.96,10.0,0,Feminino,4M,Pública,4M,1,1
+14.0,2,7.452799122766667,8.334,8.498245614,6.26,6.333333333333333,8.020833333,8.625,5.0,0,Masculino,4M,Pública,4M,0,1
+15.0,0,9.016616666700001,10.002,10.0,6.26,9.0,8.229166667,8.8375,10.0,0,Feminino,4N,Pública,4N,1,1
+16.0,0,8.1907875086,7.917,8.267770876333332,7.51,8.666666666666666,10.0,8.806,5.0,0,Feminino,4N,Pública,4N,1,1
+16.0,3,6.1707952862,7.083,6.430976431,7.51,3.5,8.125,7.064,5.0,0,Feminino,4N,Pública,4N,1,1
+15.0,0,6.5991307798,9.168,7.323153899,6.26,4.5,8.125,6.896,5.0,0,Feminino,4N,Pública,4N,1,1
+14.0,2,6.812545479666667,7.917,6.854727398333334,7.51,5.5,8.125,7.432,5.0,0,Feminino,4N,Pública,4N,0,1
+16.0,3,8.5892756038,8.334,8.743961352333335,7.51,8.666666666666666,9.6875,7.77,10.0,0,Masculino,4N,Pública,4N,1,1
+13.0,3,6.693026811600001,8.334,7.898550724666666,6.26,4.833333333333333,7.8125,7.03,5.0,0,Masculino,4N,Pública,4N,0,1
+15.0,1,8.488232329,8.751,9.540744978333334,7.51,6.666666666666667,9.0625,8.572,10.0,0,Feminino,4N,Pública,4N,1,1
+15.0,0,6.885305555533334,6.25,8.444444444333334,5.635,6.833333333333333,7.8125,6.8,5.0,0,Masculino,4N,Pública,4N,1,1
+16.0,0,6.638525017333334,6.249,4.868875086666667,6.26,6.5,9.0625,8.538,5.0,0,Masculino,4N,Pública,4N,1,1
+16.0,3,5.731267287800001,9.585,6.112836439,6.26,3.0,6.25,5.996,5.0,0,Masculino,4N,Pública,4N,1,1
+14.0,3,7.9444309524,8.751,9.761904762,6.885,8.0,7.8125,7.736,5.0,0,Masculino,4N,Pública,4N,0,1
+17.0,3,7.233804589400001,7.917,8.454106280333333,5.635,4.666666666666667,7.8125,7.366,10.0,0,Masculino,4R,Pública,4R,1,1
+14.0,0,5.8522943469666675,9.585,6.633138401666667,6.255,3.6666666666666665,5.416666667,5.833333333,5.0,0,Masculino,4R,Pública,4R,0,1
+17.0,0,6.6599304233000005,8.334,7.949735449666666,6.26,2.3333333333333335,7.395833333,7.021666667,10.0,0,Feminino,4R,Pública,4R,1,1
+16.0,3,7.261016666766667,8.751,10.0,7.51,3.3333333333333335,8.229166667,8.226666667,5.0,0,Feminino,4R,Privada - Programa de Apadrinhamento,4R,1,0
+16.0,0,7.646383333300001,9.168,8.5,5.635,8.0,7.604166667,8.028333333,5.0,0,Feminino,4R,Pública,4R,1,1
+15.0,1,6.7187063492,7.5,8.412698412666666,7.51,2.8333333333333335,8.125,8.28,5.0,0,Masculino,4R,Pública,4R,1,1
+18.0,3,7.6236817459,8.334,7.230158729999999,7.51,7.5,8.645833333,8.643333333,5.0,0,Feminino,5A,Pública,5A,1,1
+17.0,3,6.337470707133334,8.334,7.535353535666666,5.635,4.5,6.875,6.73,5.0,0,Feminino,5A,Privada - Programa de Apadrinhamento,5A,1,0
+15.0,3,7.4209164502,8.334,8.917748917666666,6.26,7.833333333333333,7.125,6.994,5.0,0,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+16.0,3,8.775268254,8.334,9.603174603333335,6.26,9.166666666666666,7.875,8.872,10.0,0,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+17.0,1,7.234168831200001,9.585,8.739177489333334,6.26,4.166666666666667,7.625,6.53,10.0,0,Feminino,5A,Pública,5A,1,1
+14.0,3,5.719565079333334,7.5,6.0634920633333325,6.26,3.3333333333333335,7.25,6.196,5.0,0,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+15.0,3,8.801463636333335,9.168,9.431818181666666,7.51,8.5,8.125,8.674,10.0,0,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+17.0,3,7.439841414133334,7.5,8.737373737333334,6.26,4.333333333333333,7.625,8.436,10.0,0,Feminino,5A,Pública,5A,1,1
+15.0,3,7.476158297266668,8.751,8.152958153,6.26,8.833333333333334,7.25,6.764,5.0,0,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+17.0,1,8.283601875933334,9.585,9.379509379666667,7.51,7.0,7.25,7.866,10.0,0,Feminino,5A,Pública,5A,1,1
+16.0,3,6.9217748918,8.751,9.458874459,7.51,3.5,7.375,7.332,5.0,0,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+15.0,3,8.6324939394,9.168,9.696969697,6.255,8.5,7.5,8.504,10.0,0,Masculino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+16.0,2,8.586533333333334,10.002,10.0,6.255,8.166666666666666,6.875,8.2,10.0,0,Feminino,5A,Privada - Programa de Apadrinhamento,5A,0,0
+17.0,3,8.5605939394,8.751,9.488636363666666,7.51,7.833333333333333,7.625,8.538,10.0,0,Feminino,5A,Pública,5A,1,1
+15.0,3,5.404184695733334,7.917,4.164756812,6.26,4.166666666666667,6.75,5.726,5.0,0,Feminino,5B,Pública,5B,0,1
+15.0,0,7.045258874400002,7.084,6.455627705333334,6.26,5.666666666666667,8.0,7.432,10.0,0,Feminino,5B,Pública,5B,0,1
+16.0,1,8.4656285714,9.585,8.857142857,7.51,7.5,8.375,8.236,10.0,0,Feminino,5B,Pública,5B,0,1
+17.0,3,7.374213419866667,8.751,8.349567099333333,6.26,5.0,7.5,7.266,10.0,0,Masculino,5B,Privada,5B,1,1
+15.0,2,6.882960606066668,8.334,6.363636363666667,7.51,7.166666666666667,7.125,6.9,5.0,0,Feminino,5B,Pública,5B,0,1
+15.0,3,7.6987770562666675,8.751,8.198051948,6.26,6.833333333333333,7.25,7.332,10.0,0,Feminino,5B,Privada,5B,0,1
+15.0,1,8.325963636333334,7.917,9.640151515,6.26,7.166666666666667,8.125,8.672,10.0,0,Feminino,5B,Pública,5B,0,1
+17.0,0,6.2015816738666665,9.168,5.036075036,6.26,3.8333333333333335,7.125,5.862,10.0,0,Feminino,5B,Pública,5B,1,1
+15.0,3,7.6059333333333345,8.334,9.666666666666666,7.51,6.5,7.75,7.566,5.0,0,Feminino,5B,Privada - Programa de Apadrinhamento,5B,0,0
+17.0,0,8.667693939400001,9.168,9.488636363666666,6.26,8.333333333333334,8.125,8.74,10.0,0,Feminino,5B,Pública,5B,1,1
+17.0,0,6.750618518533334,8.751,8.425925926,6.26,5.666666666666667,7.25,6.03,5.0,0,Feminino,5C,Pública,5C,1,1
+15.0,3,7.2431,8.751,7.0,7.51,6.5,7.5,8.335,5.0,0,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+15.0,0,8.828632575733334,9.585,9.545454545333333,6.26,8.833333333333334,8.59375,8.545,10.0,0,Feminino,5C,Pública,5C,0,1
+16.0,0,8.041889814800001,7.917,8.782407407333332,7.51,7.166666666666667,7.34375,7.875,10.0,0,Feminino,5C,Pública,5C,1,1
+16.0,0,7.836518518466668,7.5,9.259259258999998,7.51,8.333333333333334,7.5,7.835,5.0,0,Masculino,5C,Pública,5C,1,1
+14.0,3,8.0118555556,9.168,7.777777778,7.51,8.5,8.125,8.88,5.0,0,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+15.0,3,8.465046969666668,8.751,9.848484848333333,6.26,7.0,8.4375,8.7525,10.0,0,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+14.0,3,8.4690496032,7.5,9.682539682666667,6.26,7.833333333333333,7.96875,8.965,10.0,0,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+14.0,3,8.823550937933334,8.751,9.689754689666666,7.51,8.0,8.75,8.9225,10.0,0,Feminino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+14.0,2,8.568238636333334,7.5,9.848484848333333,6.26,8.333333333333334,7.96875,8.795,10.0,0,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+16.0,3,8.852545634933334,9.585,9.841269841333334,5.635,8.833333333333334,8.28125,8.8375,10.0,0,Feminino,5C,Pública,5C,1,1
+14.0,1,7.3512154762,8.334,7.880952381,6.26,7.5,7.65625,7.75,5.0,0,Masculino,5C,Privada - Programa de Apadrinhamento,5C,0,0
+15.0,1,8.914816269866666,8.751,9.682539682666667,6.26,9.166666666666666,8.59375,8.9225,10.0,0,Feminino,5C,Pública,5C,0,1
+17.0,2,8.3233039474,8.751,9.824561403666666,6.26,7.333333333333333,7.65625,8.125,10.0,0,Feminino,5D,Pública,5D,1,1
+18.0,1,8.134554885333333,8.751,9.514316093333333,5.635,9.333333333333334,7.65625,8.304,5.0,0,Masculino,5D,Concluiu o 3º EM,5D,1,1
+17.0,1,7.614235714266666,7.5,8.571428571333334,5.005,9.0,6.5625,8.466,5.0,0,Masculino,5D,Pública,5D,1,1
+17.0,2,8.0934746032,8.751,9.682539682666667,6.26,8.333333333333334,7.5,8.696,5.0,0,Feminino,5D,Pública,5D,1,1
+16.0,0,5.7316173854,9.585,4.104378593666667,6.26,3.8333333333333335,7.34375,6.626,5.0,0,Masculino,5D,Pública,5D,1,1
+16.0,3,4.920488888866667,0.0,5.0694444443333335,7.51,2.5,7.5,7.028,5.0,0,Feminino,5D,Pública,5D,1,1
+14.0,3,6.676130827066667,7.5,7.9949874686666655,7.51,4.666666666666667,7.5,6.964,5.0,0,Masculino,5D,Privada - Programa de Apadrinhamento,5D,0,0
+17.0,0,8.471456704266666,8.751,8.696741854666667,6.26,8.166666666666666,7.96875,9.004,10.0,0,Feminino,5D,Pública,5D,1,1
+16.0,0,5.8216796296,8.334,5.148148148,7.51,2.5,7.8125,7.132,5.0,0,Masculino,5D,Pública,5D,1,1
+15.0,0,4.899894444466667,5.833,6.222222222333333,5.635,0.0,6.5625,6.762,5.0,0,Masculino,5D,Pública,5D,0,1
+15.0,1,7.072539814866667,8.751,7.199074074333335,7.51,5.0,6.40625,6.83,10.0,0,Masculino,5D,Pública,5D,0,1
+16.0,2,8.220132915666667,9.168,9.665831245,7.51,5.833333333333333,8.125,8.2,10.0,0,Feminino,5F,Privada - Programa de Apadrinhamento,5F,1,0
+16.0,2,7.931384271366667,8.751,9.689754689666666,6.26,7.666666666666667,7.916666667,8.336666667,5.0,0,Feminino,5F,Pública,5F,1,1
+17.0,3,7.400477922133334,8.334,9.277056277,7.51,6.166666666666667,7.5,7.386666667,5.0,0,Feminino,5F,Pública,5F,1,1
+17.0,0,7.263155555633333,8.751,9.444444444666667,7.51,5.0,7.708333333,7.386666667,5.0,0,Feminino,5F,Pública,5F,1,1
+18.0,3,7.577233333233334,8.334,9.666666666666666,7.51,6.0,7.708333333,7.943333333,5.0,0,Feminino,5F,Concluiu o 3º EM,5F,1,1
+17.0,1,6.576761183366667,9.585,7.582972583,5.005,6.833333333333333,4.791666667,6.276666667,5.0,0,Masculino,5F,Pública,5F,1,1
+17.0,3,7.411701731566668,6.666,8.658008657666668,7.51,7.666666666666667,7.291666667,7.5,5.0,0,Masculino,5F,Pública,5F,1,1
+17.0,0,7.3860274169,9.585,8.751803751666666,7.51,5.833333333333333,7.708333333,7.443333333,5.0,0,Masculino,5F,Pública,5F,1,1
+17.0,0,6.7023729275666675,9.168,7.753697970666667,7.51,5.166666666666667,7.291666667,6.106666667,5.0,0,Masculino,5F,Pública,5F,1,1
+18.0,0,6.4589186218000005,7.083,8.361426442,7.51,4.5,7.5,5.886666667,5.0,0,Masculino,5F,Pública,5F,1,1
+16.0,1,7.014528571366666,6.666,8.523809523666666,7.51,6.166666666666667,7.708333333,6.94,5.0,0,Feminino,5G,Pública,5G,1,1
+17.0,0,7.801633333400001,9.168,10.0,7.51,7.0,8.125,7.106666667,5.0,0,Feminino,5G,Pública,5G,1,1
+14.0,3,6.085471428700001,8.334,7.1428571430000005,7.51,3.0,7.291666667,6.216666667,5.0,0,Feminino,5G,Privada - Programa de Apadrinhamento,5G,0,0
+17.0,3,8.7225,7.5,10.0,6.26,9.5,8.125,8.17,10.0,0,Feminino,5G,Pública,5G,1,1
+16.0,1,5.8963067819666675,10.002,8.285533910333333,6.26,2.0,4.583333333,6.273333333,5.0,0,Feminino,5G,Pública,5G,1,1
+16.0,3,7.6486387164,9.585,8.672360248333332,7.51,7.666666666666667,7.5,7.106666667,5.0,0,Feminino,5G,Pública,5G,1,1
+17.0,2,7.043536903066667,8.751,7.063851181666667,7.51,6.666666666666667,7.5,7.106666667,5.0,0,Feminino,5L,Pública,5L,1,1
+16.0,3,6.5837938596,7.5,7.337719298333333,5.63,5.166666666666667,7.8125,7.443333333,5.0,0,Feminino,5L,Pública,5L,1,1
+13.0,3,7.025000925866668,7.917,9.129629629666667,7.51,4.666666666666667,7.34375,7.443333333,5.0,0,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,0
+15.0,2,8.651029629666667,8.334,9.648148147999999,5.635,9.333333333333334,8.125,8.226666667,10.0,0,Masculino,5L,Pública,5L,0,1
+17.0,3,7.948699561466667,9.585,9.024122807,7.51,5.833333333333333,7.34375,7.666666667,10.0,0,Feminino,5L,Privada - Programa de Apadrinhamento,5L,1,0
+15.0,3,6.855108333266668,8.334,7.416666666666667,6.26,5.666666666666667,7.34375,7.723333333,5.0,0,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,0
+16.0,0,7.258445588333334,8.751,7.965686274666666,6.26,4.0,7.96875,7.836666667,10.0,0,Masculino,5L,Pública,5L,1,1
+17.0,3,6.787898989933334,7.5,6.574494949666668,7.51,6.5,7.5,7.11,5.0,0,Masculino,5L,Privada,5L,1,1
+16.0,3,6.837125731066667,9.585,8.084795321666666,6.26,5.666666666666667,6.25,6.886666667,5.0,0,Feminino,5L,Privada - Programa de Apadrinhamento,5L,0,1
+15.0,0,8.4627502436,7.5,9.431042884999998,7.51,8.5,7.96875,7.893333333,10.0,0,Feminino,5M,Pública,5M,0,1
+17.0,0,8.417533333333333,7.917,9.833333333333334,7.51,8.333333333333334,7.5,7.4575,10.0,0,Feminino,5M,Pública,5M,1,1
+17.0,2,7.147738235266668,8.334,8.436274509666667,7.51,6.166666666666667,7.1875,7.12,5.0,0,Feminino,5M,Pública,5M,1,1
+15.0,2,7.400633333333334,9.168,8.958333333333334,6.26,7.333333333333333,7.5,6.7475,5.0,0,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
+16.0,2,8.708925,9.168,10.0,7.51,8.0,7.65625,8.3775,10.0,0,Feminino,5M,Pública,5M,1,1
+15.0,2,5.123180882333333,6.666,4.031862745000001,6.26,3.1666666666666665,7.34375,5.7825,5.0,0,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
+16.0,1,8.442258333333335,9.168,10.0,7.51,6.666666666666667,7.65625,8.3775,10.0,0,Feminino,5M,Pública,5M,1,1
+16.0,0,6.509169736866667,8.334,6.581140350999999,7.51,5.333333333333333,7.34375,6.5375,5.0,0,Feminino,5M,Pública,5M,1,1
+15.0,3,4.926285714266666,0.0,5.571428571333333,7.51,3.25,6.875,6.1175,5.0,0,Feminino,5M,Privada - Programa de Apadrinhamento,5M,0,0
+16.0,3,6.855159259266667,8.334,7.796296296333334,6.26,4.0,6.875,6.745,10.0,0,Feminino,5M,Pública,5M,1,1
+17.0,0,6.1661539474,7.917,7.699561403666666,7.51,2.8333333333333335,7.34375,6.4125,5.0,0,Masculino,5M,Pública,5M,1,1
+15.0,3,7.0487660130666665,8.334,7.908496732000001,7.51,6.333333333333333,7.5,6.83,5.0,0,Masculino,5M,Pública,5M,0,1
+15.0,0,7.489282456133334,7.083,8.714912280666667,5.635,6.5,7.5,7.1225,10.0,0,Masculino,5M,Pública,5M,0,1
+15.0,3,7.393951851866667,7.501,9.259259259333334,7.51,4.25,7.5,7.205,10.0,0,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
+16.0,3,8.177186956533333,8.751,8.963768115999999,6.26,8.166666666666666,7.5,7.5,10.0,0,Masculino,5N,Pública,5N,1,1
+14.0,3,6.7135006212,8.751,8.612836439,5.63,4.5,6.875,7.326666667,5.0,0,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
+16.0,0,8.950566666733334,8.334,10.0,6.26,9.666666666666666,8.125,8.726666667,10.0,0,Masculino,5N,Pública,5N,1,1
+14.0,2,6.652766666666667,8.751,6.666666666666667,7.51,5.166666666666667,7.5,7.05,5.0,0,Feminino,5N,Pública,5N,0,1
+18.0,2,8.125807932933334,7.917,9.534706331,6.26,7.166666666666667,8.125,7.776666667,10.0,0,Feminino,5N,Pública,5N,1,1
+16.0,1,7.5085144926666665,9.585,9.855072463666666,5.63,6.166666666666667,7.5,7.663333333,5.0,0,Feminino,5N,Pública,5N,1,1
+14.0,3,5.6415838956,7.917,7.099419478000001,6.26,1.5,7.5,6.27,5.0,0,Masculino,5N,Privada - Programa de Apadrinhamento,5N,0,0
+17.0,2,8.907314492800001,9.168,9.855072463666666,7.51,9.333333333333334,8.125,7.946666667,10.0,0,Masculino,5N,Pública,5N,1,1
+15.0,3,6.999509385733333,8.334,8.668046928999999,3.755,7.666666666666667,6.25,6.993333333,5.0,0,Masculino,5N,Privada - Programa de Apadrinhamento,5N,0,0
+17.0,0,9.113133333366667,9.168,10.0,7.51,9.333333333333334,8.333333333,8.726666667,10.0,0,Feminino,5N,Pública,5N,1,1
+15.0,3,8.107033333366667,7.917,10.0,6.26,8.333333333333334,8.333333333,8.446666667,5.0,0,Feminino,5N,Privada - Programa de Apadrinhamento,5N,0,0
+16.0,1,8.822714492700001,7.917,9.855072463666666,6.26,9.333333333333334,8.333333333,8.67,10.0,0,Masculino,5N,Pública,5N,1,1
+16.0,0,8.376195238033333,8.751,9.523809523666666,7.51,9.0,8.333333333,8.56,5.0,0,Feminino,5N,Pública,5N,1,1
+16.0,3,8.429066666633334,8.334,10.0,7.51,9.666666666666666,8.333333333,7.89,5.0,0,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
+17.0,3,8.4746321428,8.334,8.380952380666665,7.51,8.333333333333334,8.59375,8.44,10.0,0,Masculino,6A,Pública,6A,1,1
+17.0,0,7.656628769866667,9.168,9.682539682666667,5.635,8.166666666666666,6.796875,7.134,5.0,0,Masculino,6A,Pública,6A,0,1
+16.0,3,7.7609537037333345,9.168,8.518518518666667,6.26,6.0,7.8125,7.666,10.0,0,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
+18.0,3,7.721664285733334,9.168,8.761904762,5.635,5.666666666666667,7.8125,7.872,10.0,0,Masculino,6A,Privada - Programa de Apadrinhamento,6A,1,0
+17.0,2,6.887248015866668,7.5,8.412698412666666,5.635,7.166666666666667,6.71875,6.43,5.0,0,Feminino,6A,Privada,6A,1,1
+18.0,0,6.627079761933334,8.334,5.6428571430000005,7.51,6.166666666666667,7.34375,7.232,5.0,0,Feminino,6A,Concluiu o 3º EM,6A,1,1
+17.0,0,7.743213492066667,7.917,9.460317460333334,7.51,7.5,7.8125,7.636,5.0,0,Masculino,6A,Pública,6A,0,1
+16.0,0,6.888194089266667,7.5,7.112887113,7.51,4.333333333333333,7.1875,6.896,10.0,0,Feminino,6A,Pública,6A,0,1
+17.0,0,8.541085606066668,8.751,9.696969697,7.51,7.333333333333333,8.28125,8.404,10.0,0,Feminino,6A,Pública,6A,1,1
+16.0,0,7.481547222200001,7.083,7.777777777666667,7.51,7.833333333333333,7.65625,8.172,5.0,0,Feminino,6A,Pública,6A,0,1
+17.0,3,7.500131368600001,8.334,8.509823509666667,7.51,5.833333333333333,6.875,6.798,10.0,0,Feminino,6A,Privada - Programa de Apadrinhamento,6A,0,0
+17.0,0,8.052609920666667,7.083,7.978174603333333,7.51,8.0,7.96875,8.004,10.0,0,Feminino,6A,Pública,6A,1,1
+18.0,3,7.560550529133334,9.585,8.645502645666667,7.51,7.25,7.1875,7.266,5.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
+18.0,3,7.426704761933335,10.002,7.476190476333334,5.635,7.333333333333333,7.875,8.068,5.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
+17.0,1,8.033470175466666,8.751,9.473684210666667,6.26,8.166666666666666,8.375,8.334,5.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
+17.0,3,8.9495245614,9.168,9.649122807,7.51,9.0,8.375,8.572,10.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
+16.0,3,8.637033333333335,10.002,9.666666666666666,6.26,8.0,8.375,8.2,10.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,0,0
+16.0,0,8.256566666666668,9.168,9.333333333333334,6.26,7.5,7.875,7.798,10.0,0,Masculino,6L,Privada - Programa de Apadrinhamento,6L,0,1
+18.0,2,8.583133333333334,8.334,9.833333333333334,7.51,7.333333333333333,8.25,8.702,10.0,0,Masculino,6L,Pública,6L,1,1
+18.0,1,7.3289333333333335,7.5,7.833333333333333,5.635,8.333333333333334,7.625,7.598,5.0,0,Feminino,6L,Concluiu o 3º EM,6L,1,1
+17.0,0,7.143244444466667,7.083,8.555555555666666,6.885,7.666666666666667,7.5,6.26,5.0,0,Masculino,6L,Privada,6L,1,1
+16.0,0,8.186433333333333,9.585,10.0,7.51,7.166666666666667,8.5,8.468,5.0,0,Masculino,6L,Pública,6L,0,1
+17.0,1,8.389333333333335,9.168,10.0,7.51,6.666666666666667,7.75,8.066,10.0,0,Feminino,6L,Pública,6L,0,1
+17.0,3,8.2302,9.585,10.0,7.51,5.5,7.875,8.166,10.0,0,Feminino,6L,Privada - Programa de Apadrinhamento,6L,1,0
+18.0,3,8.024136842133334,10.002,9.473684210666667,6.26,8.5,7.5,7.766,5.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+18.0,3,8.131659175733333,8.751,7.8961292116666675,8.13,7.0,8.75,7.946666667,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,1,7.098051462066667,7.083,7.211257310000001,8.13,5.333333333333333,8.125,6.276666667,10.0,0,Masculino,7A,Pública,7A,0,1
+18.0,3,8.5902971362,10.002,9.081527348,8.13,8.0,8.28125,7.663333333,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,3,8.052279017,10.002,8.769145085,7.51,7.5,7.8125,6.33,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,3,8.743476190400001,7.5,9.619047619,9.38,8.0,8.75,8.283333333,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+18.0,3,9.077020175400001,10.002,9.265350877333333,10.0,7.666666666666667,8.4375,9.233333333,10.0,0,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,1
+17.0,3,7.4193804301999995,9.585,6.010860484333333,6.88,6.166666666666667,8.59375,7.39,10.0,0,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+19.0,3,8.7713289474,9.585,9.824561403666666,7.51,7.333333333333333,9.0625,8.62,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,3,8.1780308688,8.751,8.028404344,8.755,7.5,8.4375,7.39,10.0,0,Masculino,7A,Privada - Programa de Apadrinhamento,7A,0,1
+18.0,3,9.437924561333332,8.751,9.649122807,9.375,9.166666666666666,9.375,9.623333333,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,3,8.743607059266667,10.002,8.980785296666667,8.135,8.166666666666666,8.4375,8.283333333,10.0,0,Feminino,7A,Privada - Programa de Apadrinhamento,7A,0,0
+17.0,3,8.402390371800001,7.917,8.339076859,9.375,7.5,8.59375,8.23,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+15.0,3,4.7612000000000005,7.917,0.0,7.195,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+15.0,2,8.352033333333335,10.002,9.0,6.885,8.066666666666666,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,1
+15.0,3,8.4773,9.168,9.6,7.505,8.200000000000001,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,4.79255,9.168,0.0,6.2575,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+16.0,3,8.152033333333334,10.002,9.0,6.885,7.066666666666666,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+17.0,3,4.78185,8.751,0.0,6.5675,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+17.0,3,7.785233333333334,8.334,9.0,6.885,6.066666666666666,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,8.275550000066668,9.168,9.931666667,6.2575,7.483333333333333,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,8.085299999933333,7.083,9.983333333,6.57,7.366666666666667,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+15.0,3,8.311616666733334,10.002,9.891666667,7.1975,6.816666666666667,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,1
+15.0,3,8.2887,9.585,9.621,6.26,7.650000000000001,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,1
+17.0,3,8.144466666733333,8.751,9.437666667,6.885,7.216666666666666,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,4.8446,8.751,0.0,7.195,0.0,7.5,7.5,10.0,0,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+15.0,2,8.452633333266668,9.168,9.953333333,6.885,8.033333333333333,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,1
+18.0,3,4.7404,8.334,0.0,6.57,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+17.0,3,4.8761,8.751,0.0,7.51,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,4.8238,9.168,0.0,6.57,0.0,7.5,7.5,10.0,0,Feminino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+16.0,3,8.617450000000002,9.585,9.546,7.1975,8.9,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,1
+16.0,3,8.0689833334,8.334,9.741666667,6.5725,6.8999999999999995,7.5,7.5,10.0,0,Feminino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+15.0,2,8.128766666666667,8.751,9.8,6.57,6.933333333333334,7.5,7.5,10.0,0,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+18.0,3,7.9319666667333335,8.751,9.737666667,6.26,6.166666666666667,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+15.0,3,7.611233333266666,6.667,9.704333333,6.57,5.483333333333333,7.5,7.5,10.0,0,Masculino,7E,Privada - Programa de Apadrinhamento,7E,0,0
+16.0,3,7.449366666666667,10.002,9.92,6.885,2.6333333333333333,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+15.0,3,8.243183333333334,8.334,9.246,6.5725,8.266666666666667,7.5,7.5,10.0,0,Masculino,7E,Privada *Parcerias com Bolsa 100%,7E,0,0
+22.0,3,7.7887,7.5,9.571,5.945,6.3999999999999995,7.5,7.5,10.0,0,Feminino,8A,Privada,8A,0,1
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8A,Privada,8A,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada - Pagamento por *Empresa Parceira,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada,8B,0,0
+27.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada - Pagamento por *Empresa Parceira,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8B,Privada,8B,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada *Parcerias com Bolsa 100%,8D,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8D,Privada,8D,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+21.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8D,Pública,8D,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8D,Privada,8D,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8D,Privada *Parcerias com Bolsa 100%,8D,0,0
+24.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8D,Privada,8D,0,0
+18.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+22.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+22.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada *Parcerias com Bolsa 100%,8E,0,0
+20.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+19.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8E,Privada - Pagamento por *Empresa Parceira,8E,0,0
+19.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+23.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Concluiu o 3º EM,8F,0,0
+19.0,2,0.0,0.0,0.0,0.0,8.0,0.0,0.0,10.0,1,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Concluiu o 3º EM,8F,0,0
+19.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+20.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+20.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+18.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada - Programa de Apadrinhamento,8F,0,0
+21.0,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,8F,Concluiu o 3º EM,8F,0,0
+18.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Feminino,8F,Privada *Parcerias com Bolsa 100%,8F,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Bolsista Universitário *Formado (a),9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+25.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada *Parcerias com Bolsa 100%,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+21.0,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+23.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+20.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Privada,9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Masculino,9,Bolsista Universitário *Formado (a),9,0,0
+22.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Privada,9,0,0
+24.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Bolsista Universitário *Formado (a),9,0,0
+21.0,3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0,Feminino,9,Bolsista Universitário *Formado (a),9,0,0

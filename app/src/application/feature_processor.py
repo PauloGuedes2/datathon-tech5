@@ -1,7 +1,8 @@
-import pandas as pd
-import numpy as np
 from datetime import datetime
 from typing import Optional
+
+import pandas as pd
+
 from src.config.settings import Settings
 
 
@@ -56,8 +57,12 @@ class FeatureProcessor:
 
         for col in required_cols:
             if col not in df.columns:
-                # Cria coluna faltante com valor padrão seguro
+                # Se for feature numérica (ex: INDE_ANTERIOR) e não vier, preenche com 0
                 df[col] = 0 if col in Settings.FEATURES_NUMERICAS else "N/A"
+
+        # Remove colunas que não devem estar ali (Sanitização)
+        # Garante que só passa o que está na whitelist
+        df = df[required_cols]
 
         # --- Tratamento de Nulos Final ---
         # Numéricos -> 0 (ou média, conforme sua regra de negócio original)

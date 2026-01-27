@@ -18,14 +18,24 @@ class Settings:
 
     # --- Configuração do Modelo ---
     RISK_THRESHOLD = 0.5
-    TARGET_COL = "RISCO_DEFASAGEM"  # 1 = Risco, 0 = Ok
+    TARGET_COL = "RISCO_DEFASAGEM"
     RANDOM_STATE = 42
 
-    # --- FEATURES (WHITELIST) ---
-    # Nenhuma nota aqui, garantindo que não é "soma de médias"
+    # --- FEATURES QUE O MODELO PODE VER ---
     FEATURES_NUMERICAS = [
         "IDADE",
-        "TEMPO_NA_ONG"
+        "TEMPO_NA_ONG",
+        # Features Históricas (Passado)
+        "INDE_ANTERIOR",
+        "IAA_ANTERIOR",
+        "IEG_ANTERIOR",
+        "IPS_ANTERIOR",
+        "IDA_ANTERIOR",
+        "IPP_ANTERIOR",
+        "IPV_ANTERIOR",
+        "IAN_ANTERIOR",
+        # Flag de controle
+        "ALUNO_NOVO"
     ]
 
     FEATURES_CATEGORICAS = [
@@ -33,4 +43,11 @@ class Settings:
         "TURMA",
         "INSTITUICAO_ENSINO",
         "FASE"
+    ]
+
+    # Lista de colunas usadas APENAS para criar o target, mas proibidas no X (input)
+    # Isso previne o "Somador de Notas"
+    COLUNAS_PROIBIDAS_NO_TREINO = [
+        "INDE", "PEDRA", "DEFASAGEM",
+        "NOTA_PORT", "NOTA_MAT", "NOTA_ING"
     ]
