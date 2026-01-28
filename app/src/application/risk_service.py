@@ -2,6 +2,8 @@ import pandas as pd
 
 from src.application.feature_processor import FeatureProcessor
 from src.config.settings import Settings
+from src.domain.student import StudentInput, Student
+from src.infrastructure.data.historical_repository import HistoricalRepository
 from src.infrastructure.logging.prediction_logger import PredictionLogger
 from src.util.logger import logger
 
@@ -11,6 +13,7 @@ class RiskService:
         self.model = model
         self.processor = FeatureProcessor()  # Instancia o processador
         self.logger = PredictionLogger()  # Instancia o Logger Seguro
+        self.repository = HistoricalRepository() # Instancia o repositório histórico
 
     def predict_risk(self, student_data: dict) -> dict:
         if not self.model:
@@ -47,3 +50,38 @@ class RiskService:
         except Exception as e:
             logger.error(f"Erro na inferência: {e}")
             raise e
+
+    def predict_risk_smart(self, input_data: StudentInput) -> dict:
+        """
+        Método inteligente que busca histórico automaticamente.
+        """
+        # 1. Busca histórico na Feature Store
+        history_features = self.repository.get_student_history(input_data.RA)
+
+        # 2. Lógica de "Enriquecimento"
+        if history_features:
+            logger.info(f"Histórico encontrado para RA: {input_data.RA}")
+        else:
+            logger.info(f"Aluno novo ou sem histórico (RA: {input_data.RA})")
+            history_features = {
+                "INDE_ANTERIOR": 0.0,
+                "IAA_ANTERIOR": 0.0,
+                "IEG_ANTERIOR": 0.0,
+                "IPS_ANTERIOR": 0.0,
+                "IDA_ANTERIOR": 0.0,
+                "IPP_ANTERIOR": 0.0,
+                "IPV_ANTERIOR": 0.0,
+                "IAN_ANTERIOR": 0.0,
+                "ALUNO_NOVO": 1
+            }
+
+        # 3. Cria o objeto Student completo (Domain Object)
+        # Combina os dados da tela (input_data) com os do banco (history_features)
+        full_student_data = input_data.model_dump()
+        full_student_data.update(history_features)
+
+        # Valida com o modelo rigoroso original
+        student_domain = Student(**full_student_data)
+
+        # 4. Chama a predição original
+        return self.predict_risk(student_domain.model_dump())

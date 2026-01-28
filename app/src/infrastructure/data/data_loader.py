@@ -89,8 +89,9 @@ class DataLoader:
             col_clean = re.sub(f'[ _]{ano_full}', '', col_clean)
             col_clean = re.sub(f'[ _]{ano_short}$', '', col_clean)
 
-            # 2. MAPEAMENTOS (Adicionei ANO_INGRESSO)
-            if col_clean in ['MAT', 'MATEM', 'MATEMATICA']:
+            if col_clean in ['RA', 'ID_ALUNO', 'CODIGO_ALUNO', 'MATRICULA']:
+                col_clean = 'RA'
+            elif col_clean in ['MAT', 'MATEM', 'MATEMATICA']:
                 col_clean = 'NOTA_MAT'
             elif col_clean in ['POR', 'PORT', 'PORTUG', 'PORTUGUES']:
                 col_clean = 'NOTA_PORT'
@@ -114,5 +115,8 @@ class DataLoader:
 
         if df.columns.duplicated().any():
             df = df.loc[:, ~df.columns.duplicated()]
+
+        if 'RA' in df.columns:
+            df['RA'] = df['RA'].astype(str).str.strip()
 
         return df

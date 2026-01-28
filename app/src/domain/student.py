@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field, ConfigDict
 
 class Student(BaseModel):
     # --- Dados Demográficos (Mantém) ---
+    RA: str = Field(..., min_length=1, description="Registro Acadêmico Único do Aluno")
     IDADE: int = Field(..., ge=4, le=25)
     ANO_INGRESSO: int = Field(..., ge=2010, le=2026)
     GENERO: str = Field(..., pattern="^(Masculino|Feminino|Outro)$")
@@ -28,3 +29,16 @@ class Student(BaseModel):
     ALUNO_NOVO: int = Field(0, description="1 se entrou este ano, 0 se veterano")
 
     model_config = ConfigDict(populate_by_name=True)
+
+
+class StudentInput(BaseModel):
+    """
+    O que a Diretora realmente preenche na tela.
+    """
+    RA: str = Field(..., min_length=1, description="Registro Acadêmico Único do Aluno")
+    IDADE: int = Field(..., ge=4, le=25)
+    ANO_INGRESSO: int = Field(..., ge=2010, le=2026)
+    GENERO: str = Field(..., pattern="^(Masculino|Feminino|Outro)$")
+    TURMA: str = Field(..., min_length=1)
+    INSTITUICAO_ENSINO: str = Field(..., min_length=3)
+    FASE: str = Field(..., pattern="^[0-9A-Z]+$")

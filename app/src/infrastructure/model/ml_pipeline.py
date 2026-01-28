@@ -56,11 +56,12 @@ class MLPipeline:
         logger.info("Gerando Features Históricas (Lag)...")
 
         # 1. Ordenação Crítica: Agrupar por aluno e ordenar por ano é vital para o .shift() funcionar
-        if "NOME" not in df.columns or "ANO_REFERENCIA" not in df.columns:
-            logger.warning("Colunas NOME ou ANO_REFERENCIA ausentes. Pulando criação de Lag Features.")
+        if "RA" not in df.columns or "ANO_REFERENCIA" not in df.columns:
+            logger.warning("RA ausente. Pulando Lag Features.")
             return df
 
-        df = df.sort_values(by=["NOME", "ANO_REFERENCIA"])
+        # Ordenar por RA
+        df = df.sort_values(by=["RA", "ANO_REFERENCIA"])
 
         # 2. Métricas que queremos rastrear o histórico
         metricas_para_historico = ["INDE", "IAA", "IEG", "IPS", "IDA", "IPP", "IPV", "IAN"]
@@ -69,7 +70,7 @@ class MLPipeline:
             if col in df.columns:
                 col_name = f"{col}_ANTERIOR"
                 # Pega o valor da linha anterior (Ano T-1) do mesmo aluno
-                df[col_name] = df.groupby("NOME")[col].shift(1)
+                df[col_name] = df.groupby("RA")[col].shift(1)
 
                 # Preenche com 0 para alunos novos (sem histórico)
                 df[col_name] = df[col_name].fillna(0)

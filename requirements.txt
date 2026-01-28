@@ -2,14 +2,15 @@ fastapi
 uvicorn
 pandas
 numpy
-scikit-learn
+scikit-learn==1.5.2
+evidently==0.6.0
 joblib
 openpyxl
 pydantic
+jinja2
 pytest
 pytest-cov
 pytest-mock
 httpx
 coverage
-evidently==0.6.0
 python-multipart
