@@ -76,37 +76,37 @@ A arquitetura segue o padrão de **Arquitetura Hexagonal/Limpa** para desacoplam
 
 ```mermaid 
 graph TD
-    A[Usuário/Sistema Externo] -->|POST /predict/smart| B[FastAPI - app/main.py];
-    B --> C{Controller de Predição};
-    C --> D[RiskService - Aplicação];
-    D --> E[ModelManager - Infra];
-    D --> F[HistoricalRepository - Infra];
-    D --> G[PredictionLogger - Infra];
-    E -->|Carrega Modelo| H[model_passos_magicos.joblib];
-    F -->|Busca Histórico T-1| I[Dados Históricos/Feature Store];
-    D -->|Aplica FeatureProcessor| J[Dados Prontos para Predição];
-    J --> E;
-    E -->|Resultado| C;
-    C -->|Resposta JSON| A;
-    G -->|Log JSONL| K[prediction.jsonl];
+    A[Usuário/Sistema Externo] -->|POST /predict/smart| B[FastAPI - app/main.py]
+    B --> C{Controller de Predição}
+    C --> D[RiskService - Aplicação]
+    D --> E[ModelManager - Infra]
+    D --> F[HistoricalRepository - Infra]
+    D --> G[PredictionLogger - Infra]
+    E -->|Carrega Modelo| H[model_passos_magicos.joblib]
+    F -->|Busca Histórico T-1| I[Dados Históricos/Feature Store]
+    D -->|Aplica FeatureProcessor| J[Dados Prontos para Predição]
+    J --> E
+    E -->|Resultado| C
+    C -->|Resposta JSON| A
+    G -->|Log JSONL| K[prediction.jsonl]
 
-    subgraph MLOps Pipeline (Offline)
-        L[Execução Manual: python app/train.py] --> M[DataLoader];
-        M --> N[MLPipeline];
-        N --> O[Cria Lag Features];
-        N --> P[Split Temporal];
-        N --> Q[Treinamento c/ Quality Gate];
-        Q --> H;
-        Q --> R[metrics.json];
-        Q --> S[reference_data.csv];
+    subgraph MLOps_Pipeline_Offline [MLOps Pipeline - Offline]
+        L[Execução Manual: python app/train.py] --> M[DataLoader]
+        M --> N[MLPipeline]
+        N --> O[Cria Lag Features]
+        N --> P[Split Temporal]
+        N --> Q[Treinamento c/ Quality Gate]
+        Q --> H
+        Q --> R[metrics.json]
+        Q --> S[reference_data.csv]
     end
 
-    subgraph Observabilidade (Online)
-        T[Usuário/DevOps] -->|GET /monitoring/dashboard| U[MonitoringController];
-        U --> V[MonitoringService];
-        V -->|Compara| S;
-        V -->|Compara| K;
-        V -->|Gera Dashboard HTML| T;
+    subgraph Observabilidade_Online [Observabilidade - Online]
+        T[Usuário/DevOps] -->|GET /monitoring/dashboard| U[MonitoringController]
+        U --> V[MonitoringService]
+        V -->|Compara| S
+        V -->|Compara| K
+        V -->|Gera Dashboard HTML| T
     end
 ```
 
