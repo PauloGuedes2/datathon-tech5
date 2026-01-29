@@ -1,4 +1,7 @@
+import os
+
 import pandas as pd
+
 from src.config.settings import Settings
 from src.util.logger import logger
 
@@ -21,12 +24,17 @@ class HistoricalRepository:
             # Aqui assumo que o reference_data.csv tem as colunas necessárias.
             # Se não tiver, aponte para o Excel original processado.
             logger.info("Carregando base histórica para Feature Store...")
-
-            # Exemplo: Carregando o CSV gerado pelo pipeline de treino
-            if pd.io.common.file_exists(Settings.REFERENCE_PATH):
+            # Tenta carregar do CSV de referência
+            if os.path.exists(Settings.REFERENCE_PATH):
                 self._data = pd.read_csv(Settings.REFERENCE_PATH)
+
+                # --- NOVO BLOCO DE VALIDAÇÃO ---
+                if 'RA' not in self._data.columns:
+                    logger.warning("CSV de referência obsoleto (sem RA). Recarregando do Excel...")
+                    from src.infrastructure.data.data_loader import DataLoader
+                    self._data = DataLoader().load_data()
+                # -------------------------------
             else:
-                # Fallback: Tenta carregar do dataloader se o CSV não existir
                 from src.infrastructure.data.data_loader import DataLoader
                 self._data = DataLoader().load_data()
 
