@@ -1,1021 +1,374 @@
-# 🎓 **Passos Mágicos - Previsão de Risco de Defasagem Escolar**
+# 🚀 Passos Mágicos: Sistema Preditivo de Risco de Evasão (MLOps Ready)
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Latest-orange?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)](https://docker.com)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=for-the-badge&logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.3.2-F7931E.svg?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org/)
+[![Evidently AI](https://img.shields.io/badge/Evidently%20AI-0.4.1-6F42C1.svg?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MCA1MCI+PHBhdGggZmlsbD0iIzY0NTRiYSIgZD0iTTI1IDBDMTEuMTkgMCAwIDExLjE5IDAgMjVzMTEuMTkgMjUgMjUgMjUgMjUtMTEuMTkgMjUtMjVTMzguODEgMCAyNSAwem0wIDQ1Yy0xMS4wMyAwLTIwLTguOTctMjAtMjBzOC45Ny0yMCAyMC0yMCAyMCA4Ljk3IDIwIDIwLTguOTcgMjAtMjAgMjB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI1IDVjLTExLjA1IDAtMjAgOC45NS0yMCAyMHM4Ljk1IDIwIDIwIDIwIDIwLTguOTUgMjAtMjBzLTguOTUtMjAtMjAtMjB6bTAgMzVjLTguMjggMC0xNS02LjcyLTE1LTE1czYuNzItMTUgMTUtMTUgMTUgNi43MiAxNSAxNS02LjcyIDE1LTE1IDE1eiIvPjxwYXRoIGZpbGw9IiM2NDU0YmEiIGQ9Ik0yNSAxMGMtOC4yOCAwLTE1IDYuNzItMTUgMTVzNi43MiAxNSAxNSAxNSAxNS02LjcyIDE1LTE1cy02LjcyLTE1LTE1LTE1em0wIDI1Yy01LjUyIDAtMTAtNC40OC0xMC0xMHM0LjQ4LTEwIDEwLTEwIDEwIDQuNDggMTAgMTAtNC40OCAxMC0xMCAxMHoiLz48L3N2Zz4=)](https://evidentlyai.com/)
+[![Docker](https://img.shields.io/badge/Docker-20.10.17-2496ED.svg?style=for-the-badge&logo=docker)](https://www.docker.com/)
+[![Status](https://img.shields.io/badge/Status-Produção%20Candidata-green.svg?style=for-the-badge)](https://github.com/PauloGuedes2/datathon-tech5/tree/feature/modelo-novo)
 
----
-
-## 📋 **Índice**
-
-- [Visão Geral do Projeto](#visão-geral-do-projeto)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Instruções de Deploy](#instruções-de-deploy)
-- [Exemplos de Chamadas à API](#exemplos-de-chamadas-à-api)
-- [Pipeline de Machine Learning](#pipeline-de-machine-learning)
-- [Arquitetura do Projeto](#arquitetura-do-projeto)
-- [Monitoramento e Observabilidade](#monitoramento-e-observabilidade)
-- [Licença](#licença)
+> **Previsão Preditiva de Risco de Evasão Escolar:** Uma arquitetura MLOps para intervenção social e educacional proativa.
 
 ---
 
-## 🎯 **Visão Geral do Projeto**
+## Índice
 
-### **Problema de Negócio**
-
-A **ONG Passos Mágicos** atende centenas de estudantes em situação de vulnerabilidade social, oferecendo educação complementar e apoio psicopedagógico. Um dos principais desafios é identificar precocemente quais alunos estão em risco de defasagem escolar, permitindo intervenções direcionadas e personalizadas.
-
-**Desafio**: Como identificar automaticamente estudantes que podem apresentar dificuldades acadêmicas antes que a defasagem se torne crítica?
-
-### **Solução Proposta**
-
-Sistema de Machine Learning que analisa dados históricos e características dos estudantes para predizer a probabilidade de defasagem escolar. A solução oferece:
-
-- **Pipeline completa de ML**: Desde pré-processamento até deploy em produção
-- **API REST robusta**: Integração fácil com sistemas existentes da ONG
-- **Predições em tempo real**: Análise instantânea de novos estudantes
-- **Arquitetura escalável**: Preparada para crescimento e novas funcionalidades
-
-### **Objetivo Principal**
-
-Identificar precocemente estudantes em risco de defasagem escolar através de análise preditiva, possibilitando que a ONG Passos Mágicos implemente estratégias de intervenção personalizadas e melhore os resultados educacionais.
-
-### **Características Principais**
-
-- 🧠 **Modelo Random Forest** com F1-Score de 0.99
-- 📊 **API REST** com FastAPI para predições em tempo real
-- 🏗️ **Clean Architecture** (Domain, Application, Infrastructure, API)
-- 🐳 **Containerização** completa com Docker
-- 📈 **Métricas de performance** detalhadas
-- ⚡ **Processamento eficiente** de dados categóricos e numéricos
-
-### **Stack Tecnológica**
-
-| Componente | Tecnologia | Versão | Propósito |
-|------------|------------|--------|-----------|
-| **Linguagem** | Python | 3.11+ | Linguagem principal do projeto |
-| **Framework ML** | Scikit-learn | Latest | Random Forest Classifier e pipeline |
-| **Processamento** | Pandas + NumPy | Latest | Manipulação e análise de dados |
-| **API Framework** | FastAPI | Latest | REST API e documentação automática |
-| **Validação** | Pydantic | Latest | Validação de dados de entrada |
-| **Serialização** | Joblib | Latest | Persistência do modelo treinado |
-| **Testes** | Pytest | Latest | Testes automatizados e cobertura |
-| **Containerização** | Docker + Compose | Latest | Deploy e orquestração |
-| **Monitoramento** | Logging + Health Checks | Built-in | Observabilidade da aplicação |
+1. [Visão Geral](#1-visão-geral)
+2. [O Problema que Este Projeto Resolve](#2-o-problema-que-este-projeto-resolve)
+3. [O Que Este Projeto É](#3-o-que-este-projeto-é)
+4. [O Que Este Projeto NÃO É](#4-o-que-este-projeto-não-é)
+5. [Arquitetura da Solução](#5-arquitetura-da-solução)
+6. [Pipeline de Machine Learning](#6-pipeline-de-machine-learning)
+7. [Justificativas Técnicas](#7-justificativas-técnicas)
+8. [Stack Tecnológica](#8-stack-tecnológica)
+9. [Estrutura do Projeto](#9-estrutura-do-projeto)
+10. [API e Deployment](#10-api-e-deployment)
+11. [Testes e Qualidade](#11-testes-e-qualidade)
+12. [Monitoramento e Observabilidade](#12-monitoramento-e-observabilidade)
+13. [Segurança e Confiabilidade](#13-segurança-e-confiabilidade)
+14. [Limitações Conhecidas](#14-limitações-conhecidas)
+15. [Possíveis Evoluções](#15-possíveis-evoluções)
+16. [Instruções de Execução](#16-instruções-de-execução)
+17. [Conformidade com o Datathon](#17-conformidade-com-o-datathon)
+18. [Uso Responsável e Ético](#18-uso-responsável-e-ético)
+19. [Considerações Finais](#19-considerações-finais)
+20. [Licença e Contribuição](#20-licença-e-contribuição)
 
 ---
 
-## 📁 **Estrutura do Projeto**
+## 1. Visão Geral
 
-```
-datathon-tech5/
-├── 📄 docker-compose.yml                    # Orquestração de containers
-├── 📄 Dockerfile                            # Build da imagem Docker
-├── 📄 requirements.txt                      # Dependências Python
-├── 📄 README.md                             # Documentação do projeto
-├── 📄 LICENSE                               # Licença MIT
-│
-├── 📁 app/                                  # Código fonte principal
-│   ├── 📄 main.py                           # Aplicação FastAPI
-│   ├── 📄 train.py                          # Script de treinamento
-│   │
-│   ├── 📁 data/                             # Datasets
-│   │   └── 📄 PEDE_PASSOS_DATASET_FIAP.xlsx # Dataset principal
-│   │
-│   ├── 📁 models/                           # Modelos treinados
-│   │   └── 📄 model_passos_magicos.joblib   # Modelo Random Forest
-│   │
-│   └── 📁 src/                              # Código fonte organizado
-│       ├── 📁 api/                          # Camada de API
-│       │   ├── 📄 controller.py             # Controladores REST
-│       │   └── 📄 schemas.py                # Schemas Pydantic
-│       │
-│       ├── 📁 application/                  # Camada de aplicação
-│       │   └── 📄 risk_service.py           # Serviços de negócio
-│       │
-│       ├── 📁 config/                       # Configurações
-│       │   └── 📄 settings.py               # Configurações centralizadas
-│       │
-│       ├── 📁 domain/                       # Camada de domínio
-│       │   └── 📄 student.py                # Entidades de domínio
-│       │
-│       ├── 📁 infrastructure/               # Camada de infraestrutura
-│       │   ├── 📁 data/
-│       │   │   └── 📄 data_loader.py        # Carregamento de dados
-│       │   └── 📁 model/
-│       │       ├── 📄 ml_pipeline.py        # Pipeline de ML
-│       │       └── 📄 feature_engineer.py   # Engenharia de features
-│       │
-│       └── 📁 util/                         # Utilitários
-│           └── 📄 logger.py                 # Sistema de logging
-│
-└── 📁 tests/                                # Testes automatizados
-    ├── 📄 conftest.py                       # Configurações de teste
-    ├── 📄 test_main.py                      # Testes da aplicação
-    ├── 📁 api/                              # Testes da API
-    ├── 📁 application/                      # Testes de serviços
-    ├── 📁 infrastructure/                   # Testes de infraestrutura
-    └── 📁 util/                             # Testes de utilitários
-```
+Este projeto apresenta uma solução completa de **Machine Learning Operacional (MLOps)** para prever o risco de evasão escolar em alunos da ONG Passos Mágicos. O objetivo central é fornecer uma ferramenta preditiva que permita à equipe pedagógica realizar **intervenções proativas** antes que o risco se materialize.
 
-### **Responsabilidades por Camada**
+A solução foi desenvolvida com foco em **integridade de dados**, **robustez de produção** e **prevenção de *data leakage***, utilizando uma arquitetura de microsserviços baseada em FastAPI e um pipeline de ML que simula um ambiente de produção de alto rigor técnico.
 
-#### **🌐 API Layer** (`src/api/`)
-- **controller.py**: Endpoints REST, validação de entrada e tratamento de erros
-- **schemas.py**: Modelos Pydantic para validação e serialização de dados
+O principal diferencial técnico é a implementação de **Features Históricas (*Lag Features*)** e um **Split Temporal** rigoroso, garantindo que o modelo utilize apenas informações do passado (ano T-1) para prever o risco no presente (ano T), eliminando o risco de vazamento de dados (*leakage*) e aumentando a confiança na capacidade preditiva em cenários reais.
 
-#### **🔧 Application Layer** (`src/application/`)
-- **risk_service.py**: Lógica de negócio para predição de risco e regras de threshold
+## 2. O Problema que Este Projeto Resolve
 
-#### **🏛️ Domain Layer** (`src/domain/`)
-- **student.py**: Entidade de domínio representando um estudante e suas características
+A evasão escolar e o baixo desempenho acadêmico são problemas complexos com alto **impacto social e econômico**. A identificação tardia de alunos em situação de risco impede a aplicação de medidas corretivas eficazes.
 
-#### **🏗️ Infrastructure Layer** (`src/infrastructure/`)
-- **ml_pipeline.py**: Pipeline completo de Machine Learning (treino, avaliação, predição)
-- **feature_engineer.py**: Transformações e encoding de features categóricas
-- **data_loader.py**: Carregamento e validação de dados do Excel
+Este sistema resolve a necessidade crítica de **antecipação**. Ao invés de diagnosticar o risco após a ocorrência (ex: após uma nota baixa ou defasagem de idade/série), o modelo prediz a probabilidade de risco **no início do ano letivo**, utilizando o histórico do aluno. Isso transforma a intervenção de reativa para proativa, maximizando as chances de sucesso pedagógico.
 
----
+## 3. O Que Este Projeto É
 
-## 🚀 **Instruções de Deploy**
+O projeto é um **Sistema de Inferência de Risco em Tempo Real** com um **Pipeline de Treinamento MLOps**.
 
-### **Pré-requisitos**
+| Componente | Descrição |
+| :--- | :--- |
+| **API de Predição** | Serviço *stateless* (sem estado) de baixa latência, pronto para ser integrado a sistemas de gestão escolar ou *dashboards* de acompanhamento. |
+| **Feature Store (In-Memory)** | Repositório de dados históricos (`HistoricalRepository`) que enriquece automaticamente as requisições de predição com as métricas do ano anterior do aluno. |
+| **Pipeline de Treinamento** | Rotina robusta que carrega dados, aplica engenharia de *features* (incluindo *lag features*), treina o modelo com *Quality Gate* e o promove para produção. |
+| **Monitoramento de Drift** | Endpoint dedicado que expõe um *dashboard* do Evidently AI, comparando a distribuição dos dados de produção (inferência) com os dados de referência (treinamento), garantindo a validade do modelo ao longo do tempo. |
 
-| Requisito | Versão Mínima | Observações |
-|-----------|---------------|-------------|
-| **Docker** | 20.10+ | Para containerização |
-| **Docker Compose** | 2.0+ | Para orquestração |
-| **Git** | 2.0+ | Para clone do repositório |
-| **Python** | 3.11+ | Para execução local (opcional) |
-| **curl** | Qualquer | Para testes de API (opcional) |
+## 4. O Que Este Projeto NÃO É
 
-### **🐳 Deploy com Docker (Recomendado)**
+É fundamental definir o escopo para gerenciar expectativas e riscos:
 
-```bash
-# 1. Clone o repositório
-git clone <repository-url>
-cd datathon-tech5
+*   **Não é um sistema de *data warehousing***: O `HistoricalRepository` é um *Feature Store* em memória (Singleton) para enriquecimento em tempo real. Ele não substitui um banco de dados transacional ou um *data lake*.
+*   **Não é um sistema de *retraining* automático (CI/CD completo)**: Embora o pipeline de treinamento (`train.py`) seja robusto, a execução do *retraining* e a orquestração (ex: Airflow, Kubeflow) não estão implementadas. O *retraining* é executado manualmente via `python app/train.py`.
+*   **Não é um sistema de *backtesting* completo**: O *Quality Gate* avalia o modelo candidato em relação ao modelo atual, mas não realiza uma análise exaustiva de *backtesting* em janelas temporais múltiplas.
+*   **Não possui autenticação/autorização (AuthN/AuthZ)**: A API de predição é aberta. Em um ambiente de produção real, seria obrigatório implementar um mecanismo de segurança (ex: *API Key*, OAuth2) para proteger o endpoint sensível.
 
-# 2. Build e execução com Docker Compose
-docker-compose up -d --build
+## 5. Arquitetura da Solução
 
-# 3. Verificar se o container está rodando
-docker-compose ps
+A arquitetura segue o padrão de **Arquitetura Hexagonal/Limpa** para desacoplamento de camadas, facilitando a manutenção e a troca de tecnologias.
 
-# 4. Verificar logs (opcional)
-docker-compose logs -f passos-magicos-api
+```mermaid 
+graph TD
+    A[Usuário/Sistema Externo] -->|POST /predict/smart| B[FastAPI - app/main.py];
+    B --> C{Controller de Predição};
+    C --> D[RiskService - Aplicação];
+    D --> E[ModelManager - Infra];
+    D --> F[HistoricalRepository - Infra];
+    D --> G[PredictionLogger - Infra];
+    E -->|Carrega Modelo| H[model_passos_magicos.joblib];
+    F -->|Busca Histórico T-1| I[Dados Históricos/Feature Store];
+    D -->|Aplica FeatureProcessor| J[Dados Prontos para Predição];
+    J --> E;
+    E -->|Resultado| C;
+    C -->|Resposta JSON| A;
+    G -->|Log JSONL| K[prediction.jsonl];
 
-# 5. Testar a API
-curl http://localhost:8000/health
+    subgraph MLOps Pipeline (Offline)
+        L[Execução Manual: python app/train.py] --> M[DataLoader];
+        M --> N[MLPipeline];
+        N --> O[Cria Lag Features];
+        N --> P[Split Temporal];
+        N --> Q[Treinamento c/ Quality Gate];
+        Q --> H;
+        Q --> R[metrics.json];
+        Q --> S[reference_data.csv];
+    end
+
+    subgraph Observabilidade (Online)
+        T[Usuário/DevOps] -->|GET /monitoring/dashboard| U[MonitoringController];
+        U --> V[MonitoringService];
+        V -->|Compara| S;
+        V -->|Compara| K;
+        V -->|Gera Dashboard HTML| T;
+    end
 ```
 
-**Comandos Docker Úteis:**
-```bash
-# Parar os serviços
-docker-compose down
+**Componentes Chave:**
 
-# Rebuild forçado
-docker-compose up -d --build --force-recreate
+*   **`app/main.py`**: Ponto de entrada da API, responsável por inicializar o `FastAPI` e carregar o modelo em memória no *startup* (`@app.on_event("startup")`).
+*   **`src/api/controller.py`**: Camada de interface, recebe requisições e utiliza o `Depends` do FastAPI para injetar o `RiskService` com o modelo já carregado.
+*   **`src/application/risk_service.py`**: Camada de lógica de negócio. Orquestra a busca de histórico (`HistoricalRepository`), o processamento de *features* (`FeatureProcessor`) e a predição.
+*   **`src/infrastructure/model/model_manager.py`**: Singleton thread-safe que gerencia o ciclo de vida do modelo em memória.
 
-# Ver logs em tempo real
-docker-compose logs -f
+## 6. Pipeline de Machine Learning
 
-# Entrar no container para debug
-docker-compose exec passos-magicos-api bash
+O pipeline de ML foi desenhado para ser **rigorosamente preditivo** e **resistente a *data leakage***.
+
+### 6.1. Engenharia de Features (Anti-Leakage)
+
+A principal inovação é a criação de *Lag Features* (variáveis históricas) dentro do `MLPipeline` (`create_lag_features`).
+
+| Feature | Descrição | Fonte de Dados |
+| :--- | :--- | :--- |
+| `INDE_ANTERIOR` | Índice de Desempenho Educacional do ano **T-1**. | Calculado via `groupby('RA').shift(1)` |
+| `ALUNO_NOVO` | Flag booleana (1/0) que indica se o aluno não possui histórico (`INDE_ANTERIOR` é 0). | Derivado do `INDE_ANTERIOR` |
+| `TEMPO_NA_ONG` | Anos desde o `ANO_INGRESSO` até o `ANO_REFERENCIA`. | Calculado via `FeatureProcessor` |
+
+### 6.2. Estratégia de Treinamento e Validação
+
+1.  **Criação do Target (Gabarito):** A variável alvo (`RISCO_DEFASAGEM`) é criada a partir de métricas atuais (`INDE`, `DEFASAGEM`, `PEDRA`).
+2.  **Separação Temporal:** O conjunto de dados é dividido em Treino (anos T-2 e anteriores) e Teste (ano T-1). Isso simula o cenário real onde o modelo é treinado com dados antigos e avaliado em dados mais recentes, garantindo que a performance não seja inflada por *leakage* temporal.
+3.  **Remoção de Vazamento:** Todas as colunas que definem o *target* no ano T (`INDE`, `NOTA_PORT`, etc.) são removidas do conjunto de *features* (`COLUNAS_PROIBIDAS_NO_TREINO`), forçando o modelo a aprender apenas com o histórico (`INDE_ANTERIOR`, etc.) e dados demográficos.
+4.  **Quality Gate:** O modelo só é promovido se o seu F1-Score no conjunto de teste for **igual ou superior a 95%** do F1-Score do modelo atualmente em produção (`_should_promote_model`).
+
+## 7. Justificativas Técnicas
+
+| Decisão Técnica | Justificativa | Trade-off (Risco) |
+| :--- | :--- | :--- |
+| **Lag Features (T-1)** | **Anti-Leakage:** Garante que o modelo é preditivo, utilizando apenas dados disponíveis no momento da predição (início do ano). | **Dependência de Dados:** Requer um histórico limpo e consistente de pelo menos 2 anos para funcionar. |
+| **Split Temporal** | **Validação Realista:** Simula o uso em produção, onde o modelo treinado no passado deve prever o futuro. | **Menor Volume de Treino:** Reduz o tamanho do conjunto de treino em comparação com um *split* aleatório. |
+| **FastAPI + Singleton** | **Performance e Concorrência:** FastAPI oferece alta performance assíncrona. O *Singleton* (`ModelManager`) garante que o modelo seja carregado uma única vez, otimizando o uso de memória e reduzindo a latência de predição. | **Memória:** O modelo fica residente na memória do servidor, exigindo mais RAM. |
+| **Evidently AI** | **Observabilidade MLOps:** Solução *open-source* para monitoramento de *Data Drift* e *Concept Drift*, essencial para a manutenção do modelo em produção. | **Infraestrutura:** Requer um *endpoint* dedicado (`/monitoring/dashboard`) e um mecanismo de persistência de logs (`prediction.jsonl`). |
+
+## 8. Stack Tecnológica
+
+| Categoria | Tecnologia | Uso |
+| :--- | :--- | :--- |
+| **Linguagem** | Python 3.11+ | Desenvolvimento de todo o sistema. |
+| **API** | FastAPI | Framework web de alta performance para o serviço de inferência. |
+| **ML Core** | Scikit-learn | Treinamento do modelo (`RandomForestClassifier`) e pré-processamento (`Pipeline`, `ColumnTransformer`). |
+| **Data** | Pandas, Joblib | Manipulação de dados e serialização/desserialização do modelo. |
+| **Validação** | Pydantic | Definição de schemas de entrada (`StudentInput`, `Student`) e validação automática de dados. |
+| **MLOps** | Evidently AI | Geração de relatórios de *Data Drift* em tempo real. |
+| **Infraestrutura** | Docker, Docker Compose | Empacotamento e orquestração do ambiente de desenvolvimento/produção. |
+
+## 9. Estrutura do Projeto
+
+A estrutura de diretórios segue um padrão de projeto limpo e modular:
+
+```
+.
+├── app/
+│   ├── data/                   # Dados de entrada (Ex: PEDE_PASSOS_DATASET_FIAP.xlsx)
+│   ├── models/                 # Modelos serializados (Ex: model_passos_magicos.joblib)
+│   ├── src/                    # Código-fonte da aplicação
+│   │   ├── api/                # Controladores (FastAPI)
+│   │   ├── application/        # Lógica de Negócio (Services)
+│   │   ├── config/             # Configurações globais (settings.py)
+│   │   ├── domain/             # Modelos de Domínio (Pydantic)
+│   │   ├── infrastructure/     # Implementações de Infraestrutura (ML, Data, Logging)
+│   │   └── util/               # Utilitários (Ex: logger.py)
+│   ├── main.py                 # Ponto de entrada da API
+│   └── train.py                # Script de treinamento do modelo
+├── tests/                      # Testes unitários e de integração
+├── Dockerfile                  # Definição do ambiente Docker
+├── docker-compose.yml          # Orquestração de serviços
+└── requirements.txt            # Dependências do Python
 ```
 
-### **💻 Instalação Local (Desenvolvimento)**
+## 10. API e Deployment
 
-```bash
-# 1. Clone o repositório
-git clone <repository-url>
-cd datathon-tech5
+### 10.1. Endpoints
 
-# 2. Crie um ambiente virtual (recomendado)
-python -m venv venv
+A API expõe dois endpoints principais para predição e um para observabilidade:
 
-# 3. Ative o ambiente virtual
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
+| Método | Path | Descrição | Audiência |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/v1/predict/full` | Predição bruta. Requer todas as *features* (incluindo as *lag features*) no *payload*. | Desenvolvedores/Testes |
+| `POST` | `/api/v1/predict/smart` | **Endpoint de Produção.** Requer apenas dados básicos do aluno. O sistema busca automaticamente o histórico (T-1) no `HistoricalRepository` para enriquecer o *payload*. | Sistemas Externos/Front-end |
+| `GET` | `/api/v1/monitoring/dashboard` | Retorna o *dashboard* HTML do Evidently AI com a análise de *Data Drift*. | DevOps/MLOps |
+| `GET` | `/health` | Checagem de saúde básica da API. | Infraestrutura/Load Balancer |
 
-# 4. Instale as dependências
-pip install -r requirements.txt
+### 10.2. Exemplo de Uso (`/predict/smart`)
 
-# 5. CRUCIAL: Execute o treinamento do modelo
-python app/train.py
+O endpoint `smart` é o recomendado para uso em produção, pois abstrai a complexidade do histórico.
 
-# 6. Inicie a API
-python app/main.py
-```
-
-> **⚠️ IMPORTANTE**: O comando `python app/train.py` é **OBRIGATÓRIO** antes de iniciar a API, pois ele gera o arquivo `model_passos_magicos.joblib` necessário para as predições.
-
-### **🔍 Verificação da Instalação**
-
-```bash
-# 1. Health check da API
-curl http://localhost:8000/health
-# Resposta esperada: {"status":"ok","service":"passos-magicos-api"}
-
-# 2. Documentação interativa (abrir no navegador)
-# http://localhost:8000/docs
-
-# 3. Teste de predição simples
-curl -X POST "http://localhost:8000/api/v1/predict" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "IDADE_22": 14, "CG": 7.5, "CF": 7.0, "CT": 7.2,
-       "IAA": 6.8, "IEG": 7.1, "IPS": 6.9, "IDA": 7.0,
-       "MATEM": 6.5, "PORTUG": 7.3, "INGLES": 6.8,
-       "GENERO": "M", "TURMA": "A", "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
-     }'
-```
-
-### **🌐 Deploy no Render (Produção)**
-
-A aplicação está hospedada no Render e pode ser acessada através do link:
-
-**🔗 URL de Produção**: `https://datathon-tech5.onrender.com`
-
-#### **📋 Informações do Deploy**
-- **Plataforma**: Render (Free Tier)
-- **Build automático**: A cada push na branch `main`
-- **Documentação**: `https://datathon-tech5.onrender.com/docs`
-- **Health Check**: `https://datathon-tech5.onrender.com/health`
-
-#### **⚠️ Limitações do Plano Gratuito**
-- **Sleep após inatividade**: 15 minutos sem requests
-- **Cold start**: ~30s para "acordar" o serviço  
-- **RAM**: 512MB limitado
-- **Build time**: 15 minutos máximo
-
-> **💡 Dica**: O primeiro request após período de inatividade pode demorar até 60 segundos devido ao cold start. Requests subsequentes são rápidos (~200-500ms).
-
----
-
-## 📡 **Exemplos de Chamadas à API**
-
-### **Base URLs**
-- **Produção (Render)**: `https://datathon-tech5.onrender.com`
-- **Local**: `http://localhost:8000`
-
-### **📚 Documentação Interativa**
-- **Swagger UI**: `/docs` - Interface completa para testes
-- **ReDoc**: `/redoc` - Documentação alternativa
-
-**Links diretos:**
-- Produção: `https://datathon-tech5.onrender.com/docs`
-- Local: `http://localhost:8000/docs`
-
----
-
-### **🏥 Health Check**
-
-```bash
-GET /health
-```
-
-**Exemplos:**
-```bash
-# Produção (Render)
-curl https://datathon-tech5.onrender.com/health
-
-# Local
-curl http://localhost:8000/health
-```
-
-**Resposta:**
-```json
-{
-  "status": "ok",
-  "service": "passos-magicos-api",
-  "environment": "render",
-  "port": "10000"
-}
-```
-
----
-
-### **🎯 Endpoint de Predição**
-
-```bash
-POST /api/v1/predict
-```
-
-### **Exemplo com cURL**
-
-```bash
-# Produção (Render) - Recomendado
-curl -X POST "https://datathon-tech5.onrender.com/api/v1/predict" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "IDADE_22": 14,
-       "CG": 7.5,
-       "CF": 7.0,
-       "CT": 7.2,
-       "IAA": 6.8,
-       "IEG": 7.1,
-       "IPS": 6.9,
-       "IDA": 7.0,
-       "MATEM": 6.5,
-       "PORTUG": 7.3,
-       "INGLES": 6.8,
-       "GENERO": "M",
-       "TURMA": "A",
-       "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
-     }'
-
-# Local (desenvolvimento)
-curl -X POST "http://localhost:8000/api/v1/predict" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "IDADE_22": 14,
-       "CG": 7.5,
-       "CF": 7.0,
-       "CT": 7.2,
-       "IAA": 6.8,
-       "IEG": 7.1,
-       "IPS": 6.9,
-       "IDA": 7.0,
-       "MATEM": 6.5,
-       "PORTUG": 7.3,
-       "INGLES": 6.8,
-       "GENERO": "M",
-       "TURMA": "A",
-       "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
-     }'
-```
-
-### **Exemplo com Python**
-
-```python
-import requests
-import json
-
-# Configurar URL (produção recomendada)
-BASE_URL = "https://datathon-tech5.onrender.com"  # Produção
-# BASE_URL = "http://localhost:8000"  # Local
-
-url = f"{BASE_URL}/api/v1/predict"
-
-# Dados do estudante
-student_data = {
-    "IDADE_22": 14,
-    "CG": 7.5,
-    "CF": 7.0,
-    "CT": 7.2,
-    "IAA": 6.8,
-    "IEG": 7.1,
-    "IPS": 6.9,
-    "IDA": 7.0,
-    "MATEM": 6.5,
-    "PORTUG": 7.3,
-    "INGLES": 6.8,
-    "GENERO": "M",
-    "TURMA": "A",
-    "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
-}
-
-# Fazer requisição (timeout maior para cold start do Render)
-try:
-    response = requests.post(url, json=student_data, timeout=60)
-    
-    if response.status_code == 200:
-        result = response.json()
-        print("✅ Predição realizada com sucesso:")
-        print(json.dumps(result, indent=2))
-    else:
-        print(f"❌ Erro: {response.status_code} - {response.text}")
-        
-except requests.exceptions.Timeout:
-    print("⏰ Timeout: API pode estar em cold start (aguarde ~60s)")
-except requests.exceptions.RequestException as e:
-    print(f"🔌 Erro de conexão: {e}")
-```
-
----
-
-### **📋 Estrutura do Payload (Input)**
+**Payload de Entrada (Aluno Novo - RA 1500):**
 
 ```json
 {
-  "IDADE_22": 14,           // int - Idade do estudante em 2022
-  "CG": 7.5,                // float - Competência Geral
-  "CF": 7.0,                // float - Competência em Física
-  "CT": 7.2,                // float - Competência Técnica
-  "IAA": 6.8,               // float - Indicador de Aprendizagem Ativa
-  "IEG": 7.1,               // float - Indicador de Engajamento
-  "IPS": 6.9,               // float - Indicador Psicossocial
-  "IDA": 7.0,               // float - Indicador de Desenvolvimento Acadêmico
-  "MATEM": 6.5,             // float - Nota em Matemática
-  "PORTUG": 7.3,            // float - Nota em Português
-  "INGLES": 6.8,            // float - Nota em Inglês
-  "GENERO": "M",            // string - Gênero do estudante
-  "TURMA": "A",             // string - Turma do estudante
-  "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"  // string - Instituição
+  "RA": "1500",
+  "IDADE": 10,
+  "ANO_INGRESSO": 2024,
+  "GENERO": "Feminino",
+  "TURMA": "1A",
+  "INSTITUICAO_ENSINO": "MUNICIPAL",
+  "FASE": "1A"
 }
 ```
 
-**Validações:**
-- **Features Numéricas**: Devem ser números (int/float)
-- **Features Categóricas**: Devem ser strings não vazias
-- **Campos Obrigatórios**: Todos os 14 campos são obrigatórios
-
----
-
-### **📤 Estrutura da Resposta (Output)**
+**Resposta de Saída (200 OK):**
 
 ```json
 {
-  "risk_probability": 0.2847,
+  "risk_probability": 0.4652,
   "risk_label": "BAIXO RISCO",
-  "message": "O estudante possui 28.5% de chance de defasagem."
+  "prediction": 0
 }
 ```
 
-**Descrição dos Campos:**
-- `risk_probability` (float): Probabilidade de risco entre 0.0 e 1.0
-- `risk_label` (string): "ALTO RISCO" (≥0.5) ou "BAIXO RISCO" (<0.5)
-- `message` (string): Mensagem explicativa com percentual formatado
-
----
-
-### **⚠️ Tratamento de Erros**
-
-#### **Erro 422 - Validação**
-```json
-{
-  "detail": [
-    {
-      "loc": ["body", "IDADE_22"],
-      "msg": "field required",
-      "type": "value_error.missing"
-    }
-  ]
-}
-```
-
-#### **Erro 500 - Interno**
-```json
-{
-  "detail": "Modelo indisponível. Execute 'train.py' primeiro."
-}
-```
-
----
-
-## 🔬 **Pipeline de Machine Learning**
-
-### **Visão Geral do Pipeline**
-
-O pipeline de ML segue as melhores práticas de MLOps, desde a ingestão de dados até o deploy do modelo em produção. Cada etapa é modular, testável e reproduzível.
-
-```mermaid
-graph LR
-    A[📊 Dados Excel] --> B[🔄 Pré-processamento]
-    B --> C[⚙️ Feature Engineering]
-    C --> D[🧠 Treinamento RF]
-    D --> E[📈 Avaliação]
-    E --> F[💾 Persistência]
-    F --> G[🚀 Deploy API]
-    
-    style A fill:#e3f2fd
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#fce4ec
-    style F fill:#f1f8e9
-    style G fill:#e0f2f1
-```
-
----
-
-### **1. 📊 Ingestão de Dados**
-
-**Fonte**: Dataset `PEDE_PASSOS_DATASET_FIAP.xlsx` com dados históricos de estudantes da ONG.
-
-```python
-# Carregamento via DataLoader
-from src.infrastructure.data.data_loader import DataLoader
-
-loader = DataLoader()
-df = loader.load_data()
-print(f"Dataset carregado: {df.shape[0]} registros, {df.shape[1]} colunas")
-```
-
-**Características do Dataset:**
-- **Registros**: ~800 estudantes
-- **Features**: 14 variáveis (11 numéricas + 3 categóricas)
-- **Target**: Baseado na coluna DEFAS (defasagem escolar)
-- **Formato**: Excel (.xlsx) com validação automática
-
----
-
-### **2. 🔄 Pré-processamento**
-
-#### **Limpeza e Normalização**
-```python
-# Padronização de nomes de colunas
-df.columns = df.columns.str.upper().str.strip()
-
-# Tratamento de valores nulos
-df = df.fillna(0)
-
-# Validação de tipos de dados
-numeric_cols = ['IDADE_22', 'CG', 'CF', 'CT', 'IAA', 'IEG', 'IPS', 'IDA', 'MATEM', 'PORTUG', 'INGLES']
-df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
-```
-
-#### **Criação da Variável Target**
-```python
-# Target baseado na defasagem escolar
-df["RISCO_DEFASAGEM"] = (df["DEFAS"] < 0).astype(int)
-# 1 = ALTO RISCO (DEFAS < 0)
-# 0 = BAIXO RISCO (DEFAS >= 0)
-
-# Distribuição das classes
-print(df["RISCO_DEFASAGEM"].value_counts())
-```
-
----
-
-### **3. ⚙️ Engenharia de Features**
-
-#### **Features Numéricas (11 variáveis)**
-```python
-FEATURES_NUMERICAS = [
-    "IDADE_22",    # Idade do estudante em 2022
-    "CG",          # Competência Geral
-    "CF",          # Competência em Física  
-    "CT",          # Competência Técnica
-    "IAA",         # Indicador de Aprendizagem Ativa
-    "IEG",         # Indicador de Engajamento
-    "IPS",         # Indicador Psicossocial
-    "IDA",         # Indicador de Desenvolvimento Acadêmico
-    "MATEM",       # Nota em Matemática
-    "PORTUG",      # Nota em Português
-    "INGLES"       # Nota em Inglês
-]
-```
-
-#### **Features Categóricas (3 variáveis)**
-```python
-FEATURES_CATEGORICAS = [
-    "GENERO",                # Gênero do estudante
-    "TURMA",                 # Turma do estudante  
-    "INSTITUICAO_DE_ENSINO"  # Instituição de ensino
-]
-```
-
-#### **Label Encoding Inteligente**
-```python
-class FeatureEngineer(BaseEstimator, TransformerMixin):
-    def transform(self, X):
-        # Encoding com tratamento de valores não vistos
-        for col, encoder in self.encoders.items():
-            X[col] = X[col].map(
-                lambda s: encoder.transform([s])[0] if s in encoder.classes_ else -1
-            )
-        return X
-```
-
-**Vantagens:**
-- Preserva estado dos encoders para produção
-- Trata valores não vistos durante treinamento
-- Integrado ao pipeline sklearn
-
----
-
-### **4. 🧠 Seleção e Treinamento do Modelo**
-
-#### **Justificativa: Random Forest**
-
-| Critério | Random Forest | Alternativas |
-|----------|---------------|--------------|
-| **Interpretabilidade** | ✅ Feature importance | ❌ Deep Learning |
-| **Robustez** | ✅ Resistente a overfitting | ❌ Árvore única |
-| **Features Mistas** | ✅ Numéricas + categóricas | ❌ Regressão linear |
-| **Desbalanceamento** | ✅ class_weight="balanced" | ❌ SVM padrão |
-| **Velocidade** | ✅ Rápido para predição | ❌ Ensemble complexo |
-
-#### **Configuração do Modelo**
-```python
-RandomForestClassifier(
-    n_estimators=200,           # 200 árvores para estabilidade
-    random_state=42,            # Reprodutibilidade
-    class_weight="balanced",    # Balanceamento automático
-    max_depth=None,             # Profundidade automática
-    min_samples_split=2,        # Divisão mínima
-    min_samples_leaf=1          # Folhas mínimas
-)
-```
-
-#### **Pipeline Completo**
-```python
-pipeline = Pipeline([
-    ("feature_engineer", FeatureEngineer()),    # Encoding categóricas
-    ("classifier", RandomForestClassifier(...)) # Classificador
-])
-
-# Treinamento
-pipeline.fit(X_train, y_train)
-```
-
----
-
-### **5. 📈 Avaliação e Validação**
-
-#### **Divisão Estratificada**
-```python
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.2,              # 80% treino, 20% teste
-    random_state=42,            # Reprodutibilidade
-    stratify=y                  # Mantém proporção das classes
-)
-```
-
-#### **Métricas de Performance**
-```python
-# Predições no conjunto de teste
-y_pred = pipeline.predict(X_test)
-
-# Relatório completo
-print(classification_report(y_test, y_pred, zero_division=0))
-```
-
-**Métricas Principais:**
-- **F1-Score**: 0.99 (métrica principal para classes desbalanceadas)
-- **Precision**: Precisão na identificação de risco
-- **Recall**: Capacidade de detectar todos os casos de risco
-- **Accuracy**: Acurácia geral do modelo
-
-#### **Análise de Feature Importance**
-```python
-# Extração automática da importância
-feature_names = FEATURES_NUMERICAS + FEATURES_CATEGORICAS
-importances = pipeline.named_steps["classifier"].feature_importances_
-
-# DataFrame ordenado por importância
-importance_df = pd.DataFrame({
-    "feature": feature_names,
-    "importance": importances
-}).sort_values("importance", ascending=False)
-```
-
----
-
-### **6. 💾 Persistência e Versionamento**
-
-#### **Salvamento do Pipeline**
-```python
-import joblib
-from pathlib import Path
-
-# Salvamento completo do pipeline
-model_path = "app/models/model_passos_magicos.joblib"
-joblib.dump(pipeline, model_path)
-
-print(f"Modelo salvo em: {model_path}")
-print(f"Tamanho do arquivo: {Path(model_path).stat().st_size / 1024:.1f} KB")
-```
-
-#### **Artefatos Persistidos**
-- **Pipeline Completo**: Modelo + feature engineering
-- **Estado dos Encoders**: Para variáveis categóricas
-- **Métricas de Performance**: Para monitoramento
-- **Configurações**: Parâmetros e hiperparâmetros
-
-#### **Carregamento em Produção**
-```python
-# Carregamento automático na API
-class RiskService:
-    def __init__(self):
-        self.pipeline = joblib.load("app/models/model_passos_magicos.joblib")
-    
-    def predict_risk(self, student_data):
-        probability = self.pipeline.predict_proba([student_data])[:, 1][0]
-        return {
-            "risk_probability": round(probability, 4),
-            "risk_label": "ALTO RISCO" if probability >= 0.5 else "BAIXO RISCO"
-        }
-```
-
----
-
-### **7. 🔄 Retreinamento e Monitoramento**
-
-#### **Estratégia de Retreinamento**
-- **Frequência**: Semestral ou quando performance degrada
-- **Trigger**: Monitoramento de drift nos dados
-- **Processo**: Automatizado via `python app/train.py`
-- **Validação**: A/B testing entre versões
-
-#### **Monitoramento de Performance**
-```python
-# Logs estruturados para monitoramento
-logger.info(f"Predição realizada: probabilidade={prob:.4f}")
-logger.info(f"Features utilizadas: {list(X.columns)}")
-logger.info(f"Tempo de resposta: {response_time:.3f}s")
-```
-
----
-
-## 🏗️ **Arquitetura do Projeto**
-
-### **Clean Architecture**
-
-O projeto segue os princípios da Clean Architecture, garantindo separação de responsabilidades, testabilidade e manutenibilidade.
-
-```mermaid 
-graph TB
-    subgraph "🌐 API Layer"
-        Controller[PredictionController]
-        Schemas[StudentDTO]
-        FastAPI[FastAPI App]
-    end
-    
-    subgraph "🔧 Application Layer"
-        Service[RiskService]
-    end
-    
-    subgraph "🏛️ Domain Layer"
-        Student[Student Entity]
-    end
-    
-    subgraph "🏗️ Infrastructure Layer"
-        MLPipeline[MLPipeline]
-        DataLoader[DataLoader]
-        FeatureEngineer[FeatureEngineer]
-    end
-    
-    subgraph "💾 External"
-        Excel[Excel Dataset]
-        Model[Trained Model]
-    end
-    
-    FastAPI --> Controller
-    Controller --> Schemas
-    Controller --> Service
-    Service --> Student
-    Service --> MLPipeline
-    MLPipeline --> FeatureEngineer
-    DataLoader --> Excel
-    MLPipeline --> Model
-    
-    classDef api fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    classDef app fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    classDef domain fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-    classDef infra fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef external fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    
-    class Controller,Schemas,FastAPI api
-    class Service app
-    class Student domain
-    class MLPipeline,DataLoader,FeatureEngineer infra
-    class Excel,Model external
-```
-
-### **Fluxo de Predição**
-
-```mermaid 
-sequenceDiagram
-    participant Client as 👤 Cliente
-    participant API as 🌐 FastAPI
-    participant Controller as 🎮 Controller
-    participant Service as 🔧 RiskService
-    participant Pipeline as 🏗️ MLPipeline
-    participant Model as 🧠 Random Forest
-
-    Client->>+API: POST /api/v1/predict
-    API->>+Controller: Validate Request
-    Controller->>+Service: predict_risk(student)
-    Service->>+Pipeline: predict_proba(dataframe)
-    Pipeline->>Pipeline: Feature Engineering
-    Pipeline->>+Model: Predict Probability
-    Model->>-Pipeline: Risk Probability [0-1]
-    Pipeline->>-Service: Processed Result
-    Service->>Service: Apply Threshold (≥0.5)
-    Service->>-Controller: Risk Assessment
-    Controller->>-API: JSON Response
-    API->>-Client: Risk Prediction
-```
-
-### **Princípios Arquiteturais**
-
-#### **🔄 Inversão de Dependência**
-```python
-# Service depende de abstração, não implementação
-class RiskService:
-    def __init__(self, ml_pipeline: MLPipeline):
-        self.ml_pipeline = ml_pipeline
-```
-
-#### **📦 Separação de Responsabilidades**
-- **API**: Validação, serialização, HTTP
-- **Application**: Regras de negócio, orquestração
-- **Domain**: Entidades, objetos de valor
-- **Infrastructure**: Acesso a dados, ML, I/O
-
-#### **🧪 Testabilidade**
-```python
-# Injeção de dependência facilita testes
-def get_risk_service():
-    return RiskService()
-
-# Mocking em testes
-@patch('src.application.risk_service.MLPipeline')
-def test_predict_risk(mock_pipeline):
-    # Test implementation
-```
-
----
-
-## 📊 **Monitoramento e Observabilidade**
-
-### **🏥 Health Checks**
-
-#### **Endpoint de Saúde**
+### 10.3. Deployment (Docker)
+
+O projeto é totalmente conteinerizado para garantir a portabilidade e a reprodutibilidade do ambiente.
+
+1.  **Construção da Imagem:**
+    ```bash
+    docker build -t passos-magicos-api .
+    ```
+2.  **Execução (Com Docker Compose):**
+    ```bash
+    docker-compose up --build
+    ```
+    A API estará acessível em `http://localhost:8000`.
+
+## 11. Testes e Qualidade
+
+O projeto inclui uma suíte de testes unitários e de integração para garantir a qualidade do código e a integridade da lógica de ML.
+
+| Componente Testado | Foco | Arquivos de Teste |
+| :--- | :--- | :--- |
+| **API** | Validação de *schemas* (Pydantic), status codes, e injeção de dependência. | `tests/api/` |
+| **Domain** | Regras de validação dos modelos de domínio (`Student`, `StudentInput`). | `tests/domain/test_student.py` |
+| **Infraestrutura** | Lógica de carregamento de dados (`DataLoader`), criação de *Lag Features* e *Quality Gate* do `MLPipeline`. | `tests/infrastructure/` |
+| **Funcional** | Scripts em `scripts/` simulam requisições reais para validar o fluxo de ponta a ponta. | `scripts/funcional_real.py` |
+
+## 12. Monitoramento e Observabilidade
+
+A observabilidade é um pilar deste projeto MLOps, focada na detecção de desvios de dados (*Data Drift*).
+
+### 12.1. Data Drift (Evidently AI)
+
+O `MonitoringController` expõe um *dashboard* que compara o `reference_data.csv` (dados de treinamento) com o `prediction.jsonl` (dados de inferência em produção).
+
+*   **Referência:** `reference_data.csv` (salvo após a promoção do modelo).
+*   **Corrente:** Dados de *input* e *output* logados em `prediction.jsonl` pelo `PredictionLogger`.
+
+### 12.2. Logging Estruturado
+
+O `PredictionLogger` registra cada predição em formato **JSON Lines (JSONL)**, garantindo:
+
+1.  **Atomicidade:** Escrita thread-safe (via `threading.Lock`) para ambientes concorrentes.
+2.  **Estrutura:** O log inclui `timestamp`, `model_version`, `input_features` (as features usadas na predição) e `prediction_result`.
+3.  **Rastreabilidade:** Uso de `prediction_id` e `correlation_id` para rastrear requisições.
+
+## 13. Segurança e Confiabilidade
+
+| Aspecto | Implementação |
+| :--- | :--- |
+| **Confiabilidade do Modelo** | **Quality Gate** (F1-Score > 95% do modelo atual) para evitar a promoção de modelos inferiores. |
+| **Disponibilidade** | **Singleton** (`ModelManager`) e *health check* (`/health`) para garantir que o modelo esteja sempre pronto para inferência. |
+| **Integridade de Dados** | **Pydantic** para validação de *schema* na entrada da API, rejeitando *payloads* malformados. |
+| **Segurança (A Ser Implementado)** | **Falta de AuthN/AuthZ** é um risco conhecido. Recomenda-se a implementação de *API Keys* ou *tokens* JWT para proteger o endpoint de predição. |
+
+## 14. Limitações Conhecidas
+
+1.  **Feature Store Volátil:** O `HistoricalRepository` é um *Singleton* em memória. Em caso de reinicialização do contêiner, os dados históricos são recarregados do arquivo de referência, o que pode causar latência no *startup*.
+2.  **Dependência de Arquivo:** O `DataLoader` é altamente acoplado ao formato e à estrutura do arquivo `PEDE_PASSOS_DATASET_FIAP.xlsx`. Qualquer alteração no *schema* do Excel pode quebrar o pipeline de treinamento.
+3.  **Log de Produção:** O arquivo `prediction.jsonl` cresce indefinidamente. É necessária uma estratégia de rotação de logs (ex: Logrotate, ou envio para um *data sink* como Kafka/S3) para evitar o esgotamento do disco.
+
+## 15. Possíveis Evoluções
+
+O projeto está em um estado de **Produção Candidata (MLOps Nível 2)**. As próximas etapas de evolução incluem:
+
+| Área | Melhoria Proposta | Impacto |
+| :--- | :--- | :--- |
+| **Infraestrutura** | Orquestração de *Retraining* (Airflow/Kubeflow) | Automação completa do ciclo de vida do ML. |
+| **Feature Store** | Migração para Redis ou Feast | Persistência e escalabilidade do enriquecimento de *features* históricas. |
+| **Segurança** | Implementação de AuthN/AuthZ na API | Proteção do endpoint de predição. |
+| **Monitoramento** | Alerta de Drift (Slack/PagerDuty) | Notificação proativa quando o *Data Drift* ultrapassar um limite. |
+| **Modelo** | Experimentação com modelos de *Deep Learning* (Ex: LSTMs) | Captura de padrões temporais mais complexos no histórico do aluno. |
+
+## 16. Instruções de Execução
+
+### 16.1. Pré-requisitos
+
+*   Docker e Docker Compose instalados.
+*   Python 3.11+ (para execução local).
+
+### 16.2. Treinamento do Modelo (Offline)
+
+O treinamento deve ser executado antes do *deployment* da API para gerar o modelo (`.joblib`), as métricas (`metrics.json`) e os dados de referência (`reference_data.csv`).
+
 ```bash
-GET /health
+# 1. Navegue para o diretório da aplicação
+cd project_repo/app
+
+# 2. Execute o script de treinamento
+python train.py
 ```
 
-**Verificações Realizadas:**
-- Status da aplicação
-- Disponibilidade do modelo
-- Conectividade com dependências
+Se o *Quality Gate* for aprovado, os arquivos de produção serão atualizados em `app/models/`.
 
-```python
-@staticmethod
-def health_check():
-    return {
-        "status": "ok",
-        "service": "passos-magicos-api",
-        "timestamp": datetime.now().isoformat(),
-        "version": "1.0.0"
-    }
-```
+### 16.3. Execução da API (Online)
 
-#### **Health Check Docker**
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
-```
+Utilize o Docker Compose para subir a API e o ambiente de forma isolada.
 
-### **📝 Sistema de Logging**
-
-#### **Logs Estruturados**
-```python
-import logging
-from src.util.logger import logger
-
-# Configuração centralizada
-logger.info("Iniciando predição", extra={
-    "student_id": student.id,
-    "features_count": len(features),
-    "model_version": "v1.0"
-})
-```
-
-#### **Níveis de Log**
-- **INFO**: Operações normais, predições realizadas
-- **WARNING**: Valores atípicos, fallbacks ativados  
-- **ERROR**: Falhas de modelo, dados inválidos
-- **DEBUG**: Detalhes técnicos, debugging
-
-### **📈 Métricas de Performance**
-
-#### **Métricas de Aplicação**
-```python
-# Tempo de resposta
-start_time = time.time()
-result = predict_risk(student)
-response_time = time.time() - start_time
-
-logger.info(f"Predição concluída em {response_time:.3f}s")
-```
-
-#### **Métricas de Modelo**
-```python
-# Distribuição de predições
-risk_distribution = {
-    "alto_risco": predictions.count("ALTO RISCO"),
-    "baixo_risco": predictions.count("BAIXO RISCO"),
-    "probabilidade_media": np.mean(probabilities)
-}
-```
-
-### **🔍 Monitoramento de Drift**
-
-#### **Data Drift Detection**
-```python
-# Comparação com dados de treinamento
-def detect_feature_drift(new_data, reference_data):
-    drift_scores = {}
-    for feature in FEATURES_NUMERICAS:
-        # KS test para features numéricas
-        statistic, p_value = ks_2samp(
-            reference_data[feature], 
-            new_data[feature]
-        )
-        drift_scores[feature] = {"statistic": statistic, "p_value": p_value}
-    return drift_scores
-```
-
-#### **Model Performance Monitoring**
-```python
-# Tracking de performance ao longo do tempo
-performance_metrics = {
-    "timestamp": datetime.now(),
-    "predictions_count": len(predictions),
-    "avg_probability": np.mean(probabilities),
-    "high_risk_percentage": high_risk_count / total_predictions
-}
-```
-
-### **🚨 Alertas e Notificações**
-
-#### **Condições de Alerta**
-- Taxa de erro > 5%
-- Tempo de resposta > 2s
-- Drift significativo detectado
-- Modelo indisponível
-
-#### **Canais de Notificação**
-- Logs estruturados
-- Health check failures
-- Container restart policies
-
-### **📊 Dashboard de Monitoramento**
-
-#### **Métricas Chave**
 ```bash
-# Verificar métricas via logs
-docker-compose logs passos-magicos-api | grep "Predição concluída"
+# 1. Navegue para o diretório raiz do projeto
+cd project_repo
 
-# Status do container
-docker-compose ps
-
-# Uso de recursos
-docker stats passos-magicos-container
+# 2. Suba os contêineres
+docker-compose up --build
 ```
 
-#### **Comandos de Troubleshooting**
+A API estará disponível em `http://localhost:8000`.
+
+### 16.4. Simulação de Tráfego
+
+Após a API estar rodando, utilize os scripts de simulação para gerar logs de predição e alimentar o *dashboard* de monitoramento.
+
 ```bash
-# Logs em tempo real
-docker-compose logs -f --tail=100 passos-magicos-api
+# Em um novo terminal, na raiz do projeto:
+cd project_repo/scripts
 
-# Entrar no container para debug
-docker-compose exec passos-magicos-api bash
-
-# Verificar modelo treinado
-ls -la app/models/
-
-# Testar endpoint manualmente
-curl -f http://localhost:8000/health
+# Simula um fluxo contínuo de requisições com dados reais
+python send_production_simulation.py
 ```
+
+## 17. Conformidade com o Datathon
+
+A solução atende aos requisitos de um projeto de Datathon de alto nível, com foco em MLOps e integridade preditiva.
+
+| Requisito do Datathon | Implementação no Projeto |
+| :--- | :--- |
+| **Modelo Preditivo** | `RandomForestClassifier` treinado com *Lag Features* (T-1). |
+| **Anti-Leakage** | **Split Temporal** e remoção de colunas proibidas (`COLUNAS_PROIBIDAS_NO_TREINO`). |
+| **API de Inferência** | FastAPI com endpoint `/predict/smart` de baixa latência. |
+| **Enriquecimento de Dados** | `HistoricalRepository` para busca automática de histórico (T-1). |
+| **Monitoramento** | `MonitoringController` e `MonitoringService` com Evidently AI para *Data Drift*. |
+| **Reprodutibilidade** | Dockerfile e `requirements.txt` para ambiente isolado. |
+
+## 18. Uso Responsável e Ético
+
+O modelo preditivo de risco é uma ferramenta de apoio, e não um oráculo.
+
+*   **Transparência:** O modelo é baseado em *Random Forest*, que permite a extração de importância de *features* para explicar a predição.
+*   **Viés e Equidade:** O *target* é baseado em métricas de desempenho e defasagem, que podem refletir vieses sistêmicos. O monitoramento de *drift* ajuda a identificar desvios na distribuição de *features* demográficas (ex: `GENERO`, `FASE`) que possam indicar *drift* de equidade.
+*   **Intervenção Humana:** A decisão final de intervenção pedagógica deve ser sempre tomada por um profissional, utilizando a probabilidade de risco como um **sinal de alerta**, e não como uma sentença.
+
+## 19. Considerações Finais
+
+Este projeto demonstra a maturidade técnica necessária para transicionar um modelo de ML de um ambiente de pesquisa para um ambiente de produção. A ênfase na prevenção de *data leakage* e na implementação de práticas MLOps (Quality Gate, Monitoramento, Logging Estruturado) garante que a solução seja **confiável, sustentável e eticamente responsável** no apoio à missão da ONG Passos Mágicos.
+
+## 20. Licença e Contribuição
+
+Este projeto está licenciado sob a Licença MIT.
 
 ---
-
-## 📄 **Licença**
-
-Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes completos.
-
-### **Resumo da Licença**
-- ✅ Uso comercial permitido
-- ✅ Modificação permitida  
-- ✅ Distribuição permitida
-- ✅ Uso privado permitido
-- ❌ Sem garantia
-- ❌ Sem responsabilidade
-
----
-
-### **Monitoramento e Observabilidade**
-
-This project includes an automated monitoring subsystem using Evidently to generate reports for Data Drift, Prediction Drift, Data Quality and Stability Index.
-
-- Logs of inferences are written to: `app/logs/predictions.csv` (configurable via `LOG_PATH`).
-- Reference dataset is saved after training to: `app/monitoring/reference_data.csv` (configurable via `REFERENCE_PATH`).
-- Reports are generated and saved to: `app/monitoring/reports/` (configurable via `MONITORING_PATH`).
-
-Available monitoring endpoints:
-
-- POST `/api/v1/monitoring/run` — trigger generation of Evidently reports
-- GET `/api/v1/monitoring/reports` — list generated report files.
-- GET `/api/v1/monitoring/reports/{name}` — download an HTML report.
-
-Environment variables:
-
-- `LOG_PATH` — path to predictions log file (default `app/logs/predictions.csv`).
-- `MONITORING_PATH` — base monitoring path (default `app/monitoring`).
-- `REFERENCE_PATH` — path to reference dataset (default `app/monitoring/reference_data.csv`).
-
-Usage notes:
-
-1. Run `python app/train.py` to train the model and automatically save the reference dataset used for monitoring.
-2. Start the API `python app/main.py` — reports will be attempted on startup and can also be triggered via the monitoring endpoint.

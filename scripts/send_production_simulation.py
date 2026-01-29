@@ -1,169 +1,192 @@
 import pandas as pd
 import requests
 import time
-import random
 import os
 import glob
-import warnings
-import re
+import sys
+import numpy as np
 
-from src.config.settings import Settings
+# --- 1. Configuração de Path (Para rodar de qualquer lugar) ---
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
 
-# Ignora avisos do Excel e Pandas
-warnings.simplefilter(action='ignore', category=UserWarning)
-warnings.simplefilter(action='ignore', category=FutureWarning)
+try:
+    from src.config.settings import Settings
+except ImportError:
+    sys.path.append(os.getcwd())
+    from src.config.settings import Settings
 
-API_URL = "http://localhost:8000/api/v1/predict"
+# --- 2. Configurações da API ---
+PORT = int(os.getenv("PORT", 8000))
+API_URL = f"http://localhost:{PORT}/api/v1/predict/smart"
+DELAY = 0.1
 
 
 def load_real_data():
-    print(f"📂 Buscando arquivo Excel em {Settings.DATA_DIR}...")
-    files = glob.glob(os.path.join(Settings.DATA_DIR, "*.xlsx"))
+    """
+    Carrega arquivos CSV ou XLSX direto da pasta definida no Settings.DATA_DIR
+    """
+    data_dir = Settings.DATA_DIR
+    print(f"📂 Buscando arquivos de dados em: {data_dir}")
 
-    if not files:
-        raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Settings.DATA_DIR}")
+    csv_files = glob.glob(os.path.join(data_dir, "*.csv"))
+    xlsx_files = glob.glob(os.path.join(data_dir, "*.xlsx"))
+    all_files = csv_files + xlsx_files
 
-    file_path = files[0]
-    print(f"📊 Carregando: {file_path}")
+    if not all_files:
+        print(f"❌ Nenhum arquivo de dados encontrado em {data_dir}")
+        return None
 
-    xls = pd.ExcelFile(file_path)
+    print(f"✅ Encontrados {len(all_files)} arquivos: {[os.path.basename(f) for f in all_files]}")
 
-    # Prioriza aba de 2024 ou 2023 para simulação
-    target_sheet = next((s for s in xls.sheet_names if "2024" in s),
-                        next((s for s in xls.sheet_names if "2023" in s), xls.sheet_names[0]))
+    dataframes = []
+    for file in all_files:
+        try:
+            filename = os.path.basename(file)
+            if file.endswith('.xlsx'):
+                df = pd.read_excel(file)
+            else:
+                try:
+                    df = pd.read_csv(file, sep=';')
+                    if len(df.columns) <= 1:
+                        df = pd.read_csv(file, sep=',')
+                except:
+                    df = pd.read_csv(file, sep=',')
 
-    print(f"📅 Usando aba: {target_sheet}")
-    df = pd.read_excel(xls, sheet_name=target_sheet)
+            df['_ORIGEM'] = filename
+            dataframes.append(df)
+        except Exception as e:
+            print(f"⚠️ Erro ao ler {file}: {e}")
+
+    if not dataframes:
+        return None
+
+    try:
+        full_df = pd.concat(dataframes, ignore_index=True)
+        return full_df
+    except ValueError:
+        return None
+
+
+def normalize_columns(df):
+    """
+    Padroniza colunas para o formato da API
+    """
+    df.columns = [str(c).upper().strip() for c in df.columns]
+
+    rename_map = {
+        'ID_ALUNO': 'RA', 'CODIGO_ALUNO': 'RA', 'MATRICULA': 'RA',
+        'ALUNO': 'NOME', 'NOME_ALUNO': 'NOME',
+        'ANO': 'ANO_INGRESSO',
+        'INSTITUICAO': 'INSTITUICAO_ENSINO', 'ESCOLA': 'INSTITUICAO_ENSINO',
+    }
+    df = df.rename(columns=rename_map)
+
+    if 'RA' in df.columns:
+        df['RA'] = df['RA'].astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
+
     return df
 
 
-def find_column(df, keywords):
-    """Tenta encontrar uma coluna no DF que contenha uma das keywords."""
-    if isinstance(keywords, str): keywords = [keywords]
-
-    for col in df.columns:
-        col_norm = str(col).upper().strip()
-        for k in keywords:
-            # Regex simples para achar ex: "INDE_2023" ou "INDE"
-            if re.search(rf"\b{k}\b", col_norm):
-                return col
-    return None
+def get_infinite_stream(df):
+    while True:
+        df_shuffled = df.sample(frac=1).reset_index(drop=True)
+        for index, row in df_shuffled.iterrows():
+            yield row
 
 
-def map_columns(df):
-    print("🛠️  Mapeando e normalizando colunas para o novo Schema...")
+def simulate_production_traffic():
+    print("--- 🚀 Iniciando Simulação com DADOS REAIS (Correção IDADE) ---")
 
-    # 1. Normaliza colunas básicas
-    column_mapping = {
-        'Idade': 'IDADE',
-        'Ano ingresso': 'ANO_INGRESSO',
-        'Gênero': 'GENERO',
-        'Turma': 'TURMA',
-        'Instituição de ensino': 'INSTITUICAO_ENSINO',
-        'Fase': 'FASE',
-        'Pedra': 'PEDRA'
-    }
+    raw_df = load_real_data()
+    if raw_df is None or raw_df.empty:
+        print("❌ Abortando: Dataframe vazio.")
+        return
 
-    df_ready = pd.DataFrame()
+    df = normalize_columns(raw_df)
 
-    # Mapeia colunas existentes no Excel
-    for excel_name, api_name in column_mapping.items():
-        found = find_column(df, excel_name.upper())
-        if found:
-            df_ready[api_name] = df[found]
-        else:
-            # Fallbacks seguros
-            if api_name == 'PEDRA':
-                df_ready[api_name] = "N/A"
-            else:
-                print(f"⚠️ Aviso: Coluna '{excel_name}' não encontrada.")
+    if 'RA' not in df.columns:
+        print("❌ Erro: Coluna 'RA' não encontrada.")
+        print(f"Colunas disponíveis: {df.columns.tolist()}")
+        return
 
-    # 2. Mapeia Indicadores (Lag Features)
-    # Procura por colunas como INDE_2023, INDE, etc.
-    indicators = [
-        ('INDE', 'INDE_ANTERIOR'),
-        ('IAA', 'IAA_ANTERIOR'),
-        ('IEG', 'IEG_ANTERIOR'),
-        ('IPS', 'IPS_ANTERIOR'),
-        ('IDA', 'IDA_ANTERIOR'),
-        ('IPP', 'IPP_ANTERIOR'),
-        ('IPV', 'IPV_ANTERIOR'),
-        ('IAN', 'IAN_ANTERIOR')
-    ]
+    print(f"✅ Carregado: {len(df)} linhas.")
+    print(f"📡 Target: {API_URL}")
 
-    for kw, api_col in indicators:
-        found = find_column(df, kw)
-        if found:
-            # Converte para numérico forçado
-            df_ready[api_col] = pd.to_numeric(df[found], errors='coerce').fillna(0.0)
-        else:
-            # Se não tiver no Excel, preenche com 0.0 (simula aluno novo)
-            df_ready[api_col] = 0.0
+    stream = get_infinite_stream(df)
+    counter = 0
 
-    # 3. Tratamentos Finais
-    df_ready['ALUNO_NOVO'] = (df_ready['INDE_ANTERIOR'] == 0).astype(int)
-
-    if 'IDADE' in df_ready.columns:
-        df_ready['IDADE'] = pd.to_numeric(df_ready['IDADE'], errors='coerce').fillna(10).astype(int)
-
-    if 'ANO_INGRESSO' in df_ready.columns:
-        df_ready['ANO_INGRESSO'] = pd.to_numeric(df_ready['ANO_INGRESSO'], errors='coerce').fillna(2023).astype(int)
-
-    # Preenche vazios obrigatórios com padrão para não quebrar a API
-    defaults = {
-        'GENERO': 'Outro',
-        'TURMA': 'N/A',
-        'INSTITUICAO_ENSINO': 'N/A',
-        'FASE': '0',
-        'PEDRA': 'Quartzo'
-    }
-    for col, val in defaults.items():
-        if col not in df_ready.columns:
-            df_ready[col] = val
-        else:
-            df_ready[col] = df_ready[col].fillna(val).astype(str)
-
-    return df_ready
-
-
-def simulate_traffic(df, n_requests=100):
-    print(f"\n🚀 Iniciando simulação com {n_requests} requisições (Data Schema V2)...")
-
-    records = df.to_dict(orient='records')
-    random.shuffle(records)
-    sample = records[:n_requests]
-    sucessos = 0
-
-    for i, student in enumerate(sample):
+    for row in stream:
+        counter += 1
         try:
-            response = requests.post(API_URL, json=student, timeout=5)
+            # --- LÓGICA DE SANITIZAÇÃO CORRIGIDA ---
+
+            # 1. Tratamento de IDADE (API exige >= 4)
+            # Se for nulo ou menor que 4, usa 10 como padrão
+            idade_raw = row.get('IDADE')
+            idade_final = 10  # Default seguro
+
+            if pd.notnull(idade_raw):
+                try:
+                    val = int(idade_raw)
+                    if val >= 4:
+                        idade_final = val
+                except:
+                    pass
+
+            # 2. Tratamento de ANO_INGRESSO (API exige >= 2010)
+            ano_raw = row.get('ANO_INGRESSO')
+            ano_final = 2022  # Default seguro
+
+            if pd.notnull(ano_raw):
+                try:
+                    val = int(ano_raw)
+                    if 2010 <= val <= 2026:
+                        ano_final = val
+                except:
+                    pass
+
+            payload = {
+                "RA": str(row['RA']),
+                "NOME": str(row.get('NOME', f"Aluno {row['RA']}")),
+                "IDADE": idade_final,
+                "ANO_INGRESSO": ano_final,
+                "GENERO": str(row.get('GENERO', 'Outro')),
+                "TURMA": str(row.get('TURMA', 'N/A')),
+                "INSTITUICAO_ENSINO": str(row.get('INSTITUICAO_ENSINO', 'N/A')),
+                "FASE": str(row.get('FASE', '0'))
+            }
+
+            # Limpeza final para nulos nas strings
+            for k, v in payload.items():
+                if str(v).lower() == 'nan':
+                    payload[k] = "N/A"
+
+            start_time = time.time()
+            response = requests.post(API_URL, json=payload)
+            elapsed = time.time() - start_time
+
+            origin = row.get('_ORIGEM', 'BD')
 
             if response.status_code == 200:
-                data = response.json()
-                risk = data.get("risk_label")
-                prob = data.get("risk_probability", 0)
-                print(f"[{i + 1}/{n_requests}] ✅ {risk} ({prob:.1%}) | INDE_ANT: {student.get('INDE_ANTERIOR', 0):.2f}")
-                sucessos += 1
+                d = response.json()
+                print(
+                    f"#{counter} | 📂 {origin} | RA: {payload['RA']} | Idade: {payload['IDADE']} | ⏱ {elapsed:.2f}s | {d.get('risk_label')} ({d.get('risk_probability')})")
             else:
-                print(f"[{i + 1}/{n_requests}] ❌ Erro {response.status_code}: {response.text}")
+                print(f"#{counter} | ❌ Erro {response.status_code}: {response.text}")
 
-            time.sleep(0.05)
-
+        except requests.exceptions.ConnectionError:
+            print(f"⚠️ API Offline em {API_URL}. Reconectando...")
+            time.sleep(2)
         except Exception as e:
-            print(f"⚠️ Erro de conexão: {e}")
+            print(f"⚠️ Erro: {e}")
 
-    print(f"\n🏁 Simulação finalizada. Sucessos: {sucessos}/{n_requests}")
+        time.sleep(DELAY)
 
 
 if __name__ == "__main__":
     try:
-        df_raw = load_real_data()
-        df_ready = map_columns(df_raw)
-
-        # Validação simples
-        print(f"📋 Colunas prontas para envio: {list(df_ready.columns)}")
-
-        simulate_traffic(df_ready, n_requests=50)
-
-    except Exception as e:
-        print(f"❌ Erro crítico: {e}")
+        simulate_production_traffic()
+    except KeyboardInterrupt:
+        print("\n🛑 Encerrado.")
