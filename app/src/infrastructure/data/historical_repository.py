@@ -1,7 +1,5 @@
 import os
-
 import pandas as pd
-
 from src.config.settings import Settings
 from src.util.logger import logger
 
@@ -11,7 +9,6 @@ class HistoricalRepository:
     _data = None
 
     def __new__(cls):
-        # Singleton para carregar os dados apenas uma vez na memória
         if cls._instance is None:
             cls._instance = super(HistoricalRepository, cls).__new__(cls)
             cls._instance._load_data()
@@ -20,30 +17,26 @@ class HistoricalRepository:
     def _load_data(self):
         """Carrega o dataset de referência (o mesmo usado no treino ou o arquivo raw)"""
         try:
-            # Idealmente, use o arquivo processado ou o raw unificado.
-            # Aqui assumo que o reference_data.csv tem as colunas necessárias.
-            # Se não tiver, aponte para o Excel original processado.
             logger.info("Carregando base histórica para Feature Store...")
             # Tenta carregar do CSV de referência
             if os.path.exists(Settings.REFERENCE_PATH):
                 self._data = pd.read_csv(Settings.REFERENCE_PATH)
 
-                # --- NOVO BLOCO DE VALIDAÇÃO ---
+                # Validação: Se o CSV estiver obsoleto (sem RA), recarrega do Excel
                 if 'RA' not in self._data.columns:
                     logger.warning("CSV de referência obsoleto (sem RA). Recarregando do Excel...")
                     from src.infrastructure.data.data_loader import DataLoader
                     self._data = DataLoader().load_data()
-                # -------------------------------
             else:
                 from src.infrastructure.data.data_loader import DataLoader
                 self._data = DataLoader().load_data()
 
             if 'RA' not in self._data.columns:
-                # Fallback ou erro se não tiver RA no histórico
                 logger.warning("Coluna RA não encontrada no histórico! A busca smart falhará.")
                 return
 
-            self._data['RA'] = self._data['RA'].astype(str).str.strip()
+            # Normaliza RA para texto
+            self._data['RA'] = self._data['RA'].astype(str).str.strip().str.replace(r'\.0$', '', regex=True)
             self._data = self._data.sort_values(by=['RA', 'ANO_REFERENCIA'])
 
             logger.info(f"Feature Store carregada com {len(self._data)} registros.")
@@ -56,7 +49,7 @@ class HistoricalRepository:
         Busca as métricas do ano anterior para um aluno.
         Retorna um dicionário com os valores ou 0.0 se for aluno novo.
         """
-        if self._data.empty:
+        if self._data is None or self._data.empty:
             return {}
 
         ra_target = str(student_ra).strip()
@@ -67,19 +60,29 @@ class HistoricalRepository:
         if student_history.empty:
             return None  # Aluno não encontrado (Novo na ONG)
 
-        # Pega o registro mais recente (assumindo que é o do ano anterior)
-        # Atenção: Aqui você pode refinar para garantir que é o ano T-1
+        # Pega o registro mais recente
         last_record = student_history.iloc[-1]
 
-        # Mapeia as colunas do dataset para os campos esperados pelo modelo (sufixo _ANTERIOR)
+        # --- FUNÇÃO AUXILIAR DE SEGURANÇA ---
+        def _safe_get(col_name):
+            val = last_record.get(col_name, 0.0)
+            try:
+                # Tenta converter para float
+                return float(val)
+            except (ValueError, TypeError):
+                # Se for texto ("INCLUIR", "N/A"), retorna 0.0
+                return 0.0
+
+        # ------------------------------------
+
         return {
-            "INDE_ANTERIOR": float(last_record.get("INDE", 0.0)),
-            "IAA_ANTERIOR": float(last_record.get("IAA", 0.0)),
-            "IEG_ANTERIOR": float(last_record.get("IEG", 0.0)),
-            "IPS_ANTERIOR": float(last_record.get("IPS", 0.0)),
-            "IDA_ANTERIOR": float(last_record.get("IDA", 0.0)),
-            "IPP_ANTERIOR": float(last_record.get("IPP", 0.0)),
-            "IPV_ANTERIOR": float(last_record.get("IPV", 0.0)),
-            "IAN_ANTERIOR": float(last_record.get("IAN", 0.0)),
-            "ALUNO_NOVO": 0  # Se achou histórico, não é novo
+            "INDE_ANTERIOR": _safe_get("INDE"),
+            "IAA_ANTERIOR": _safe_get("IAA"),
+            "IEG_ANTERIOR": _safe_get("IEG"),
+            "IPS_ANTERIOR": _safe_get("IPS"),
+            "IDA_ANTERIOR": _safe_get("IDA"),
+            "IPP_ANTERIOR": _safe_get("IPP"),
+            "IPV_ANTERIOR": _safe_get("IPV"),
+            "IAN_ANTERIOR": _safe_get("IAN"),
+            "ALUNO_NOVO": 0
         }

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Dict, Any
 
 import pandas as pd
 
@@ -12,7 +12,8 @@ class FeatureProcessor:
     entre Treino (Historical) e Inferência (Live).
     """
 
-    def process(self, df: pd.DataFrame, snapshot_date: Optional[datetime] = None) -> pd.DataFrame:
+    def process(self, df: pd.DataFrame, snapshot_date: Optional[datetime] = None,
+                stats: Optional[Dict[str, Any]] = None) -> pd.DataFrame:
         """
         Transforma dados brutos em features prontas para o modelo.
 
@@ -20,35 +21,35 @@ class FeatureProcessor:
             df: DataFrame com dados brutos.
             snapshot_date: Data de referência para cálculos temporais (usado na inferência).
                            Se None, usa a data atual do sistema.
+            stats: Dicionário com estatísticas calculadas no TREINO (ex: mediana_ano_ingresso).
+                   Essencial para evitar Data Leakage.
         """
         df = df.copy()
 
         # Define o ano de referência
-        # LÓGICA ANTI-LEAKAGE:
-        # 1. Se o dataset já tem 'ANO_REFERENCIA' (Treino histórico), usamos ele.
-        # 2. Se não tem (Inferência), usamos o snapshot_date ou hoje.
         if "ANO_REFERENCIA" in df.columns:
-            # Garante que é numérico para subtração
             referencia = pd.to_numeric(df["ANO_REFERENCIA"], errors="coerce")
         else:
-            # Modo Inferência
             current_date = snapshot_date or datetime.now()
             referencia = current_date.year
 
         # --- Feature: TEMPO_NA_ONG ---
+        # Correção de Data Leakage: Usa estatística do treino se fornecida
         if "ANO_INGRESSO" in df.columns:
             ano_ingresso = pd.to_numeric(df["ANO_INGRESSO"], errors="coerce")
 
-            # Preenche ingresso vazio com a mediana (ou lógica de negócio)
-            # Nota: Em produção real, idealmente usamos valores salvos do treino,
-            # mas aqui usaremos a lógica simplificada para manter compatibilidade.
             if ano_ingresso.isnull().any():
-                mediana = ano_ingresso.median() if not ano_ingresso.isnull().all() else referencia
+                if stats and "mediana_ano_ingresso" in stats:
+                    # Usa valor fixo do treino (Correto)
+                    mediana = stats["mediana_ano_ingresso"]
+                else:
+                    # Fallback (Inferência sem stats ou treino inicial)
+                    mediana = ano_ingresso.median() if not ano_ingresso.isnull().all() else 2020
+
                 ano_ingresso = ano_ingresso.fillna(mediana)
 
-            # O Cálculo Mágico unificado
             df["TEMPO_NA_ONG"] = referencia - ano_ingresso
-            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].clip(lower=0)  # Evita tempo negativo
+            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].clip(lower=0)
         else:
             df["TEMPO_NA_ONG"] = 0
 
@@ -57,20 +58,18 @@ class FeatureProcessor:
 
         for col in required_cols:
             if col not in df.columns:
-                # Se for feature numérica (ex: INDE_ANTERIOR) e não vier, preenche com 0
                 df[col] = 0 if col in Settings.FEATURES_NUMERICAS else "N/A"
 
-        # Remove colunas que não devem estar ali (Sanitização)
-        # Garante que só passa o que está na whitelist
-        df = df[required_cols]
+        # Remove colunas que não devem estar ali (apenas features finais)
+        # Nota: Mantemos df original separado se precisarmos dele depois,
+        # mas aqui retornamos o dataset processado.
+        df_processed = df[required_cols].copy()
 
         # --- Tratamento de Nulos Final ---
-        # Numéricos -> 0 (ou média, conforme sua regra de negócio original)
         for col in Settings.FEATURES_NUMERICAS:
-            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+            df_processed[col] = pd.to_numeric(df_processed[col], errors='coerce').fillna(0)
 
-        # Categóricos -> 'N/A'
         for col in Settings.FEATURES_CATEGORICAS:
-            df[col] = df[col].astype(str).replace('nan', 'N/A')
+            df_processed[col] = df_processed[col].astype(str).replace('nan', 'N/A')
 
-        return df[required_cols]
+        return df_processed

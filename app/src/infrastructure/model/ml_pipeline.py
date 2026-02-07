@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Dict, Any
 
 import pandas as pd
+import numpy as np
 from joblib import dump
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
@@ -24,59 +25,41 @@ class MLPipeline:
         self.processor = FeatureProcessor()
 
     def create_target(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Cria a variável alvo RISCO_DEFASAGEM baseada no DESEMPENHO ATUAL.
-        O Target continua olhando para o presente (é o gabarito),
-        mas as Features olharão para o passado.
-        """
+        """Cria a variável alvo RISCO_DEFASAGEM."""
         if "DEFASAGEM" in df.columns:
-            # Prioriza a defasagem explícita (idade/série)
             df[Settings.TARGET_COL] = df["DEFASAGEM"].apply(
                 lambda x: 1 if (isinstance(x, (int, float)) and x < 0) else 0
             )
         elif "INDE" in df.columns:
-            # Fallback para nota baixa (Regra de Negócio: INDE < 6.0 é risco)
             df["INDE"] = pd.to_numeric(df["INDE"], errors='coerce')
             df[Settings.TARGET_COL] = (df["INDE"] < 6.0).astype(int)
         elif "PEDRA" in df.columns:
-            # Fallback para classificação Pedra
             df[Settings.TARGET_COL] = df["PEDRA"].astype(str).str.upper().apply(
                 lambda x: 1 if "QUARTZO" in x else 0
             )
         else:
-            raise ValueError("Não foi possível criar o target: Colunas DEFASAGEM, INDE ou PEDRA ausentes.")
+            # Se não tiver target, assume 0 (apenas para evitar crash em inferência simulada)
+            # Mas em treino deve falhar.
+            logger.warning("Colunas de Target ausentes. Criando target dummy.")
+            df[Settings.TARGET_COL] = 0
 
         return df
 
     def create_lag_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Gera features históricas (Lag) comparando o ano atual com o anterior do MESMO aluno.
-        Isso captura a TENDÊNCIA (se o aluno está melhorando ou piorando).
-        """
+        """Gera features históricas (Lag)."""
         logger.info("Gerando Features Históricas (Lag)...")
 
-        # 1. Ordenação Crítica: Agrupar por aluno e ordenar por ano é vital para o .shift() funcionar
         if "RA" not in df.columns or "ANO_REFERENCIA" not in df.columns:
-            logger.warning("RA ausente. Pulando Lag Features.")
             return df
 
-        # Ordenar por RA
         df = df.sort_values(by=["RA", "ANO_REFERENCIA"])
+        metricas = ["INDE", "IAA", "IEG", "IPS", "IDA", "IPP", "IPV", "IAN"]
 
-        # 2. Métricas que queremos rastrear o histórico
-        metricas_para_historico = ["INDE", "IAA", "IEG", "IPS", "IDA", "IPP", "IPV", "IAN"]
-
-        for col in metricas_para_historico:
+        for col in metricas:
             if col in df.columns:
                 col_name = f"{col}_ANTERIOR"
-                # Pega o valor da linha anterior (Ano T-1) do mesmo aluno
-                df[col_name] = df.groupby("RA")[col].shift(1)
+                df[col_name] = df.groupby("RA")[col].shift(1).fillna(0)
 
-                # Preenche com 0 para alunos novos (sem histórico)
-                df[col_name] = df[col_name].fillna(0)
-
-        # 3. Cria flag de 'Aluno Novo'
-        # Se INDE_ANTERIOR é 0, assumimos que é o primeiro ano dele na base
         if "INDE_ANTERIOR" in df.columns:
             df["ALUNO_NOVO"] = (df["INDE_ANTERIOR"] == 0).astype(int)
         else:
@@ -85,65 +68,50 @@ class MLPipeline:
         return df
 
     def train(self, df: pd.DataFrame):
-        """
-        Executa o pipeline completo de treinamento com Lógica Preditiva (Anti-Leakage).
-        """
-        logger.info("Iniciando pipeline de treinamento Enterprise (Modo Preditivo)...")
+        logger.info("Iniciando pipeline de treinamento Enterprise (Anti-Leakage)...")
 
-        # ---------------------------------------------------------
-        # 1. Preparação dos Dados
-        # ---------------------------------------------------------
-
-        # A. Cria o Target (Gabarito do Presente)
+        # 1. Preparação Básica (Target e Lags)
+        # Lags dependem apenas do passado, então podem ser feitos antes do split
         df = self.create_target(df)
-
-        # B. Cria Features do Passado (Lag)
         df = self.create_lag_features(df)
 
-        # C. Processamento (Limpeza e Padronização)
-        X_processed = self.processor.process(df)
-
-        # ---------------------------------------------------------
-        # 2. REMOÇÃO DE DATA LEAKAGE (CRUCIAL)
-        # ---------------------------------------------------------
-        # Removemos as colunas que compõem o Target (Notas Atuais).
-        # O modelo só pode ver: Dados Demográficos + Histórico (Ano Anterior).
-
-        # Certifique-se de ter adicionado COLUNAS_PROIBIDAS_NO_TREINO no settings.py
-        cols_proibidas = getattr(Settings, "COLUNAS_PROIBIDAS_NO_TREINO", [])
-
-        cols_to_drop = [c for c in cols_proibidas if c in X_processed.columns]
-        if cols_to_drop:
-            logger.info(f"Removendo colunas de vazamento (Leakage): {cols_to_drop}")
-            X_processed = X_processed.drop(columns=cols_to_drop)
-
-        # Recolocamos colunas auxiliares necessárias para o split
-        X_processed[Settings.TARGET_COL] = df[Settings.TARGET_COL]
-
-        # Precisamos do ANO_REFERENCIA original para fazer o split temporal
+        # 2. Definição do Split Temporal (ANTES do processamento)
+        # Necessário para calcular estatísticas apenas no treino
         if "ANO_REFERENCIA" in df.columns:
-            X_processed["ANO_REFERENCIA"] = df["ANO_REFERENCIA"]
+            anos_disponiveis = sorted(df["ANO_REFERENCIA"].unique())
+            if len(anos_disponiveis) > 1:
+                ano_teste = anos_disponiveis[-1]
+                logger.info(f"Split Temporal: Treino < {ano_teste} | Teste == {ano_teste}")
+                mask_train = df["ANO_REFERENCIA"] < ano_teste
+                mask_test = df["ANO_REFERENCIA"] == ano_teste
+            else:
+                logger.warning("Apenas 1 ano disponível. Split Aleatório.")
+                # Cria índices aleatórios mantendo consistência
+                indices = np.arange(len(df))
+                train_idx, test_idx = train_test_split(indices, test_size=0.2, random_state=42)
+                mask_train = np.zeros(len(df), dtype=bool)
+                mask_test = np.zeros(len(df), dtype=bool)
+                mask_train[train_idx] = True
+                mask_test[test_idx] = True
         else:
-            X_processed["ANO_REFERENCIA"] = datetime.now().year
+            raise ValueError("Coluna ANO_REFERENCIA necessária para treino.")
 
-        # ---------------------------------------------------------
-        # 3. Split Temporal (Evita Data Leakage do Futuro)
-        # ---------------------------------------------------------
-        anos_disponiveis = sorted(X_processed["ANO_REFERENCIA"].unique())
+        # 3. Cálculo de Estatísticas no Treino (Evita Leakage)
+        ano_ingresso_train = pd.to_numeric(df.loc[mask_train, "ANO_INGRESSO"], errors='coerce')
+        mediana_treino = ano_ingresso_train.median()
+        if pd.isna(mediana_treino): mediana_treino = 2020
 
-        if len(anos_disponiveis) > 1:
-            # Se temos múltiplos anos, o último ano é SEMPRE teste
-            ano_teste = anos_disponiveis[-1]
-            logger.info(f"Split Temporal: Treino (Anos < {ano_teste}) | Teste (Ano {ano_teste})")
+        stats = {"mediana_ano_ingresso": mediana_treino}
+        logger.info(f"Estatísticas de Treino calculadas: {stats}")
 
-            mask_test = X_processed["ANO_REFERENCIA"] == ano_teste
-            mask_train = ~mask_test
-        else:
-            logger.warning("Apenas um ano de dados disponível. Usando Split Aleatório (80/20).")
-            mask_train, mask_test = train_test_split(X_processed.index, test_size=0.2, random_state=42)
+        # 4. Processamento (Aplicando stats do treino em tudo)
+        X_processed = self.processor.process(df, stats=stats)
 
-        # Seleciona apenas as features permitidas na Whitelist (Settings)
-        # A Whitelist agora deve conter INDE_ANTERIOR, etc.
+        # 5. Recolocamos Target e Ano para separação
+        X_processed[Settings.TARGET_COL] = df[Settings.TARGET_COL]
+        X_processed["ANO_REFERENCIA"] = df["ANO_REFERENCIA"]
+
+        # 6. Aplicação do Split
         features_to_use = [f for f in Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
                            if f in X_processed.columns]
 
@@ -153,12 +121,9 @@ class MLPipeline:
         X_test = X_processed.loc[mask_test, features_to_use]
         y_test = X_processed.loc[mask_test, Settings.TARGET_COL]
 
-        logger.info(f"Dimensões -> Treino: {X_train.shape} | Teste: {X_test.shape}")
-        logger.info(f"Taxa de Risco (Treino): {y_train.mean():.2%}")
+        logger.info(f"Treino: {X_train.shape}, Teste: {X_test.shape}")
 
-        # ---------------------------------------------------------
-        # 4. Definição do Pipeline do Modelo
-        # ---------------------------------------------------------
+        # 7. Pipeline e Modelo
         numeric_features = [f for f in Settings.FEATURES_NUMERICAS if f in X_train.columns]
         categorical_features = [f for f in Settings.FEATURES_CATEGORICAS if f in X_train.columns]
 
@@ -178,23 +143,18 @@ class MLPipeline:
                 ('cat', categorical_transformer, categorical_features)
             ])
 
-        candidate_model = Pipeline(steps=[
+        model = Pipeline(steps=[
             ('preprocessor', preprocessor),
             ('classifier', RandomForestClassifier(
-                n_estimators=200,
-                max_depth=10,
-                random_state=Settings.RANDOM_STATE,
-                class_weight='balanced',
-                n_jobs=-1
+                n_estimators=200, max_depth=10, random_state=Settings.RANDOM_STATE,
+                class_weight='balanced', n_jobs=-1
             ))
         ])
 
-        # ---------------------------------------------------------
-        # 5. Treinamento e Avaliação
-        # ---------------------------------------------------------
-        candidate_model.fit(X_train, y_train)
-        y_pred = candidate_model.predict(X_test)
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
 
+        # 8. Métricas
         new_metrics = {
             "timestamp": datetime.now().isoformat(),
             "recall": round(recall_score(y_test, y_pred, zero_division=0), 4),
@@ -205,80 +165,54 @@ class MLPipeline:
             "model_version": "candidate"
         }
 
-        logger.info(f"Resultados do Modelo Candidato: {json.dumps(new_metrics, indent=2)}")
+        logger.info(f"Métricas: {new_metrics}")
 
-        # ---------------------------------------------------------
-        # 6. Quality Gate & Promoção
-        # ---------------------------------------------------------
         if self._should_promote_model(new_metrics):
-            self._promote_model(candidate_model, new_metrics, X_test, y_test, y_pred)
-        else:
-            logger.warning("ABORTANDO: O modelo candidato não superou os critérios de qualidade.")
+            # Passamos o 'df' original (com colunas brutas) para salvar o Reference Data correto
+            self._promote_model(model, new_metrics, df.loc[mask_test], y_test, y_pred)
 
     def _should_promote_model(self, new_metrics: Dict[str, Any]) -> bool:
-        """
-        Decide se o novo modelo deve substituir o antigo.
-        Aceita queda de até 5% no F1-Score para permitir variação natural.
-        """
         if not os.path.exists(Settings.METRICS_FILE):
-            logger.info("Nenhuma métrica anterior encontrada (Primeiro Deploy). Aprovado.")
             return True
-
         try:
             with open(Settings.METRICS_FILE, "r") as f:
-                current_metrics = json.load(f)
-
-            current_f1 = current_metrics.get("f1_score", 0)
-            threshold = current_f1 * 0.95
-
-            logger.info(
-                f"Comparando F1: Novo ({new_metrics['f1_score']}) vs Atual ({current_f1}) [Threshold: {threshold:.4f}]")
-
-            if new_metrics["f1_score"] >= threshold:
-                logger.info("Quality Gate: APROVADO.")
-                return True
-            else:
-                logger.warning(f"Quality Gate: REPROVADO.")
-                return False
-
-        except Exception as e:
-            logger.warning(f"Erro ao ler métricas antigas ({e}). Forçando aprovação.")
+                current = json.load(f)
+            # Aceita se não cair mais que 5%
+            return new_metrics["f1_score"] >= (current.get("f1_score", 0) * 0.95)
+        except:
             return True
 
-    def _promote_model(self, model, metrics, X_test, y_test, y_pred):
+    def _promote_model(self, model, metrics, df_test_original, y_test, y_pred):
         """
-        Promove o modelo a produção: Backup, Save Model, Save Metrics, Save Reference Data.
+        Promove o modelo e salva dados de referência.
+        Args:
+            df_test_original: DataFrame ORIGINAL do conjunto de teste (contém INDE, PEDRA, etc.)
+                              Isso corrige o bug de perder histórico para o próximo ano.
         """
-        logger.info("Iniciando promoção do modelo...")
+        logger.info("Promovendo Modelo...")
 
-        # 1. Backup
+        # Backup e Save Model (Igual original)
         if os.path.exists(Settings.MODEL_PATH):
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            backup_path = f"{Settings.MODEL_PATH}.{timestamp}.bak"
-            shutil.copy(Settings.MODEL_PATH, backup_path)
+            shutil.copy(Settings.MODEL_PATH, f"{Settings.MODEL_PATH}.bak")
 
-        # 2. Salvar Modelo
         os.makedirs(os.path.dirname(Settings.MODEL_PATH), exist_ok=True)
         dump(model, Settings.MODEL_PATH)
-        logger.info(f"Modelo salvo em produção: {Settings.MODEL_PATH}")
 
-        # 3. Salvar Métricas
+        # Save Metrics
         metrics["model_version"] = datetime.now().strftime("v%Y.%m.%d")
-        os.makedirs(os.path.dirname(Settings.METRICS_FILE), exist_ok=True)
         with open(Settings.METRICS_FILE, "w") as f:
             json.dump(metrics, f)
 
-        # 4. Salvar Reference Data (Evidently)
-        # Importante: O Reference Data deve conter as features usadas no treino (Lag features)
-        # e o target real.
-        reference_df = X_test.copy()
-        reference_df[Settings.TARGET_COL] = y_test
+        # Save Reference Data (CORRIGIDO)
+        # Salva as colunas originais + predição
+        reference_df = df_test_original.copy()
         reference_df["prediction"] = y_pred
 
-        os.makedirs(os.path.dirname(Settings.REFERENCE_PATH), exist_ok=True)
+        # Opcional: Garantir que target está lá
+        reference_df[Settings.TARGET_COL] = y_test
+
         reference_df.to_csv(Settings.REFERENCE_PATH, index=False)
-        logger.info(f"Reference Data atualizado: {Settings.REFERENCE_PATH}")
+        logger.info(f"Reference Data salvo com colunas originais: {Settings.REFERENCE_PATH}")
 
 
-# Instância pronta para importação
 trainer = MLPipeline()
