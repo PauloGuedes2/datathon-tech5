@@ -1,11 +1,14 @@
+import glob
+import os
+import re
+import sys
+import time
+import warnings
+
 import pandas as pd
 import requests
-import time
-import os
-import glob
-import sys
-import re
-import warnings
+
+from src.config.settings import Configuracoes
 
 # Suprime avisos de pandas
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -14,12 +17,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(current_dir)
 sys.path.append(project_root)
-
-try:
-    from src.config.settings import Settings
-except ImportError:
-    sys.path.append(os.getcwd())
-    from src.config.settings import Settings
 
 # --- 2. Configurações da API ---
 PORT = int(os.getenv("PORT", 8000))
@@ -60,7 +57,7 @@ def get_any_col(row, possible_names):
 # --- CARREGAMENTO DE DADOS ---
 
 def load_real_data():
-    data_dir = Settings.DATA_DIR
+    data_dir = Configuracoes.DATA_DIR
     print(f"📂 Buscando arquivos em: {data_dir}")
 
     extensions = ['*.xlsx', '*.csv']
