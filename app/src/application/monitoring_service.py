@@ -1,3 +1,12 @@
+"""
+Serviço de monitoramento de drift.
+
+Responsabilidades:
+- Ler dados de referência e produção
+- Gerar relatório Evidently em HTML
+- Tratar cenários de erro e dados insuficientes
+"""
+
 import os
 
 import pandas as pd
@@ -5,72 +14,145 @@ from evidently import ColumnMapping
 from evidently.metric_preset import DataDriftPreset, TargetDriftPreset
 from evidently.report import Report
 
-from src.config.settings import Settings
+from src.config.settings import Configuracoes
 from src.util.logger import logger
 
-""" Módulo de Serviço para Monitoramento de Data Drift e Target Drift."""
 
+class ServicoMonitoramento:
+    """
+    Serviço para monitoramento de Data Drift e Target Drift.
 
-class MonitoringService:
+    Responsabilidades:
+    - Validar existência de arquivos necessários
+    - Preparar dados atuais e de referência
+    - Executar e retornar relatório Evidently
+    """
 
     @staticmethod
-    def generate_dashboard() -> str:
+    def gerar_dashboard() -> str:
         """
-        Gera o relatório HTML de Data Drift comparando Treino (Reference) vs Produção (Current).
-        Retorna: String contendo o HTML.
+        Gera o relatório HTML comparando referência vs produção.
+
+        Retorno:
+        - str: HTML do relatório ou mensagens de aviso/erro
         """
-        if not os.path.exists(Settings.REFERENCE_PATH):
+        if not os.path.exists(Configuracoes.REFERENCE_PATH):
             return "<h1>Erro: Dataset de Referência não encontrado. Treine o modelo primeiro.</h1>"
 
-        if not os.path.exists(Settings.LOG_PATH):
+        if not os.path.exists(Configuracoes.LOG_PATH):
             return "<h1>Aviso: Nenhum dado de produção ainda. Faça algumas predições na API primeiro.</h1>"
 
         try:
-            reference_data = pd.read_csv(Settings.REFERENCE_PATH)
-            try:
-                current_data_raw = pd.read_json(Settings.LOG_PATH, lines=True)
-            except ValueError:
-                return "<h1>Aviso: Arquivo de logs vazio ou inválido.</h1>"
+            referencia = pd.read_csv(Configuracoes.REFERENCE_PATH)
+            dados_atual_raw = ServicoMonitoramento._carregar_logs()
+            if isinstance(dados_atual_raw, str):
+                return dados_atual_raw
 
-            if current_data_raw.empty:
+            if dados_atual_raw.empty:
                 return "<h1>Aviso: Arquivo de logs sem dados.</h1>"
 
-            features_df = pd.json_normalize(current_data_raw["input_features"])
-            preds_df = pd.json_normalize(current_data_raw["prediction_result"])
-            current_data = pd.concat([features_df, preds_df], axis=1)
+            dados_atual = ServicoMonitoramento._montar_dados_atual(dados_atual_raw)
+            referencia, dados_atual = ServicoMonitoramento._filtrar_predicoes_validas(referencia, dados_atual)
 
-            if "class" in current_data.columns:
-                current_data.rename(columns={"class": "prediction"}, inplace=True)
-
-            reference_data = reference_data.dropna(subset=["prediction"])
-            current_data = current_data.dropna(subset=["prediction"])
-
-            common_cols = list(set(reference_data.columns) & set(current_data.columns))
-
-            if len(current_data) < 5:
+            colunas_comuns = list(set(referencia.columns) & set(dados_atual.columns))
+            if len(dados_atual) < 5:
                 return "<h1>Aguardando mais dados... (Mínimo 5 requisições para gerar relatório confiável)</h1>"
 
-            column_mapping = ColumnMapping()
+            mapeamento_colunas = ServicoMonitoramento._criar_mapeamento(colunas_comuns, dados_atual)
+            relatorio = ServicoMonitoramento._executar_relatorio(referencia, dados_atual, mapeamento_colunas)
+            return relatorio.get_html()
 
-            column_mapping.numerical_features = [c for c in Settings.FEATURES_NUMERICAS if c in common_cols]
-            column_mapping.categorical_features = [c for c in Settings.FEATURES_CATEGORICAS if c in common_cols]
+        except Exception as erro:
+            logger.error(f"Erro ao gerar dashboard: {erro}")
+            return f"<h1>Erro interno ao gerar relatório: {str(erro)}</h1>"
 
-            if "prediction" in current_data.columns:
-                column_mapping.prediction = "prediction"
+    @staticmethod
+    def _carregar_logs():
+        """
+        Carrega os logs de produção em JSONL.
 
-            drift_report = Report(metrics=[
-                DataDriftPreset(),
-                TargetDriftPreset()
-            ])
+        Retorno:
+        - pd.DataFrame | str: DataFrame com logs ou mensagem HTML de aviso
+        """
+        try:
+            return pd.read_json(Configuracoes.LOG_PATH, lines=True)
+        except ValueError:
+            return "<h1>Aviso: Arquivo de logs vazio ou inválido.</h1>"
 
-            drift_report.run(
-                reference_data=reference_data,
-                current_data=current_data,
-                column_mapping=column_mapping
-            )
+    @staticmethod
+    def _montar_dados_atual(dados_raw: pd.DataFrame) -> pd.DataFrame:
+        """
+        Monta o DataFrame atual combinando features e predições.
 
-            return drift_report.get_html()
+        Parâmetros:
+        - dados_raw (pd.DataFrame): logs brutos
 
-        except Exception as e:
-            logger.error(f"Erro ao gerar dashboard: {e}")
-            return f"<h1>Erro interno ao gerar relatório: {str(e)}</h1>"
+        Retorno:
+        - pd.DataFrame: dados atuais preparados
+        """
+        features_df = pd.json_normalize(dados_raw["input_features"])
+        preds_df = pd.json_normalize(dados_raw["prediction_result"])
+        dados_atual = pd.concat([features_df, preds_df], axis=1)
+
+        if "class" in dados_atual.columns:
+            dados_atual.rename(columns={"class": "prediction"}, inplace=True)
+
+        return dados_atual
+
+    @staticmethod
+    def _filtrar_predicoes_validas(referencia: pd.DataFrame, atual: pd.DataFrame):
+        """
+        Remove linhas sem coluna de predição.
+
+        Parâmetros:
+        - referencia (pd.DataFrame): dados de referência
+        - atual (pd.DataFrame): dados atuais
+
+        Retorno:
+        - tuple[pd.DataFrame, pd.DataFrame]: referência e atual filtrados
+        """
+        referencia_filtrada = referencia.dropna(subset=["prediction"])
+        atual_filtrado = atual.dropna(subset=["prediction"])
+        return referencia_filtrada, atual_filtrado
+
+    @staticmethod
+    def _criar_mapeamento(colunas_comuns, dados_atual: pd.DataFrame) -> ColumnMapping:
+        """
+        Cria o mapeamento de colunas para o Evidently.
+
+        Parâmetros:
+        - colunas_comuns (list): colunas presentes em ambos os conjuntos
+        - dados_atual (pd.DataFrame): dados atuais
+
+        Retorno:
+        - ColumnMapping: configuração de colunas
+        """
+        mapeamento = ColumnMapping()
+        mapeamento.numerical_features = [c for c in Configuracoes.FEATURES_NUMERICAS if c in colunas_comuns]
+        mapeamento.categorical_features = [c for c in Configuracoes.FEATURES_CATEGORICAS if c in colunas_comuns]
+
+        if "prediction" in dados_atual.columns:
+            mapeamento.prediction = "prediction"
+
+        return mapeamento
+
+    @staticmethod
+    def _executar_relatorio(referencia: pd.DataFrame, atual: pd.DataFrame, mapeamento: ColumnMapping) -> Report:
+        """
+        Executa o relatório de drift.
+
+        Parâmetros:
+        - referencia (pd.DataFrame): dados de referência
+        - atual (pd.DataFrame): dados atuais
+        - mapeamento (ColumnMapping): configuração de colunas
+
+        Retorno:
+        - Report: relatório Evidently executado
+        """
+        relatorio = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
+        relatorio.run(
+            reference_data=referencia,
+            current_data=atual,
+            column_mapping=mapeamento,
+        )
+        return relatorio

@@ -1,29 +1,62 @@
+"""
+Controlador de monitoramento da API.
+
+Responsabilidades:
+- Expor endpoint de dashboard de monitoramento
+- Fornecer dependência do serviço de monitoramento
+"""
+
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
 
-from src.application.monitoring_service import MonitoringService
+from src.application.monitoring_service import ServicoMonitoramento
 
 
-def get_monitoring_service():
-    """ Dependência para obter uma instância do MonitoringService."""
-    return MonitoringService()
+def obter_servico_monitoramento():
+    """
+    Dependência para obter uma instância do serviço de monitoramento.
+
+    Retorno:
+    - ServicoMonitoramento: instância pronta para uso
+    """
+    return ServicoMonitoramento()
 
 
-class MonitoringController:
-    """ Controller para endpoints relacionados ao monitoramento do modelo e dashboard do Evidently AI."""
+class ControladorMonitoramento:
+    """
+    Controlador para endpoints de monitoramento.
+
+    Responsabilidades:
+    - Registrar rota do dashboard
+    - Retornar HTML gerado pelo Evidently
+    """
+
     def __init__(self):
-        self.router = APIRouter()
-        self.router.add_api_route(
+        """
+        Inicializa o controlador.
+
+        Responsabilidades:
+        - Criar o roteador
+        - Registrar a rota do dashboard
+        """
+        self.roteador = APIRouter()
+        self.roteador.add_api_route(
             "/dashboard",
-            self._get_dashboard,
+            self._obter_dashboard,
             methods=["GET"],
-            response_class=HTMLResponse  # Importante: Retorna HTML, não JSON
+            response_class=HTMLResponse,
         )
 
     @staticmethod
-    async def _get_dashboard(service: MonitoringService = Depends(get_monitoring_service)):
+    async def _obter_dashboard(servico: ServicoMonitoramento = Depends(obter_servico_monitoramento)):
         """
-        Retorna o Dashboard do Evidently AI.
+        Retorna o dashboard do Evidently AI.
+
+        Parâmetros:
+        - servico (ServicoMonitoramento): serviço de monitoramento
+
+        Retorno:
+        - HTMLResponse: HTML do dashboard
         """
-        html_content = service.generate_dashboard()
-        return HTMLResponse(content=html_content, status_code=200)
+        conteudo_html = servico.gerar_dashboard()
+        return HTMLResponse(content=conteudo_html, status_code=200)

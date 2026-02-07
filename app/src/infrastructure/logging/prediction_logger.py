@@ -1,53 +1,82 @@
+"""
+Logger de predições em JSONL.
+
+Responsabilidades:
+- Registrar predições com segurança de thread
+- Garantir estrutura padronizada do log
+"""
+
 import json
 import os
 import threading
 import uuid
 from datetime import datetime
-from src.config.settings import Settings
+
+from src.config.settings import Configuracoes
 from src.util.logger import logger
 
-class PredictionLogger:
+
+class LoggerPredicao:
     """
-    Logger thread-safe para persistir predições em formato JSONL.
-    Atende ao Requisito 3: Concorrência Segura e JSON Estruturado.
+    Logger thread-safe para persistir predições.
+
+    Responsabilidades:
+    - Garantir instância única
+    - Serializar dados de predição
+    - Escrever logs com segurança
     """
-    _instance = None
+
+    _instancia = None
     _lock = threading.Lock()
 
     def __new__(cls):
-        if cls._instance is None:
-            with cls._lock:
-                if cls._instance is None:
-                    cls._instance = super(PredictionLogger, cls).__new__(cls)
-        return cls._instance
+        """
+        Cria ou reutiliza a instância única.
 
-    def log_prediction(self, features: dict, prediction_data: dict, model_version: str = "2.1.0"):
+        Retorno:
+        - LoggerPredicao: instância singleton
+        """
+        if cls._instancia is None:
+            with cls._lock:
+                if cls._instancia is None:
+                    cls._instancia = super(LoggerPredicao, cls).__new__(cls)
+        return cls._instancia
+
+    def registrar_predicao(self, features: dict, dados_predicao: dict, versao_modelo: str = "2.1.0"):
         """
         Escreve um registro de predição de forma atômica.
+
+        Parâmetros:
+        - features (dict): features de entrada
+        - dados_predicao (dict): dados da predição
+        - versao_modelo (str): versão do modelo
+
+        Retorno:
+        - None: não retorna valor
         """
-        log_entry = {
+        entrada_log = {
             "prediction_id": str(uuid.uuid4()),
-            "correlation_id": prediction_data.get("correlation_id", str(uuid.uuid4())),
+            "correlation_id": dados_predicao.get("correlation_id", str(uuid.uuid4())),
             "timestamp": datetime.now().isoformat(),
-            "model_version": model_version,
+            "model_version": versao_modelo,
             "input_features": features,
             "prediction_result": {
-                "class": prediction_data.get("prediction"),
-                "probability": prediction_data.get("risk_probability"),
-                "label": prediction_data.get("risk_label")
-            }
+                "class": dados_predicao.get("prediction"),
+                "probability": dados_predicao.get("risk_probability"),
+                "label": dados_predicao.get("risk_label"),
+            },
         }
 
         try:
-            json_line = json.dumps(log_entry, ensure_ascii=False)
-        except Exception as e:
-            logger.error(f"Falha ao serializar log: {e}")
+            linha_json = json.dumps(entrada_log, ensure_ascii=False)
+        except Exception as erro:
+            logger.error(f"Falha ao serializar log: {erro}")
             return
 
         with self._lock:
             try:
-                os.makedirs(os.path.dirname(Settings.LOG_PATH), exist_ok=True)
-                with open(Settings.LOG_PATH, "a", encoding="utf-8") as f:
-                    f.write(json_line + "\n")
-            except Exception as e:
-                logger.error(f"Falha Crítica ao escrever no log de predição: {e}")
+                os.makedirs(os.path.dirname(Configuracoes.LOG_PATH), exist_ok=True)
+                with open(Configuracoes.LOG_PATH, "a", encoding="utf-8") as arquivo:
+                    arquivo.write(linha_json + "\n")
+            except Exception as erro:
+                logger.error(f"Falha Crítica ao escrever no log de predição: {erro}")

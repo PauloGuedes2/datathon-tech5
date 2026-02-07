@@ -1,79 +1,115 @@
+"""
+Repositório de histórico acadêmico.
+
+Responsabilidades:
+- Carregar dataset de referência
+- Fornecer histórico do aluno
+- Aplicar normalizações de RA
+"""
+
 import os
 import pandas as pd
-from src.config.settings import Settings
+
+from src.config.settings import Configuracoes
 from src.util.logger import logger
 
 
-class HistoricalRepository:
-    _instance = None
-    _data = None
+class RepositorioHistorico:
+    """
+    Repositório singleton para consulta de histórico.
+
+    Responsabilidades:
+    - Manter dados carregados em memória
+    - Recarregar quando necessário
+    - Buscar métricas do ano anterior
+    """
+
+    _instancia = None
+    _dados = None
 
     def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(HistoricalRepository, cls).__new__(cls)
-            cls._instance._load_data()
-        return cls._instance
+        """
+        Cria ou reutiliza a instância única.
 
-    def _load_data(self):
-        """Carrega o dataset de referência (o mesmo usado no treino ou o arquivo raw)"""
+        Retorno:
+        - RepositorioHistorico: instância singleton
+        """
+        if cls._instancia is None:
+            cls._instancia = super(RepositorioHistorico, cls).__new__(cls)
+            cls._instancia._carregar_dados()
+        return cls._instancia
+
+    def _carregar_dados(self):
+        """
+        Carrega o dataset de referência ou o arquivo bruto.
+
+        Retorno:
+        - None: não retorna valor
+        """
         try:
             logger.info("Carregando base histórica para Feature Store...")
 
-            if os.path.exists(Settings.REFERENCE_PATH):
-                self._data = pd.read_csv(Settings.REFERENCE_PATH)
+            if os.path.exists(Configuracoes.REFERENCE_PATH):
+                self._dados = pd.read_csv(Configuracoes.REFERENCE_PATH)
 
-                if 'RA' not in self._data.columns:
+                if "RA" not in self._dados.columns:
                     logger.warning("CSV de referência obsoleto (sem RA). Recarregando do Excel...")
-                    from src.infrastructure.data.data_loader import DataLoader
-                    self._data = DataLoader().load_data()
+                    from src.infrastructure.data.data_loader import CarregadorDados
+                    self._dados = CarregadorDados().carregar_dados()
             else:
-                from src.infrastructure.data.data_loader import DataLoader
-                self._data = DataLoader().load_data()
+                from src.infrastructure.data.data_loader import CarregadorDados
+                self._dados = CarregadorDados().carregar_dados()
 
-            if 'RA' not in self._data.columns:
+            if "RA" not in self._dados.columns:
                 logger.warning("Coluna RA não encontrada no histórico! A busca smart falhará.")
                 return
 
-            self._data['RA'] = self._data['RA'].astype(str).str.strip().str.replace(r'\.0$', '', regex=True)
-            self._data = self._data.sort_values(by=['RA', 'ANO_REFERENCIA'])
+            self._dados["RA"] = (
+                self._dados["RA"].astype(str).str.strip().str.replace(r"\.0$", "", regex=True)
+            )
+            self._dados = self._dados.sort_values(by=["RA", "ANO_REFERENCIA"])
 
-            logger.info(f"Feature Store carregada com {len(self._data)} registros.")
-        except Exception as e:
-            logger.error(f"Erro ao carregar Feature Store: {e}")
-            self._data = pd.DataFrame()
+            logger.info(f"Feature Store carregada com {len(self._dados)} registros.")
+        except Exception as erro:
+            logger.error(f"Erro ao carregar Feature Store: {erro}")
+            self._dados = pd.DataFrame()
 
-    def get_student_history(self, student_ra: str) -> dict:
+    def obter_historico_estudante(self, ra_estudante: str) -> dict:
         """
-        Busca as métricas do ano anterior para um aluno.
-        Retorna um dicionário com os valores ou 0.0 se for aluno novo.
+        Busca métricas do ano anterior para um aluno.
+
+        Parâmetros:
+        - ra_estudante (str): RA do aluno
+
+        Retorno:
+        - dict: métricas históricas ou vazio para aluno novo
         """
-        if self._data is None or self._data.empty:
+        if self._dados is None or self._dados.empty:
             return {}
 
-        ra_target = str(student_ra).strip()
+        ra_alvo = str(ra_estudante).strip()
+        historico = self._dados[self._dados["RA"] == ra_alvo]
 
-        student_history = self._data[self._data['RA'] == ra_target]
-
-        if student_history.empty:
+        if historico.empty:
             return None
 
-        last_record = student_history.iloc[-1]
+        ultimo_registro = historico.iloc[-1]
 
-        def _safe_get(col_name):
-            val = last_record.get(col_name, 0.0)
+        def _obter_seguro(nome_coluna):
+            valor = ultimo_registro.get(nome_coluna, 0.0)
             try:
-                return float(val)
+                return float(valor)
             except (ValueError, TypeError):
                 return 0.0
 
         return {
-            "INDE_ANTERIOR": _safe_get("INDE"),
-            "IAA_ANTERIOR": _safe_get("IAA"),
-            "IEG_ANTERIOR": _safe_get("IEG"),
-            "IPS_ANTERIOR": _safe_get("IPS"),
-            "IDA_ANTERIOR": _safe_get("IDA"),
-            "IPP_ANTERIOR": _safe_get("IPP"),
-            "IPV_ANTERIOR": _safe_get("IPV"),
-            "IAN_ANTERIOR": _safe_get("IAN"),
-            "ALUNO_NOVO": 0
+            "INDE_ANTERIOR": _obter_seguro("INDE"),
+            "IAA_ANTERIOR": _obter_seguro("IAA"),
+            "IEG_ANTERIOR": _obter_seguro("IEG"),
+            "IPS_ANTERIOR": _obter_seguro("IPS"),
+            "IDA_ANTERIOR": _obter_seguro("IDA"),
+            "IPP_ANTERIOR": _obter_seguro("IPP"),
+            "IPV_ANTERIOR": _obter_seguro("IPV"),
+            "IAN_ANTERIOR": _obter_seguro("IAN"),
+            "ALUNO_NOVO": 0,
         }

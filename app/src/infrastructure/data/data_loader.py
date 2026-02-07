@@ -1,3 +1,12 @@
+"""
+Carregamento e preparação de dados históricos.
+
+Responsabilidades:
+- Localizar arquivos Excel
+- Normalizar colunas
+- Unificar abas por ano
+"""
+
 import glob
 import os
 import re
@@ -5,108 +14,170 @@ import re
 import pandas as pd
 import unicodedata
 
-from src.config.settings import Settings
+from src.config.settings import Configuracoes
 from src.util.logger import logger
 
 
-class DataLoader:
+class CarregadorDados:
     """
-    Responsável pelo carregamento, limpeza e unificação dos dados históricos (2022, 2023, 2024).
+    Responsável pelo carregamento, limpeza e unificação dos dados históricos.
+
+    Responsabilidades:
+    - Buscar arquivos na pasta de dados
+    - Processar abas por ano
+    - Concatenar datasets
     """
 
-    def load_data(self) -> pd.DataFrame:
+    def carregar_dados(self) -> pd.DataFrame:
         """
-        Busca arquivos Excel na pasta de dados, processa as abas por ano e unifica em um único DataFrame.
+        Busca arquivos Excel na pasta de dados e unifica as abas por ano.
+
+        Retorno:
+        - pd.DataFrame: dataset consolidado
+
+        Exceções:
+        - FileNotFoundError: quando não há arquivos .xlsx
+        - RuntimeError: quando nenhuma aba válida é encontrada
         """
-        search_path = os.path.join(Settings.DATA_DIR, "*.xlsx")
-        excel_files = glob.glob(search_path)
+        caminho_busca = os.path.join(Configuracoes.DATA_DIR, "*.xlsx")
+        arquivos_excel = glob.glob(caminho_busca)
 
-        logger.info(f"Buscando arquivos em: {search_path}")
+        logger.info(f"Buscando arquivos em: {caminho_busca}")
 
-        if not excel_files:
-            try:
-                contents = os.listdir(Settings.DATA_DIR)
-                logger.error(f"Conteúdo encontrado em {Settings.DATA_DIR}: {contents}")
-            except Exception as e:
-                pass
-            raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Settings.DATA_DIR}")
+        if not arquivos_excel:
+            self._registrar_conteudo_pasta()
+            raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Configuracoes.DATA_DIR}")
 
-        file_path = excel_files[0]
-        logger.info(f"Carregando arquivo Excel: {file_path}")
+        caminho_arquivo = arquivos_excel[0]
+        logger.info(f"Carregando arquivo Excel: {caminho_arquivo}")
 
-        try:
-            sheets_dict = pd.read_excel(file_path, sheet_name=None)
-        except Exception as e:
-            logger.error(f"Erro crítico ao ler o Excel: {e}")
-            raise e
+        abas = self._ler_excel(caminho_arquivo)
+        dados_unificados = self._processar_abas(abas)
 
-        all_data = []
-
-        for sheet_name, df_sheet in sheets_dict.items():
-            ano_match = re.search(r'202\d', sheet_name)
-
-            if not ano_match:
-                logger.warning(f"Aba '{sheet_name}' ignorada (não contém ano no nome).")
-                continue
-
-            ano_completo = int(ano_match.group())
-            logger.info(f"Processando aba: {sheet_name} (Ano {ano_completo})")
-
-            df_sheet = self._process_dataframe(df_sheet, ano_completo)
-            df_sheet['ANO_REFERENCIA'] = ano_completo
-
-            all_data.append(df_sheet)
-
-        if not all_data:
+        if not dados_unificados:
             raise RuntimeError("Nenhuma aba válida carregada do Excel.")
 
         try:
-            final_df = pd.concat(all_data, ignore_index=True)
-        except Exception as e:
-            logger.error(f"Erro ao concatenar os dados: {e}")
-            raise e
+            df_final = pd.concat(dados_unificados, ignore_index=True)
+        except Exception as erro:
+            logger.error(f"Erro ao concatenar os dados: {erro}")
+            raise erro
 
-        final_df = final_df.fillna(0)
+        df_final = df_final.fillna(0)
+        logger.info(f"Dataset Total Unificado: {df_final.shape}")
+        return df_final
 
-        logger.info(f"Dataset Total Unificado: {final_df.shape}")
-        return final_df
+    def _registrar_conteudo_pasta(self) -> None:
+        """
+        Registra o conteúdo da pasta de dados no log.
+
+        Retorno:
+        - None: não retorna valor
+        """
+        try:
+            conteudo = os.listdir(Configuracoes.DATA_DIR)
+            logger.error(f"Conteúdo encontrado em {Configuracoes.DATA_DIR}: {conteudo}")
+        except Exception:
+            return
 
     @staticmethod
-    def _process_dataframe(df: pd.DataFrame, ano_full: int) -> pd.DataFrame:
-        new_cols = []
-        ano_short = int(str(ano_full)[-2:])
+    def _ler_excel(caminho_arquivo: str):
+        """
+        Lê todas as abas de um arquivo Excel.
 
-        for col in df.columns:
-            col_clean = str(col).upper().strip()
-            col_clean = unicodedata.normalize('NFKD', col_clean).encode('ASCII', 'ignore').decode('utf-8')
-            col_clean = re.sub(f'[ _]{ano_full}', '', col_clean)
-            col_clean = re.sub(f'[ _]{ano_short}$', '', col_clean)
+        Parâmetros:
+        - caminho_arquivo (str): caminho do arquivo
 
-            if col_clean in ['RA', 'ID_ALUNO', 'CODIGO_ALUNO', 'MATRICULA']:
-                col_clean = 'RA'
-            elif col_clean in ['MAT', 'MATEM', 'MATEMATICA']:
-                col_clean = 'NOTA_MAT'
-            elif col_clean in ['POR', 'PORT', 'PORTUG', 'PORTUGUES']:
-                col_clean = 'NOTA_PORT'
-            elif col_clean in ['ING', 'INGL', 'INGLES']:
-                col_clean = 'NOTA_ING'
-            elif col_clean in ['DEFAS', 'DEFASAGEM']:
-                col_clean = 'DEFASAGEM'
-            elif "ANO" in col_clean and "INGRESSO" in col_clean:
-                col_clean = "ANO_INGRESSO"
+        Retorno:
+        - dict: abas e DataFrames
 
-            if "INST" in col_clean and "ENSINO" in col_clean: col_clean = "INSTITUICAO_ENSINO"
-            if "PONTO" in col_clean and "VIRADA" in col_clean: col_clean = "PONTO_VIRADA"
-            if "PSICOLOGIA" in col_clean and "REC" in col_clean: col_clean = "REC_PSICOLOGIA"
+        Exceções:
+        - Exception: quando a leitura falha
+        """
+        try:
+            return pd.read_excel(caminho_arquivo, sheet_name=None)
+        except Exception as erro:
+            logger.error(f"Erro crítico ao ler o Excel: {erro}")
+            raise erro
 
-            new_cols.append(col_clean)
+    def _processar_abas(self, abas: dict):
+        """
+        Processa abas válidas e retorna lista de DataFrames.
 
-        df.columns = new_cols
+        Parâmetros:
+        - abas (dict): dicionário de abas
+
+        Retorno:
+        - list[pd.DataFrame]: dados processados
+        """
+        dados = []
+
+        for nome_aba, df_aba in abas.items():
+            ano_match = re.search(r"202\d", nome_aba)
+
+            if not ano_match:
+                logger.warning(f"Aba '{nome_aba}' ignorada (não contém ano no nome).")
+                continue
+
+            ano_completo = int(ano_match.group())
+            logger.info(f"Processando aba: {nome_aba} (Ano {ano_completo})")
+
+            df_processado = self._processar_dataframe(df_aba, ano_completo)
+            df_processado["ANO_REFERENCIA"] = ano_completo
+
+            dados.append(df_processado)
+
+        return dados
+
+    @staticmethod
+    def _processar_dataframe(df: pd.DataFrame, ano_completo: int) -> pd.DataFrame:
+        """
+        Normaliza colunas e dados de uma aba.
+
+        Parâmetros:
+        - df (pd.DataFrame): dados da aba
+        - ano_completo (int): ano da referência
+
+        Retorno:
+        - pd.DataFrame: DataFrame processado
+        """
+        novas_colunas = []
+        ano_curto = int(str(ano_completo)[-2:])
+
+        for coluna in df.columns:
+            coluna_limpa = str(coluna).upper().strip()
+            coluna_limpa = unicodedata.normalize("NFKD", coluna_limpa).encode("ASCII", "ignore").decode("utf-8")
+            coluna_limpa = re.sub(f"[ _]{ano_completo}", "", coluna_limpa)
+            coluna_limpa = re.sub(f"[ _]{ano_curto}$", "", coluna_limpa)
+
+            if coluna_limpa in ["RA", "ID_ALUNO", "CODIGO_ALUNO", "MATRICULA"]:
+                coluna_limpa = "RA"
+            elif coluna_limpa in ["MAT", "MATEM", "MATEMATICA"]:
+                coluna_limpa = "NOTA_MAT"
+            elif coluna_limpa in ["POR", "PORT", "PORTUG", "PORTUGUES"]:
+                coluna_limpa = "NOTA_PORT"
+            elif coluna_limpa in ["ING", "INGL", "INGLES"]:
+                coluna_limpa = "NOTA_ING"
+            elif coluna_limpa in ["DEFAS", "DEFASAGEM"]:
+                coluna_limpa = "DEFASAGEM"
+            elif "ANO" in coluna_limpa and "INGRESSO" in coluna_limpa:
+                coluna_limpa = "ANO_INGRESSO"
+
+            if "INST" in coluna_limpa and "ENSINO" in coluna_limpa:
+                coluna_limpa = "INSTITUICAO_ENSINO"
+            if "PONTO" in coluna_limpa and "VIRADA" in coluna_limpa:
+                coluna_limpa = "PONTO_VIRADA"
+            if "PSICOLOGIA" in coluna_limpa and "REC" in coluna_limpa:
+                coluna_limpa = "REC_PSICOLOGIA"
+
+            novas_colunas.append(coluna_limpa)
+
+        df.columns = novas_colunas
 
         if df.columns.duplicated().any():
             df = df.loc[:, ~df.columns.duplicated()]
 
-        if 'RA' in df.columns:
-            df['RA'] = df['RA'].astype(str).str.strip()
+        if "RA" in df.columns:
+            df["RA"] = df["RA"].astype(str).str.strip()
 
         return df

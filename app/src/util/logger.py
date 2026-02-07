@@ -1,56 +1,59 @@
+"""
+Fábrica de logger da aplicação.
+
+Responsabilidades:
+- Configurar loggers de forma padronizada
+- Evitar duplicação de handlers
+- Direcionar saída para stdout
+"""
+
 import logging
 import sys
 
-from src.config.settings import Settings
+from src.config.settings import Configuracoes
 
 
-class LoggerFactory:
+class FabricaLogger:
     """
-    Responsável por configurar e fornecer instâncias de Logger
-    padronizadas para toda a aplicação.
-    
-    Funcionalidades:
-        - Configuração única de logger
-        - Formatação padronizada
-        - Handler para console/Docker
-        - Prevenção de logs duplicados
+    Responsável por configurar e fornecer instâncias de Logger.
+
+    Responsabilidades:
+    - Configuração única de logger
+    - Formatação padronizada
+    - Handler para console/Docker
     """
 
-    _configured = False
+    _configurado = False
 
     @classmethod
-    def setup(cls, name: str = "PASSOS_MAGICOS_APP"):
+    def configurar(cls, nome: str = "PASSOS_MAGICOS_APP"):
         """
         Configura o logger se ainda não estiver configurado.
-        
-        Args:
-            name: Nome do logger (padrão: PASSOS_MAGICOS_APP)
-            
-        Returns:
-            Logger configurado e pronto para uso
-            
-        Features:
-            - Garante que não haja duplicação de handlers
-            - Formatação com timestamp e nível
-            - Output para stdout (compatível com Docker)
+
+        Parâmetros:
+        - nome (str): nome do logger
+
+        Retorno:
+        - logging.Logger: logger configurado
         """
-        logger = logging.getLogger(name)
+        logger_instancia = logging.getLogger(nome)
 
-        if not logger.handlers:
-            log_level = getattr(Settings, "LOG_LEVEL", "INFO")
-            logger.setLevel(log_level)
+        if not logger_instancia.handlers:
+            nivel_log = getattr(Configuracoes, "LOG_LEVEL", "INFO")
+            logger_instancia.setLevel(nivel_log)
 
-            formatter = logging.Formatter(
-                fmt='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                datefmt='%Y-%m-%d %H:%M:%S'
+            formatador = logging.Formatter(
+                fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+                datefmt="%Y-%m-%d %H:%M:%S",
             )
 
-            console_handler = logging.StreamHandler(sys.stdout)
-            console_handler.setFormatter(formatter)
-            logger.addHandler(console_handler)
+            handler_console = logging.StreamHandler(sys.stdout)
+            handler_console.setFormatter(formatador)
+            logger_instancia.addHandler(handler_console)
 
-            logger.propagate = False
+            logger_instancia.propagate = False
 
-        return logger
+        return logger_instancia
 
-logger = LoggerFactory.setup()
+
+logger = FabricaLogger.configurar()

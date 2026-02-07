@@ -1,11 +1,21 @@
+"""
+Pipeline de treinamento do modelo de ML.
+
+Responsabilidades:
+- Criar variável alvo
+- Gerar features históricas
+- Treinar modelo e avaliar métricas
+- Promover modelo com base em critérios
+"""
+
 import json
 import os
 import shutil
 from datetime import datetime
-from typing import Dict, Any
+from typing import Dict, Any, Tuple
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from joblib import dump
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
@@ -15,187 +25,309 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from src.application.feature_processor import FeatureProcessor
-from src.config.settings import Settings
+from src.application.feature_processor import ProcessadorFeatures
+from src.config.settings import Configuracoes
 from src.util.logger import logger
 
 
-class MLPipeline:
+class PipelineML:
+    """
+    Pipeline de treinamento do modelo.
+
+    Responsabilidades:
+    - Preparar dados
+    - Treinar e avaliar o modelo
+    - Promover modelo quando aplicável
+    """
+
     def __init__(self):
-        self.processor = FeatureProcessor()
+        """
+        Inicializa o pipeline.
+
+        Responsabilidades:
+        - Instanciar o processador de features
+        """
+        self.processador = ProcessadorFeatures()
 
     @staticmethod
-    def create_target(df: pd.DataFrame) -> pd.DataFrame:
-        """Cria a variável alvo RISCO_DEFASAGEM."""
-        if "DEFASAGEM" in df.columns:
-            df[Settings.TARGET_COL] = df["DEFASAGEM"].apply(
-                lambda x: 1 if (isinstance(x, (int, float)) and x < 0) else 0
+    def criar_target(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Cria a variável alvo RISCO_DEFASAGEM.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+
+        Retorno:
+        - pd.DataFrame: dados com coluna alvo
+        """
+        if "DEFASAGEM" in dados.columns:
+            dados[Configuracoes.TARGET_COL] = dados["DEFASAGEM"].apply(
+                lambda valor: 1 if (isinstance(valor, (int, float)) and valor < 0) else 0
             )
-        elif "INDE" in df.columns:
-            df["INDE"] = pd.to_numeric(df["INDE"], errors='coerce')
-            df[Settings.TARGET_COL] = (df["INDE"] < 6.0).astype(int)
-        elif "PEDRA" in df.columns:
-            df[Settings.TARGET_COL] = df["PEDRA"].astype(str).str.upper().apply(
-                lambda x: 1 if "QUARTZO" in x else 0
+        elif "INDE" in dados.columns:
+            dados["INDE"] = pd.to_numeric(dados["INDE"], errors="coerce")
+            dados[Configuracoes.TARGET_COL] = (dados["INDE"] < 6.0).astype(int)
+        elif "PEDRA" in dados.columns:
+            dados[Configuracoes.TARGET_COL] = dados["PEDRA"].astype(str).str.upper().apply(
+                lambda valor: 1 if "QUARTZO" in valor else 0
             )
         else:
             logger.warning("Colunas de Target ausentes. Criando target dummy.")
-            df[Settings.TARGET_COL] = 0
+            dados[Configuracoes.TARGET_COL] = 0
 
-        return df
+        return dados
 
     @staticmethod
-    def create_lag_features(df: pd.DataFrame) -> pd.DataFrame:
-        """Gera features históricas (Lag)."""
+    def criar_features_lag(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Gera features históricas (Lag).
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+
+        Retorno:
+        - pd.DataFrame: dados com features de histórico
+        """
         logger.info("Gerando Features Históricas (Lag)...")
 
-        if "RA" not in df.columns or "ANO_REFERENCIA" not in df.columns:
-            return df
+        if "RA" not in dados.columns or "ANO_REFERENCIA" not in dados.columns:
+            return dados
 
-        df = df.sort_values(by=["RA", "ANO_REFERENCIA"])
+        dados = dados.sort_values(by=["RA", "ANO_REFERENCIA"])
         metricas = ["INDE", "IAA", "IEG", "IPS", "IDA", "IPP", "IPV", "IAN"]
 
-        for col in metricas:
-            if col in df.columns:
-                col_name = f"{col}_ANTERIOR"
-                df[col_name] = df.groupby("RA")[col].shift(1).fillna(0)
+        for coluna in metricas:
+            if coluna in dados.columns:
+                nome_coluna = f"{coluna}_ANTERIOR"
+                dados[nome_coluna] = dados.groupby("RA")[coluna].shift(1).fillna(0)
 
-        if "INDE_ANTERIOR" in df.columns:
-            df["ALUNO_NOVO"] = (df["INDE_ANTERIOR"] == 0).astype(int)
+        if "INDE_ANTERIOR" in dados.columns:
+            dados["ALUNO_NOVO"] = (dados["INDE_ANTERIOR"] == 0).astype(int)
         else:
-            df["ALUNO_NOVO"] = 1
+            dados["ALUNO_NOVO"] = 1
 
-        return df
+        return dados
 
-    def train(self, df: pd.DataFrame):
+    def treinar(self, dados: pd.DataFrame):
+        """
+        Executa o treinamento do modelo.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados para treinamento
+
+        Exceções:
+        - ValueError: quando ANO_REFERENCIA não está disponível
+        """
         logger.info("Iniciando pipeline de treinamento Enterprise (Anti-Leakage)...")
 
-        df = self.create_target(df)
-        df = self.create_lag_features(df)
+        dados = self.criar_target(dados)
+        dados = self.criar_features_lag(dados)
 
-        if "ANO_REFERENCIA" in df.columns:
-            anos_disponiveis = sorted(df["ANO_REFERENCIA"].unique())
-            if len(anos_disponiveis) > 1:
-                ano_teste = anos_disponiveis[-1]
-                logger.info(f"Split Temporal: Treino < {ano_teste} | Teste == {ano_teste}")
-                mask_train = df["ANO_REFERENCIA"] < ano_teste
-                mask_test = df["ANO_REFERENCIA"] == ano_teste
-            else:
-                logger.warning("Apenas 1 ano disponível. Split Aleatório.")
-                indices = np.arange(len(df))
-                train_idx, test_idx = train_test_split(indices, test_size=0.2, random_state=42)
-                mask_train = np.zeros(len(df), dtype=bool)
-                mask_test = np.zeros(len(df), dtype=bool)
-                mask_train[train_idx] = True
-                mask_test[test_idx] = True
-        else:
+        mascara_treino, mascara_teste = self._definir_particao_temporal(dados)
+
+        estatisticas = self._calcular_estatisticas_treino(dados, mascara_treino)
+        logger.info(f"Estatísticas de Treino calculadas: {estatisticas}")
+
+        dados_processados = self.processador.processar(dados, estatisticas=estatisticas)
+        dados_processados[Configuracoes.TARGET_COL] = dados[Configuracoes.TARGET_COL]
+        dados_processados["ANO_REFERENCIA"] = dados["ANO_REFERENCIA"]
+
+        features_uso = [
+            f for f in Configuracoes.FEATURES_NUMERICAS + Configuracoes.FEATURES_CATEGORICAS
+            if f in dados_processados.columns
+        ]
+
+        matriz_treino = dados_processados.loc[mascara_treino, features_uso]
+        alvo_treino = dados_processados.loc[mascara_treino, Configuracoes.TARGET_COL]
+
+        matriz_teste = dados_processados.loc[mascara_teste, features_uso]
+        alvo_teste = dados_processados.loc[mascara_teste, Configuracoes.TARGET_COL]
+
+        logger.info(f"Treino: {matriz_treino.shape}, Teste: {matriz_teste.shape}")
+
+        modelo = self._criar_modelo(matriz_treino)
+        modelo.fit(matriz_treino, alvo_treino)
+        predicoes = modelo.predict(matriz_teste)
+
+        novas_metricas = self._calcular_metricas(alvo_teste, predicoes, matriz_treino, matriz_teste)
+        logger.info(f"Métricas: {novas_metricas}")
+
+        if self._deve_promover_modelo(novas_metricas):
+            self._promover_modelo(modelo, novas_metricas, dados.loc[mascara_teste], alvo_teste, predicoes)
+
+    @staticmethod
+    def _definir_particao_temporal(dados: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Define máscaras de treino e teste com base em ANO_REFERENCIA.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+
+        Retorno:
+        - tuple[np.ndarray, np.ndarray]: máscaras de treino e teste
+
+        Exceções:
+        - ValueError: quando ANO_REFERENCIA não está disponível
+        """
+        if "ANO_REFERENCIA" not in dados.columns:
             raise ValueError("Coluna ANO_REFERENCIA necessária para treino.")
 
-        ano_ingresso_train = pd.to_numeric(df.loc[mask_train, "ANO_INGRESSO"], errors='coerce')
-        mediana_treino = ano_ingresso_train.median()
-        if pd.isna(mediana_treino): mediana_treino = 2020
+        anos_disponiveis = sorted(dados["ANO_REFERENCIA"].unique())
+        if len(anos_disponiveis) > 1:
+            ano_teste = anos_disponiveis[-1]
+            logger.info(f"Split Temporal: Treino < {ano_teste} | Teste == {ano_teste}")
+            mascara_treino = dados["ANO_REFERENCIA"] < ano_teste
+            mascara_teste = dados["ANO_REFERENCIA"] == ano_teste
+            return mascara_treino, mascara_teste
 
-        stats = {"mediana_ano_ingresso": mediana_treino}
-        logger.info(f"Estatísticas de Treino calculadas: {stats}")
+        logger.warning("Apenas 1 ano disponível. Split Aleatório.")
+        indices = np.arange(len(dados))
+        idx_treino, idx_teste = train_test_split(indices, test_size=0.2, random_state=42)
+        mascara_treino = np.zeros(len(dados), dtype=bool)
+        mascara_teste = np.zeros(len(dados), dtype=bool)
+        mascara_treino[idx_treino] = True
+        mascara_teste[idx_teste] = True
+        return mascara_treino, mascara_teste
 
-        X_processed = self.processor.process(df, stats=stats)
-        X_processed[Settings.TARGET_COL] = df[Settings.TARGET_COL]
-        X_processed["ANO_REFERENCIA"] = df["ANO_REFERENCIA"]
+    @staticmethod
+    def _calcular_estatisticas_treino(dados: pd.DataFrame, mascara_treino: np.ndarray) -> Dict[str, Any]:
+        """
+        Calcula estatísticas do conjunto de treino.
 
-        features_to_use = [f for f in Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
-                           if f in X_processed.columns]
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+        - mascara_treino (np.ndarray): máscara de treino
 
-        X_train = X_processed.loc[mask_train, features_to_use]
-        y_train = X_processed.loc[mask_train, Settings.TARGET_COL]
+        Retorno:
+        - dict: estatísticas calculadas
+        """
+        ano_ingresso = pd.to_numeric(dados.loc[mascara_treino, "ANO_INGRESSO"], errors="coerce")
+        mediana = ano_ingresso.median()
+        if pd.isna(mediana):
+            mediana = 2020
+        return {"mediana_ano_ingresso": mediana}
 
-        X_test = X_processed.loc[mask_test, features_to_use]
-        y_test = X_processed.loc[mask_test, Settings.TARGET_COL]
+    @staticmethod
+    def _criar_modelo(matriz_treino: pd.DataFrame) -> Pipeline:
+        """
+        Cria pipeline de pré-processamento e modelo.
 
-        logger.info(f"Treino: {X_train.shape}, Teste: {X_test.shape}")
+        Parâmetros:
+        - matriz_treino (pd.DataFrame): dados de treino
 
-        numeric_features = [f for f in Settings.FEATURES_NUMERICAS if f in X_train.columns]
-        categorical_features = [f for f in Settings.FEATURES_CATEGORICAS if f in X_train.columns]
+        Retorno:
+        - Pipeline: pipeline do modelo
+        """
+        features_numericas = [f for f in Configuracoes.FEATURES_NUMERICAS if f in matriz_treino.columns]
+        features_categoricas = [f for f in Configuracoes.FEATURES_CATEGORICAS if f in matriz_treino.columns]
 
-        numeric_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='median')),
-            ('scaler', StandardScaler())
+        transformador_numerico = Pipeline(steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
         ])
 
-        categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
-            ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+        transformador_categorico = Pipeline(steps=[
+            ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
+            ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
         ])
 
         preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numeric_transformer, numeric_features),
-                ('cat', categorical_transformer, categorical_features)
-            ])
+                ("num", transformador_numerico, features_numericas),
+                ("cat", transformador_categorico, features_categoricas),
+            ]
+        )
 
-        model = Pipeline(steps=[
-            ('preprocessor', preprocessor),
-            ('classifier', RandomForestClassifier(
-                n_estimators=200, max_depth=10, random_state=Settings.RANDOM_STATE,
-                class_weight='balanced', n_jobs=-1
-            ))
+        return Pipeline(steps=[
+            ("preprocessor", preprocessor),
+            (
+                "classifier",
+                RandomForestClassifier(
+                    n_estimators=200,
+                    max_depth=10,
+                    random_state=Configuracoes.RANDOM_STATE,
+                    class_weight="balanced",
+                    n_jobs=-1,
+                ),
+            ),
         ])
 
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
+    @staticmethod
+    def _calcular_metricas(
+        alvo_teste, predicoes, matriz_treino: pd.DataFrame, matriz_teste: pd.DataFrame
+    ) -> Dict[str, Any]:
+        """
+        Calcula métricas do modelo.
 
-        new_metrics = {
+        Parâmetros:
+        - alvo_teste (pd.Series): valores reais
+        - predicoes (np.ndarray): predições
+        - matriz_treino (pd.DataFrame): dados de treino
+        - matriz_teste (pd.DataFrame): dados de teste
+
+        Retorno:
+        - dict: métricas calculadas
+        """
+        return {
             "timestamp": datetime.now().isoformat(),
-            "recall": round(recall_score(y_test, y_pred, zero_division=0), 4),
-            "f1_score": round(f1_score(y_test, y_pred, zero_division=0), 4),
-            "precision": round(precision_score(y_test, y_pred, zero_division=0), 4),
-            "train_size": int(len(X_train)),
-            "test_size": int(len(X_test)),
-            "model_version": "candidate"
+            "recall": round(recall_score(alvo_teste, predicoes, zero_division=0), 4),
+            "f1_score": round(f1_score(alvo_teste, predicoes, zero_division=0), 4),
+            "precision": round(precision_score(alvo_teste, predicoes, zero_division=0), 4),
+            "train_size": int(len(matriz_treino)),
+            "test_size": int(len(matriz_teste)),
+            "model_version": "candidate",
         }
 
-        logger.info(f"Métricas: {new_metrics}")
-
-        if self._should_promote_model(new_metrics):
-            self._promote_model(model, new_metrics, df.loc[mask_test], y_test, y_pred)
-
     @staticmethod
-    def _should_promote_model(new_metrics: Dict[str, Any]) -> bool:
-        if not os.path.exists(Settings.METRICS_FILE):
+    def _deve_promover_modelo(novas_metricas: Dict[str, Any]) -> bool:
+        """
+        Avalia se o modelo deve ser promovido.
+
+        Parâmetros:
+        - novas_metricas (dict): métricas do modelo candidato
+
+        Retorno:
+        - bool: True se deve promover
+        """
+        if not os.path.exists(Configuracoes.METRICS_FILE):
             return True
         try:
-            with open(Settings.METRICS_FILE, "r") as f:
-                current = json.load(f)
-            return new_metrics["f1_score"] >= (current.get("f1_score", 0) * 0.95)
-        except:
+            with open(Configuracoes.METRICS_FILE, "r") as arquivo:
+                atual = json.load(arquivo)
+            return novas_metricas["f1_score"] >= (atual.get("f1_score", 0) * 0.95)
+        except Exception:
             return True
 
     @staticmethod
-    def _promote_model(model, metrics, df_test_original, y_test, y_pred):
+    def _promover_modelo(modelo, metricas, dados_teste_original, alvo_teste, predicoes):
         """
         Promove o modelo e salva dados de referência.
-        Args:
-            df_test_original: DataFrame ORIGINAL do conjunto de teste (contém INDE, PEDRA, etc.)
-                              Isso corrige o bug de perder histórico para o próximo ano.
+
+        Parâmetros:
+        - modelo (Any): modelo treinado
+        - metricas (dict): métricas do modelo
+        - dados_teste_original (pd.DataFrame): dados originais de teste
+        - alvo_teste (pd.Series): valores reais
+        - predicoes (np.ndarray): predições
         """
         logger.info("Promovendo Modelo...")
 
-        if os.path.exists(Settings.MODEL_PATH):
-            shutil.copy(Settings.MODEL_PATH, f"{Settings.MODEL_PATH}.bak")
+        if os.path.exists(Configuracoes.MODEL_PATH):
+            shutil.copy(Configuracoes.MODEL_PATH, f"{Configuracoes.MODEL_PATH}.bak")
 
-        os.makedirs(os.path.dirname(Settings.MODEL_PATH), exist_ok=True)
-        dump(model, Settings.MODEL_PATH)
+        os.makedirs(os.path.dirname(Configuracoes.MODEL_PATH), exist_ok=True)
+        dump(modelo, Configuracoes.MODEL_PATH)
 
-        metrics["model_version"] = datetime.now().strftime("v%Y.%m.%d")
-        with open(Settings.METRICS_FILE, "w") as f:
-            json.dump(metrics, f)
+        metricas["model_version"] = datetime.now().strftime("v%Y.%m.%d")
+        with open(Configuracoes.METRICS_FILE, "w") as arquivo:
+            json.dump(metricas, arquivo)
 
-        reference_df = df_test_original.copy()
-        reference_df["prediction"] = y_pred
+        referencia_df = dados_teste_original.copy()
+        referencia_df["prediction"] = predicoes
+        referencia_df[Configuracoes.TARGET_COL] = alvo_teste
 
-        reference_df[Settings.TARGET_COL] = y_test
-
-        reference_df.to_csv(Settings.REFERENCE_PATH, index=False)
-        logger.info(f"Reference Data salvo com colunas originais: {Settings.REFERENCE_PATH}")
+        referencia_df.to_csv(Configuracoes.REFERENCE_PATH, index=False)
+        logger.info(f"Reference Data salvo com colunas originais: {Configuracoes.REFERENCE_PATH}")
 
 
-trainer = MLPipeline()
+treinador = PipelineML()
