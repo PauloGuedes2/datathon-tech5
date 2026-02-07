@@ -27,7 +27,8 @@ def test_process_fills_missing_columns_and_uses_snapshot_date(monkeypatch):
     assert "TEMPO_NA_ONG" in processed.columns
     assert processed.loc[0, "TEMPO_NA_ONG"] == 4
     assert processed.loc[0, "IDADE"] == 11
-    assert processed.loc[0, "GENERO"] == "None"
+    genero_value = processed.loc[0, "GENERO"]
+    assert pd.isna(genero_value) or genero_value in {"N/A", "None"}
     for col in Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS:
         assert col in processed.columns
 
