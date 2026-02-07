@@ -45,12 +45,10 @@ class LoggerFactory:
                 datefmt='%Y-%m-%d %H:%M:%S'
             )
 
-            # Handler para Console (Stdout) - Essencial para Docker logs
             console_handler = logging.StreamHandler(sys.stdout)
             console_handler.setFormatter(formatter)
             logger.addHandler(console_handler)
 
-            # Evita propagação para loggers raiz (evita logs duplicados do Uvicorn/FastAPI)
             logger.propagate = False
 
         return logger

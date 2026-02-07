@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-
+"""Configurações centrais do projeto, como caminhos de arquivos, colunas usadas, hiperparâmetros, etc."""
 class Settings:
     # --- Caminhos Base ---
     BASE_DIR = Path(__file__).resolve().parents[2]
@@ -45,8 +45,7 @@ class Settings:
         "FASE"
     ]
 
-    # Lista de colunas usadas APENAS para criar o target, mas proibidas no X (input)
-    # Isso previne o "Somador de Notas"
+    # Lista de colunas usadas APENAS para criar o target, mas proibidas no X (input), Isso previne o "Somador de Notas"!
     COLUNAS_PROIBIDAS_NO_TREINO = [
         "INDE", "PEDRA", "DEFASAGEM",
         "NOTA_PORT", "NOTA_MAT", "NOTA_ING"

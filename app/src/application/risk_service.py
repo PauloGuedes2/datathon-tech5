@@ -7,24 +7,23 @@ from src.infrastructure.data.historical_repository import HistoricalRepository
 from src.infrastructure.logging.prediction_logger import PredictionLogger
 from src.util.logger import logger
 
-
+""" Módulo de Serviço para Predição de Risco de Defasagem Acadêmica."""
 class RiskService:
     def __init__(self, model):
         self.model = model
-        self.processor = FeatureProcessor()  # Instancia o processador
-        self.logger = PredictionLogger()  # Instancia o Logger Seguro
-        self.repository = HistoricalRepository() # Instancia o repositório histórico
+        self.processor = FeatureProcessor()
+        self.logger = PredictionLogger()
+        self.repository = HistoricalRepository()
 
     def predict_risk(self, student_data: dict) -> dict:
+        """Realiza a predição de risco com base nos dados do aluno."""
         if not self.model:
             raise RuntimeError("Serviço indisponível: Modelo não inicializado.")
 
         try:
-            # 1. Processamento (Já corrigido no Passo 2)
             raw_df = pd.DataFrame([student_data])
             features_df = self.processor.process(raw_df)
 
-            # 2. Inferência
             prob_risk = self.model.predict_proba(features_df)[:, 1][0]
             prediction_class = int(prob_risk > Settings.RISK_THRESHOLD)
             risk_label = "ALTO RISCO" if prediction_class == 1 else "BAIXO RISCO"
@@ -35,11 +34,8 @@ class RiskService:
                 "prediction": prediction_class
             }
 
-            # 3. Logging Seguro (Requisito 3)
-            # Convertemos o DataFrame de features para dict para salvar no JSON
             features_dict = features_df.to_dict(orient="records")[0]
 
-            # Chamada Thread-Safe
             self.logger.log_prediction(
                 features=features_dict,
                 prediction_data=result
@@ -55,10 +51,9 @@ class RiskService:
         """
         Método inteligente que busca histórico automaticamente.
         """
-        # 1. Busca histórico na Feature Store
+
         history_features = self.repository.get_student_history(input_data.RA)
 
-        # 2. Lógica de "Enriquecimento"
         if history_features:
             logger.info(f"Histórico encontrado para RA: {input_data.RA}")
         else:
@@ -75,13 +70,9 @@ class RiskService:
                 "ALUNO_NOVO": 1
             }
 
-        # 3. Cria o objeto Student completo (Domain Object)
-        # Combina os dados da tela (input_data) com os do banco (history_features)
         full_student_data = input_data.model_dump()
         full_student_data.update(history_features)
 
-        # Valida com o modelo rigoroso original
         student_domain = Student(**full_student_data)
 
-        # 4. Chama a predição original
         return self.predict_risk(student_domain.model_dump())

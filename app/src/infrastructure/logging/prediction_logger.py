@@ -12,7 +12,7 @@ class PredictionLogger:
     Atende ao Requisito 3: Concorrência Segura e JSON Estruturado.
     """
     _instance = None
-    _lock = threading.Lock() # Lock global para controlar escrita no arquivo
+    _lock = threading.Lock()
 
     def __new__(cls):
         if cls._instance is None:
@@ -25,13 +25,12 @@ class PredictionLogger:
         """
         Escreve um registro de predição de forma atômica.
         """
-        # Cria o payload estruturado (Requisito 3)
         log_entry = {
             "prediction_id": str(uuid.uuid4()),
             "correlation_id": prediction_data.get("correlation_id", str(uuid.uuid4())),
             "timestamp": datetime.now().isoformat(),
             "model_version": model_version,
-            "input_features": features, # Salva o dicionário de features usado
+            "input_features": features,
             "prediction_result": {
                 "class": prediction_data.get("prediction"),
                 "probability": prediction_data.get("risk_probability"),
@@ -39,15 +38,12 @@ class PredictionLogger:
             }
         }
 
-        # Serializa para JSON
         try:
             json_line = json.dumps(log_entry, ensure_ascii=False)
         except Exception as e:
             logger.error(f"Falha ao serializar log: {e}")
             return
 
-        # Escrita Thread-Safe
-        # O lock garante que apenas uma thread escreva no arquivo por vez
         with self._lock:
             try:
                 os.makedirs(os.path.dirname(Settings.LOG_PATH), exist_ok=True)

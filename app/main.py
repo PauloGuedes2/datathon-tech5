@@ -17,14 +17,11 @@ app = FastAPI(
 @app.on_event("startup")
 async def startup_event():
     logger.info("Inicializando recursos da API...")
-    # Carrega o modelo na memória IMEDIATAMENTE ao iniciar o servidor
     ModelManager().load_model()
 
-# Rota de Predição
 prediction_controller = PredictionController()
 app.include_router(prediction_controller.router, prefix="/api/v1", tags=["Predição"])
 
-# Rota de Monitoramento (Nova)
 monitoring_controller = MonitoringController()
 app.include_router(monitoring_controller.router, prefix="/api/v1/monitoring", tags=["Observabilidade"])
 

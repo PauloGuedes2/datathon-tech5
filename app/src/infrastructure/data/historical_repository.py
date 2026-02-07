@@ -18,11 +18,10 @@ class HistoricalRepository:
         """Carrega o dataset de referência (o mesmo usado no treino ou o arquivo raw)"""
         try:
             logger.info("Carregando base histórica para Feature Store...")
-            # Tenta carregar do CSV de referência
+
             if os.path.exists(Settings.REFERENCE_PATH):
                 self._data = pd.read_csv(Settings.REFERENCE_PATH)
 
-                # Validação: Se o CSV estiver obsoleto (sem RA), recarrega do Excel
                 if 'RA' not in self._data.columns:
                     logger.warning("CSV de referência obsoleto (sem RA). Recarregando do Excel...")
                     from src.infrastructure.data.data_loader import DataLoader
@@ -35,7 +34,6 @@ class HistoricalRepository:
                 logger.warning("Coluna RA não encontrada no histórico! A busca smart falhará.")
                 return
 
-            # Normaliza RA para texto
             self._data['RA'] = self._data['RA'].astype(str).str.strip().str.replace(r'\.0$', '', regex=True)
             self._data = self._data.sort_values(by=['RA', 'ANO_REFERENCIA'])
 
@@ -54,26 +52,19 @@ class HistoricalRepository:
 
         ra_target = str(student_ra).strip()
 
-        # Filtra pelo aluno
         student_history = self._data[self._data['RA'] == ra_target]
 
         if student_history.empty:
-            return None  # Aluno não encontrado (Novo na ONG)
+            return None
 
-        # Pega o registro mais recente
         last_record = student_history.iloc[-1]
 
-        # --- FUNÇÃO AUXILIAR DE SEGURANÇA ---
         def _safe_get(col_name):
             val = last_record.get(col_name, 0.0)
             try:
-                # Tenta converter para float
                 return float(val)
             except (ValueError, TypeError):
-                # Se for texto ("INCLUIR", "N/A"), retorna 0.0
                 return 0.0
-
-        # ------------------------------------
 
         return {
             "INDE_ANTERIOR": _safe_get("INDE"),

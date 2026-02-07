@@ -1,8 +1,10 @@
-import pandas as pd
-import re
-import os
 import glob
+import os
+import re
+
+import pandas as pd
 import unicodedata
+
 from src.config.settings import Settings
 from src.util.logger import logger
 
@@ -16,7 +18,6 @@ class DataLoader:
         """
         Busca arquivos Excel na pasta de dados, processa as abas por ano e unifica em um único DataFrame.
         """
-        # 1. Busca por qualquer arquivo Excel na pasta 'data'
         search_path = os.path.join(Settings.DATA_DIR, "*.xlsx")
         excel_files = glob.glob(search_path)
 
@@ -26,16 +27,14 @@ class DataLoader:
             try:
                 contents = os.listdir(Settings.DATA_DIR)
                 logger.error(f"Conteúdo encontrado em {Settings.DATA_DIR}: {contents}")
-            except Exception:
+            except Exception as e:
                 pass
             raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Settings.DATA_DIR}")
 
-        # Pega o primeiro Excel encontrado
         file_path = excel_files[0]
         logger.info(f"Carregando arquivo Excel: {file_path}")
 
         try:
-            # sheet_name=None lê TODAS as abas e retorna um dicionário
             sheets_dict = pd.read_excel(file_path, sheet_name=None)
         except Exception as e:
             logger.error(f"Erro crítico ao ler o Excel: {e}")
@@ -44,7 +43,6 @@ class DataLoader:
         all_data = []
 
         for sheet_name, df_sheet in sheets_dict.items():
-            # 2. Identifica o ano pelo nome da aba (Ex: "PEDE 2022" -> 2022)
             ano_match = re.search(r'202\d', sheet_name)
 
             if not ano_match:
@@ -54,10 +52,7 @@ class DataLoader:
             ano_completo = int(ano_match.group())
             logger.info(f"Processando aba: {sheet_name} (Ano {ano_completo})")
 
-            # 3. Processa colunas (Limpeza de nomes, acentos e anos)
             df_sheet = self._process_dataframe(df_sheet, ano_completo)
-
-            # Adiciona coluna de controle de ano
             df_sheet['ANO_REFERENCIA'] = ano_completo
 
             all_data.append(df_sheet)
@@ -65,25 +60,23 @@ class DataLoader:
         if not all_data:
             raise RuntimeError("Nenhuma aba válida carregada do Excel.")
 
-        # 4. Unifica tudo em um único Dataset
         try:
             final_df = pd.concat(all_data, ignore_index=True)
         except Exception as e:
             logger.error(f"Erro ao concatenar os dados: {e}")
             raise e
 
-        # Preenche nulos com 0 (segurança para o modelo)
         final_df = final_df.fillna(0)
 
         logger.info(f"Dataset Total Unificado: {final_df.shape}")
         return final_df
 
-    def _process_dataframe(self, df: pd.DataFrame, ano_full: int) -> pd.DataFrame:
+    @staticmethod
+    def _process_dataframe(df: pd.DataFrame, ano_full: int) -> pd.DataFrame:
         new_cols = []
         ano_short = int(str(ano_full)[-2:])
 
         for col in df.columns:
-            # 1. Normalização Básica
             col_clean = str(col).upper().strip()
             col_clean = unicodedata.normalize('NFKD', col_clean).encode('ASCII', 'ignore').decode('utf-8')
             col_clean = re.sub(f'[ _]{ano_full}', '', col_clean)
@@ -99,11 +92,8 @@ class DataLoader:
                 col_clean = 'NOTA_ING'
             elif col_clean in ['DEFAS', 'DEFASAGEM']:
                 col_clean = 'DEFASAGEM'
-
-            # --- NOVA LINHA AQUI ---
             elif "ANO" in col_clean and "INGRESSO" in col_clean:
                 col_clean = "ANO_INGRESSO"
-            # -----------------------
 
             if "INST" in col_clean and "ENSINO" in col_clean: col_clean = "INSTITUICAO_ENSINO"
             if "PONTO" in col_clean and "VIRADA" in col_clean: col_clean = "PONTO_VIRADA"

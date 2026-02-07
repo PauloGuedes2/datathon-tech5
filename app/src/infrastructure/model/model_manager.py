@@ -29,7 +29,6 @@ class ModelManager:
 
         if not os.path.exists(Settings.MODEL_PATH):
             logger.critical(f"Arquivo de modelo não encontrado em: {Settings.MODEL_PATH}")
-            # Em produção, talvez queiramos falhar o startup se não houver modelo
             return
 
         try:
@@ -43,7 +42,6 @@ class ModelManager:
     def get_model(self) -> Any:
         """Retorna a instância do modelo carregado."""
         if self._model is None:
-            # Tenta carregar sob demanda se falhou no startup
             self.load_model()
 
         if self._model is None:
