@@ -1,12 +1,25 @@
+"""
+Modelos de domínio para representar dados do aluno.
+
+Responsabilidades:
+- Validar entradas de predição
+- Garantir consistência de tipos e limites
+"""
+
 from typing import Optional
 
 from pydantic import BaseModel, Field, ConfigDict
 
-""" Módulo de domínio para representar os dados do aluno, incluindo os dados demográficos e o histórico acadêmico (lag features). """
 
+class Estudante(BaseModel):
+    """
+    Representa um aluno com dados demográficos e histórico acadêmico.
 
-class Student(BaseModel):
-    """ Representa um aluno com seus dados demográficos e históricos acadêmicos."""
+    Responsabilidades:
+    - Validar dados completos do aluno
+    - Fornecer estrutura para predição completa
+    """
+
     RA: str = Field(..., min_length=1, description="Registro Acadêmico Único do Aluno")
     IDADE: int = Field(..., ge=4, le=25)
     ANO_INGRESSO: int = Field(..., ge=2010, le=2026)
@@ -28,10 +41,14 @@ class Student(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
 
-class StudentInput(BaseModel):
+class EntradaEstudante(BaseModel):
     """
-    O que o cliente realmente preenche na tela.
+    Dados básicos do aluno enviados pelo cliente.
+
+    Responsabilidades:
+    - Validar campos mínimos para predição inteligente
     """
+
     RA: str = Field(..., min_length=1, description="Registro Acadêmico Único do Aluno")
     IDADE: int = Field(..., ge=4, le=25)
     ANO_INGRESSO: int = Field(..., ge=2010, le=2026)
@@ -39,3 +56,8 @@ class StudentInput(BaseModel):
     TURMA: str = Field(..., min_length=1)
     INSTITUICAO_ENSINO: str = Field(..., min_length=3)
     FASE: str = Field(..., pattern="^[0-9A-Z]+$")
+
+
+# Aliases para compatibilidade com nomes anteriores
+Student = Estudante
+StudentInput = EntradaEstudante

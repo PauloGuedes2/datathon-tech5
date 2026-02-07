@@ -1,36 +1,63 @@
+"""
+Ponto de entrada da API FastAPI.
+
+Responsabilidades:
+- Configurar a aplicação FastAPI
+- Registrar rotas e eventos
+- Inicializar recursos no startup
+"""
+
 import os
 
 import uvicorn
 from fastapi import FastAPI
 
-from src.api.controller import PredictionController
-from src.api.monitoring_controller import MonitoringController
-from src.infrastructure.model.model_manager import ModelManager
+from src.api.controller import ControladorPredicao
+from src.api.monitoring_controller import ControladorMonitoramento
+from src.infrastructure.model.model_manager import GerenciadorModelo
 from src.util.logger import logger
 
 app = FastAPI(
     title="Passos Mágicos - API de Risco",
     description="API com Monitoramento de Data Drift (Evidently).",
-    version="2.1.0"
+    version="2.1.0",
 )
 
+
 @app.on_event("startup")
-async def startup_event():
+async def evento_inicializacao():
+    """
+    Executa ações de inicialização da aplicação.
+
+    Responsabilidades:
+    - Registrar log de inicialização
+    - Carregar o modelo na memória
+
+    Retorno:
+    - None: não retorna valor
+    """
     logger.info("Inicializando recursos da API...")
-    ModelManager().load_model()
+    GerenciadorModelo().carregar_modelo()
 
-prediction_controller = PredictionController()
-app.include_router(prediction_controller.router, prefix="/api/v1", tags=["Predição"])
 
-monitoring_controller = MonitoringController()
-app.include_router(monitoring_controller.router, prefix="/api/v1/monitoring", tags=["Observabilidade"])
+controlador_predicao = ControladorPredicao()
+app.include_router(controlador_predicao.roteador, prefix="/api/v1", tags=["Predição"])
+
+controlador_monitoramento = ControladorMonitoramento()
+app.include_router(controlador_monitoramento.roteador, prefix="/api/v1/monitoring", tags=["Observabilidade"])
 
 
 @app.get("/health", tags=["Infraestrutura"])
-def health_check():
+def checar_saude():
+    """
+    Endpoint de health check.
+
+    Retorno:
+    - dict: status da aplicação
+    """
     return {"status": "ok"}
 
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    porta = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=porta)

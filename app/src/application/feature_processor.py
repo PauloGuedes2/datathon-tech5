@@ -1,51 +1,172 @@
+"""
+Processamento de features de entrada.
+
+Responsabilidades:
+- Calcular tempo na ONG
+- Garantir colunas obrigatórias
+- Normalizar tipos numéricos e categóricos
+"""
+
 from datetime import datetime
 from typing import Optional, Dict, Any
 
 import pandas as pd
 
-from src.config.settings import Settings
+from src.config.settings import Configuracoes
 
-""" Módulo responsável por processar os dados de entrada, gerando as features necessárias para o modelo."""
-class FeatureProcessor:
+
+class ProcessadorFeatures:
+    """
+    Processa DataFrames de entrada para o formato esperado pelo modelo.
+
+    Responsabilidades:
+    - Aplicar regras de cálculo de tempo na ONG
+    - Preencher colunas ausentes
+    - Normalizar tipos de dados
+    """
+
     @staticmethod
-    def process(df: pd.DataFrame, snapshot_date: Optional[datetime] = None, stats: Optional[Dict[str, Any]] = None) -> pd.DataFrame:
-        """Processa o DataFrame de entrada, gerando as features necessárias para o modelo."""
-        df = df.copy()
+    def processar(
+        dados: pd.DataFrame,
+        data_snapshot: Optional[datetime] = None,
+        estatisticas: Optional[Dict[str, Any]] = None,
+    ) -> pd.DataFrame:
+        """
+        Processa o DataFrame de entrada.
 
-        if "ANO_REFERENCIA" in df.columns:
-            referencia = pd.to_numeric(df["ANO_REFERENCIA"], errors="coerce")
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+        - data_snapshot (datetime | None): data de referência para cálculos
+        - estatisticas (dict | None): estatísticas para preenchimento de nulos
+
+        Retorno:
+        - pd.DataFrame: DataFrame com features normalizadas
+        """
+        dados_copia = dados.copy()
+
+        referencia = ProcessadorFeatures._obter_ano_referencia(dados_copia, data_snapshot)
+        dados_copia = ProcessadorFeatures._calcular_tempo_ong(dados_copia, referencia, estatisticas)
+        dados_copia = ProcessadorFeatures._garantir_colunas_obrigatorias(dados_copia)
+
+        colunas = Configuracoes.FEATURES_NUMERICAS + Configuracoes.FEATURES_CATEGORICAS
+        dados_processados = dados_copia[colunas].copy()
+        dados_processados = ProcessadorFeatures._normalizar_numericos(dados_processados)
+        dados_processados = ProcessadorFeatures._normalizar_categoricos(dados_processados)
+
+        return dados_processados
+
+    @staticmethod
+    def _obter_ano_referencia(dados: pd.DataFrame, data_snapshot: Optional[datetime]):
+        """
+        Obtém o ano de referência para cálculos.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+        - data_snapshot (datetime | None): data de referência
+
+        Retorno:
+        - int | pd.Series: ano de referência
+        """
+        if "ANO_REFERENCIA" in dados.columns:
+            return pd.to_numeric(dados["ANO_REFERENCIA"], errors="coerce")
+
+        data_atual = data_snapshot or datetime.now()
+        return data_atual.year
+
+    @staticmethod
+    def _calcular_tempo_ong(
+        dados: pd.DataFrame, referencia, estatisticas: Optional[Dict[str, Any]]
+    ) -> pd.DataFrame:
+        """
+        Calcula a coluna TEMPO_NA_ONG.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+        - referencia (int | pd.Series): ano de referência
+        - estatisticas (dict | None): estatísticas para preenchimento
+
+        Retorno:
+        - pd.DataFrame: DataFrame com TEMPO_NA_ONG atualizado
+        """
+        if "ANO_INGRESSO" in dados.columns:
+            ano_ingresso = pd.to_numeric(dados["ANO_INGRESSO"], errors="coerce")
+            ano_ingresso = ProcessadorFeatures._preencher_ano_ingresso(ano_ingresso, estatisticas)
+            dados["TEMPO_NA_ONG"] = referencia - ano_ingresso
+            dados["TEMPO_NA_ONG"] = dados["TEMPO_NA_ONG"].clip(lower=0)
         else:
-            current_date = snapshot_date or datetime.now()
-            referencia = current_date.year
+            dados["TEMPO_NA_ONG"] = 0
 
-        if "ANO_INGRESSO" in df.columns:
-            ano_ingresso = pd.to_numeric(df["ANO_INGRESSO"], errors="coerce")
+        return dados
 
-            if ano_ingresso.isnull().any():
-                if stats and "mediana_ano_ingresso" in stats:
-                    mediana = stats["mediana_ano_ingresso"]
-                else:
-                    mediana = ano_ingresso.median() if not ano_ingresso.isnull().all() else 2020
+    @staticmethod
+    def _preencher_ano_ingresso(serie: pd.Series, estatisticas: Optional[Dict[str, Any]]) -> pd.Series:
+        """
+        Preenche valores nulos de ANO_INGRESSO.
 
-                ano_ingresso = ano_ingresso.fillna(mediana)
+        Parâmetros:
+        - serie (pd.Series): série de ano de ingresso
+        - estatisticas (dict | None): estatísticas para preenchimento
 
-            df["TEMPO_NA_ONG"] = referencia - ano_ingresso
-            df["TEMPO_NA_ONG"] = df["TEMPO_NA_ONG"].clip(lower=0)
+        Retorno:
+        - pd.Series: série com nulos preenchidos
+        """
+        if not serie.isnull().any():
+            return serie
+
+        if estatisticas and "mediana_ano_ingresso" in estatisticas:
+            mediana = estatisticas["mediana_ano_ingresso"]
         else:
-            df["TEMPO_NA_ONG"] = 0
+            mediana = serie.median() if not serie.isnull().all() else 2020
 
-        required_cols = Settings.FEATURES_NUMERICAS + Settings.FEATURES_CATEGORICAS
+        return serie.fillna(mediana)
 
-        for col in required_cols:
-            if col not in df.columns:
-                df[col] = 0 if col in Settings.FEATURES_NUMERICAS else "N/A"
+    @staticmethod
+    def _garantir_colunas_obrigatorias(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Garante a presença de colunas obrigatórias.
 
-        df_processed = df[required_cols].copy()
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
 
-        for col in Settings.FEATURES_NUMERICAS:
-            df_processed[col] = pd.to_numeric(df_processed[col], errors='coerce').fillna(0)
+        Retorno:
+        - pd.DataFrame: DataFrame com colunas garantidas
+        """
+        colunas_obrigatorias = Configuracoes.FEATURES_NUMERICAS + Configuracoes.FEATURES_CATEGORICAS
+        for coluna in colunas_obrigatorias:
+            if coluna not in dados.columns:
+                dados[coluna] = 0 if coluna in Configuracoes.FEATURES_NUMERICAS else "N/A"
+        return dados
 
-        for col in Settings.FEATURES_CATEGORICAS:
-            df_processed[col] = df_processed[col].astype(str).replace('nan', 'N/A')
+    @staticmethod
+    def _normalizar_numericos(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normaliza colunas numéricas.
 
-        return df_processed
+        Parâmetros:
+        - dados (pd.DataFrame): DataFrame com features
+
+        Retorno:
+        - pd.DataFrame: DataFrame com numéricos normalizados
+        """
+        for coluna in Configuracoes.FEATURES_NUMERICAS:
+            dados[coluna] = pd.to_numeric(dados[coluna], errors="coerce").fillna(0)
+        return dados
+
+    @staticmethod
+    def _normalizar_categoricos(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normaliza colunas categóricas.
+
+        Parâmetros:
+        - dados (pd.DataFrame): DataFrame com features
+
+        Retorno:
+        - pd.DataFrame: DataFrame com categóricos normalizados
+        """
+        for coluna in Configuracoes.FEATURES_CATEGORICAS:
+            dados[coluna] = dados[coluna].astype(str).replace("nan", "N/A")
+        return dados
+
+
+# Aliases para compatibilidade com nomes anteriores
+FeatureProcessor = ProcessadorFeatures
