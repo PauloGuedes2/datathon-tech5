@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.infrastructure.model.ml_pipeline import MLPipeline
 from src.config.settings import Settings
+from src.infrastructure.model.ml_pipeline import MLPipeline
 
 
 class DummyPipeline:

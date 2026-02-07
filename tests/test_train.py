@@ -1,6 +1,5 @@
-from unittest.mock import Mock
-
 import runpy
+from unittest.mock import Mock
 
 
 def test_train_success(monkeypatch):

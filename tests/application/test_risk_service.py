@@ -3,8 +3,8 @@ from unittest.mock import Mock
 import numpy as np
 
 from src.application.risk_service import RiskService
-from src.domain.student import StudentInput
 from src.config.settings import Settings
+from src.domain.student import StudentInput
 
 
 def test_predict_risk_success(monkeypatch, sample_student_dict):

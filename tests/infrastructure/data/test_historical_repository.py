@@ -1,10 +1,8 @@
 from unittest.mock import Mock
 
 import pandas as pd
-import pytest
 
 from src.infrastructure.data.historical_repository import HistoricalRepository
-from src.config.settings import Settings
 
 
 def reset_repository():

@@ -18,6 +18,7 @@ def test_process_fills_missing_columns_and_uses_snapshot_date(monkeypatch):
         def now(cls):
             class _Now:
                 year = 2024
+
             return _Now()
 
     monkeypatch.setattr("src.application.feature_processor.datetime", FixedDate)

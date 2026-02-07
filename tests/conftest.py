@@ -4,7 +4,6 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 APP_DIR = ROOT / "app"
 if str(APP_DIR) not in sys.path:

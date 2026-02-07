@@ -1,10 +1,7 @@
-from unittest.mock import Mock
-
 import pandas as pd
 import pytest
 
 from src.infrastructure.data.data_loader import DataLoader
-from src.config.settings import Settings
 
 
 def test_load_data_no_files(monkeypatch):
