@@ -64,7 +64,15 @@ class ServicoRisco:
             estatisticas = self._carregar_estatisticas()
             dados_features = self.processador.processar(dados_brutos, estatisticas=estatisticas)
 
-            prob_risco = self.modelo.predict_proba(dados_features)[:, 1][0]
+            features_modelo = [
+                c
+                for c in Configuracoes.FEATURES_MODELO_NUMERICAS
+                + Configuracoes.FEATURES_MODELO_CATEGORICAS
+                if c in dados_features.columns
+            ]
+            dados_modelo = dados_features[features_modelo]
+
+            prob_risco = self.modelo.predict_proba(dados_modelo)[:, 1][0]
             threshold = self._obter_threshold()
             classe_predicao = int(prob_risco >= threshold)
             rotulo_risco = "ALTO RISCO" if classe_predicao == 1 else "BAIXO RISCO"

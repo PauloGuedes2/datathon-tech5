@@ -207,20 +207,86 @@ class ServicoMonitoramento:
         def adicionar_metricas(dataset_nome: str, dados: pd.DataFrame):
             metricas = ServicoMonitoramento._calcular_metricas_fairness(dados)
             if isinstance(metricas, str):
-                return f"<h3>{dataset_nome}</h3><p>{metricas}</p>"
+                return f"<div class='fairness-section'><h3>{dataset_nome}</h3><p>{metricas}</p></div>"
             tabela_html = metricas.to_html(index=False, classes="fairness-table")
             resumo = ServicoMonitoramento._resumir_gaps_fairness(metricas)
-            return f"<h3>{dataset_nome}</h3>{resumo}{tabela_html}"
+            barras = ServicoMonitoramento._renderizar_barras_fairness(metricas)
+            return f"<div class='fairness-section'><h3>{dataset_nome}</h3>{resumo}{barras}{tabela_html}</div>"
 
         grupos.append(adicionar_metricas("Referência (Treino/Teste)", referencia))
         if Configuracoes.TARGET_COL in atual.columns:
             grupos.append(adicionar_metricas("Produção (com target)", atual))
 
         conteudo = "".join(grupos)
+        estilos = (
+            "<style>"
+            ".fairness-wrapper{"
+            "--fair-bg:var(--euiColorEmptyShade,#ffffff);"
+            "--fair-bg-soft:var(--euiColorLightestShade,#f7f7f9);"
+            "--fair-card:var(--euiColorLightestShade,#f9fafc);"
+            "--fair-border:var(--euiColorLightShade,#e6e6ef);"
+            "--fair-text:var(--euiTextColor,#1d1f2a);"
+            "--fair-muted:var(--euiTextSubduedColor,#5b6070);"
+            "--fair-chip:var(--euiColorPrimaryTint,#eef2ff);"
+            "--fair-chip-border:var(--euiColorPrimaryLightShade,#d8e1ff);"
+            "--fair-table-head:var(--euiColorLightestShade,#f3f4f6);"
+            "--fair-hover:var(--euiColorLightestShade,#fafafa);"
+            "--fair-shadow:rgba(20,20,40,0.08);"
+            "--fair-success:var(--euiColorSuccess,#2f855a);"
+            "--fair-warning:var(--euiColorWarning,#b7791f);"
+            "--fair-danger:var(--euiColorDanger,#c53030);"
+            "--fair-primary:var(--euiColorPrimary,#3b82f6);"
+            "}"
+            ".fairness-wrapper{font-family:Arial,Helvetica,sans-serif;margin:24px 0;padding:20px;"
+            "background:linear-gradient(135deg,var(--fair-bg-soft) 0%,var(--fair-bg) 70%);"
+            "border:1px solid var(--fair-border);border-radius:14px;box-shadow:0 8px 20px var(--fair-shadow)}"
+            ".fairness-header{display:flex;align-items:center;justify-content:space-between;gap:16px}"
+            ".fairness-title{font-size:22px;margin:0;color:var(--fair-text)}"
+            ".fairness-subtitle{margin:6px 0 0;color:var(--fair-muted);font-size:13px}"
+            ".fairness-chip{font-size:12px;font-weight:600;color:var(--fair-text);background:var(--fair-chip);"
+            "border:1px solid var(--fair-chip-border);padding:6px 10px;border-radius:999px}"
+            ".fairness-section{margin-top:18px;padding:14px 16px;background:var(--fair-bg);"
+            "border:1px solid var(--fair-border);border-radius:12px}"
+            ".fairness-section h3{margin:0 0 8px;font-size:16px;color:var(--fair-text)}"
+            ".fairness-summary{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 4px}"
+            ".fairness-card{flex:1 1 180px;background:var(--fair-card);border:1px solid var(--fair-border);"
+            "border-radius:10px;padding:10px 12px}"
+            ".fairness-card .label{font-size:12px;color:var(--fair-muted);margin-bottom:4px}"
+            ".fairness-card .value{font-size:18px;font-weight:700;color:var(--fair-text)}"
+            ".fairness-badges{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px}"
+            ".fairness-badge{font-size:11px;font-weight:700;letter-spacing:0.3px;padding:4px 8px;"
+            "border-radius:999px;border:1px solid var(--fair-border);text-transform:uppercase}"
+            ".fairness-badge.low{background:color-mix(in srgb,var(--fair-success) 20%, transparent);"
+            "color:var(--fair-success);border-color:color-mix(in srgb,var(--fair-success) 35%, transparent)}"
+            ".fairness-badge.med{background:color-mix(in srgb,var(--fair-warning) 20%, transparent);"
+            "color:var(--fair-warning);border-color:color-mix(in srgb,var(--fair-warning) 35%, transparent)}"
+            ".fairness-badge.high{background:color-mix(in srgb,var(--fair-danger) 20%, transparent);"
+            "color:var(--fair-danger);border-color:color-mix(in srgb,var(--fair-danger) 35%, transparent)}"
+            ".fairness-bars{margin:10px 0 6px;display:flex;flex-direction:column;gap:8px}"
+            ".fairness-bar-row{display:grid;grid-template-columns:140px 1fr 60px;gap:10px;align-items:center}"
+            ".fairness-bar-label{font-size:12px;color:var(--fair-muted)}"
+            ".fairness-bar-track{height:8px;border-radius:999px;background:var(--fair-table-head);overflow:hidden}"
+            ".fairness-bar-fill{height:100%;border-radius:999px}"
+            ".fairness-bar-fill.fpr{background:var(--fair-warning)}"
+            ".fairness-bar-fill.fnr{background:var(--fair-primary)}"
+            ".fairness-bar-value{font-size:12px;color:var(--fair-text);text-align:right}"
+            ".fairness-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;color:var(--fair-text)}"
+            ".fairness-table th,.fairness-table td{padding:8px 10px;border-bottom:1px solid var(--fair-border)}"
+            ".fairness-table th{text-align:left;color:var(--fair-text);background:var(--fair-table-head);"
+            "position:sticky;top:0}"
+            ".fairness-table tr:hover{background:var(--fair-hover)}"
+            "</style>"
+        )
         return (
-            "<section>"
-            "<h2>Fairness por Grupo</h2>"
-            "<p>As taxas são percentuais e medem erros por grupo; diferenças altas indicam risco de viés.</p>"
+            f"{estilos}"
+            "<section class='fairness-wrapper'>"
+            "<div class='fairness-header'>"
+            "<div>"
+            "<h2 class='fairness-title'>Fairness por Grupo</h2>"
+            "<p class='fairness-subtitle'>Taxas em %, diferencas altas indicam risco de vies.</p>"
+            "</div>"
+            "<div class='fairness-chip'>Auditoria de Equidade</div>"
+            "</div>"
             f"{conteudo}"
             "</section>"
         )
@@ -285,12 +351,82 @@ class ServicoMonitoramento:
 
         gap_fpr = metricas["false_positive_rate_pct"].max() - metricas["false_positive_rate_pct"].min()
         gap_fnr = metricas["false_negative_rate_pct"].max() - metricas["false_negative_rate_pct"].min()
+        def _nivel_gap(valor: float) -> str:
+            if valor <= 5:
+                return "low"
+            if valor <= 10:
+                return "med"
+            return "high"
+
+        nivel_fpr = _nivel_gap(gap_fpr)
+        nivel_fnr = _nivel_gap(gap_fnr)
         return (
-            "<p>"
-            f"Gap de FPR: {gap_fpr:.2f} pp | "
-            f"Gap de FNR: {gap_fnr:.2f} pp"
-            "</p>"
+            "<div class='fairness-summary'>"
+            "<div class='fairness-card'>"
+            "<div class='label'>Gap de FPR</div>"
+            f"<div class='value'>{gap_fpr:.2f} pp</div>"
+            "<div class='fairness-badges'>"
+            f"<span class='fairness-badge {nivel_fpr}'>FPR {nivel_fpr}</span>"
+            "</div>"
+            "</div>"
+            "<div class='fairness-card'>"
+            "<div class='label'>Gap de FNR</div>"
+            f"<div class='value'>{gap_fnr:.2f} pp</div>"
+            "<div class='fairness-badges'>"
+            f"<span class='fairness-badge {nivel_fnr}'>FNR {nivel_fnr}</span>"
+            "</div>"
+            "</div>"
+            "</div>"
         )
+
+    @staticmethod
+    def _renderizar_barras_fairness(metricas: pd.DataFrame) -> str:
+        """
+        Renderiza barras simples de FPR/FNR por grupo.
+
+        Parâmetros:
+        - metricas (pd.DataFrame): métricas por grupo
+
+        Retorno:
+        - str: HTML das barras
+        """
+        if metricas.empty:
+            return ""
+
+        max_valor = max(
+            metricas["false_positive_rate_pct"].max(),
+            metricas["false_negative_rate_pct"].max(),
+        )
+        if not max_valor or pd.isna(max_valor):
+            max_valor = 1.0
+
+        linhas = []
+        for _, row in metricas.iterrows():
+            grupo = row.iloc[0]
+            fpr = float(row["false_positive_rate_pct"])
+            fnr = float(row["false_negative_rate_pct"])
+            fpr_pct = max(0.0, min(100.0, (fpr / max_valor) * 100.0))
+            fnr_pct = max(0.0, min(100.0, (fnr / max_valor) * 100.0))
+            linhas.append(
+                "<div class='fairness-bar-row'>"
+                f"<div class='fairness-bar-label'>{grupo} · FPR</div>"
+                "<div class='fairness-bar-track'>"
+                f"<div class='fairness-bar-fill fpr' style='width:{fpr_pct:.1f}%'></div>"
+                "</div>"
+                f"<div class='fairness-bar-value'>{fpr:.2f}%</div>"
+                "</div>"
+            )
+            linhas.append(
+                "<div class='fairness-bar-row'>"
+                f"<div class='fairness-bar-label'>{grupo} · FNR</div>"
+                "<div class='fairness-bar-track'>"
+                f"<div class='fairness-bar-fill fnr' style='width:{fnr_pct:.1f}%'></div>"
+                "</div>"
+                f"<div class='fairness-bar-value'>{fnr:.2f}%</div>"
+                "</div>"
+            )
+
+        return "<div class='fairness-bars'>" + "".join(linhas) + "</div>"
 
     @staticmethod
     def _tem_target_valido(referencia: pd.DataFrame, atual: pd.DataFrame) -> bool:

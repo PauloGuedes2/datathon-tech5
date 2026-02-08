@@ -59,12 +59,18 @@ class Configuracoes:
         "ALUNO_NOVO",
     ]
 
+    # Features sensíveis que não devem ser usadas pelo modelo.
+    FEATURES_SENSIVEIS = ["GENERO"]
+
     FEATURES_CATEGORICAS = [
         "GENERO",
         "TURMA",
         "INSTITUICAO_ENSINO",
         "FASE",
     ]
+
+    FEATURES_MODELO_NUMERICAS = FEATURES_NUMERICAS
+    FEATURES_MODELO_CATEGORICAS = []
 
     FAIRNESS_GROUP_COL = "GENERO"
 
@@ -76,3 +82,8 @@ class Configuracoes:
         "NOTA_MAT",
         "NOTA_ING",
     ]
+
+
+Configuracoes.FEATURES_MODELO_CATEGORICAS = [
+    c for c in Configuracoes.FEATURES_CATEGORICAS if c not in Configuracoes.FEATURES_SENSIVEIS
+]

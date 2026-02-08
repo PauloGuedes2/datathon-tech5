@@ -92,12 +92,19 @@ class RepositorioHistorico:
         if historico.empty:
             return None
 
-        ultimo_registro = historico.iloc[-1]
+        # Usa o registro imediatamente anterior para evitar vazamento de dados futuros.
+        if len(historico) < 2:
+            return None
+
+        ultimo_registro = historico.iloc[-2]
 
         def _obter_seguro(nome_coluna):
             valor = ultimo_registro.get(nome_coluna, 0.0)
             try:
-                return float(valor)
+                convertido = float(valor)
+                if pd.isna(convertido):
+                    return 0.0
+                return convertido
             except (ValueError, TypeError):
                 return 0.0
 

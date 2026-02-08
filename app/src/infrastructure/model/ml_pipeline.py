@@ -133,7 +133,8 @@ class PipelineML:
         dados_processados["ANO_REFERENCIA"] = dados["ANO_REFERENCIA"]
 
         features_uso = [
-            f for f in Configuracoes.FEATURES_NUMERICAS + Configuracoes.FEATURES_CATEGORICAS
+            f
+            for f in Configuracoes.FEATURES_MODELO_NUMERICAS + Configuracoes.FEATURES_MODELO_CATEGORICAS
             if f in dados_processados.columns
         ]
 
@@ -162,7 +163,13 @@ class PipelineML:
         logger.info(f"Métricas: {novas_metricas}")
 
         if self._deve_promover_modelo(novas_metricas):
-            self._promover_modelo(modelo, novas_metricas, dados.loc[mascara_teste], alvo_teste, predicoes)
+            self._promover_modelo(
+                modelo,
+                novas_metricas,
+                dados_processados.loc[mascara_teste],
+                alvo_teste,
+                predicoes,
+            )
 
     @staticmethod
     def _definir_particao_temporal(dados: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
@@ -266,8 +273,12 @@ class PipelineML:
         Retorno:
         - Pipeline: pipeline do modelo
         """
-        features_numericas = [f for f in Configuracoes.FEATURES_NUMERICAS if f in matriz_treino.columns]
-        features_categoricas = [f for f in Configuracoes.FEATURES_CATEGORICAS if f in matriz_treino.columns]
+        features_numericas = [
+            f for f in Configuracoes.FEATURES_MODELO_NUMERICAS if f in matriz_treino.columns
+        ]
+        features_categoricas = [
+            f for f in Configuracoes.FEATURES_MODELO_CATEGORICAS if f in matriz_treino.columns
+        ]
 
         transformador_numerico = Pipeline(steps=[
             ("imputer", SimpleImputer(strategy="median")),
@@ -428,7 +439,7 @@ class PipelineML:
         referencia_df[Configuracoes.TARGET_COL] = alvo_teste
 
         referencia_df.to_csv(Configuracoes.REFERENCE_PATH, index=False)
-        logger.info(f"Reference Data salvo com colunas originais: {Configuracoes.REFERENCE_PATH}")
+        logger.info(f"Reference Data salvo com colunas processadas: {Configuracoes.REFERENCE_PATH}")
 
 
 treinador = PipelineML()

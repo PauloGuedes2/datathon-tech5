@@ -26,7 +26,8 @@ class Estudante(BaseModel):
     GENERO: str = Field(..., pattern="^(Masculino|Feminino|Outro)$")
     TURMA: str = Field(..., min_length=1)
     INSTITUICAO_ENSINO: str = Field(..., min_length=3)
-    FASE: str = Field(..., pattern="^[0-9A-Z]+$")
+    FASE: str = Field(..., min_length=1)
+    ANO_REFERENCIA: Optional[int] = Field(None, ge=2010, le=2030)
     NOME: Optional[str] = None
     INDE_ANTERIOR: float = Field(..., ge=0, le=10, description="INDE do ano passado. Se novo, usar 0 ou média.")
     IAA_ANTERIOR: Optional[float] = 0.0
@@ -55,4 +56,5 @@ class EntradaEstudante(BaseModel):
     GENERO: str = Field(..., pattern="^(Masculino|Feminino|Outro)$")
     TURMA: str = Field(..., min_length=1)
     INSTITUICAO_ENSINO: str = Field(..., min_length=3)
-    FASE: str = Field(..., pattern="^[0-9A-Z]+$")
+    FASE: str = Field(..., min_length=1)
+    ANO_REFERENCIA: Optional[int] = Field(None, ge=2010, le=2030)

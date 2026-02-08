@@ -66,7 +66,19 @@ def limpar_fase(valor):
     """
     if pd.isna(valor):
         return "0"
-    limpo = re.sub(r"[^A-Z0-9]", "", str(valor).upper())
+    texto = str(valor).upper().strip()
+    if re.fullmatch(r"[0-9A-Z]+", texto):
+        return texto
+    match = re.search(r"\b(ALFA)\b", texto)
+    if match:
+        return match.group(1)
+    match = re.search(r"\b([0-9]{1,2}[A-Z])\b", texto)
+    if match:
+        return match.group(1)
+    match = re.search(r"\b([0-9]{1,2})\b", texto)
+    if match:
+        return match.group(1)
+    limpo = re.sub(r"[^A-Z0-9]", "", texto)
     return limpo if limpo else "0"
 
 
@@ -98,6 +110,12 @@ def carregar_dados_reais():
     diretorio_dados = Configuracoes.DATA_DIR
     print(f"📂 Buscando arquivos em: {diretorio_dados}")
 
+    try:
+        from src.infrastructure.data.data_loader import CarregadorDados
+        return CarregadorDados().carregar_dados()
+    except Exception as erro:
+        print(f"⚠️ Falha ao usar CarregadorDados: {erro}. Usando fallback bruto.")
+
     extensoes = ["*.xlsx", "*.csv"]
     arquivos = []
     for extensao in extensoes:
@@ -116,6 +134,9 @@ def carregar_dados_reais():
                 for nome_aba in excel.sheet_names:
                     df = pd.read_excel(arquivo, sheet_name=nome_aba)
                     df["_ORIGEM"] = f"{nome_arquivo} ({nome_aba})"
+                    match_ano = re.search(r"(20\\d{2})", str(nome_aba))
+                    if match_ano:
+                        df["ANO_REFERENCIA"] = int(match_ano.group(1))
                     dataframes.append(df)
             else:
                 try:
@@ -151,6 +172,7 @@ def normalizar_colunas(df):
         "MATRICULA": "RA",
         "ALUNO": "NOME",
         "NOME_ALUNO": "NOME",
+        "ANO REFERENCIA": "ANO_REFERENCIA",
     }
     df = df.rename(columns=mapa_renomear)
     if "RA" in df.columns:
@@ -174,7 +196,7 @@ def obter_stream_infinito(df):
             yield row
 
 
-def _normalizar_idade(idade_raw):
+def _normalizar_idade(idade_raw, ano_referencia=None):
     """
     Normaliza a idade a partir de valores brutos.
 
@@ -184,17 +206,29 @@ def _normalizar_idade(idade_raw):
     Retorno:
     - int: idade normalizada
     """
-    idade_final = 10
     if idade_raw:
         try:
             valor = float(idade_raw)
-            if valor > 1900:
-                valor = 2024 - valor
             if 4 <= valor <= 25:
-                idade_final = int(valor)
+                return int(valor)
+            if valor > 1900:
+                ano_base = ano_referencia if ano_referencia else 2024
+                valor = ano_base - valor
+                if 4 <= valor <= 25:
+                    return int(valor)
         except Exception:
             pass
-    return idade_final
+
+    try:
+        data_nasc = pd.to_datetime(idade_raw, errors="coerce")
+        if pd.notna(data_nasc):
+            ano_base = ano_referencia if ano_referencia else 2024
+            idade_calc = int(ano_base - data_nasc.year)
+            if 4 <= idade_calc <= 25:
+                return idade_calc
+    except Exception:
+        pass
+    return None
 
 
 def _normalizar_ano_ingresso(ano_raw):
@@ -207,15 +241,14 @@ def _normalizar_ano_ingresso(ano_raw):
     Retorno:
     - int: ano de ingresso normalizado
     """
-    ano_final = 2022
     if ano_raw:
         try:
             valor = int(float(ano_raw))
             if 2000 <= valor <= 2026:
-                ano_final = valor
+                return valor
         except Exception:
             pass
-    return ano_final
+    return None
 
 
 def _montar_payload(row, chaves):
@@ -233,11 +266,25 @@ def _montar_payload(row, chaves):
     ano_raw = obter_coluna(row, chaves["ano_ingresso"])
     genero_raw = obter_coluna(row, chaves["genero"])
     fase_raw = obter_coluna(row, chaves["fase"])
+    ano_ref_raw = obter_coluna(row, chaves["ano_referencia"])
 
-    idade_final = _normalizar_idade(idade_raw)
+    ano_ref_final = None
+    if ano_ref_raw:
+        try:
+            ano_ref_final = int(float(ano_ref_raw))
+        except Exception:
+            ano_ref_final = None
+
+    idade_final = _normalizar_idade(idade_raw, ano_ref_final)
     ano_final = _normalizar_ano_ingresso(ano_raw)
     genero_final = limpar_genero(genero_raw)
-    fase_final = limpar_fase(fase_raw)
+    if pd.isna(fase_raw):
+        fase_final = "N/A"
+    else:
+        fase_final = str(fase_raw)
+
+    if idade_final is None:
+        return None
 
     payload = {
         "RA": str(row["RA"]),
@@ -248,7 +295,15 @@ def _montar_payload(row, chaves):
         "TURMA": str(obter_coluna(row, chaves["turma"]) or "N/A"),
         "INSTITUICAO_ENSINO": str(obter_coluna(row, chaves["instituicao"]) or "N/A"),
         "FASE": fase_final,
+        "ANO_REFERENCIA": ano_ref_final,
     }
+
+    if payload.get("ANO_REFERENCIA") is None:
+        payload.pop("ANO_REFERENCIA", None)
+    if payload.get("IDADE") is None:
+        payload.pop("IDADE", None)
+    if payload.get("ANO_INGRESSO") is None:
+        payload.pop("ANO_INGRESSO", None)
 
     for chave, valor in payload.items():
         if str(valor).lower() in ["nan", "nat", "none"]:
@@ -292,15 +347,26 @@ def simular_trafego_producao():
         print("❌ Erro: Coluna RA não encontrada.")
         return
 
+    if "ANO_REFERENCIA" in dados.columns:
+        ano_referencia = pd.to_numeric(dados["ANO_REFERENCIA"], errors="coerce")
+        validos = ano_referencia.notna()
+        if validos.any():
+            ano_max = int(ano_referencia[validos].max())
+            dados = dados[validos & (ano_referencia == ano_max)]
+            print(f"Filtrando producao para ANO_REFERENCIA == {ano_max}")
+        else:
+            print("Nenhuma linha com ANO_REFERENCIA valido. Prosseguindo sem filtro.")
+
     print(f"✅ Dados Carregados: {len(dados)} linhas.")
 
     chaves = {
-        "idade": ["IDADE", "IDADE 2024", "IDADE_ALUNO", "ANO_NASC"],
+        "idade": ["IDADE", "IDADE 2024", "IDADE_ALUNO", "ANO_NASC", "ANO NASC", "DATA DE NASC"],
         "ano_ingresso": ["ANO_INGRESSO", "ANO INGRESSO"],
         "genero": ["GENERO", "GÊNERO", "SEXO"],
         "turma": ["TURMA", "TURMA 2024"],
-        "instituicao": ["INSTITUICAO_ENSINO", "ESCOLA", "INSTITUICAO"],
+        "instituicao": ["INSTITUICAO_ENSINO", "INSTITUIÇÃO DE ENSINO", "ESCOLA", "INSTITUICAO"],
         "fase": ["FASE", "FASE 2024", "FASE_TURMA"],
+        "ano_referencia": ["ANO_REFERENCIA", "ANO REFERENCIA", "ANO_REF"],
     }
 
     stream = obter_stream_infinito(dados)
@@ -310,6 +376,8 @@ def simular_trafego_producao():
         contador += 1
         try:
             payload = _montar_payload(row, chaves)
+            if payload is None:
+                continue
             resposta = _enviar_payload(payload)
 
             origem = str(row.get("_ORIGEM", "BD"))[:15]
