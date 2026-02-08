@@ -10,7 +10,7 @@ Responsabilidades:
 import os
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from src.api.controller import ControladorPredicao
 from src.api.monitoring_controller import ControladorMonitoramento
@@ -55,7 +55,11 @@ def checar_saude():
     Retorno:
     - dict: status da aplicação
     """
-    return {"status": "ok"}
+    try:
+        GerenciadorModelo().obter_modelo()
+        return {"status": "ok"}
+    except Exception as erro:
+        raise HTTPException(status_code=503, detail=str(erro))
 
 
 if __name__ == "__main__":

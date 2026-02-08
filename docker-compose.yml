@@ -11,15 +11,15 @@ services:
       - PYTHONPATH=/app
     volumes:
       # Persiste o modelo treinado
-      - ./app/models:/app/app/models
+      - ./app/models:/app/models
       # Persiste os logs de produção (predictions.csv)
       - ./logs:/app/logs
       # NOVO: Persiste os dados de referência do Evidently (reference_data.csv)
       # Isso garante que o dashboard funcione mesmo após reiniciar o container
-      - ./app/monitoring:/app/app/monitoring
+      - ./app/monitoring:/app/monitoring
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health').read()"]
       interval: 30s
       timeout: 10s
       retries: 3

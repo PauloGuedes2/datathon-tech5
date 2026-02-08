@@ -59,7 +59,9 @@ class ServicoMonitoramento:
                 return "<h1>Aguardando mais dados... (Mínimo 5 requisições para gerar relatório confiável)</h1>"
 
             mapeamento_colunas = ServicoMonitoramento._criar_mapeamento(colunas_comuns, dados_atual)
-            relatorio = ServicoMonitoramento._executar_relatorio(referencia, dados_atual, mapeamento_colunas)
+            relatorio = ServicoMonitoramento._executar_relatorio(
+                referencia, dados_atual, mapeamento_colunas
+            )
             return relatorio.get_html()
 
         except Exception as erro:
@@ -149,10 +151,26 @@ class ServicoMonitoramento:
         Retorno:
         - Report: relatório Evidently executado
         """
-        relatorio = Report(metrics=[DataDriftPreset(), TargetDriftPreset()])
+        metricas = [DataDriftPreset()]
+        if ServicoMonitoramento._tem_target_valido(referencia, atual):
+            metricas.append(TargetDriftPreset())
+        relatorio = Report(metrics=metricas)
         relatorio.run(
             reference_data=referencia,
             current_data=atual,
             column_mapping=mapeamento,
         )
         return relatorio
+
+    @staticmethod
+    def _tem_target_valido(referencia: pd.DataFrame, atual: pd.DataFrame) -> bool:
+        """
+        Verifica se há coluna de target com dados válidos.
+
+        Retorno:
+        - bool: True se o target está disponível nos dois conjuntos
+        """
+        target_col = Configuracoes.TARGET_COL
+        if target_col not in referencia.columns or target_col not in atual.columns:
+            return False
+        return referencia[target_col].notna().any() and atual[target_col].notna().any()

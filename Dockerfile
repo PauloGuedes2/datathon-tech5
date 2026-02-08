@@ -39,8 +39,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app
 
 # Copia o código fonte da aplicação
-COPY src/ ./src/
-COPY main.py .
+COPY app/src/ ./src/
+COPY app/main.py .
 
 # Copia a pasta de dados e modelos iniciais (necessário para a API subir na primeira vez)
 # NOTA: Crie a pasta 'models' localmente e coloque um .joblib lá antes de buildar, 

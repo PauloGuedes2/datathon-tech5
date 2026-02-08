@@ -48,11 +48,11 @@ class CarregadorDados:
             self._registrar_conteudo_pasta()
             raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Configuracoes.DATA_DIR}")
 
-        caminho_arquivo = arquivos_excel[0]
-        logger.info(f"Carregando arquivo Excel: {caminho_arquivo}")
-
-        abas = self._ler_excel(caminho_arquivo)
-        dados_unificados = self._processar_abas(abas)
+        dados_unificados = []
+        for caminho_arquivo in arquivos_excel:
+            logger.info(f"Carregando arquivo Excel: {caminho_arquivo}")
+            abas = self._ler_excel(caminho_arquivo)
+            dados_unificados.extend(self._processar_abas(abas))
 
         if not dados_unificados:
             raise RuntimeError("Nenhuma aba válida carregada do Excel.")
@@ -63,7 +63,6 @@ class CarregadorDados:
             logger.error(f"Erro ao concatenar os dados: {erro}")
             raise erro
 
-        df_final = df_final.fillna(0)
         logger.info(f"Dataset Total Unificado: {df_final.shape}")
         return df_final
 

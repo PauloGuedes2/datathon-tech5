@@ -19,8 +19,7 @@ if __name__ == "__main__":
         carregador = CarregadorDados()
         df_bruto = carregador.carregar_dados()
 
-        df_com_target = treinador.criar_target(df_bruto)
-        treinador.treinar(df_com_target)
+        treinador.treinar(df_bruto)
 
         logger.info("Processo concluído com sucesso!")
 

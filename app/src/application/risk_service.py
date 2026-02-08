@@ -7,6 +7,8 @@ Responsabilidades:
 - Registrar logs de predição
 """
 
+import json
+import os
 import pandas as pd
 
 from src.application.feature_processor import ProcessadorFeatures
@@ -62,7 +64,8 @@ class ServicoRisco:
             dados_features = self.processador.processar(dados_brutos)
 
             prob_risco = self.modelo.predict_proba(dados_features)[:, 1][0]
-            classe_predicao = int(prob_risco > Configuracoes.RISK_THRESHOLD)
+            threshold = self._obter_threshold()
+            classe_predicao = int(prob_risco > threshold)
             rotulo_risco = "ALTO RISCO" if classe_predicao == 1 else "BAIXO RISCO"
 
             resultado = {
@@ -79,6 +82,23 @@ class ServicoRisco:
         except Exception as erro:
             logger.error(f"Erro na inferência: {erro}")
             raise erro
+
+    @staticmethod
+    def _obter_threshold() -> float:
+        """
+        Obtém o threshold configurado ou salvo em métricas.
+
+        Retorno:
+        - float: threshold de risco
+        """
+        try:
+            if Configuracoes.METRICS_FILE and os.path.exists(Configuracoes.METRICS_FILE):
+                with open(Configuracoes.METRICS_FILE, "r") as arquivo:
+                    metricas = json.load(arquivo)
+                return float(metricas.get("risk_threshold", Configuracoes.RISK_THRESHOLD))
+        except Exception as erro:
+            logger.warning(f"Falha ao carregar threshold salvo: {erro}")
+        return Configuracoes.RISK_THRESHOLD
 
     def prever_risco_inteligente(self, entrada: EntradaEstudante) -> dict:
         """

@@ -116,7 +116,7 @@ class ProcessadorFeatures:
         if estatisticas and "mediana_ano_ingresso" in estatisticas:
             mediana = estatisticas["mediana_ano_ingresso"]
         else:
-            mediana = serie.median() if not serie.isnull().all() else 2020
+            mediana = serie.median() if not serie.isnull().all() else datetime.now().year
 
         return serie.fillna(mediana)
 

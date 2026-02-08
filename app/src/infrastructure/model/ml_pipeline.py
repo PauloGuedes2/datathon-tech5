@@ -20,8 +20,7 @@ from joblib import dump
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
-from sklearn.metrics import recall_score, f1_score, precision_score
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import recall_score, f1_score, precision_score, precision_recall_curve
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
@@ -72,8 +71,7 @@ class PipelineML:
                 lambda valor: 1 if "QUARTZO" in valor else 0
             )
         else:
-            logger.warning("Colunas de Target ausentes. Criando target dummy.")
-            dados[Configuracoes.TARGET_COL] = 0
+            raise ValueError("Colunas de target ausentes para criação do rótulo.")
 
         return dados
 
@@ -122,6 +120,7 @@ class PipelineML:
 
         dados = self.criar_target(dados)
         dados = self.criar_features_lag(dados)
+        dados = self._remover_colunas_proibidas(dados)
 
         mascara_treino, mascara_teste = self._definir_particao_temporal(dados)
 
@@ -147,9 +146,18 @@ class PipelineML:
 
         modelo = self._criar_modelo(matriz_treino)
         modelo.fit(matriz_treino, alvo_treino)
-        predicoes = modelo.predict(matriz_teste)
+        probabilidades = modelo.predict_proba(matriz_teste)[:, 1]
+        threshold = self._calcular_threshold(alvo_teste, probabilidades)
+        predicoes = (probabilidades >= threshold).astype(int)
 
-        novas_metricas = self._calcular_metricas(alvo_teste, predicoes, matriz_treino, matriz_teste)
+        novas_metricas = self._calcular_metricas(
+            alvo_teste,
+            predicoes,
+            threshold,
+            dados.loc[mascara_teste],
+            matriz_treino,
+            matriz_teste,
+        )
         logger.info(f"Métricas: {novas_metricas}")
 
         if self._deve_promover_modelo(novas_metricas):
@@ -180,14 +188,7 @@ class PipelineML:
             mascara_teste = dados["ANO_REFERENCIA"] == ano_teste
             return mascara_treino, mascara_teste
 
-        logger.warning("Apenas 1 ano disponível. Split Aleatório.")
-        indices = np.arange(len(dados))
-        idx_treino, idx_teste = train_test_split(indices, test_size=0.2, random_state=42)
-        mascara_treino = np.zeros(len(dados), dtype=bool)
-        mascara_teste = np.zeros(len(dados), dtype=bool)
-        mascara_treino[idx_treino] = True
-        mascara_teste[idx_teste] = True
-        return mascara_treino, mascara_teste
+        raise ValueError("Split temporal requer ao menos dois anos de dados.")
 
     @staticmethod
     def _calcular_estatisticas_treino(dados: pd.DataFrame, mascara_treino: np.ndarray) -> Dict[str, Any]:
@@ -204,8 +205,26 @@ class PipelineML:
         ano_ingresso = pd.to_numeric(dados.loc[mascara_treino, "ANO_INGRESSO"], errors="coerce")
         mediana = ano_ingresso.median()
         if pd.isna(mediana):
-            mediana = 2020
+            mediana = datetime.now().year
         return {"mediana_ano_ingresso": mediana}
+
+    @staticmethod
+    def _remover_colunas_proibidas(dados: pd.DataFrame) -> pd.DataFrame:
+        """
+        Remove colunas proibidas para evitar vazamento de informação.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados de entrada
+
+        Retorno:
+        - pd.DataFrame: dados sem colunas proibidas
+        """
+        colunas_remover = [
+            coluna for coluna in Configuracoes.COLUNAS_PROIBIDAS_NO_TREINO if coluna in dados.columns
+        ]
+        if colunas_remover:
+            dados = dados.drop(columns=colunas_remover)
+        return dados
 
     @staticmethod
     def _criar_modelo(matriz_treino: pd.DataFrame) -> Pipeline:
@@ -254,7 +273,12 @@ class PipelineML:
 
     @staticmethod
     def _calcular_metricas(
-        alvo_teste, predicoes, matriz_treino: pd.DataFrame, matriz_teste: pd.DataFrame
+        alvo_teste,
+        predicoes,
+        threshold: float,
+        dados_teste: pd.DataFrame,
+        matriz_treino: pd.DataFrame,
+        matriz_teste: pd.DataFrame,
     ) -> Dict[str, Any]:
         """
         Calcula métricas do modelo.
@@ -268,7 +292,7 @@ class PipelineML:
         Retorno:
         - dict: métricas calculadas
         """
-        return {
+        metricas = {
             "timestamp": datetime.now().isoformat(),
             "recall": round(recall_score(alvo_teste, predicoes, zero_division=0), 4),
             "f1_score": round(f1_score(alvo_teste, predicoes, zero_division=0), 4),
@@ -276,7 +300,52 @@ class PipelineML:
             "train_size": int(len(matriz_treino)),
             "test_size": int(len(matriz_teste)),
             "model_version": "candidate",
+            "risk_threshold": round(float(threshold), 4),
         }
+        metricas["group_metrics"] = PipelineML._calcular_metricas_grupo(
+            dados_teste, alvo_teste, predicoes
+        )
+        return metricas
+
+    @staticmethod
+    def _calcular_threshold(alvo_teste, probabilidades) -> float:
+        """
+        Calcula o melhor threshold baseado em F1.
+
+        Retorno:
+        - float: threshold selecionado
+        """
+        precisions, recalls, thresholds = precision_recall_curve(alvo_teste, probabilidades)
+        f1_scores = (2 * precisions * recalls) / (precisions + recalls + 1e-9)
+        if thresholds.size == 0:
+            return Configuracoes.RISK_THRESHOLD
+        melhor_indice = int(np.nanargmax(f1_scores[:-1]))
+        return float(thresholds[melhor_indice])
+
+    @staticmethod
+    def _calcular_metricas_grupo(dados_teste: pd.DataFrame, alvo_teste, predicoes) -> Dict[str, Any]:
+        """
+        Calcula métricas por grupos sensíveis para auditoria.
+
+        Retorno:
+        - dict: métricas agregadas por grupo
+        """
+        metricas_grupo = {}
+        for coluna in Configuracoes.FEATURES_CATEGORICAS:
+            if coluna not in dados_teste.columns:
+                continue
+            metricas_coluna = {}
+            for valor, indices in dados_teste.groupby(coluna).groups.items():
+                y_true = alvo_teste.loc[indices]
+                y_pred = pd.Series(predicoes, index=alvo_teste.index).loc[indices]
+                metricas_coluna[str(valor)] = {
+                    "recall": round(recall_score(y_true, y_pred, zero_division=0), 4),
+                    "precision": round(precision_score(y_true, y_pred, zero_division=0), 4),
+                    "f1_score": round(f1_score(y_true, y_pred, zero_division=0), 4),
+                    "support": int(len(indices)),
+                }
+            metricas_grupo[coluna] = metricas_coluna
+        return metricas_grupo
 
     @staticmethod
     def _deve_promover_modelo(novas_metricas: Dict[str, Any]) -> bool:
@@ -289,6 +358,9 @@ class PipelineML:
         Retorno:
         - bool: True se deve promover
         """
+        if novas_metricas.get("recall", 0) < Configuracoes.MIN_RECALL:
+            logger.warning("Recall abaixo do mínimo configurado. Modelo não promovido.")
+            return False
         if not os.path.exists(Configuracoes.METRICS_FILE):
             return True
         try:
