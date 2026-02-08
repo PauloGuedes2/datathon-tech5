@@ -49,11 +49,10 @@ class RepositorioHistorico:
         try:
             logger.info("Carregando base histórica para Feature Store...")
 
-            if os.path.exists(Configuracoes.REFERENCE_PATH):
-                self._dados = pd.read_csv(Configuracoes.REFERENCE_PATH)
-
+            if Configuracoes.HISTORICAL_PATH and os.path.exists(Configuracoes.HISTORICAL_PATH):
+                self._dados = pd.read_csv(Configuracoes.HISTORICAL_PATH)
                 if "RA" not in self._dados.columns:
-                    logger.warning("CSV de referência obsoleto (sem RA). Recarregando do Excel...")
+                    logger.warning("CSV histórico sem RA. Recarregando do Excel...")
                     from src.infrastructure.data.data_loader import CarregadorDados
                     self._dados = CarregadorDados().carregar_dados()
             else:

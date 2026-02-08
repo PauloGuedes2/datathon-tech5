@@ -8,6 +8,8 @@ Responsabilidades:
 """
 
 import os
+from collections import deque
+from io import StringIO
 
 import pandas as pd
 from evidently import ColumnMapping
@@ -77,9 +79,34 @@ class ServicoMonitoramento:
         - pd.DataFrame | str: DataFrame com logs ou mensagem HTML de aviso
         """
         try:
-            return pd.read_json(Configuracoes.LOG_PATH, lines=True)
+            linhas = ServicoMonitoramento._ler_ultimas_linhas(
+                Configuracoes.LOG_PATH, Configuracoes.LOG_SAMPLE_LIMIT
+            )
+            if not linhas:
+                return "<h1>Aviso: Arquivo de logs vazio ou inválido.</h1>"
+            buffer = StringIO("".join(linhas))
+            return pd.read_json(buffer, lines=True)
         except ValueError:
             return "<h1>Aviso: Arquivo de logs vazio ou inválido.</h1>"
+        except FileNotFoundError:
+            return "<h1>Aviso: Nenhum dado de produção ainda. Faça algumas predições na API primeiro.</h1>"
+
+    @staticmethod
+    def _ler_ultimas_linhas(caminho: str, limite: int):
+        """
+        Lê as últimas linhas de um arquivo de log.
+
+        Parâmetros:
+        - caminho (str): caminho do arquivo
+        - limite (int): quantidade máxima de linhas
+
+        Retorno:
+        - list[str]: linhas lidas
+        """
+        if limite <= 0:
+            return []
+        with open(caminho, "r", encoding="utf-8") as arquivo:
+            return list(deque(arquivo, maxlen=limite))
 
     @staticmethod
     def _montar_dados_atual(dados_raw: pd.DataFrame) -> pd.DataFrame:

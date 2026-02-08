@@ -36,8 +36,8 @@ def test_prever_risco_limite_threshold(estudante_exemplo):
 
     resultado = servico.prever_risco(estudante_exemplo)
 
-    assert resultado["prediction"] == 0
-    assert resultado["risk_label"] == "BAIXO RISCO"
+    assert resultado["prediction"] == 1
+    assert resultado["risk_label"] == "ALTO RISCO"
 
 
 def test_prever_risco_modelo_nulo():

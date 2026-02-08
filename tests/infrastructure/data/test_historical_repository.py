@@ -15,6 +15,10 @@ def resetar_repositorio():
 def test_repositorio_carrega_referencia_com_ra(monkeypatch):
     resetar_repositorio()
 
+    monkeypatch.setattr(
+        "src.infrastructure.data.historical_repository.Configuracoes.HISTORICAL_PATH",
+        "/tmp/historico.csv",
+    )
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
@@ -30,6 +34,10 @@ def test_repositorio_carrega_referencia_com_ra(monkeypatch):
 def test_repositorio_recarrega_quando_referencia_sem_ra(monkeypatch):
     resetar_repositorio()
 
+    monkeypatch.setattr(
+        "src.infrastructure.data.historical_repository.Configuracoes.HISTORICAL_PATH",
+        "/tmp/historico.csv",
+    )
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
@@ -49,6 +57,10 @@ def test_repositorio_recarrega_quando_referencia_sem_ra(monkeypatch):
 def test_repositorio_retorna_vazio_sem_dados(monkeypatch):
     resetar_repositorio()
 
+    monkeypatch.setattr(
+        "src.infrastructure.data.historical_repository.Configuracoes.HISTORICAL_PATH",
+        "/tmp/historico.csv",
+    )
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: False)
 
     carregador_mock = Mock()
@@ -63,6 +75,10 @@ def test_repositorio_retorna_vazio_sem_dados(monkeypatch):
 def test_repositorio_retorna_none_quando_estudante_nao_existe(monkeypatch):
     resetar_repositorio()
 
+    monkeypatch.setattr(
+        "src.infrastructure.data.historical_repository.Configuracoes.HISTORICAL_PATH",
+        "/tmp/historico.csv",
+    )
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
@@ -77,6 +93,10 @@ def test_repositorio_retorna_none_quando_estudante_nao_existe(monkeypatch):
 def test_repositorio_trata_valores_invalidos(monkeypatch):
     resetar_repositorio()
 
+    monkeypatch.setattr(
+        "src.infrastructure.data.historical_repository.Configuracoes.HISTORICAL_PATH",
+        "/tmp/historico.csv",
+    )
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",

@@ -76,7 +76,25 @@ class LoggerPredicao:
         with self._lock:
             try:
                 os.makedirs(os.path.dirname(Configuracoes.LOG_PATH), exist_ok=True)
+                self._rotacionar_se_necessario()
                 with open(Configuracoes.LOG_PATH, "a", encoding="utf-8") as arquivo:
                     arquivo.write(linha_json + "\n")
             except Exception as erro:
                 logger.error(f"Falha Crítica ao escrever no log de predição: {erro}")
+
+    @staticmethod
+    def _rotacionar_se_necessario() -> None:
+        """
+        Rotaciona o arquivo de log quando atinge o tamanho máximo.
+        """
+        try:
+            if not os.path.exists(Configuracoes.LOG_PATH):
+                return
+            tamanho_atual = os.path.getsize(Configuracoes.LOG_PATH)
+            if tamanho_atual < Configuracoes.LOG_MAX_BYTES:
+                return
+            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+            novo_nome = f"{Configuracoes.LOG_PATH}.{timestamp}.bak"
+            os.replace(Configuracoes.LOG_PATH, novo_nome)
+        except Exception as erro:
+            logger.warning(f"Falha ao rotacionar log: {erro}")

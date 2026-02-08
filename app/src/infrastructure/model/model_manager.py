@@ -77,6 +77,8 @@ class GerenciadorModelo:
         - RuntimeError: quando o hash configurado não corresponde ao arquivo
         """
         if not Configuracoes.MODEL_SHA256:
+            if Configuracoes.MODEL_SHA256_REQUIRED:
+                raise RuntimeError("Hash do modelo obrigatório não configurado.")
             return
 
         hash_esperado = Configuracoes.MODEL_SHA256.lower()

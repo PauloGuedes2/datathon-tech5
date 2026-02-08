@@ -10,6 +10,7 @@ Responsabilidades:
 import glob
 import os
 import re
+from datetime import datetime
 
 import pandas as pd
 import unicodedata
@@ -39,20 +40,29 @@ class CarregadorDados:
         - FileNotFoundError: quando não há arquivos .xlsx
         - RuntimeError: quando nenhuma aba válida é encontrada
         """
-        caminho_busca = os.path.join(Configuracoes.DATA_DIR, "*.xlsx")
-        arquivos_excel = glob.glob(caminho_busca)
+        padroes = ["*.xlsx", "*.csv"]
+        arquivos = []
+        for padrao in padroes:
+            caminho_busca = os.path.join(Configuracoes.DATA_DIR, padrao)
+            arquivos.extend(glob.glob(caminho_busca))
+            logger.info(f"Buscando arquivos em: {caminho_busca}")
 
-        logger.info(f"Buscando arquivos em: {caminho_busca}")
-
-        if not arquivos_excel:
+        if not arquivos:
             self._registrar_conteudo_pasta()
-            raise FileNotFoundError(f"Nenhum arquivo .xlsx encontrado em {Configuracoes.DATA_DIR}")
+            raise FileNotFoundError(f"Nenhum arquivo de dados encontrado em {Configuracoes.DATA_DIR}")
 
         dados_unificados = []
-        for caminho_arquivo in arquivos_excel:
-            logger.info(f"Carregando arquivo Excel: {caminho_arquivo}")
-            abas = self._ler_excel(caminho_arquivo)
-            dados_unificados.extend(self._processar_abas(abas))
+        for caminho_arquivo in arquivos:
+            if caminho_arquivo.endswith(".xlsx"):
+                logger.info(f"Carregando arquivo Excel: {caminho_arquivo}")
+                abas = self._ler_excel(caminho_arquivo)
+                dados_unificados.extend(self._processar_abas(abas))
+            else:
+                logger.info(f"Carregando arquivo CSV: {caminho_arquivo}")
+                df_csv = self._ler_csv(caminho_arquivo)
+                if df_csv is not None:
+                    df_csv["ANO_REFERENCIA"] = df_csv.get("ANO_REFERENCIA", datetime.now().year)
+                    dados_unificados.append(self._processar_dataframe(df_csv, int(df_csv["ANO_REFERENCIA"].iloc[0])))
 
         if not dados_unificados:
             raise RuntimeError("Nenhuma aba válida carregada do Excel.")
@@ -97,6 +107,29 @@ class CarregadorDados:
             return pd.read_excel(caminho_arquivo, sheet_name=None)
         except Exception as erro:
             logger.error(f"Erro crítico ao ler o Excel: {erro}")
+            raise erro
+
+    @staticmethod
+    def _ler_csv(caminho_arquivo: str):
+        """
+        Lê um arquivo CSV.
+
+        Parâmetros:
+        - caminho_arquivo (str): caminho do arquivo
+
+        Retorno:
+        - pd.DataFrame | None: DataFrame lido
+        """
+        try:
+            try:
+                df = pd.read_csv(caminho_arquivo, sep=";")
+                if len(df.columns) <= 1:
+                    df = pd.read_csv(caminho_arquivo, sep=",")
+            except Exception:
+                df = pd.read_csv(caminho_arquivo, sep=",")
+            return df
+        except Exception as erro:
+            logger.error(f"Erro crítico ao ler o CSV: {erro}")
             raise erro
 
     def _processar_abas(self, abas: dict):
