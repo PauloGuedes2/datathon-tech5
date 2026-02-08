@@ -126,6 +126,7 @@ class PipelineML:
 
         estatisticas = self._calcular_estatisticas_treino(dados, mascara_treino)
         logger.info(f"Estatísticas de Treino calculadas: {estatisticas}")
+        self._salvar_estatisticas(estatisticas)
 
         dados_processados = self.processador.processar(dados, estatisticas=estatisticas)
         dados_processados[Configuracoes.TARGET_COL] = dados[Configuracoes.TARGET_COL]
@@ -188,7 +189,20 @@ class PipelineML:
             mascara_teste = dados["ANO_REFERENCIA"] == ano_teste
             return mascara_treino, mascara_teste
 
-        raise ValueError("Split temporal requer ao menos dois anos de dados.")
+        logger.warning("Split temporal com apenas um ano disponível. Aplicando split aleatório 80/20.")
+        indices = np.arange(len(dados))
+        if len(indices) < 2:
+            mascara_treino = np.ones(len(dados), dtype=bool)
+            mascara_teste = np.ones(len(dados), dtype=bool)
+            return mascara_treino, mascara_teste
+        rng = np.random.default_rng(Configuracoes.RANDOM_STATE)
+        rng.shuffle(indices)
+        corte = int(len(indices) * 0.8)
+        mascara_treino = np.zeros(len(dados), dtype=bool)
+        mascara_teste = np.zeros(len(dados), dtype=bool)
+        mascara_treino[indices[:corte]] = True
+        mascara_teste[indices[corte:]] = True
+        return mascara_treino, mascara_teste
 
     @staticmethod
     def _calcular_estatisticas_treino(dados: pd.DataFrame, mascara_treino: np.ndarray) -> Dict[str, Any]:
@@ -207,6 +221,21 @@ class PipelineML:
         if pd.isna(mediana):
             mediana = datetime.now().year
         return {"mediana_ano_ingresso": mediana}
+
+    @staticmethod
+    def _salvar_estatisticas(estatisticas: Dict[str, Any]) -> None:
+        """
+        Salva estatísticas de treino para uso em inferência.
+
+        Parâmetros:
+        - estatisticas (dict): estatísticas calculadas
+        """
+        try:
+            os.makedirs(os.path.dirname(Configuracoes.FEATURE_STATS_PATH), exist_ok=True)
+            with open(Configuracoes.FEATURE_STATS_PATH, "w") as arquivo:
+                json.dump(estatisticas, arquivo)
+        except Exception as erro:
+            logger.warning(f"Falha ao salvar estatísticas de treino: {erro}")
 
     @staticmethod
     def _remover_colunas_proibidas(dados: pd.DataFrame) -> pd.DataFrame:
@@ -247,7 +276,7 @@ class PipelineML:
 
         transformador_categorico = Pipeline(steps=[
             ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
-            ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
+            ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=True)),
         ])
 
         preprocessor = ColumnTransformer(
@@ -266,7 +295,7 @@ class PipelineML:
                     max_depth=10,
                     random_state=Configuracoes.RANDOM_STATE,
                     class_weight="balanced",
-                    n_jobs=-1,
+                    n_jobs=Configuracoes.N_JOBS,
                 ),
             ),
         ])

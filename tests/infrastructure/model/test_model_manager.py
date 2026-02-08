@@ -24,14 +24,14 @@ def test_carregar_modelo_arquivo_inexistente(monkeypatch):
     monkeypatch.setattr("src.infrastructure.model.model_manager.os.path.exists", lambda path: False)
 
     gerenciador = GerenciadorModelo()
-    gerenciador.carregar_modelo()
-
-    assert gerenciador._modelo is None
+    with pytest.raises(FileNotFoundError):
+        gerenciador.carregar_modelo()
 
 
 def test_carregar_modelo_sucesso(monkeypatch):
     resetar_gerenciador()
     monkeypatch.setattr("src.infrastructure.model.model_manager.os.path.exists", lambda path: True)
+    monkeypatch.setattr("src.infrastructure.model.model_manager.Configuracoes.MODEL_SHA256_REQUIRED", False)
     modelo = Mock()
     monkeypatch.setattr("src.infrastructure.model.model_manager.load", lambda path: modelo)
 
@@ -44,6 +44,7 @@ def test_carregar_modelo_sucesso(monkeypatch):
 def test_carregar_modelo_falha(monkeypatch):
     resetar_gerenciador()
     monkeypatch.setattr("src.infrastructure.model.model_manager.os.path.exists", lambda path: True)
+    monkeypatch.setattr("src.infrastructure.model.model_manager.Configuracoes.MODEL_SHA256_REQUIRED", False)
 
     def levantar_erro(path):
         raise RuntimeError("boom")
@@ -61,13 +62,14 @@ def test_obter_modelo_indisponivel(monkeypatch):
 
     gerenciador = GerenciadorModelo()
 
-    with pytest.raises(RuntimeError):
+    with pytest.raises(FileNotFoundError):
         gerenciador.obter_modelo()
 
 
 def test_carregar_modelo_sem_recarregar(monkeypatch):
     resetar_gerenciador()
     monkeypatch.setattr("src.infrastructure.model.model_manager.os.path.exists", lambda path: True)
+    monkeypatch.setattr("src.infrastructure.model.model_manager.Configuracoes.MODEL_SHA256_REQUIRED", False)
     modelo = Mock()
     monkeypatch.setattr("src.infrastructure.model.model_manager.load", lambda path: modelo)
 

@@ -61,11 +61,12 @@ class ServicoRisco:
 
         try:
             dados_brutos = pd.DataFrame([dados_estudante])
-            dados_features = self.processador.processar(dados_brutos)
+            estatisticas = self._carregar_estatisticas()
+            dados_features = self.processador.processar(dados_brutos, estatisticas=estatisticas)
 
             prob_risco = self.modelo.predict_proba(dados_features)[:, 1][0]
             threshold = self._obter_threshold()
-            classe_predicao = int(prob_risco > threshold)
+            classe_predicao = int(prob_risco >= threshold)
             rotulo_risco = "ALTO RISCO" if classe_predicao == 1 else "BAIXO RISCO"
 
             resultado = {
@@ -99,6 +100,22 @@ class ServicoRisco:
         except Exception as erro:
             logger.warning(f"Falha ao carregar threshold salvo: {erro}")
         return Configuracoes.RISK_THRESHOLD
+
+    @staticmethod
+    def _carregar_estatisticas() -> dict:
+        """
+        Carrega estatísticas de treino salvas.
+
+        Retorno:
+        - dict: estatísticas ou vazio se indisponível
+        """
+        try:
+            if os.path.exists(Configuracoes.FEATURE_STATS_PATH):
+                with open(Configuracoes.FEATURE_STATS_PATH, "r") as arquivo:
+                    return json.load(arquivo)
+        except Exception as erro:
+            logger.warning(f"Falha ao carregar estatísticas de treino: {erro}")
+        return {}
 
     def prever_risco_inteligente(self, entrada: EntradaEstudante) -> dict:
         """

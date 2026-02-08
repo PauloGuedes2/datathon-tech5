@@ -28,6 +28,10 @@ class PipelineFalso:
         """Simula a predição do modelo."""
         return np.zeros(len(dados), dtype=int)
 
+    def predict_proba(self, dados):
+        """Simula probabilidade do modelo."""
+        return np.tile([0.5, 0.5], (len(dados), 1))
+
 
 def test_criar_target_defasagem():
     dados = pd.DataFrame({"DEFASAGEM": [-1, 2]})
@@ -49,8 +53,8 @@ def test_criar_target_pedra():
 
 def test_criar_target_padrao():
     dados = pd.DataFrame({"OTHER": [1]})
-    resultado = PipelineML.criar_target(dados)
-    assert resultado[Configuracoes.TARGET_COL].tolist() == [0]
+    with pytest.raises(ValueError):
+        PipelineML.criar_target(dados)
 
 
 def test_criar_features_lag_com_colunas_faltantes():
@@ -72,7 +76,7 @@ def test_criar_features_lag_gera_flags():
 
 def test_deve_promover_modelo_sem_metricas(monkeypatch):
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: False)
-    assert PipelineML._deve_promover_modelo({"f1_score": 0.5}) is True
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.5, "recall": 0.7}) is True
 
 
 def test_deve_promover_modelo_com_metricas(monkeypatch):
@@ -81,15 +85,15 @@ def test_deve_promover_modelo_com_metricas(monkeypatch):
     arquivo_mock = mock_open(read_data='{"f1_score": 0.8}')
     monkeypatch.setattr("builtins.open", arquivo_mock)
 
-    assert PipelineML._deve_promover_modelo({"f1_score": 0.76}) is True
-    assert PipelineML._deve_promover_modelo({"f1_score": 0.7}) is False
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.76, "recall": 0.7}) is True
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.7, "recall": 0.7}) is False
 
 
 def test_deve_promover_modelo_em_erro(monkeypatch):
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: True)
     monkeypatch.setattr("builtins.open", lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("boom")))
 
-    assert PipelineML._deve_promover_modelo({"f1_score": 0.1}) is True
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.1, "recall": 0.7}) is True
 
 
 def test_promover_modelo_cria_backup_e_arquivos(monkeypatch):
@@ -147,7 +151,6 @@ def test_treinar_com_ano_unico(monkeypatch, dataframe_base):
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.recall_score", lambda *args, **kwargs: 0.5)
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.f1_score", lambda *args, **kwargs: 0.5)
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.precision_score", lambda *args, **kwargs: 0.5)
-    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.train_test_split", lambda idx, test_size, random_state: (idx[:1], idx[1:]))
     monkeypatch.setattr("src.infrastructure.model.ml_pipeline.PipelineML._deve_promover_modelo", lambda *args, **kwargs: False)
 
     pipeline.treinar(dataframe_base)

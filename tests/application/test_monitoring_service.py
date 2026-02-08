@@ -36,6 +36,7 @@ def test_gerar_dashboard_logs_invalidos(monkeypatch):
     def levantar_erro(*args, **kwargs):
         raise ValueError("invalid")
 
+    monkeypatch.setattr("src.application.monitoring_service.ServicoMonitoramento._ler_ultimas_linhas", lambda *_: ["{}"])
     monkeypatch.setattr("src.application.monitoring_service.pd.read_json", levantar_erro)
 
     html = ServicoMonitoramento.gerar_dashboard()
@@ -46,11 +47,11 @@ def test_gerar_dashboard_logs_invalidos(monkeypatch):
 def test_gerar_dashboard_logs_vazios(monkeypatch):
     monkeypatch.setattr("src.application.monitoring_service.os.path.exists", lambda path: True)
     monkeypatch.setattr("src.application.monitoring_service.pd.read_csv", lambda path: pd.DataFrame({"prediction": [1]}))
-    monkeypatch.setattr("src.application.monitoring_service.pd.read_json", lambda *args, **kwargs: pd.DataFrame())
+    monkeypatch.setattr("src.application.monitoring_service.ServicoMonitoramento._ler_ultimas_linhas", lambda *_: [])
 
     html = ServicoMonitoramento.gerar_dashboard()
 
-    assert "logs sem dados" in html.lower()
+    assert "arquivo de logs vazio" in html.lower()
 
 
 def test_gerar_dashboard_aguarda_dados(monkeypatch):
@@ -63,6 +64,7 @@ def test_gerar_dashboard_aguarda_dados(monkeypatch):
     })
 
     monkeypatch.setattr("src.application.monitoring_service.pd.read_csv", lambda path: referencia)
+    monkeypatch.setattr("src.application.monitoring_service.ServicoMonitoramento._ler_ultimas_linhas", lambda *_: ["{}"])
     monkeypatch.setattr("src.application.monitoring_service.pd.read_json", lambda *args, **kwargs: atual_raw)
 
     html = ServicoMonitoramento.gerar_dashboard()
@@ -88,6 +90,7 @@ def test_gerar_dashboard_sucesso(monkeypatch):
     })
 
     monkeypatch.setattr("src.application.monitoring_service.pd.read_csv", lambda path: referencia)
+    monkeypatch.setattr("src.application.monitoring_service.ServicoMonitoramento._ler_ultimas_linhas", lambda *_: ["{}"])
     monkeypatch.setattr("src.application.monitoring_service.pd.read_json", lambda *args, **kwargs: atual_raw)
 
     relatorio = Mock()
@@ -131,6 +134,7 @@ def test_gerar_dashboard_trata_excecao(monkeypatch):
             }
         ),
     )
+    monkeypatch.setattr("src.application.monitoring_service.ServicoMonitoramento._ler_ultimas_linhas", lambda *_: ["{}"])
 
     def levantar_erro(*args, **kwargs):
         raise RuntimeError("boom")

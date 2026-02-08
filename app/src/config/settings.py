@@ -31,12 +31,19 @@ class Configuracoes:
     LOG_PATH = os.path.join(LOG_DIR, "predictions.jsonl")
     REFERENCE_PATH = os.path.join(MONITORING_DIR, "reference_data.csv")
     METRICS_FILE = os.path.join(MONITORING_DIR, "train_metrics.json")
+    FEATURE_STATS_PATH = os.path.join(MONITORING_DIR, "feature_stats.json")
     MODEL_SHA256 = os.getenv("MODEL_SHA256")
+    MODEL_SHA256_REQUIRED = os.getenv("MODEL_SHA256_REQUIRED", "false").lower() in ("1", "true", "yes")
 
     RISK_THRESHOLD = float(os.getenv("RISK_THRESHOLD", "0.5"))
     TARGET_COL = "RISCO_DEFASAGEM"
     RANDOM_STATE = 42
     MIN_RECALL = float(os.getenv("MIN_RECALL", "0.6"))
+    N_JOBS = int(os.getenv("MODEL_N_JOBS", "1"))
+
+    HISTORICAL_PATH = os.getenv("HISTORICAL_PATH")
+    LOG_SAMPLE_LIMIT = int(os.getenv("LOG_SAMPLE_LIMIT", "1000"))
+    LOG_MAX_BYTES = int(os.getenv("LOG_MAX_BYTES", str(10 * 1024 * 1024)))
 
     FEATURES_NUMERICAS = [
         "IDADE",
