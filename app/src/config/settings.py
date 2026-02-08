@@ -33,7 +33,7 @@ class Configuracoes:
     METRICS_FILE = os.path.join(MONITORING_DIR, "train_metrics.json")
     FEATURE_STATS_PATH = os.path.join(MONITORING_DIR, "feature_stats.json")
     MODEL_SHA256 = os.getenv("MODEL_SHA256")
-    MODEL_SHA256_REQUIRED = os.getenv("MODEL_SHA256_REQUIRED", "true").lower() in ("1", "true", "yes")
+    MODEL_SHA256_REQUIRED = os.getenv("MODEL_SHA256_REQUIRED", "false").lower() in ("1", "true", "yes")
 
     RISK_THRESHOLD = float(os.getenv("RISK_THRESHOLD", "0.5"))
     TARGET_COL = "RISCO_DEFASAGEM"
