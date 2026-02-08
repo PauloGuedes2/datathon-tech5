@@ -8,6 +8,7 @@ Responsabilidades:
 """
 
 from datetime import datetime
+import re
 from typing import Optional, Dict, Any
 
 import pandas as pd
@@ -164,5 +165,47 @@ class ProcessadorFeatures:
         - pd.DataFrame: DataFrame com categóricos normalizados
         """
         for coluna in Configuracoes.FEATURES_CATEGORICAS:
-            dados[coluna] = dados[coluna].astype(str).replace("nan", "N/A")
+            if coluna == "GENERO":
+                dados[coluna] = dados[coluna].apply(ProcessadorFeatures._limpar_genero)
+            elif coluna == "FASE":
+                dados[coluna] = dados[coluna].apply(ProcessadorFeatures._limpar_fase)
+            else:
+                dados[coluna] = dados[coluna].astype(str).replace("nan", "N/A")
         return dados
+
+    @staticmethod
+    def _limpar_genero(valor) -> str:
+        """
+        Normaliza valores de gênero para o padrão do modelo.
+
+        Parâmetros:
+        - valor (Any): valor original
+
+        Retorno:
+        - str: gênero normalizado
+        """
+        if pd.isna(valor):
+            return "Outro"
+        texto = str(valor).lower().strip()
+
+        if any(item in texto for item in ["fem", "menina", "mulher", "garota", "feminino", "f"]):
+            return "Feminino"
+        if any(item in texto for item in ["masc", "menino", "homem", "garoto", "masculino", "m"]):
+            return "Masculino"
+        return "Outro"
+
+    @staticmethod
+    def _limpar_fase(valor) -> str:
+        """
+        Normaliza valores de fase para o padrão do modelo.
+
+        Parâmetros:
+        - valor (Any): valor original
+
+        Retorno:
+        - str: fase normalizada
+        """
+        if pd.isna(valor):
+            return "0"
+        limpo = re.sub(r"[^A-Z0-9]", "", str(valor).upper())
+        return limpo if limpo else "0"

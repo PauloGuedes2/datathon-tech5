@@ -33,7 +33,7 @@ def test_processar_preenche_colunas_e_usa_snapshot(monkeypatch):
     assert processado.loc[0, "TEMPO_NA_ONG"] == 4
     assert processado.loc[0, "IDADE"] == 11
     valor_genero = processado.loc[0, "GENERO"]
-    assert pd.isna(valor_genero) or valor_genero in {"N/A", "None"}
+    assert valor_genero == "Outro"
     for coluna in Configuracoes.FEATURES_NUMERICAS + Configuracoes.FEATURES_CATEGORICAS:
         assert coluna in processado.columns
 
@@ -58,12 +58,14 @@ def test_processar_sem_ano_ingresso():
     df = pd.DataFrame([
         {
             "IDADE": 9,
-            "GENERO": "Feminino",
+            "GENERO": "menina",
             "TURMA": "B",
             "INSTITUICAO_ENSINO": "Escola",
-            "FASE": "2B",
+            "FASE": "fase 2b",
         }
     ])
 
     processado = ProcessadorFeatures.processar(df, data_snapshot=None)
     assert processado.loc[0, "TEMPO_NA_ONG"] == 0
+    assert processado.loc[0, "GENERO"] == "Feminino"
+    assert processado.loc[0, "FASE"] == "FASE2B"
