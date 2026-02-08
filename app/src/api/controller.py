@@ -1,65 +1,124 @@
+"""
+Controlador de predição da API.
+
+Responsabilidades:
+- Definir rotas de predição
+- Resolver dependências do serviço de risco
+- Traduzir erros em respostas HTTP
+"""
+
 from fastapi import APIRouter, HTTPException, Depends
 
-from src.api.schemas import StudentDTO
-from src.application.risk_service import RiskService
-from src.domain.student import Student
+from src.application.risk_service import ServicoRisco
+from src.domain.student import Estudante, EntradaEstudante
+from src.infrastructure.model.model_manager import GerenciadorModelo
 
 
-def get_risk_service():
+gerenciador_modelo = GerenciadorModelo()
+
+
+def obter_servico_risco():
     """
-    Factory function para injeção de dependência do RiskService.
-    
-    Returns:
-        Instância do RiskService para uso nos endpoints
+    Dependência para obter uma instância do serviço de risco.
+
+    Responsabilidades:
+    - Validar se o modelo está carregado
+    - Criar o serviço com o modelo em memória
+
+    Retorno:
+    - ServicoRisco: instância pronta para uso
+
+    Exceções:
+    - HTTPException: quando o modelo não está disponível
     """
-    return RiskService()
+    try:
+        modelo = gerenciador_modelo.obter_modelo()
+        return ServicoRisco(modelo=modelo)
+    except RuntimeError as erro:
+        raise HTTPException(status_code=503, detail=f"Modelo de ML não inicializado. {str(erro)}")
 
 
-class PredictionController:
+class ControladorPredicao:
+    """
+    Controlador de predição.
+
+    Responsabilidades:
+    - Registrar rotas de predição
+    - Expor endpoints de predição completa e inteligente
+    """
+
     def __init__(self):
         """
-        Inicializa o controller de predições.
-        
-        Configura automaticamente todas as rotas relacionadas a predições.
-        
-        Attributes:
-            router: APIRouter do FastAPI com rotas configuradas
-        """
-        self.router = APIRouter()
-        self._register_routes()
+        Inicializa o controlador.
 
-    def _register_routes(self):
+        Responsabilidades:
+        - Instanciar o roteador
+        - Registrar as rotas disponíveis
         """
-        Registra todas as rotas do controller no router.
-        
-        Rotas configuradas:
-            - POST /predict: Endpoint de predição de risco
+        self.roteador = APIRouter()
+        self._registrar_rotas()
+
+    def _registrar_rotas(self):
         """
-        self.router.add_api_route(
-            path="/predict",
-            endpoint=self.predict,
+        Registra as rotas de predição.
+
+        Responsabilidades:
+        - Configurar endpoint de predição completa
+        - Configurar endpoint de predição inteligente
+        """
+        self.roteador.add_api_route(
+            path="/predict/full",
+            endpoint=self._predizer,
             methods=["POST"],
             response_model=dict,
         )
 
+        self.roteador.add_api_route(
+            path="/predict/smart",
+            endpoint=self._predizer_inteligente,
+            methods=["POST"],
+            response_model=dict,
+            summary="Predição com busca automática de histórico",
+        )
+
     @staticmethod
-    def predict(data: StudentDTO, service: RiskService = Depends(get_risk_service)):
+    async def _predizer(estudante: Estudante, servico: ServicoRisco = Depends(obter_servico_risco)):
         """
-        Endpoint para predição de risco de defasagem escolar.
-        
-        Args:
-            data: Dados do estudante validados pelo schema
-            service: Instância do serviço de predição (injetada)
-            
-        Returns:
-            Dict com resultado da predição
-            
-        Raises:
-            HTTPException: Em caso de erro interno (status 500)
+        Predição tradicional com modelo completo do aluno.
+
+        Parâmetros:
+        - estudante (Estudante): dados completos do aluno
+        - servico (ServicoRisco): serviço de risco injetado
+
+        Retorno:
+        - dict: resultado da predição
+
+        Exceções:
+        - HTTPException: erro interno durante a predição
         """
         try:
-            student = Student(data=data.dict())
-            return service.predict_risk(student)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            return servico.prever_risco(estudante.model_dump())
+        except Exception as erro:
+            raise HTTPException(status_code=500, detail=str(erro))
 
+    @staticmethod
+    async def _predizer_inteligente(
+        entrada: EntradaEstudante, servico: ServicoRisco = Depends(obter_servico_risco)
+    ):
+        """
+        Predição inteligente com busca automática de histórico.
+
+        Parâmetros:
+        - entrada (EntradaEstudante): dados básicos do aluno
+        - servico (ServicoRisco): serviço de risco injetado
+
+        Retorno:
+        - dict: resultado da predição
+
+        Exceções:
+        - HTTPException: erro interno durante a predição
+        """
+        try:
+            return servico.prever_risco_inteligente(entrada)
+        except Exception as erro:
+            raise HTTPException(status_code=500, detail=str(erro))
