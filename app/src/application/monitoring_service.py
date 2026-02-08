@@ -209,14 +209,21 @@ class ServicoMonitoramento:
             if isinstance(metricas, str):
                 return f"<h3>{dataset_nome}</h3><p>{metricas}</p>"
             tabela_html = metricas.to_html(index=False, classes="fairness-table")
-            return f"<h3>{dataset_nome}</h3>{tabela_html}"
+            resumo = ServicoMonitoramento._resumir_gaps_fairness(metricas)
+            return f"<h3>{dataset_nome}</h3>{resumo}{tabela_html}"
 
         grupos.append(adicionar_metricas("Referência (Treino/Teste)", referencia))
         if Configuracoes.TARGET_COL in atual.columns:
             grupos.append(adicionar_metricas("Produção (com target)", atual))
 
         conteudo = "".join(grupos)
-        return f"<section><h2>Fairness por Grupo</h2>{conteudo}</section>"
+        return (
+            "<section>"
+            "<h2>Fairness por Grupo</h2>"
+            "<p>As taxas são percentuais e medem erros por grupo; diferenças altas indicam risco de viés.</p>"
+            f"{conteudo}"
+            "</section>"
+        )
 
     @staticmethod
     def _calcular_metricas_fairness(dados: pd.DataFrame):
@@ -249,16 +256,41 @@ class ServicoMonitoramento:
             fpr_denom = falso_positivo + verdadeiro_negativo
             fnr_denom = falso_negativo + verdadeiro_positivo
 
+            fpr = round(falso_positivo / fpr_denom, 4) if fpr_denom else 0.0
+            fnr = round(falso_negativo / fnr_denom, 4) if fnr_denom else 0.0
             metricas.append(
                 {
                     grupo_coluna: grupo,
-                    "false_positive_rate": round(falso_positivo / fpr_denom, 4) if fpr_denom else 0.0,
-                    "false_negative_rate": round(falso_negativo / fnr_denom, 4) if fnr_denom else 0.0,
+                    "false_positive_rate_pct": round(fpr * 100, 2),
+                    "false_negative_rate_pct": round(fnr * 100, 2),
                     "support": int(len(subset)),
                 }
             )
 
         return pd.DataFrame(metricas)
+
+    @staticmethod
+    def _resumir_gaps_fairness(metricas: pd.DataFrame) -> str:
+        """
+        Resume os gaps de fairness com base nas taxas por grupo.
+
+        Parâmetros:
+        - metricas (pd.DataFrame): métricas por grupo
+
+        Retorno:
+        - str: HTML com resumo de gaps
+        """
+        if metricas.empty:
+            return "<p>Sem dados suficientes para resumir gaps de fairness.</p>"
+
+        gap_fpr = metricas["false_positive_rate_pct"].max() - metricas["false_positive_rate_pct"].min()
+        gap_fnr = metricas["false_negative_rate_pct"].max() - metricas["false_negative_rate_pct"].min()
+        return (
+            "<p>"
+            f"Gap de FPR: {gap_fpr:.2f} pp | "
+            f"Gap de FNR: {gap_fnr:.2f} pp"
+            "</p>"
+        )
 
     @staticmethod
     def _tem_target_valido(referencia: pd.DataFrame, atual: pd.DataFrame) -> bool:

@@ -112,6 +112,7 @@ def test_gerar_dashboard_sucesso(monkeypatch):
 
     assert "<html>ok</html>" in html
     assert "Fairness por Grupo" in html
+    assert "Gap de FPR" in html
     relatorio.run.assert_called_once()
 
 
