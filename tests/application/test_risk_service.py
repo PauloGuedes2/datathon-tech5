@@ -74,6 +74,7 @@ def test_prever_risco_inteligente_com_historico(entrada_estudante_exemplo):
     resultado = servico.prever_risco_inteligente(EntradaEstudante(**entrada_estudante_exemplo))
 
     assert resultado["prediction"] == 1
+    assert resultado["requires_human_review"] is False
 
 
 def test_prever_risco_inteligente_sem_historico(entrada_estudante_exemplo):
@@ -88,3 +89,4 @@ def test_prever_risco_inteligente_sem_historico(entrada_estudante_exemplo):
     resultado = servico.prever_risco_inteligente(EntradaEstudante(**entrada_estudante_exemplo))
 
     assert resultado["prediction"] == 0
+    assert resultado["requires_human_review"] is True

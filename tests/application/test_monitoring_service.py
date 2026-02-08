@@ -75,7 +75,14 @@ def test_gerar_dashboard_aguarda_dados(monkeypatch):
 def test_gerar_dashboard_sucesso(monkeypatch):
     monkeypatch.setattr("src.application.monitoring_service.os.path.exists", lambda path: True)
 
-    referencia = pd.DataFrame({"prediction": [0, 1, 0, 1, 0], "IDADE": [10, 11, 12, 13, 14]})
+    referencia = pd.DataFrame(
+        {
+            "prediction": [0, 1, 0, 1, 0],
+            "IDADE": [10, 11, 12, 13, 14],
+            "GENERO": ["Masculino", "Feminino", "Masculino", "Feminino", "Masculino"],
+            Configuracoes.TARGET_COL: [0, 1, 0, 1, 0],
+        }
+    )
     atual_raw = pd.DataFrame({
         "input_features": [
             {"IDADE": 10, "GENERO": "Masculino"},
@@ -103,7 +110,8 @@ def test_gerar_dashboard_sucesso(monkeypatch):
 
     html = ServicoMonitoramento.gerar_dashboard()
 
-    assert html == "<html>ok</html>"
+    assert "<html>ok</html>" in html
+    assert "Fairness por Grupo" in html
     relatorio.run.assert_called_once()
 
 

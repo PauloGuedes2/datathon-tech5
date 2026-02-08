@@ -66,6 +66,8 @@ class Configuracoes:
         "FASE",
     ]
 
+    FAIRNESS_GROUP_COL = "GENERO"
+
     COLUNAS_PROIBIDAS_NO_TREINO = [
         "INDE",
         "PEDRA",

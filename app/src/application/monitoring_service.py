@@ -64,7 +64,8 @@ class ServicoMonitoramento:
             relatorio = ServicoMonitoramento._executar_relatorio(
                 referencia, dados_atual, mapeamento_colunas
             )
-            return relatorio.get_html()
+            fairness_html = ServicoMonitoramento._gerar_fairness_html(referencia, dados_atual)
+            return f"{relatorio.get_html()}{fairness_html}"
 
         except Exception as erro:
             logger.error(f"Erro ao gerar dashboard: {erro}")
@@ -188,6 +189,76 @@ class ServicoMonitoramento:
             column_mapping=mapeamento,
         )
         return relatorio
+
+    @staticmethod
+    def _gerar_fairness_html(referencia: pd.DataFrame, atual: pd.DataFrame) -> str:
+        """
+        Gera um bloco HTML com métricas de fairness por grupo.
+
+        Parâmetros:
+        - referencia (pd.DataFrame): dados de referência com target/prediction
+        - atual (pd.DataFrame): dados atuais
+
+        Retorno:
+        - str: HTML com métricas de fairness ou mensagem de aviso
+        """
+        grupos = []
+
+        def adicionar_metricas(dataset_nome: str, dados: pd.DataFrame):
+            metricas = ServicoMonitoramento._calcular_metricas_fairness(dados)
+            if isinstance(metricas, str):
+                return f"<h3>{dataset_nome}</h3><p>{metricas}</p>"
+            tabela_html = metricas.to_html(index=False, classes="fairness-table")
+            return f"<h3>{dataset_nome}</h3>{tabela_html}"
+
+        grupos.append(adicionar_metricas("Referência (Treino/Teste)", referencia))
+        if Configuracoes.TARGET_COL in atual.columns:
+            grupos.append(adicionar_metricas("Produção (com target)", atual))
+
+        conteudo = "".join(grupos)
+        return f"<section><h2>Fairness por Grupo</h2>{conteudo}</section>"
+
+    @staticmethod
+    def _calcular_metricas_fairness(dados: pd.DataFrame):
+        """
+        Calcula FPR/FNR por grupo para análise de fairness.
+
+        Parâmetros:
+        - dados (pd.DataFrame): dados com target e prediction
+
+        Retorno:
+        - pd.DataFrame | str: métricas por grupo ou mensagem de aviso
+        """
+        grupo_coluna = Configuracoes.FAIRNESS_GROUP_COL
+        target_col = Configuracoes.TARGET_COL
+
+        colunas_necessarias = {grupo_coluna, target_col, "prediction"}
+        if not colunas_necessarias.issubset(dados.columns):
+            return "Dados insuficientes para calcular fairness (grupo, target ou prediction ausentes)."
+
+        metricas = []
+        for grupo, subset in dados.groupby(grupo_coluna):
+            y_true = subset[target_col]
+            y_pred = subset["prediction"]
+
+            falso_positivo = int(((y_pred == 1) & (y_true == 0)).sum())
+            falso_negativo = int(((y_pred == 0) & (y_true == 1)).sum())
+            verdadeiro_positivo = int(((y_pred == 1) & (y_true == 1)).sum())
+            verdadeiro_negativo = int(((y_pred == 0) & (y_true == 0)).sum())
+
+            fpr_denom = falso_positivo + verdadeiro_negativo
+            fnr_denom = falso_negativo + verdadeiro_positivo
+
+            metricas.append(
+                {
+                    grupo_coluna: grupo,
+                    "false_positive_rate": round(falso_positivo / fpr_denom, 4) if fpr_denom else 0.0,
+                    "false_negative_rate": round(falso_negativo / fnr_denom, 4) if fnr_denom else 0.0,
+                    "support": int(len(subset)),
+                }
+            )
+
+        return pd.DataFrame(metricas)
 
     @staticmethod
     def _tem_target_valido(referencia: pd.DataFrame, atual: pd.DataFrame) -> bool:

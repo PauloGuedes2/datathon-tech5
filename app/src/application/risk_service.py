@@ -128,11 +128,13 @@ class ServicoRisco:
         - dict: resultado da predição
         """
         historico = self.repositorio.obter_historico_estudante(entrada.RA)
+        requer_revisao_humana = False
 
         if historico:
             logger.info(f"Histórico encontrado para RA: {entrada.RA}")
         else:
             logger.info(f"Aluno novo ou sem histórico (RA: {entrada.RA})")
+            requer_revisao_humana = True
             historico = {
                 "INDE_ANTERIOR": 0.0,
                 "IAA_ANTERIOR": 0.0,
@@ -149,4 +151,6 @@ class ServicoRisco:
         dados_completos.update(historico)
 
         estudante = Estudante(**dados_completos)
-        return self.prever_risco(estudante.model_dump())
+        resultado = self.prever_risco(estudante.model_dump())
+        resultado["requires_human_review"] = requer_revisao_humana
+        return resultado
