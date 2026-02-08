@@ -33,6 +33,7 @@ def test_prever_risco_limite_threshold(estudante_exemplo):
 
     servico = ServicoRisco(modelo=modelo)
     servico.logger = Mock()
+    servico._obter_threshold = Mock(return_value=Configuracoes.RISK_THRESHOLD)
 
     resultado = servico.prever_risco(estudante_exemplo)
 

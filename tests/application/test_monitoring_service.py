@@ -153,3 +153,54 @@ def test_gerar_dashboard_trata_excecao(monkeypatch):
     html = ServicoMonitoramento.gerar_dashboard()
 
     assert "Erro interno" in html
+
+
+def test_resumir_gaps_fairness_badges():
+    metricas = pd.DataFrame(
+        {
+            "GENERO": ["A", "B"],
+            "false_positive_rate_pct": [3.0, 10.0],
+            "false_negative_rate_pct": [2.0, 15.0],
+            "support": [10, 12],
+        }
+    )
+
+    html = ServicoMonitoramento._resumir_gaps_fairness(metricas)
+
+    assert "FPR med" in html
+    assert "FNR high" in html
+
+
+def test_renderizar_barras_fairness():
+    metricas = pd.DataFrame(
+        {
+            "GENERO": ["A", "B"],
+            "false_positive_rate_pct": [10.0, 20.0],
+            "false_negative_rate_pct": [5.0, 15.0],
+            "support": [10, 12],
+        }
+    )
+
+    html = ServicoMonitoramento._renderizar_barras_fairness(metricas)
+
+    assert "fairness-bars" in html
+    assert "A · FPR" in html
+    assert "B · FNR" in html
+    assert "10.00%" in html
+
+
+def test_gerar_fairness_html_inclui_estilos_e_barras():
+    referencia = pd.DataFrame(
+        {
+            "GENERO": ["Feminino", "Masculino", "Feminino", "Masculino"],
+            Configuracoes.TARGET_COL: [0, 1, 0, 1],
+            "prediction": [0, 1, 1, 0],
+        }
+    )
+    atual = referencia.copy()
+
+    html = ServicoMonitoramento._gerar_fairness_html(referencia, atual)
+
+    assert "fairness-wrapper" in html
+    assert "fairness-table" in html
+    assert "fairness-bars" in html

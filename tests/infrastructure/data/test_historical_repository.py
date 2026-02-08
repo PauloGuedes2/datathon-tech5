@@ -22,7 +22,13 @@ def test_repositorio_carrega_referencia_com_ra(monkeypatch):
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
-        lambda path: pd.DataFrame({"RA": ["1"], "ANO_REFERENCIA": [2023], "INDE": [5.0]}),
+        lambda path: pd.DataFrame(
+            {
+                "RA": ["1", "1"],
+                "ANO_REFERENCIA": [2022, 2023],
+                "INDE": [5.0, 6.0],
+            }
+        ),
     )
 
     repo = RepositorioHistorico()
@@ -45,7 +51,9 @@ def test_repositorio_recarrega_quando_referencia_sem_ra(monkeypatch):
     )
 
     carregador_mock = Mock()
-    carregador_mock.carregar_dados.return_value = pd.DataFrame({"RA": ["2"], "ANO_REFERENCIA": [2023], "INDE": [3.0]})
+    carregador_mock.carregar_dados.return_value = pd.DataFrame(
+        {"RA": ["2", "2"], "ANO_REFERENCIA": [2022, 2023], "INDE": [3.0, 4.0]}
+    )
     monkeypatch.setattr("src.infrastructure.data.data_loader.CarregadorDados", lambda: carregador_mock)
 
     repo = RepositorioHistorico()
@@ -82,7 +90,13 @@ def test_repositorio_retorna_none_quando_estudante_nao_existe(monkeypatch):
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
-        lambda path: pd.DataFrame({"RA": ["1"], "ANO_REFERENCIA": [2023], "INDE": [5.0]}),
+        lambda path: pd.DataFrame(
+            {
+                "RA": ["1", "1"],
+                "ANO_REFERENCIA": [2022, 2023],
+                "INDE": [5.0, 6.0],
+            }
+        ),
     )
 
     repo = RepositorioHistorico()
@@ -100,7 +114,14 @@ def test_repositorio_trata_valores_invalidos(monkeypatch):
     monkeypatch.setattr("src.infrastructure.data.historical_repository.os.path.exists", lambda path: True)
     monkeypatch.setattr(
         "src.infrastructure.data.historical_repository.pd.read_csv",
-        lambda path: pd.DataFrame({"RA": ["1"], "ANO_REFERENCIA": [2023], "INDE": ["x"], "IAA": [None]}),
+        lambda path: pd.DataFrame(
+            {
+                "RA": ["1", "1"],
+                "ANO_REFERENCIA": [2022, 2023],
+                "INDE": ["x", 1.0],
+                "IAA": [None, 2.0],
+            }
+        ),
     )
 
     repo = RepositorioHistorico()
