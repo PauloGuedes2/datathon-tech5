@@ -1,341 +1,183 @@
-from unittest.mock import Mock, patch
+"""Testes do pipeline de treinamento."""
 
+from unittest.mock import Mock, mock_open
+
+import numpy as np
 import pandas as pd
 import pytest
 
-from src.infrastructure.model.ml_pipeline import MLPipeline
+from src.infrastructure.model.ml_pipeline import PipelineML
+from src.config.settings import Configuracoes
 
 
-class TestMLPipeline:
-    """
-    Classe de testes para MLPipeline.
-    
-    Testa:
-        - Criação de target
-        - Treinamento do modelo
-        - Carregamento e salvamento
-        - Predições
-        - Feature importance
-    """
+class PipelineFalso:
+    """Pipeline falso para simular comportamento do sklearn."""
 
-    def test_pipeline_initialization(self):
-        """
-        Testa inicialização do pipeline.
-        
-        Verifica:
-            - Pipeline é criado corretamente
-            - Modelo é None inicialmente
-        """
-        pipeline = MLPipeline()
-        assert pipeline.model is None
+    def __init__(self, *args, **kwargs):
+        """Inicializa o pipeline falso."""
+        self.args = args
+        self.kwargs = kwargs
+        self.treinado = False
 
-    def test_create_target_success(self, sample_dataframe):
-        """
-        Testa criação da variável target com sucesso.
-        
-        Args:
-            sample_dataframe: DataFrame com coluna DEFAS
-            
-        Verifica:
-            - Coluna RISCO_DEFASAGEM é criada
-            - Valores corretos (DEFAS < 0 = 1, senão 0)
-            - DataFrame original é preservado
-        """
-        result_df = MLPipeline.create_target(sample_dataframe)
+    def fit(self, dados, alvo):
+        """Simula o ajuste do modelo."""
+        self.treinado = True
+        return self
 
-        assert "RISCO_DEFASAGEM" in result_df.columns
+    def predict(self, dados):
+        """Simula a predição do modelo."""
+        return np.zeros(len(dados), dtype=int)
 
-        # Verifica lógica: DEFAS < 0 -> RISCO = 1
-        expected_risk = [1, 0, 0]  # [-1, 0, 2] -> [1, 0, 0]
-        assert list(result_df["RISCO_DEFASAGEM"]) == expected_risk
+    def predict_proba(self, dados):
+        """Simula probabilidade do modelo."""
+        return np.tile([0.5, 0.5], (len(dados), 1))
 
-        # Verifica que outras colunas foram preservadas
-        for col in sample_dataframe.columns:
-            assert col in result_df.columns
 
-    def test_create_target_missing_defas_column(self):
-        """
-        Testa erro quando coluna DEFAS não existe.
-        
-        Verifica:
-            - ValueError é levantado
-            - Mensagem de erro apropriada
-        """
-        df_without_defas = pd.DataFrame({
-            'IDADE_22': [14, 15],
-            'CG': [7.5, 6.8]
-        })
+def test_criar_target_defasagem():
+    dados = pd.DataFrame({"DEFASAGEM": [-1, 2]})
+    resultado = PipelineML.criar_target(dados)
+    assert resultado[Configuracoes.TARGET_COL].tolist() == [1, 0]
 
-        with pytest.raises(ValueError) as exc_info:
-            MLPipeline.create_target(df_without_defas)
 
-        assert "DEFAS não encontrada" in str(exc_info.value)
+def test_criar_target_inde():
+    dados = pd.DataFrame({"INDE": [5.0, 7.0, "bad"]})
+    resultado = PipelineML.criar_target(dados)
+    assert resultado[Configuracoes.TARGET_COL].tolist() == [1, 0, 0]
 
-    def test_create_target_edge_cases(self):
-        """
-        Testa casos extremos na criação do target.
-        
-        Verifica:
-            - Valores zero no limite
-            - Valores muito negativos
-            - Valores muito positivos
-        """
-        edge_df = pd.DataFrame({
-            'DEFAS': [-100, -0.1, 0, 0.1, 100],
-            'IDADE_22': [14, 15, 16, 17, 18]
-        })
 
-        result_df = MLPipeline.create_target(edge_df)
+def test_criar_target_pedra():
+    dados = pd.DataFrame({"PEDRA": ["Quartzo", "onix"]})
+    resultado = PipelineML.criar_target(dados)
+    assert resultado[Configuracoes.TARGET_COL].tolist() == [1, 0]
 
-        # DEFAS < 0 -> RISCO = 1
-        expected_risk = [1, 1, 0, 0, 0]
-        assert list(result_df["RISCO_DEFASAGEM"]) == expected_risk
 
-    @patch('src.infrastructure.model.ml_pipeline.train_test_split')
-    @patch('src.infrastructure.model.ml_pipeline.Pipeline')
-    @patch('src.infrastructure.model.ml_pipeline.dump')
-    @patch('src.infrastructure.model.ml_pipeline.logger')
-    def test_train_success(self, mock_logger, mock_dump, mock_pipeline_class,
-                           mock_train_test_split, sample_dataframe):
-        """
-        Testa treinamento bem-sucedido do modelo.
-        
-        Args:
-            mock_logger: Mock do logger
-            mock_dump: Mock da função dump
-            mock_pipeline_class: Mock da classe Pipeline
-            mock_train_test_split: Mock do train_test_split
-            sample_dataframe: DataFrame com dados de treino
-            
-        Verifica:
-            - Pipeline é criado e treinado
-            - Modelo é salvo
-            - Logs são gerados
-            - Métricas são calculadas
-        """
-        # Preparar dados
-        df_with_target = MLPipeline.create_target(sample_dataframe)
+def test_criar_target_padrao():
+    dados = pd.DataFrame({"OTHER": [1]})
+    with pytest.raises(ValueError):
+        PipelineML.criar_target(dados)
 
-        # Setup mocks
-        X_train = pd.DataFrame({'feature': [1, 2]})
-        X_test = pd.DataFrame({'feature': [3]})
-        y_train = pd.Series([0, 1])
-        y_test = pd.Series([0])
 
-        mock_train_test_split.return_value = (X_train, X_test, y_train, y_test)
+def test_criar_features_lag_com_colunas_faltantes():
+    dados = pd.DataFrame({"RA": ["1"], "INDE": [5]})
+    resultado = PipelineML.criar_features_lag(dados)
+    assert "INDE_ANTERIOR" not in resultado.columns
 
-        mock_pipeline = Mock()
-        mock_pipeline.predict.return_value = [0]
-        mock_pipeline_class.return_value = mock_pipeline
 
-        # Executar treinamento
-        MLPipeline.train(df_with_target)
+def test_criar_features_lag_gera_flags():
+    dados = pd.DataFrame({
+        "RA": ["1", "1"],
+        "ANO_REFERENCIA": [2022, 2023],
+        "INDE": [5.0, 6.0],
+    })
+    resultado = PipelineML.criar_features_lag(dados)
+    assert "INDE_ANTERIOR" in resultado.columns
+    assert resultado.loc[resultado["ANO_REFERENCIA"] == 2023, "ALUNO_NOVO"].iloc[0] == 0
 
-        # Verificações
-        mock_pipeline_class.assert_called_once()
-        mock_pipeline.fit.assert_called_once_with(X_train, y_train)
-        mock_pipeline.predict.assert_called_once_with(X_test)
-        mock_dump.assert_called_once()
 
-        # Verifica logs
-        assert mock_logger.info.call_count >= 2
+def test_deve_promover_modelo_sem_metricas(monkeypatch):
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: False)
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.5, "recall": 0.7}) is True
 
-    @patch('src.infrastructure.model.ml_pipeline.train_test_split')
-    @patch('src.infrastructure.model.ml_pipeline.logger')
-    def test_train_unbalanced_data(self, mock_logger, mock_train_test_split, sample_dataframe):
-        """
-        Testa treinamento com dados desbalanceados.
-        
-        Args:
-            mock_logger: Mock do logger
-            mock_train_test_split: Mock do train_test_split
-            sample_dataframe: DataFrame base
-            
-        Verifica:
-            - Warning é logado para dados desbalanceados
-            - Stratify é None quando classe minoritária < 2
-        """
-        # Criar dados muito desbalanceados
-        unbalanced_df = sample_dataframe.copy()
-        unbalanced_df['DEFAS'] = [1, 1, 1]  # Todos positivos -> RISCO = 0
-        df_with_target = MLPipeline.create_target(unbalanced_df)
 
-        # Mock para simular classe minoritária com 1 amostra
-        mock_train_test_split.side_effect = ValueError("stratify")
+def test_deve_promover_modelo_com_metricas(monkeypatch):
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: True)
 
-        with pytest.raises(ValueError):
-            MLPipeline.train(df_with_target)
+    arquivo_mock = mock_open(read_data='{"f1_score": 0.8}')
+    monkeypatch.setattr("builtins.open", arquivo_mock)
 
-    @patch('src.infrastructure.model.ml_pipeline.load')
-    def test_load_success(self, mock_load):
-        """
-        Testa carregamento bem-sucedido do modelo.
-        
-        Args:
-            mock_load: Mock da função load
-            
-        Verifica:
-            - Modelo é carregado corretamente
-            - Atribuído à instância
-        """
-        mock_model = Mock()
-        mock_load.return_value = mock_model
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.76, "recall": 0.7}) is True
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.7, "recall": 0.7}) is False
 
-        pipeline = MLPipeline()
-        pipeline.load()
 
-        mock_load.assert_called_once()
-        assert pipeline.model == mock_model
+def test_deve_promover_modelo_em_erro(monkeypatch):
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: True)
+    monkeypatch.setattr("builtins.open", lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("boom")))
 
-    @patch('src.infrastructure.model.ml_pipeline.load')
-    @patch('src.infrastructure.model.ml_pipeline.logger')
-    def test_load_file_not_found(self, mock_logger, mock_load):
-        """
-        Testa comportamento quando modelo não é encontrado.
-        
-        Args:
-            mock_logger: Mock do logger
-            mock_load: Mock da função load
-            
-        Verifica:
-            - FileNotFoundError é tratado
-            - Modelo fica None
-            - Erro é logado
-        """
-        mock_load.side_effect = FileNotFoundError("Arquivo não encontrado")
+    assert PipelineML._deve_promover_modelo({"f1_score": 0.1, "recall": 0.7}) is True
 
-        pipeline = MLPipeline()
-        pipeline.load()
 
-        assert pipeline.model is None
-        mock_logger.error.assert_called_once()
+def test_promover_modelo_cria_backup_e_arquivos(monkeypatch):
+    modelo = Mock()
+    metricas = {"f1_score": 0.9}
+    dados_teste = pd.DataFrame({"RA": ["1"]})
+    alvo_teste = pd.Series([1])
+    predicoes = np.array([1])
 
-    def test_predict_proba_success(self, mock_model):
-        """
-        Testa predição de probabilidade com sucesso.
-        
-        Args:
-            mock_model: Mock do modelo treinado
-            
-        Verifica:
-            - Probabilidade é retornada corretamente
-            - Classe positiva (índice 1) é usada
-        """
-        pipeline = MLPipeline()
-        pipeline.model = mock_model
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.path.exists", lambda path: True)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.shutil.copy", Mock())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.os.makedirs", Mock())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.dump", Mock())
 
-        test_df = pd.DataFrame({'feature': [1]})
+    arquivo_mock = mock_open()
+    monkeypatch.setattr("builtins.open", arquivo_mock)
 
-        result = pipeline.predict_proba(test_df)
+    class DataFixa:
+        """Classe de data fixa para testes."""
+        @classmethod
+        def now(cls):
+            """Retorna um objeto com data fixa."""
+            class _Agora:
+                """Objeto simples com data fixa."""
+                def strftime(self, fmt):
+                    """Retorna versão fixa do modelo."""
+                    return "v2024.01.01"
+            return _Agora()
 
-        mock_model.predict_proba.assert_called_once_with(test_df)
-        assert result == 0.3  # mock_model retorna [[0.7, 0.3]]
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.datetime", DataFixa)
+    monkeypatch.setattr(pd.DataFrame, "to_csv", Mock())
 
-    def test_predict_proba_no_model(self):
-        """
-        Testa predição sem modelo carregado.
-        
-        Verifica:
-            - RuntimeError é levantado
-            - Mensagem apropriada
-        """
-        with patch('src.infrastructure.model.ml_pipeline.load') as mock_load:
-            mock_load.side_effect = FileNotFoundError("Modelo não encontrado")
-            
-            pipeline = MLPipeline()
-            # Não carrega modelo
+    PipelineML._promover_modelo(modelo, metricas, dados_teste, alvo_teste, predicoes)
 
-            test_df = pd.DataFrame({'feature': [1]})
+    assert metricas["model_version"] == "v2024.01.01"
 
-            with pytest.raises(RuntimeError) as exc_info:
-                pipeline.predict_proba(test_df)
 
-            assert "indisponível" in str(exc_info.value)
+def test_treinar_exige_ano_referencia(dataframe_base):
+    pipeline = PipelineML()
+    dados = dataframe_base.drop(columns=["ANO_REFERENCIA"])
 
-    @patch('src.infrastructure.model.ml_pipeline.load')
-    def test_predict_proba_auto_load(self, mock_load, mock_model):
-        """
-        Testa carregamento automático do modelo na predição.
-        
-        Args:
-            mock_load: Mock da função load
-            mock_model: Mock do modelo
-            
-        Verifica:
-            - Modelo é carregado automaticamente
-            - Predição funciona após carregamento
-        """
-        mock_load.return_value = mock_model
+    with pytest.raises(ValueError):
+        pipeline.treinar(dados)
 
-        pipeline = MLPipeline()
-        test_df = pd.DataFrame({'feature': [1]})
 
-        result = pipeline.predict_proba(test_df)
+def test_treinar_com_ano_unico(monkeypatch, dataframe_base):
+    pipeline = PipelineML()
 
-        mock_load.assert_called_once()
-        assert result == 0.3
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.Pipeline", PipelineFalso)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.ColumnTransformer", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.RandomForestClassifier", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.SimpleImputer", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.StandardScaler", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.OneHotEncoder", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.recall_score", lambda *args, **kwargs: 0.5)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.f1_score", lambda *args, **kwargs: 0.5)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.precision_score", lambda *args, **kwargs: 0.5)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.PipelineML._deve_promover_modelo", lambda *args, **kwargs: False)
 
-    def test_get_feature_importance_success(self, mock_model):
-        """
-        Testa extração de feature importance.
-        
-        Args:
-            mock_model: Mock do modelo com feature importance
-            
-        Verifica:
-            - DataFrame é retornado
-            - Features estão ordenadas por importância
-            - Estrutura correta
-        """
-        pipeline = MLPipeline()
-        pipeline.model = mock_model
+    pipeline.treinar(dataframe_base)
 
-        result_df = pipeline.get_feature_importance()
 
-        assert isinstance(result_df, pd.DataFrame)
-        assert "feature" in result_df.columns
-        assert "importance" in result_df.columns
-        assert len(result_df) > 0
+def test_treinar_com_varios_anos_promove(monkeypatch, dataframe_base):
+    pipeline = PipelineML()
 
-        # Verifica ordenação decrescente
-        importances = result_df["importance"].tolist()
-        assert importances == sorted(importances, reverse=True)
+    dados = pd.concat([
+        dataframe_base,
+        dataframe_base.assign(RA="2", ANO_REFERENCIA=2024),
+    ], ignore_index=True)
 
-    def test_get_feature_importance_no_model(self):
-        """
-        Testa feature importance sem modelo carregado.
-        
-        Verifica:
-            - RuntimeError é levantado
-            - Tentativa de carregamento automático
-        """
-        with patch('src.infrastructure.model.ml_pipeline.load') as mock_load:
-            mock_load.side_effect = FileNotFoundError("Modelo não encontrado")
-            
-            pipeline = MLPipeline()
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.Pipeline", PipelineFalso)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.ColumnTransformer", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.RandomForestClassifier", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.SimpleImputer", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.StandardScaler", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.OneHotEncoder", lambda *args, **kwargs: object())
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.recall_score", lambda *args, **kwargs: 0.5)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.f1_score", lambda *args, **kwargs: 0.5)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.precision_score", lambda *args, **kwargs: 0.5)
 
-            with pytest.raises(RuntimeError) as exc_info:
-                pipeline.get_feature_importance()
+    promovido = Mock()
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.PipelineML._promover_modelo", promovido)
+    monkeypatch.setattr("src.infrastructure.model.ml_pipeline.PipelineML._deve_promover_modelo", lambda *args, **kwargs: True)
 
-            assert "indisponível" in str(exc_info.value)
+    pipeline.treinar(dados)
 
-    @patch('src.infrastructure.model.ml_pipeline.load')
-    def test_get_feature_importance_auto_load(self, mock_load, mock_model):
-        """
-        Testa carregamento automático para feature importance.
-        
-        Args:
-            mock_load: Mock da função load
-            mock_model: Mock do modelo
-            
-        Verifica:
-            - Modelo é carregado automaticamente
-            - Feature importance é extraída
-        """
-        mock_load.return_value = mock_model
-
-        pipeline = MLPipeline()
-        result_df = pipeline.get_feature_importance()
-
-        mock_load.assert_called_once()
-        assert isinstance(result_df, pd.DataFrame)
+    promovido.assert_called_once()

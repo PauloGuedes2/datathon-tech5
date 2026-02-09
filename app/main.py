@@ -1,71 +1,67 @@
+"""
+Ponto de entrada da API FastAPI.
+
+Responsabilidades:
+- Configurar a aplicação FastAPI
+- Registrar rotas e eventos
+- Inicializar recursos no startup
+"""
+
 import os
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
-from src.api.controller import PredictionController
+from src.api.controller import ControladorPredicao
+from src.api.monitoring_controller import ControladorMonitoramento
+from src.infrastructure.model.model_manager import GerenciadorModelo
+from src.util.logger import logger
+
+app = FastAPI(
+    title="Passos Mágicos - API de Risco",
+    description="API com Monitoramento de Data Drift (Evidently).",
+    version="2.1.0",
+)
 
 
-class App:
-    def __init__(self):
-        """
-        Inicializa a aplicação FastAPI com configurações e rotas.
-        
-        Configura:
-            - Instância FastAPI com metadados
-            - Registro de todas as rotas da aplicação
-        """
-        self.app = FastAPI(
-            title="Passos Mágicos - API de Previsão de Risco",
-            description="API para predição de risco de defasagem escolar utilizando Machine Learning.",
-            version="1.0.0"
-        )
+@app.on_event("startup")
+async def evento_inicializacao():
+    """
+    Executa ações de inicialização da aplicação.
 
-        self._configure_routes()
+    Responsabilidades:
+    - Registrar log de inicialização
+    - Carregar o modelo na memória
 
-    def _configure_routes(self):
-        """
-        Configura e registra todas as rotas da aplicação.
-        
-        Registra:
-            - Rotas do PredictionController com prefixo /api/v1
-            - Endpoint de health check na raiz
-        """
-        prediction_controller = PredictionController()
+    Retorno:
+    - None: não retorna valor
+    """
+    logger.info("Inicializando recursos da API...")
+    GerenciadorModelo().carregar_modelo()
 
-        self.app.include_router(
-            prediction_controller.router,
-            prefix="/api/v1",
-            tags=["Previsão"]
-        )
 
-        self.app.add_api_route("/health", self.health_check, methods=["GET"], tags=["Health"])
+controlador_predicao = ControladorPredicao()
+app.include_router(controlador_predicao.roteador, prefix="/api/v1", tags=["Predição"])
 
-    @staticmethod
-    def health_check():
-        """
-        Endpoint de health check para monitoramento da API.
-        
-        Returns:
-            Dict com status da aplicação
-        """
-        return {"status": "ok", "service": "passos-magicos-api"}
+controlador_monitoramento = ControladorMonitoramento()
+app.include_router(controlador_monitoramento.roteador, prefix="/api/v1/monitoring", tags=["Observabilidade"])
 
-    def run(self, host: str = "0.0.0.0", port: int = 8000):
-        """
-        Inicia o servidor Uvicorn para servir a API.
-        
-        Args:
-            host: Endereço IP para bind (padrão: 0.0.0.0)
-            port: Porta para servir a API (padrão: 8000)
-            
-        Note:
-            A porta pode ser sobrescrita pela variável de ambiente PORT
-        """
-        port = int(os.getenv("PORT", port))
-        uvicorn.run(self.app, host=host, port=port)
+
+@app.get("/health", tags=["Infraestrutura"])
+def checar_saude():
+    """
+    Endpoint de health check.
+
+    Retorno:
+    - dict: status da aplicação
+    """
+    try:
+        GerenciadorModelo().obter_modelo()
+        return {"status": "ok"}
+    except Exception as erro:
+        raise HTTPException(status_code=503, detail=str(erro))
 
 
 if __name__ == "__main__":
-    application = App()
-    application.run()
+    porta = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=porta)

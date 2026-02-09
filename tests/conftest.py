@@ -1,145 +1,127 @@
-import pytest
-from fastapi.testclient import TestClient
+"""Fixtures compartilhadas para os testes."""
+
+import sys
+import types
+from pathlib import Path
+
 import pandas as pd
-import tempfile
-import os
-from unittest.mock import Mock
-
-from main import App
+import pytest
 
 
-@pytest.fixture(scope="session")
-def client():
-    """
-    Fixture que fornece cliente de teste para a API FastAPI.
-    
-    Returns:
-        TestClient configurado com a aplicação FastAPI
-        
-    Scope:
-        session - Reutilizado em toda a sessão de testes
-    """
-    app = App().app
-    return TestClient(app)
+DIRETORIO_EVIDENTLY = "evidently"
+RAIZ = Path(__file__).resolve().parents[1]
+DIRETORIO_APP = RAIZ / "app"
+if str(DIRETORIO_APP) not in sys.path:
+    sys.path.insert(0, str(DIRETORIO_APP))
 
 
-@pytest.fixture
-def sample_dataframe():
-    """
-    Fixture que fornece DataFrame de exemplo para testes.
-    
-    Returns:
-        DataFrame com dados de teste estruturados
-    """
-    return pd.DataFrame({
-        'IDADE_22': [14, 15, 16],
-        'CG': [7.5, 6.8, 8.2],
-        'CF': [7.0, 6.5, 7.8],
-        'CT': [7.2, 6.9, 8.0],
-        'IAA': [6.8, 6.2, 7.5],
-        'IEG': [7.1, 6.7, 7.9],
-        'IPS': [6.9, 6.4, 7.6],
-        'IDA': [7.0, 6.6, 7.7],
-        'MATEM': [6.5, 6.0, 7.3],
-        'PORTUG': [7.3, 6.8, 8.1],
-        'INGLES': [6.8, 6.3, 7.4],
-        'GENERO': ['M', 'F', 'M'],
-        'TURMA': ['A', 'B', 'A'],
-        'INSTITUICAO_DE_ENSINO': ['ESCOLA MUNICIPAL', 'ESCOLA ESTADUAL', 'ESCOLA MUNICIPAL'],
-        'DEFAS': [-1, 0, 2]
-    })
+def _registrar_stub_evidently():
+    """Registra módulos stub do Evidently para testes sem dependência instalada."""
+    if DIRETORIO_EVIDENTLY in sys.modules:
+        return
+
+    modulo_evidently = types.ModuleType("evidently")
+    modulo_metricas = types.ModuleType("evidently.metric_preset")
+    modulo_relatorio = types.ModuleType("evidently.report")
+
+    class ColumnMapping:
+        """Stub de ColumnMapping."""
+
+    class DataDriftPreset:
+        """Stub de DataDriftPreset."""
+
+    class TargetDriftPreset:
+        """Stub de TargetDriftPreset."""
+
+    class Report:
+        """Stub de Report."""
+
+        def __init__(self, *args, **kwargs):
+            """Inicializa o relatório."""
+            self.args = args
+            self.kwargs = kwargs
+
+        def run(self, *args, **kwargs):
+            """Simula execução do relatório."""
+            return None
+
+        def get_html(self):
+            """Retorna HTML vazio."""
+            return ""
+
+    modulo_evidently.ColumnMapping = ColumnMapping
+    modulo_metricas.DataDriftPreset = DataDriftPreset
+    modulo_metricas.TargetDriftPreset = TargetDriftPreset
+    modulo_relatorio.Report = Report
+
+    sys.modules["evidently"] = modulo_evidently
+    sys.modules["evidently.metric_preset"] = modulo_metricas
+    sys.modules["evidently.report"] = modulo_relatorio
 
 
-@pytest.fixture
-def sample_student_data():
-    """
-    Fixture que fornece dados de estudante para testes.
-    
-    Returns:
-        Dict com dados válidos de estudante
-    """
+_registrar_stub_evidently()
+
+
+@pytest.fixture()
+def estudante_exemplo():
+    """Retorna um dicionário com dados completos de aluno."""
     return {
-        "IDADE_22": 14,
-        "CG": 7.5,
-        "CF": 7.0,
-        "CT": 7.2,
-        "IAA": 6.8,
-        "IEG": 7.1,
-        "IPS": 6.9,
-        "IDA": 7.0,
-        "MATEM": 6.5,
-        "PORTUG": 7.3,
-        "INGLES": 6.8,
-        "GENERO": "M",
+        "RA": "123",
+        "IDADE": 10,
+        "ANO_INGRESSO": 2020,
+        "GENERO": "Masculino",
         "TURMA": "A",
-        "INSTITUICAO_DE_ENSINO": "ESCOLA MUNICIPAL"
+        "INSTITUICAO_ENSINO": "Escola",
+        "FASE": "1A",
+        "NOME": "Aluno",
+        "INDE_ANTERIOR": 5.0,
+        "IAA_ANTERIOR": 1.0,
+        "IEG_ANTERIOR": 2.0,
+        "IPS_ANTERIOR": 3.0,
+        "IDA_ANTERIOR": 4.0,
+        "IPP_ANTERIOR": 5.0,
+        "IPV_ANTERIOR": 6.0,
+        "IAN_ANTERIOR": 7.0,
+        "ALUNO_NOVO": 0,
     }
 
 
-@pytest.fixture
-def temp_excel_file(sample_dataframe):
-    """
-    Fixture que cria arquivo Excel temporário para testes.
-    
-    Args:
-        sample_dataframe: DataFrame para salvar no arquivo
-        
-    Returns:
-        Caminho do arquivo Excel temporário
-    """
-    # Cria arquivo temporário
-    fd, temp_path = tempfile.mkstemp(suffix='.xlsx')
-    
-    try:
-        # Fecha o file descriptor para permitir que pandas escreva
-        os.close(fd)
-        
-        # Salva o DataFrame
-        sample_dataframe.to_excel(temp_path, index=False)
-        
-        yield temp_path
-        
-    finally:
-        # Tenta remover o arquivo com retry para Windows
-        import time
-        max_attempts = 3
-        for attempt in range(max_attempts):
-            try:
-                if os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                break
-            except PermissionError:
-                if attempt < max_attempts - 1:
-                    time.sleep(0.1)  # Aguarda um pouco antes de tentar novamente
-                else:
-                    # Se ainda não conseguir, apenas avisa (não falha o teste)
-                    import warnings
-                    warnings.warn(f"Não foi possível remover arquivo temporário: {temp_path}")
-            except FileNotFoundError:
-                # Arquivo já foi removido, tudo bem
-                break
-
-
-@pytest.fixture
-def mock_model():
-    """
-    Fixture que fornece modelo mockado para testes.
-    
-    Returns:
-        Mock object configurado como modelo sklearn
-    """
-    import numpy as np
-    
-    model = Mock()
-    # Mock predict_proba retorna array numpy 2D
-    model.predict_proba.return_value = np.array([[0.7, 0.3]])
-    
-    # Mock para feature importance com tamanhos corretos
-    mock_clf = Mock()
-    # 11 features numéricas + 3 categóricas = 14 features
-    mock_clf.feature_importances_ = np.array([0.1, 0.2, 0.15, 0.05, 0.1, 0.08, 0.12, 0.06, 0.04, 0.07, 0.03, 0.02, 0.01, 0.005])
-    
-    model.named_steps = {
-        'clf': mock_clf
+@pytest.fixture()
+def entrada_estudante_exemplo():
+    """Retorna um dicionário com dados básicos de aluno."""
+    return {
+        "RA": "123",
+        "IDADE": 10,
+        "ANO_INGRESSO": 2020,
+        "GENERO": "Masculino",
+        "TURMA": "A",
+        "INSTITUICAO_ENSINO": "Escola",
+        "FASE": "1A",
     }
-    return model
+
+
+@pytest.fixture()
+def dataframe_base():
+    """Retorna um DataFrame base para testes de pipeline."""
+    return pd.DataFrame(
+        [
+            {
+                "RA": "1",
+                "ANO_REFERENCIA": 2023,
+                "ANO_INGRESSO": 2021,
+                "INDE": 5.0,
+                "IAA": 1.0,
+                "IEG": 2.0,
+                "IPS": 3.0,
+                "IDA": 4.0,
+                "IPP": 5.0,
+                "IPV": 6.0,
+                "IAN": 7.0,
+                "GENERO": "Masculino",
+                "TURMA": "A",
+                "INSTITUICAO_ENSINO": "Escola",
+                "FASE": "1A",
+                "IDADE": 10,
+            }
+        ]
+    )
