@@ -21,6 +21,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+
 # --- Estágio 2: Runner (Execução Leve) ---
 FROM python:3.11-slim as runner
 
@@ -36,25 +37,25 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Variáveis de ambiente para o Python e Render
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app
+    PYTHONPATH=/app \
+    DATA_DIR=/app/data
 
 # Copia o código fonte da aplicação
 COPY app/src/ ./src/
 COPY app/main.py .
 
-# Copia a pasta de dados e modelos iniciais (necessário para a API subir na primeira vez)
-# NOTA: Crie a pasta 'models' localmente e coloque um .joblib lá antes de buildar, 
-# ou o build pode falhar ou a API não subir.
+# Copia modelos treinados
 COPY app/models/ ./models/
-# COPY data/ ./data/  <-- Opcional, se precisar de dados de referência iniciais
 
-# Ajusta permissões para o usuário não-root (caso precise escrever logs na pasta temporária)
-# No Render, logs devem ir para stdout, mas se salvar em arquivo localmente:
+# ✅ Copia os dados históricos para dentro do container
+# Necessário para Feature Store / carregamento inicial
+COPY app/data/ ./data/
+
+# Ajusta permissões para o usuário não-root
 RUN chown -R appuser:appuser /app
 
 # Muda para o usuário seguro
 USER appuser
 
-# O Render injeta a variável PORT automaticamente. 
-# Usamos o shell form para expandir a variável $PORT.
+# O Render injeta a variável PORT automaticamente
 CMD sh -c "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"
