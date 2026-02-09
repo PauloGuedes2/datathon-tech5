@@ -45,7 +45,7 @@ COPY app/main.py .
 # Copia a pasta de dados e modelos iniciais (necessário para a API subir na primeira vez)
 # NOTA: Crie a pasta 'models' localmente e coloque um .joblib lá antes de buildar, 
 # ou o build pode falhar ou a API não subir.
-COPY models/ ./models/
+COPY app/models/ ./models/
 # COPY data/ ./data/  <-- Opcional, se precisar de dados de referência iniciais
 
 # Ajusta permissões para o usuário não-root (caso precise escrever logs na pasta temporária)
